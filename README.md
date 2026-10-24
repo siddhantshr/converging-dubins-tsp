@@ -3,7 +3,12 @@
 Computes an **upper bound** and a **lower bound** on the shortest closed tour of
 a Dubins vehicle (forward-only, minimum turning radius `r`) through a set of points.
 Both bounds turn the problem into a one-in-a-set (generalised) TSP and solve it
-with the **Noon–Bean transformation** to an ordinary asymmetric TSP.
+with the **Noon–Bean transformation** to an ordinary asymmetric TSP, solved by LKH.
+
+**The lower bound is an estimate.** LKH is a heuristic: when it misses the
+optimal GTSP tour, the reported lower bound is too high. It is labelled
+"estimate (LKH)" everywhere. (An exact MILP solver used to certify it, but
+it dominated the runtime; it was removed.)
 
 Python rewrite of the Julia `Dubins-TSP` code, with the issues found in that
 version fixed (see the end of this file).
@@ -15,6 +20,7 @@ pip install -r requirements.txt
 python -m src                    # uses ./config.yml
 python -m src --config other.yml --no-plot
 python -m pytest                 # run the checks
+python tools/lb_stability.py 12  # LB estimate of iteration 12 with 1 / 10 / 50 LKH restarts
 ```
 
 Edit `config.yml` to set the points, the turning radius, the number of
@@ -28,7 +34,8 @@ results/
   iter_00/   summary.txt  results.json  tour.png    uniform grids from config.yml
   iter_01/   ...                                    after the 1st refinement
   ...
-  convergence.txt    table of every iteration (bounds, best-so-far, gap, nodes, time)
+  convergence.txt    table of every iteration (bounds, best UB, max LB estimate, gap, nodes, time)
+  summary.txt        time per iteration, split by stage (interval problems, LKH, ...)
   convergence.json   everything, machine-readable
   convergence.png    bounds and gap against iteration
 ```
@@ -47,11 +54,18 @@ then both bounds are solved again. Repeated `mu` times.
 Both parts are needed: if only headings were added, the next lower bound would
 pick the same intervals and every later iteration would repeat the first.
 
-With exact solvers the upper bound can only go down (heading sets only grow)
-and the lower bound can only go up (each new interval is inside an old one, so
-its edge costs can only rise). LKH can wobble slightly, so the gap is computed
-from the best upper and best lower bound seen so far. Edge costs are cached
-between iterations; only edges touching new options are computed.
+With optimal GTSP solutions the upper bound could only go down (heading sets
+only grow) and the lower bound only go up (each new interval is inside an old
+one, so its edge costs can only rise). LKH can break both. Every upper bound
+is a real tour, so the best one so far is kept. The lower bound is only an
+estimate, so the gap is
+
+    gap = (best upper bound - this iteration's LB estimate) / this iteration's LB estimate
+
+The maximum LB estimate over iterations is shown ("max LB est.") but not used:
+an estimate that is too high would then stick. If an LB estimate ever exceeds
+the best upper bound, a warning is printed (LKH missed the optimum).
+Edge costs are cached between iterations; only edges touching new options are computed.
 
 ## What the two bounds are
 
@@ -60,7 +74,7 @@ between iterations; only edges touching new options are computed.
 | node | target + one heading `k·360°/N` | target + heading interval `[k, k+1]·360°/N` |
 | edge cost | point-to-point Dubins path | two-point Dubins **interval problem** |
 | tour | flyable (same heading in and out) | may "kink" at targets, not flyable |
-| guarantee | always ≥ optimum, any solver | ≤ optimum, **only with `solver: exact`** |
+| guarantee | always ≥ optimum | ≤ optimum only if the GTSP is solved optimally: **estimate** with LKH |
 
 Increasing `N` tightens both bounds.
 
@@ -80,11 +94,13 @@ src/
   tsp/
     gtsp.py              clustered graphs for both bounds
     noon_bean.py         Noon-Bean transformation and decoding
-    solvers.py           LKH (elkai) and exact MILP (pulp/CBC)
+    solvers.py           LKH (elkai); exact MILP (pulp/CBC) kept only as a test reference
   utils/
     angles.py            angle wrapping, HeadingInterval
     plotting.py          plots of the tours
     report.py            text report, JSON export
+tools/
+  lb_stability.py        LB estimate vs number of LKH restarts for one iteration
 tests/                   correctness checks (see below)
 ```
 
@@ -115,41 +131,44 @@ Between refinement iterations they are reused in three ways:
 3. **Lazy evaluation.** Every other new edge starts with its parent's cost as
    a lower estimate (for the first iteration: the straight-line distance).
    Solve, make the edges around the tour exact, and repeat until the tour uses
-   exact edges only. That tour is then optimal for the exact costs as well:
+   exact edges only. With an optimal solver that tour would be optimal for the
+   exact costs as well:
 
        estimated optimum <= exact optimum <= exact cost of the tour = estimated optimum
 
-   so the lower bound is identical to computing every edge. Cheap LKH rounds
-   pick which edges to compute; the final answer is always the exact solver's.
-   The exact model keeps its subtour cuts between rounds.
+   With LKH it is only LKH's best tour, so lazy and eager evaluation can give
+   slightly different estimates.
 
-On the example (6 targets, lambda = 2, 10 iterations) this cuts interval
-solves from 34,320 to about 6,900 and runtime from ~121 s to ~96 s, with
-identical bounds at every iteration. In later iterations the exact MILP solve
-becomes the bottleneck.
+   The rounds that only pick edges to make exact use a cheap LKH
+   (`lower_bound.lkh_runs_screening`, default 1 restart). Once a screening
+   tour is all exact, the graph is solved again with the full
+   `solver.lkh_runs` (default 10); if that tour is all exact too we stop,
+   otherwise its edges are made exact and screening continues.
 
-## Choosing the solver
+## Solver
 
-* `lkh`: fast heuristic (LKH via `elkai`). Use for the upper bound.
-* `exact`: integer program with subtour cuts (CBC via `pulp`). Proves
-  optimality, so it is needed for a *certified* lower bound. It becomes slow
-  for large `targets × intervals`; if the time limit is hit the program
-  stops instead of reporting an uncertified value.
-
-For the lower bound, costs are rounded **down** to integers, and the reported
-value is the integer optimum divided by `cost_scale`. This keeps the bound valid.
+Both bounds use LKH (via `elkai`, deterministic: LKH's default seed is 1).
+`solver: lkh` is the only accepted value. For the lower bound, costs are
+rounded **down** to integers and the value is the tour's integer cost divided
+by `cost_scale`, so rounding never pushes the estimate up; LKH missing the
+optimum still can. `tools/lb_stability.py` shows how much the estimate moves
+with more LKH restarts.
 
 ## Tests
 
 * every Dubins word really ends at the goal configuration;
 * the interval solver is never above brute force, and its path really exists;
-* Noon–Bean + each solver reproduces the brute-force one-in-a-set optimum;
+* Noon–Bean + each solver (LKH, and the exact MILP as reference) reproduces the
+  brute-force one-in-a-set optimum;
 * with one 360° interval the lower bound equals the Euclidean TSP;
 * the upper-bound tour has no kinks;
 * a refinement step adds headings inside the chosen interval and keeps the
   interval partition covering the circle exactly once;
-* with exact solvers the lower bound never drops and the upper bound never rises;
-* lazy evaluation gives exactly the same lower bounds as computing every edge;
+* the LB estimate stays below the upper bound on the small test instance;
+* lazy and eager evaluation give the same LB estimates there (both LKH);
+* best UB / max LB estimate / gap are reported as defined above, with a
+  warning when an LB estimate exceeds the best UB;
+* LKH is deterministic; lazy rounds end with a full LKH solve;
 * a split piece containing the parent's optimal headings inherits its cost exactly.
 
 ## Changes from the Julia version
@@ -160,8 +179,8 @@ value is the integer optimum divided by `cost_scale`. This keeps the bound valid
 * The 3-segment search never updated its running minimum and used a global
   variable that leaked between calls.
 * The turning radius was hard-coded to 1 in several places.
-* A lower bound computed with LKH was reported as a bound; it is now flagged
-  as an estimate unless `solver: exact` is used.
+* A lower bound computed with LKH was reported as a bound; it is now
+  labelled as an estimate.
 * Big M is strictly larger than any tour cost (`n · max + 1`).
 * Decoding checks the tour really visits each cluster as one block.
 * Dubins formulas are guarded against rounding noise (a zero-length turn
