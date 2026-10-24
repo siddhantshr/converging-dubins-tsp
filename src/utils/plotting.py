@@ -39,9 +39,8 @@ def plot_results(points, results, r: float, filename: str, suptitle: str = ""):
         for idx, (x, y) in enumerate(points):
             ax.annotate(str(idx), (x, y), textcoords="offset points", xytext=(6, 6))
 
-        label = "Upper bound" if res.kind == "upper" else "Lower bound"
-        flag = "" if res.is_valid_bound else " (estimate)"
-        ax.set_title(f"{label}{flag}: {res.value:.4f}\n"
+        label = "Upper bound" if res.kind == "upper" else "Lower bound, estimate (LKH)"
+        ax.set_title(f"{label}: {res.value:.4f}\n"
                      f"{describe_options(res)}, solver = {res.solver}")
         ax.set_aspect("equal", adjustable="datalim")
         ax.grid(alpha=0.3)
@@ -61,15 +60,17 @@ def plot_convergence(iterations, filename: str):
     idx = [it.index for it in iterations]
     lower = [it.lower.value for it in iterations]
     upper = [it.upper.value for it in iterations]
-    best_lower = [max(lower[: k + 1]) for k in range(len(lower))]
-    best_upper = [min(upper[: k + 1]) for k in range(len(upper))]
-    gap = [(u - l) / l * 100 for u, l in zip(best_upper, best_lower)]
+    best_upper = [it.best_upper for it in iterations]
+    gap = [it.gap_percent for it in iterations]
 
     fig, (top, bottom) = plt.subplots(2, 1, figsize=(7, 7), sharex=True)
     top.plot(idx, upper, "o-", color="tab:blue", label="upper bound")
-    top.plot(idx, lower, "s-", color="tab:orange", label="lower bound")
-    top.fill_between(idx, best_lower, best_upper, color="grey", alpha=0.15,
-                     label="optimum lies here")
+    top.step(idx, best_upper, where="post", color="tab:blue", alpha=0.4, label="best upper bound")
+    top.plot(idx, lower, "s-", color="tab:orange", label="lower bound, estimate (LKH)")
+    over = [(i, l) for i, l, b in zip(idx, lower, best_upper) if l > b + 1e-9]
+    if over:
+        top.scatter(*zip(*over), marker="x", s=80, color="red", zorder=4,
+                    label="LB estimate > best UB (LKH missed the optimum)")
     top.set_ylabel("tour length")
     top.legend()
     top.grid(alpha=0.3)
@@ -79,7 +80,7 @@ def plot_convergence(iterations, filename: str):
         bottom.annotate(f"{y:.2f}%", (x, y), textcoords="offset points", xytext=(0, 6),
                         ha="center", fontsize=8)
     bottom.margins(y=0.15)  # room for the labels
-    bottom.set_ylabel("gap (best UB - best LB) / best LB  [%]")
+    bottom.set_ylabel("gap (best UB - LB est.) / LB est.  [%]")
     bottom.set_xlabel("iteration")
     bottom.set_xticks(idx)
     bottom.grid(alpha=0.3)

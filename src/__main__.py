@@ -48,7 +48,8 @@ def _run_refinement(cfg, results_dir: Path, plot: bool) -> None:
         if plot:
             plot_results(cfg.points, [it.upper, it.lower], cfg.turning_radius,
                          str(folder / "tour.png"),
-                         suptitle=f"Iteration {it.index}  |  gap {it.gap_percent:.2f}%")
+                         suptitle=f"Iteration {it.index}  |  gap {it.gap_percent:.2f}%  "
+                                  f"(lower bound is an LKH estimate)")
 
     iterations = refine.run(cfg, cfg.refine_lambda, cfg.refine_mu, on_iteration=save_iteration)
 

@@ -32,7 +32,7 @@ def test_bounds_move_the_right_way():
     # Exact solvers: refined intervals only raise the LB, extra headings only lower the UB.
     assert all(b >= a - tol for a, b in zip(lowers, lowers[1:]))
     assert all(b <= a + tol for a, b in zip(uppers, uppers[1:]))
-    assert all(it.best_lower <= it.best_upper for it in its)
+    assert all(it.lower.value <= it.best_upper for it in its)
     assert its[-1].gap_percent <= its[0].gap_percent
 
 

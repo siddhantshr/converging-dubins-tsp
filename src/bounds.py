@@ -48,7 +48,8 @@ class Leg:
 class BoundResult:
     kind: str                 # "upper" or "lower"
     value: float
-    is_valid_bound: bool      # False only for a lower bound from a heuristic solver
+    is_valid_bound: bool      # True for the upper bound; the LKH lower bound is an estimate
+    status: str               # "valid upper bound" or "estimate (LKH)"
     solver: str
     options_per_target: list[int]
     order: list[int]          # targets in visiting order
@@ -191,7 +192,8 @@ def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config,
         valid = True
 
     return BoundResult(
-        kind=kind, value=value, is_valid_bound=valid, solver="lkh",
+        kind=kind, value=value, is_valid_bound=valid,
+        status="valid upper bound" if valid else "estimate (LKH)", solver="lkh",
         options_per_target=[len(c) for c in graph.clusters],
         order=[leg.from_target for leg in legs], legs=legs, selected=selected,
         build_seconds=build_seconds, solve_seconds=solve_seconds, notes=notes,

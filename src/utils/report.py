@@ -6,6 +6,9 @@ import json
 import math
 from dataclasses import asdict
 
+LB_WARNING = ("WARNING: iteration {k}: lower-bound estimate {lb:.6f} exceeds the best upper "
+              "bound {ub:.6f}. LKH missed the optimal GTSP tour, so this estimate is too high.")
+
 
 def _deg(rad: float) -> str:
     return f"{math.degrees(rad) % 360:6.1f}°"
@@ -22,9 +25,8 @@ def describe_options(res) -> str:
 
 def format_result(res) -> str:
     title = "UPPER BOUND" if res.kind == "upper" else "LOWER BOUND"
-    status = "valid bound" if res.is_valid_bound else "ESTIMATE ONLY"
     lines = [
-        f"{title}: {res.value:.6f}   ({status})",
+        f"{title}: {res.value:.6f}   ({res.status})",
         f"  {describe_options(res)}, solver = {res.solver}, "
         f"build {res.build_seconds:.2f}s, solve {res.solve_seconds:.2f}s",
         f"  order: {' -> '.join(map(str, res.order + res.order[:1]))}",
@@ -35,18 +37,6 @@ def format_result(res) -> str:
                      f"{_deg(leg.depart_heading)}  {_deg(leg.arrive_heading)}  {leg.length:9.4f}")
     lines += [f"  note: {note}" for note in res.notes]
     return "\n".join(lines)
-
-
-def format_gap(upper, lower) -> str:
-    gap = (upper.value - lower.value) / lower.value * 100 if lower.value > 0 else float("inf")
-    caveat = "" if lower.is_valid_bound else "  (lower bound is only an estimate)"
-    return (f"{lower.value:.6f} <= optimal Dubins tour <= {upper.value:.6f}\n"
-            f"gap = (UB - LB) / LB = {gap:.2f}%{caveat}")
-
-
-def save_json(results, filename: str):
-    with open(filename, "w") as fh:
-        json.dump([asdict(res) for res in results], fh, indent=2)
 
 
 # --- refinement output ------------------------------------------------------------
@@ -64,9 +54,13 @@ def format_iteration(it) -> str:
             lines.append(f"  target {t}: {', '.join(f'{d:.2f}' for d in _deg_list(fresh)) or '-'}")
         lines.append("")
     lines += [format_result(it.upper), "", format_result(it.lower), "",
-              f"this iteration:  {it.lower.value:.6f} <= optimum <= {it.upper.value:.6f}",
-              f"best so far:     {it.best_lower:.6f} <= optimum <= {it.best_upper:.6f}",
-              f"gap (best)     = {it.gap_percent:.3f}%"]
+              f"lower bound, estimate (LKH): {it.lower.value:.6f}",
+              f"upper bound, this iteration: {it.upper.value:.6f}",
+              f"best upper bound so far:     {it.best_upper:.6f}",
+              f"max LB estimate so far:      {it.max_lb_estimate:.6f}   (not used for the gap)",
+              f"gap = (best UB - LB estimate) / LB estimate = {it.gap_percent:.3f}%"]
+    if it.lb_exceeds_ub:
+        lines += ["", LB_WARNING.format(k=it.index, lb=it.lower.value, ub=it.best_upper)]
     return "\n".join(lines)
 
 
@@ -75,9 +69,12 @@ def iteration_record(it) -> dict:
         "iteration": it.index,
         "upper_bound": asdict(it.upper),
         "lower_bound": asdict(it.lower),
+        "lower_bound_status": it.lower.status,
         "best_upper": it.best_upper,
-        "best_lower": it.best_lower,
+        "max_lb_estimate": it.max_lb_estimate,
         "gap_percent": it.gap_percent,
+        "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
+        "lb_exceeds_best_upper": it.lb_exceeds_ub,
         "headings_deg_per_target": [_deg_list(h) for h in it.headings],
         "intervals_deg_per_target": [[str(iv) for iv in ivs] for ivs in it.intervals],
         "added_headings_deg_per_target": [_deg_list(a) for a in it.added],
@@ -85,18 +82,24 @@ def iteration_record(it) -> dict:
 
 
 def format_convergence(iterations) -> str:
-    header = (f"{'iter':>4}  {'nodes UB':>8}  {'nodes LB':>8}  {'upper':>11}  {'lower':>11}  "
-              f"{'best UB':>11}  {'best LB':>11}  {'gap %':>7}  {'time s':>7}")
+    header = (f"{'iter':>4}  {'nodes UB':>8}  {'nodes LB':>8}  {'upper':>11}  {'LB est.':>11}  "
+              f"{'best UB':>11}  {'max LB est.':>11}  {'gap %':>7}  {'time s':>7}")
     lines = [header, "-" * len(header)]
     for it in iterations:
         secs = sum(r.build_seconds + r.solve_seconds for r in (it.upper, it.lower))
         lines.append(
             f"{it.index:>4}  {sum(it.upper.options_per_target):>8}  "
             f"{sum(it.lower.options_per_target):>8}  {it.upper.value:>11.6f}  "
-            f"{it.lower.value:>11.6f}  {it.best_upper:>11.6f}  {it.best_lower:>11.6f}  "
-            f"{it.gap_percent:>7.3f}  {secs:>7.1f}")
-    if not all(it.lower.is_valid_bound for it in iterations):
-        lines.append("\nnote: lower bounds were solved with LKH, so they are estimates only.")
+            f"{it.lower.value:>11.6f}  {it.best_upper:>11.6f}  {it.max_lb_estimate:>11.6f}  "
+            f"{it.gap_percent:>7.3f}  {secs:>7.1f}" + ("  <- LB > best UB" if it.lb_exceeds_ub else ""))
+    lines += ["",
+              "LB est. = lower bound, estimate (LKH): LKH may miss the optimal GTSP tour, and",
+              "          then the value is too high. It is not a certified lower bound.",
+              "gap %   = (best UB - LB est. of that iteration) / LB est. of that iteration.",
+              "          'max LB est.' is shown for reference only and not used for the gap."]
+    for it in iterations:
+        if it.lb_exceeds_ub:
+            lines.append(LB_WARNING.format(k=it.index, lb=it.lower.value, ub=it.best_upper))
     return "\n".join(lines)
 
 
