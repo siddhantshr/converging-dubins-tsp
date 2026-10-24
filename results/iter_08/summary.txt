@@ -1,0 +1,39 @@
+ITERATION 8
+
+headings added (deg) per target, inside the interval the previous lower bound picked:
+  target 0: 155.00, 160.00
+  target 1: 216.67, 218.33
+  target 2: 275.00, 280.00
+  target 3: 35.00, 40.00
+  target 4: 15.00, 30.00
+  target 5: 20.00, 25.00
+
+UPPER BOUND: 25.187521   (valid upper bound)
+  24 headings per target, solver = lkh, build 0.05s, solve 0.62s
+  order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
+  legs:   from -> to   leave     arrive    length
+             4 -> 3      65.0°     5.0°     4.7659
+             3 -> 2       5.0°   291.7°     3.9124
+             2 -> 1     291.7°   185.0°     4.7395
+             1 -> 5     185.0°   195.0°     3.3817
+             5 -> 0     195.0°   195.0°     3.4863
+             0 -> 4     195.0°    65.0°     4.9018
+
+LOWER BOUND: 24.718000   (estimate (LKH))
+  24 intervals per target, solver = lkh, build 0.24s, solve 4.84s
+  order: 0 -> 5 -> 1 -> 2 -> 3 -> 4 -> 0
+  legs:   from -> to   leave     arrive    length
+             0 -> 5      15.0°    20.0°     3.4304
+             5 -> 1      15.0°   315.0°     3.2217
+             1 -> 2       0.0°   120.0°     4.8396
+             2 -> 3     135.0°   180.0°     3.8280
+             3 -> 4     185.0°   245.0°     4.7659
+             4 -> 0     250.0°     0.0°     4.6363
+  note: solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.
+  note: legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound).
+
+lower bound, estimate (LKH): 24.718000
+upper bound, this iteration: 25.187521
+best upper bound so far:     25.187521
+max LB estimate so far:      24.718000   (not used for the gap)
+gap = (best UB - LB estimate) / LB estimate = 1.900%

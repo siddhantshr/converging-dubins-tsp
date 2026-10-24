@@ -1,26 +1,34 @@
 TIME PER ITERATION (seconds)
 
       ---------------- UPPER BOUND ----------------  |---------------------------- LOWER BOUND ----------------------------  |
- iter   dubins       NB      lkh    other    total  | interval       NB      lkh    exact    other    total #solves rounds  |     iter
+ iter   dubins       NB      lkh    other    total  | interval       NB  lkh scr  lkh fin    other    total #solves rounds  |     iter
 --------------------------------------------------------------------------------------------------------------------------------------
-    0     0.03     0.00     0.08     0.00     0.11  |     3.04     0.00     0.06     0.00     0.00     3.11    1920      1  |     3.21
-    1     0.02     0.00     0.11     0.00     0.13  |     2.30     0.00     0.08     0.00     0.01     2.38    1530      1  |     2.51
-    2     0.02     0.00     0.15     0.00     0.17  |     2.84     0.00     0.15     0.00     0.01     2.99    1890      1  |     3.16
-    3     0.03     0.00     0.21     0.00     0.24  |     3.34     0.00     0.19     0.00     0.01     3.55    2250      1  |     3.78
-    4     0.03     0.00     0.28     0.00     0.31  |     3.87     0.00     0.29     0.00     0.01     4.17    2610      1  |     4.48
-    5     0.04     0.00     0.35     0.00     0.38  |     4.30     0.00     0.34     0.00     0.02     4.65    2970      1  |     5.03
+    0     0.03     0.00     0.08     0.00     0.11  |     1.71     0.00     0.32     0.07     0.02     2.11    1006     28  |     2.22
+    1     0.02     0.00     0.11     0.00     0.13  |     0.00     0.00     0.02     0.11     0.02     0.15       0      2  |     0.28
+    2     0.02     0.00     0.18     0.00     0.20  |     1.05     0.00     0.21     0.13     0.04     1.43     667     10  |     1.64
+    3     0.03     0.00     0.22     0.00     0.24  |     0.47     0.00     0.13     0.19     0.05     0.85     312      5  |     1.10
+    4     0.03     0.00     0.28     0.00     0.32  |     1.04     0.00     0.31     0.28     0.08     1.71     673      9  |     2.02
+    5     0.04     0.00     0.36     0.00     0.39  |     0.00     0.00     0.05     0.37     0.13     0.55       0      2  |     0.94
+    6     0.04     0.00     0.37     0.00     0.42  |     1.86     0.00     0.57     0.36     0.16     2.95    1232     11  |     3.36
+    7     0.05     0.00     0.56     0.00     0.61  |     0.00     0.00     0.07     0.40     0.18     0.65       0      2  |     1.26
+    8     0.05     0.00     0.62     0.00     0.68  |     2.43     0.00     1.17     1.23     0.24     5.08    1617     15  |     5.75
+    9     0.06     0.00     0.73     0.00     0.79  |     0.60     0.00     0.34     0.76     0.28     1.98     404      4  |     2.77
+   10     0.08     0.00     0.89     0.00     0.97  |     1.60     0.00     0.84     0.83     0.35     3.62    1087      8  |     4.59
+   11     0.07     0.00     0.98     0.00     1.05  |     0.00     0.00     0.14     0.92     0.40     1.46       0      2  |     2.51
+   12     0.07     0.00     1.08     0.00     1.16  |     2.22     0.00     1.14     1.11     0.49     4.97    1505      8  |     6.13
 --------------------------------------------------------------------------------------------------------------------------------------
-total     0.16     0.00     1.17     0.00     1.33  |    19.68     0.00     1.10     0.00     0.05    20.84   13170      6  |    22.18
+total     0.59     0.00     6.46     0.00     7.05  |    12.98     0.01     5.31     6.77     2.45    27.52    8503    106  |    34.57
 
-share of total time: UB dubins 0.7%, UB NB 0.0%, UB lkh 5.3%, UB other 0.0%, LB interval 88.8%, LB NB 0.0%, LB lkh 5.0%, LB exact 0.0%, LB other 0.2%
+share of total time: UB dubins 1.7%, UB NB 0.0%, UB lkh 18.7%, UB other 0.0%, LB interval 37.5%, LB NB 0.0%, LB lkh scr 15.3%, LB lkh fin 19.6%, LB other 7.1%
 
 columns:
   dubins    building the upper-bound graph (point-to-point Dubins lengths, cached)
   interval  time inside the interval-problem solver (graph build + lazy refreshes)
   NB        integer cost scaling + Noon-Bean transform (+ decode), all solve rounds
-  lkh       LKH solve (lower bound: all rounds if solver = lkh, screening rounds if exact)
-  exact     exact ATSP solve (CBC), incl. building the MILP and subtour cuts
+  lkh       LKH solve with solver.lkh_runs restarts
+  lkh scr   lower bound: lazy screening rounds, lower_bound.lkh_runs_screening restarts
+  lkh fin   lower bound: full solves (solver.lkh_runs) once a screening tour is all exact
   other     everything else (lazy cost estimates from parents, bookkeeping)
   #solves   interval problems actually solved in that iteration
-  rounds    lower-bound solve rounds (one per lazy re-solve)
+  rounds    lower-bound LKH calls (screening + full)
   iter      upper total + lower total (plotting and file output not included)

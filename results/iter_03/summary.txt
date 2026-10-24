@@ -8,8 +8,8 @@ headings added (deg) per target, inside the interval the previous lower bound pi
   target 4: 105.00, 120.00
   target 5: 105.00, 120.00
 
-UPPER BOUND: 25.279131   (valid bound)
-  14 headings per target, solver = lkh, build 0.03s, solve 0.21s
+UPPER BOUND: 25.279131   (valid upper bound)
+  14 headings per target, solver = lkh, build 0.03s, solve 0.22s
   order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
              4 -> 3      60.0°     5.0°     4.7535
@@ -19,8 +19,8 @@ UPPER BOUND: 25.279131   (valid bound)
              5 -> 0     210.0°   180.0°     3.5520
              0 -> 4     180.0°    60.0°     4.6735
 
-LOWER BOUND: 24.137000   (ESTIMATE ONLY)
-  14 intervals per target, solver = lkh, build 3.35s, solve 0.20s
+LOWER BOUND: 24.137000   (estimate (LKH))
+  14 intervals per target, solver = lkh, build 0.05s, solve 0.80s
   order: 1 -> 2 -> 3 -> 4 -> 5 -> 0 -> 1
   legs:   from -> to   leave     arrive    length
              1 -> 2      45.0°   105.0°     4.5454
@@ -29,9 +29,11 @@ LOWER BOUND: 24.137000   (ESTIMATE ONLY)
              4 -> 5     315.0°   315.0°     3.2585
              5 -> 0     270.0°   270.0°     3.2286
              0 -> 1     315.0°    30.0°     4.3328
-  note: solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. Use lower_bound.solver: exact for a guarantee.
+  note: solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.
   note: legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound).
 
-this iteration:  24.137000 <= optimum <= 25.279131
-best so far:     24.137000 <= optimum <= 25.279131
-gap (best)     = 4.732%
+lower bound, estimate (LKH): 24.137000
+upper bound, this iteration: 25.279131
+best upper bound so far:     25.279131
+max LB estimate so far:      24.137000   (not used for the gap)
+gap = (best UB - LB estimate) / LB estimate = 4.732%
