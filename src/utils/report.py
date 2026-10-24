@@ -77,6 +77,7 @@ def iteration_record(it) -> dict:
         "lb_exceeds_best_upper": it.lb_exceeds_ub,
         "headings_deg_per_target": [_deg_list(h) for h in it.headings],
         "intervals_deg_per_target": [[str(iv) for iv in ivs] for ivs in it.intervals],
+        "intervals_rad_per_target": [[[iv.start, iv.width] for iv in ivs] for ivs in it.intervals],
         "added_headings_deg_per_target": [_deg_list(a) for a in it.added],
     }
 
