@@ -18,8 +18,12 @@ def _config(**kw):
 
 
 def test_lower_below_upper():
+    # Not guaranteed with LKH in general (the LB is an estimate), but on this
+    # small instance LKH finds the optimum and the estimate must stay below.
     cfg = _config()
-    assert compute_lower_bound(cfg).value <= compute_upper_bound(cfg).value
+    for lazy in (True, False):
+        lower = compute_lower_bound(dataclasses.replace(cfg, lower=BoundConfig(True, 6, "lkh", lazy)))
+        assert lower.value <= compute_upper_bound(cfg).value
 
 
 def test_one_interval_gives_euclidean_tsp():

@@ -1,10 +1,13 @@
 """Checks of the lower-bound-driven refinement."""
+import dataclasses
 import math
 
 from src import refine
 from src.utils.angles import TWO_PI, HeadingInterval
 from tests.test_bounds import POINTS, _config
+from src.bounds import compute_lower_bound
 from src.config import BoundConfig
+from src.utils.report import format_convergence, format_iteration
 
 
 def test_refine_step_adds_headings_inside_selected_interval():
@@ -23,27 +26,51 @@ def test_refine_step_adds_headings_inside_selected_interval():
     assert [round(math.degrees(iv.start), 6) for iv in pieces] == [90.0, 120.0, 150.0]
 
 
-def test_bounds_move_the_right_way():
+def test_reported_values_on_lkh_run():
+    # LKH gives no monotonicity guarantee, so only check what always holds.
     cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh"))
     its = refine.run(cfg, lam=1, mu=3)
-    lowers = [it.lower.value for it in its]
-    uppers = [it.upper.value for it in its]
-    tol = len(POINTS) / cfg.cost_scale  # integer rounding of the costs
-    # Exact solvers: refined intervals only raise the LB, extra headings only lower the UB.
-    assert all(b >= a - tol for a, b in zip(lowers, lowers[1:]))
-    assert all(b <= a + tol for a, b in zip(uppers, uppers[1:]))
-    assert all(it.lower.value <= it.best_upper for it in its)
-    assert its[-1].gap_percent <= its[0].gap_percent
+    for k, it in enumerate(its):
+        assert it.lower.status == "estimate (LKH)" and not it.lower.is_valid_bound
+        assert it.best_upper == min(i.upper.value for i in its[:k + 1])
+        assert it.max_lb_estimate == max(i.lower.value for i in its[:k + 1])
+        # gap uses this iteration's LB estimate, not the max over iterations
+        assert it.gap_percent == (it.best_upper - it.lower.value) / it.lower.value * 100
+        assert it.lower.value <= it.best_upper and not it.lb_exceeds_ub
+
+
+def test_warns_when_lb_estimate_exceeds_best_upper():
+    cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh"))
+    it = refine.run(cfg, lam=1, mu=0)[0]
+    too_high = dataclasses.replace(it, lower=dataclasses.replace(it.lower, value=it.best_upper + 1))
+    assert too_high.lb_exceeds_ub
+    assert "WARNING" in format_iteration(too_high) and "WARNING" in format_convergence([too_high])
 
 
 def test_lazy_lower_bound_equals_eager():
     # Lazy evaluation reuses parent intervals' costs as lower estimates and
-    # only computes edges the solver wants; the bound must not change.
+    # only computes edges the solver wants. Both runs use LKH; elkai has no
+    # seed argument but LKH's default SEED = 1 makes it deterministic. On this
+    # small instance LKH finds the GTSP optimum, so the values must agree.
     def lower_bounds(lazy):
         cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh", lazy))
         return [it.lower.value for it in refine.run(cfg, lam=2, mu=3)]
 
     assert lower_bounds(lazy=True) == lower_bounds(lazy=False)
+
+
+def test_lkh_is_deterministic():
+    cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh"))
+    runs = [[(it.upper.value, it.lower.value) for it in refine.run(cfg, lam=1, mu=2)]
+            for _ in range(2)]
+    assert runs[0] == runs[1]
+
+
+def test_lazy_rounds_end_with_a_full_lkh_solve():
+    cfg = _config(lower=BoundConfig(True, 4, "lkh", True), lkh_runs=5, lkh_runs_screening=1)
+    lower = compute_lower_bound(cfg)
+    assert lower.solve_rounds >= 2                     # >= 1 screening round + the full solve
+    assert lower.timings["lkh_screen"] > 0 and lower.timings["lkh"] > 0
 
 
 def test_child_interval_inherits_exact_cost():
