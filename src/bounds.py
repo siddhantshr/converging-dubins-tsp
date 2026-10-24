@@ -122,28 +122,43 @@ def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config,
         estimated optimum  <=  exact optimum  <=  exact cost of this tour
                                               =   its estimated cost = estimated optimum.
     LKH is not optimal, so here it is only LKH's best tour on the exact costs.
+
+    Screening: the lazy rounds only decide which edges to make exact, so they
+    use a cheap LKH (cfg.lkh_runs_screening restarts). Once a screening tour
+    uses exact edges only, solve once more with the full cfg.lkh_runs. If that
+    tour is all exact too, stop; otherwise make its edges exact and go back
+    to screening.
     """
     is_lower = kind == "lower"
     lazy = graph.exact is not None and not graph.exact.all()
     rounds = 0
-    timings = {"transform": 0.0, "lkh": 0.0}
+    timings = {"transform": 0.0, "lkh_screen": 0.0, "lkh": 0.0}
     t0 = time.perf_counter()
 
-    def solve_once(runs):
+    def solve_once(runs, stage):
         t = time.perf_counter()
         int_cost = _integer_costs(graph, cfg.cost_scale, round_down=is_lower)
         atsp = noon_bean.transform(int_cost, graph.clusters)
         timings["transform"] += time.perf_counter() - t
         t = time.perf_counter()
         tour = solvers.solve_lkh(atsp, runs)
-        timings["lkh"] += time.perf_counter() - t
+        timings[stage] += time.perf_counter() - t
         return atsp, tour, noon_bean.decode(tour, atsp)
 
+    no_screening = not lazy or cfg.lkh_runs_screening >= cfg.lkh_runs
+    final = no_screening
     while True:
         rounds += 1
-        atsp, tour, chosen = solve_once(cfg.lkh_runs)
-        if not lazy or not _refresh_tour_neighbourhood(graph, chosen, edge_costs):
+        if final:
+            atsp, tour, chosen = solve_once(cfg.lkh_runs, "lkh")
+        else:
+            atsp, tour, chosen = solve_once(cfg.lkh_runs_screening, "lkh_screen")
+        if lazy and _refresh_tour_neighbourhood(graph, chosen, edge_costs):
+            final = no_screening        # tour used estimated edges: screen again
+        elif final:
             break
+        else:
+            final = True                # screening tour is all exact: full solve
     solve_seconds = time.perf_counter() - t0
 
     n = len(chosen)

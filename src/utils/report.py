@@ -103,8 +103,8 @@ def format_convergence(iterations) -> str:
 def format_timings(iterations) -> str:
     """Seconds per iteration, split by stage, for both bounds."""
     ub_cols = [("dubins", "dubins"), ("transform", "NB"), ("lkh", "lkh"), ("other", "other")]
-    lb_cols = [("interval", "interval"), ("transform", "NB"), ("lkh", "lkh"),
-               ("exact", "exact"), ("other", "other")]
+    lb_cols = [("interval", "interval"), ("transform", "NB"), ("lkh_screen", "lkh scr"),
+               ("lkh", "lkh fin"), ("other", "other")]
 
     def total(res):
         return res.build_seconds + res.solve_seconds
@@ -148,11 +148,12 @@ def format_timings(iterations) -> str:
         "  dubins    building the upper-bound graph (point-to-point Dubins lengths, cached)",
         "  interval  time inside the interval-problem solver (graph build + lazy refreshes)",
         "  NB        integer cost scaling + Noon-Bean transform (+ decode), all solve rounds",
-        "  lkh       LKH solve (lower bound: all rounds if solver = lkh, screening rounds if exact)",
-        "  exact     exact ATSP solve (CBC), incl. building the MILP and subtour cuts",
+        "  lkh       LKH solve with solver.lkh_runs restarts",
+        "  lkh scr   lower bound: lazy screening rounds, lower_bound.lkh_runs_screening restarts",
+        "  lkh fin   lower bound: full solves (solver.lkh_runs) once a screening tour is all exact",
         "  other     everything else (lazy cost estimates from parents, bookkeeping)",
         "  #solves   interval problems actually solved in that iteration",
-        "  rounds    lower-bound solve rounds (one per lazy re-solve)",
+        "  rounds    lower-bound LKH calls (screening + full)",
         "  iter      upper total + lower total (plotting and file output not included)",
     ]
     return "\n".join(lines)
