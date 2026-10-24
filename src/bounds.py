@@ -12,8 +12,10 @@ They differ only in what a node means and what an edge costs:
 
 * Lower bound: node = a heading interval; edge = interval-problem minimum.
   Every leg may use a different heading at each end (the tour can "kink" at
-  targets), so it is not flyable, but its optimal value is <= the optimum.
-  This only holds if the GTSP is solved to optimality ("exact" solver).
+  targets), so it is not flyable, and its *optimal* value is <= the optimum.
+  The GTSP is solved with LKH, a heuristic: it may miss the optimal GTSP
+  tour, and then the value it reports is too high. So the lower bound is an
+  ESTIMATE, not a certified bound (the exact MILP solver was too slow).
 """
 
 from __future__ import annotations
@@ -108,51 +110,38 @@ def _lazy_batch(graph: ClusteredGraph, tour_edges) -> set[tuple[int, int]]:
     return {(a, b) for a, b in batch if not graph.exact[a, b]}
 
 
-def _solve_graph(graph: ClusteredGraph, kind: str, solver: str, cfg: Config,
+def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config,
                  build_seconds: float, edge_costs: IntervalEdgeCosts | None = None):
-    """Noon-Bean + solve + decode.
+    """Noon-Bean + LKH + decode.
 
     Lazy edge evaluation (lower bound only): some graph costs may be lower
     estimates (graph.exact == False). Solve with them; if the tour uses any
     estimated edge, compute its exact cost and solve again. Stop when the tour
-    uses exact edges only. That tour is optimal for the exact costs too:
+    uses exact edges only. With an optimal solver that tour would be optimal
+    for the exact costs too:
         estimated optimum  <=  exact optimum  <=  exact cost of this tour
                                               =   its estimated cost = estimated optimum.
+    LKH is not optimal, so here it is only LKH's best tour on the exact costs.
     """
     is_lower = kind == "lower"
     lazy = graph.exact is not None and not graph.exact.all()
-    exact_model = None
     rounds = 0
-    timings = {"transform": 0.0, "lkh": 0.0, "exact": 0.0}
+    timings = {"transform": 0.0, "lkh": 0.0}
     t0 = time.perf_counter()
 
-    def solve_once(method):
+    def solve_once(runs):
         t = time.perf_counter()
         int_cost = _integer_costs(graph, cfg.cost_scale, round_down=is_lower)
         atsp = noon_bean.transform(int_cost, graph.clusters)
         timings["transform"] += time.perf_counter() - t
         t = time.perf_counter()
-        if method == "exact":
-            nonlocal exact_model
-            exact_model = exact_model or solvers.ExactATSP(atsp)
-            tour = exact_model.solve(atsp, cfg.exact_time_limit)
-        else:
-            tour = solvers.solve(atsp, method, cfg.lkh_runs, cfg.exact_time_limit)
-        timings[method] = timings.get(method, 0.0) + time.perf_counter() - t
+        tour = solvers.solve_lkh(atsp, runs)
+        timings["lkh"] += time.perf_counter() - t
         return atsp, tour, noon_bean.decode(tour, atsp)
-
-    # Cheap screening rounds: LKH only *finds* edges worth making exact; it
-    # decides nothing, so the final answer below is still the exact solver's.
-    if lazy and solver == "exact":
-        while True:
-            rounds += 1
-            _, _, chosen = solve_once("lkh")
-            if not _refresh_tour_neighbourhood(graph, chosen, edge_costs):
-                break
 
     while True:
         rounds += 1
-        atsp, tour, chosen = solve_once(solver)
+        atsp, tour, chosen = solve_once(cfg.lkh_runs)
         if not lazy or not _refresh_tour_neighbourhood(graph, chosen, edge_costs):
             break
     solve_seconds = time.perf_counter() - t0
@@ -174,12 +163,12 @@ def _solve_graph(graph: ClusteredGraph, kind: str, solver: str, cfg: Config,
 
     notes = []
     if is_lower:
-        # Integer optimum / scale  <=  real GTSP optimum  <=  true Dubins TSP optimum.
+        # Integer optimum / scale <= real GTSP optimum <= true Dubins TSP optimum,
+        # but LKH's tour may cost more than the integer optimum: an estimate only.
         value = atsp.gtsp_cost(tour) / cfg.cost_scale
-        valid = solver == "exact"
-        if not valid:
-            notes.append("solved with LKH (heuristic): this is an ESTIMATE, not a certified "
-                         "lower bound. Use lower_bound.solver: exact for a guarantee.")
+        valid = False
+        notes.append("solved with LKH (heuristic): this is an ESTIMATE, not a certified "
+                     "lower bound. If LKH misses the optimal GTSP tour it is too high.")
         notes.append("legs may use different headings when arriving at and leaving a "
                      "target, so this tour is not flyable (that is why it is a lower bound).")
     else:
@@ -187,7 +176,7 @@ def _solve_graph(graph: ClusteredGraph, kind: str, solver: str, cfg: Config,
         valid = True
 
     return BoundResult(
-        kind=kind, value=value, is_valid_bound=valid, solver=solver,
+        kind=kind, value=value, is_valid_bound=valid, solver="lkh",
         options_per_target=[len(c) for c in graph.clusters],
         order=[leg.from_target for leg in legs], legs=legs, selected=selected,
         build_seconds=build_seconds, solve_seconds=solve_seconds, notes=notes,
@@ -219,7 +208,7 @@ def compute_upper_bound(cfg: Config, headings: list[list[float]] | None = None,
     t0 = time.perf_counter()
     headings = headings or initial_headings(cfg)
     graph = build_heading_graph(cfg.points, headings, cfg.turning_radius, cache)
-    result = _solve_graph(graph, "upper", cfg.upper.solver, cfg, time.perf_counter() - t0)
+    result = _solve_graph(graph, "upper", cfg, time.perf_counter() - t0)
     result.timings["dubins"] = result.build_seconds   # building = Dubins path lengths
     _finish_timings(result)
     return result
@@ -240,7 +229,7 @@ def compute_lower_bound(cfg: Config, intervals: list[list[HeadingInterval]] | No
     solves_before, seconds_before = costs.solves, costs.solve_seconds
     graph = build_interval_graph(cfg.points, intervals, cfg.turning_radius, costs,
                                  lazy=cfg.lower.lazy, progress=_progress)
-    result = _solve_graph(graph, "lower", cfg.lower.solver, cfg, time.perf_counter() - t0, costs)
+    result = _solve_graph(graph, "lower", cfg, time.perf_counter() - t0, costs)
     result.interval_solves = costs.solves - solves_before
     # interval solves happen both while building and in the lazy re-solve rounds
     result.timings["interval"] = costs.solve_seconds - seconds_before

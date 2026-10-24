@@ -24,7 +24,7 @@ def test_refine_step_adds_headings_inside_selected_interval():
 
 
 def test_bounds_move_the_right_way():
-    cfg = _config(upper=BoundConfig(True, 4, "exact"), lower=BoundConfig(True, 4, "exact"))
+    cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh"))
     its = refine.run(cfg, lam=1, mu=3)
     lowers = [it.lower.value for it in its]
     uppers = [it.upper.value for it in its]
@@ -40,7 +40,7 @@ def test_lazy_lower_bound_equals_eager():
     # Lazy evaluation reuses parent intervals' costs as lower estimates and
     # only computes edges the solver wants; the bound must not change.
     def lower_bounds(lazy):
-        cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "exact", lazy))
+        cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh", lazy))
         return [it.lower.value for it in refine.run(cfg, lam=2, mu=3)]
 
     assert lower_bounds(lazy=True) == lower_bounds(lazy=False)

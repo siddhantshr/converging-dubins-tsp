@@ -4,9 +4,9 @@
            bundled, no binary to install). Fast and usually optimal, but gives
            no guarantee. Fine for the upper bound: any tour is a valid upper
            bound.
-* "exact": integer program solved with CBC (via `pulp`). Proves optimality, so
-           it is required for a *certified* lower bound. Only practical for
-           small instances.
+* "exact": integer program solved with CBC (via `pulp`). Proves optimality.
+           No longer used by the bounds (too slow); kept only as the
+           reference solver in tests/test_noon_bean.py.
 
 Both return a tour as a list of node ids (each node once, no repeat at the end).
 """

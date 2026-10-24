@@ -8,7 +8,7 @@ from pathlib import Path
 
 import yaml
 
-SOLVERS = ("lkh", "exact")
+SOLVERS = ("lkh",)  # the exact MILP solver was removed: too slow for refinement
 
 
 class ConfigError(ValueError):
@@ -32,7 +32,6 @@ class Config:
     lower: BoundConfig
     sweep_samples: int
     lkh_runs: int
-    exact_time_limit: float
     cost_scale: float
     refine_lambda: int              # headings added per target per iteration
     refine_mu: int                  # number of refinement iterations (0 = single run)
@@ -54,7 +53,9 @@ def _bound(raw: dict, name: str, count_key: str, default_solver: str) -> BoundCo
         lazy=bool(section.get("lazy", True)),
     )
     _require(cfg.resolution >= 1, f"{name}.{count_key} must be >= 1")
-    _require(cfg.solver in SOLVERS, f"{name}.solver must be one of {SOLVERS}")
+    _require(cfg.solver in SOLVERS,
+             f"{name}.solver must be 'lkh' (the exact MILP solver was removed; "
+             f"the lower bound is now an LKH estimate)")
     return cfg
 
 
@@ -78,10 +79,9 @@ def load_config(path: str | Path) -> Config:
         turning_radius=float(vehicle.get("turning_radius", 1.0)),
         heading_offset=math.radians(float(raw.get("heading_offset_deg", 0.0))),
         upper=_bound(raw, "upper_bound", "num_headings", "lkh"),
-        lower=_bound(raw, "lower_bound", "num_intervals", "exact"),
+        lower=_bound(raw, "lower_bound", "num_intervals", "lkh"),
         sweep_samples=int((raw.get("lower_bound", {}) or {}).get("sweep_samples", 128)),
         lkh_runs=int(solver.get("lkh_runs", 10)),
-        exact_time_limit=float(solver.get("exact_time_limit", 120)),
         cost_scale=float(solver.get("cost_scale", 1000)),
         refine_lambda=int(refinement.get("lambda", 2)),
         refine_mu=int(refinement.get("mu", 0)) if refinement.get("enabled", True) else 0,

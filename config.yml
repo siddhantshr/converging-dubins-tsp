@@ -18,12 +18,12 @@ heading_offset_deg: 0.0
 upper_bound:
   enabled: true
   num_headings: 8                # discrete headings per target: 0, 45, 90, ... degrees
-  solver: lkh                    # lkh | exact   (any tour found is a valid upper bound)
+  solver: lkh                    # lkh only   (any tour found is a valid upper bound)
 
 lower_bound:
   enabled: true
   num_intervals: 8               # heading intervals per target, each 360/N degrees wide
-  solver: lkh                    # exact = certified lower bound | lkh = estimate only
+  solver: lkh                    # lkh only: the lower bound is an ESTIMATE, not certified
   sweep_samples: 128             # grid size of the interior search in the interval solver
   lazy: true                      # reuse parent-interval costs; compute only edges the
                                  # solver needs (same bound, far fewer interval solves)
@@ -38,8 +38,7 @@ refinement:
   mu: 12                         # number of refinement iterations after iteration 0
 
 solver:
-  lkh_runs: 1                   # LKH restarts (more = better tours, slower)
-  exact_time_limit: 300          # seconds, for the exact (MILP) solver
+  lkh_runs: 10                   # LKH restarts (more = better tours, slower)
   cost_scale: 1000               # costs are multiplied by this and made integers
 
 output:
