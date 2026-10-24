@@ -1,0 +1,6 @@
+numpy>=1.24
+pyyaml>=6.0
+matplotlib>=3.7
+elkai>=2.0        # LKH heuristic, bundled (no separate LKH-3 binary needed)
+pulp>=2.8,<3      # exact solver (ships with the CBC MILP solver); pulp 4 changed its API
+pytest>=7.0       # only for the tests

@@ -1,0 +1,47 @@
+# Dubins TSP: upper and lower bounds
+# Headings are measured counter-clockwise from the +x axis.
+
+vehicle:
+  turning_radius: 1.0            # minimum turning radius (same units as the points)
+
+points:                          # targets [x, y]; the tour is closed
+  - [0.0, 0.0]
+  - [4.0, 1.0]
+  - [6.0, 5.0]
+  - [2.5, 6.5]
+  - [-1.5, 4.0]
+  - [1.5, 2.8]
+
+# Rotate the whole heading grid / interval grid by this angle (degrees).
+heading_offset_deg: 0.0
+
+upper_bound:
+  enabled: true
+  num_headings: 8                # discrete headings per target: 0, 45, 90, ... degrees
+  solver: lkh                    # lkh | exact   (any tour found is a valid upper bound)
+
+lower_bound:
+  enabled: true
+  num_intervals: 8               # heading intervals per target, each 360/N degrees wide
+  solver: lkh                    # exact = certified lower bound | lkh = estimate only
+  sweep_samples: 128             # grid size of the interior search in the interval solver
+  lazy: true                      # reuse parent-interval costs; compute only edges the
+                                 # solver needs (same bound, far fewer interval solves)
+
+# Iterative refinement driven by the lower bound (see src/refine.py).
+# Each iteration, at every target: take the interval picked by the last
+# lower-bound tour, add `lambda` evenly spaced headings inside it to the
+# upper-bound headings, and split that interval at the same headings.
+refinement:
+  enabled: true
+  lambda: 2                      # headings added per target per iteration
+  mu: 12                         # number of refinement iterations after iteration 0
+
+solver:
+  lkh_runs: 1                   # LKH restarts (more = better tours, slower)
+  exact_time_limit: 300          # seconds, for the exact (MILP) solver
+  cost_scale: 1000               # costs are multiplied by this and made integers
+
+output:
+  plot: true
+  results_dir: results           # results/iter_00, iter_01, ... + convergence summary

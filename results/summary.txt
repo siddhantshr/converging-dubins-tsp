@@ -1,0 +1,26 @@
+TIME PER ITERATION (seconds)
+
+      ---------------- UPPER BOUND ----------------  |---------------------------- LOWER BOUND ----------------------------  |
+ iter   dubins       NB      lkh    other    total  | interval       NB      lkh    exact    other    total #solves rounds  |     iter
+--------------------------------------------------------------------------------------------------------------------------------------
+    0     0.03     0.00     0.08     0.00     0.11  |     3.04     0.00     0.06     0.00     0.00     3.11    1920      1  |     3.21
+    1     0.02     0.00     0.11     0.00     0.13  |     2.30     0.00     0.08     0.00     0.01     2.38    1530      1  |     2.51
+    2     0.02     0.00     0.15     0.00     0.17  |     2.84     0.00     0.15     0.00     0.01     2.99    1890      1  |     3.16
+    3     0.03     0.00     0.21     0.00     0.24  |     3.34     0.00     0.19     0.00     0.01     3.55    2250      1  |     3.78
+    4     0.03     0.00     0.28     0.00     0.31  |     3.87     0.00     0.29     0.00     0.01     4.17    2610      1  |     4.48
+    5     0.04     0.00     0.35     0.00     0.38  |     4.30     0.00     0.34     0.00     0.02     4.65    2970      1  |     5.03
+--------------------------------------------------------------------------------------------------------------------------------------
+total     0.16     0.00     1.17     0.00     1.33  |    19.68     0.00     1.10     0.00     0.05    20.84   13170      6  |    22.18
+
+share of total time: UB dubins 0.7%, UB NB 0.0%, UB lkh 5.3%, UB other 0.0%, LB interval 88.8%, LB NB 0.0%, LB lkh 5.0%, LB exact 0.0%, LB other 0.2%
+
+columns:
+  dubins    building the upper-bound graph (point-to-point Dubins lengths, cached)
+  interval  time inside the interval-problem solver (graph build + lazy refreshes)
+  NB        integer cost scaling + Noon-Bean transform (+ decode), all solve rounds
+  lkh       LKH solve (lower bound: all rounds if solver = lkh, screening rounds if exact)
+  exact     exact ATSP solve (CBC), incl. building the MILP and subtour cuts
+  other     everything else (lazy cost estimates from parents, bookkeeping)
+  #solves   interval problems actually solved in that iteration
+  rounds    lower-bound solve rounds (one per lazy re-solve)
+  iter      upper total + lower total (plotting and file output not included)

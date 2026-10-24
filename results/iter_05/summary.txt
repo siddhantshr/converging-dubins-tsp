@@ -1,0 +1,37 @@
+ITERATION 5
+
+headings added (deg) per target, inside the interval the previous lower bound picked:
+  target 0: 15.00, 30.00
+  target 1: 5.00, 10.00
+  target 2: 111.67, 113.33
+  target 3: 186.67, 188.33
+  target 4: 245.00, 250.00
+  target 5: 5.00, 10.00
+
+UPPER BOUND: 25.187521   (valid bound)
+  18 headings per target, solver = lkh, build 0.04s, solve 0.35s
+  order: 5 -> 1 -> 2 -> 3 -> 4 -> 0 -> 5
+  legs:   from -> to   leave     arrive    length
+             5 -> 1      15.0°     5.0°     3.3817
+             1 -> 2       5.0°   111.7°     4.7395
+             2 -> 3     111.7°   185.0°     3.9124
+             3 -> 4     185.0°   245.0°     4.7659
+             4 -> 0     245.0°    15.0°     4.9018
+             0 -> 5      15.0°    15.0°     3.4863
+
+LOWER BOUND: 24.416000   (ESTIMATE ONLY)
+  18 intervals per target, solver = lkh, build 4.31s, solve 0.34s
+  order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
+  legs:   from -> to   leave     arrive    length
+             4 -> 3      60.0°    10.0°     4.7458
+             3 -> 2       5.0°   295.0°     3.8940
+             2 -> 1     290.0°   195.0°     4.6559
+             1 -> 5     180.0°   180.0°     3.1997
+             5 -> 0     195.0°   225.0°     3.2999
+             0 -> 4     180.0°    75.0°     4.6253
+  note: solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. Use lower_bound.solver: exact for a guarantee.
+  note: legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound).
+
+this iteration:  24.416000 <= optimum <= 25.187521
+best so far:     24.416000 <= optimum <= 25.187521
+gap (best)     = 3.160%
