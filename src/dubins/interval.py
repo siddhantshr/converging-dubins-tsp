@@ -31,11 +31,18 @@ of this problem live.
 Every candidate is a real, flyable path, so the result can never be *below*
 the true minimum by more than floating-point error. `brute_force_interval`
 gives an independent check used by the tests.
+
+Speed: `solve_interval_problem` runs the C++ port in _interval.cpp (~3 us per
+solve; build it with `python tools/build_interval.py`). This Python version,
+`solve_interval_problem_py`, is the reference: the tests check that the two
+agree. If the C++ module is not built, the Python version is used (~0.5 ms
+per solve) and a warning is printed.
 """
 
 from __future__ import annotations
 
 import math
+import warnings
 from dataclasses import dataclass
 
 import numpy as np
@@ -44,7 +51,15 @@ from ..utils.angles import HeadingInterval, mod2pi
 from .free_heading import paths_between_points, paths_to_point
 from .path import shortest_length
 
+try:
+    from . import _interval as _ext
+except ImportError:
+    _ext = None
+
 Point = tuple[float, float]
+
+# Order of the case codes returned by the C++ solver.
+CASES = ("corner", "edge(start fixed)", "edge(end fixed)", "interior(S/C/CC)")
 
 
 @dataclass(frozen=True)
@@ -104,6 +119,16 @@ def _interior_closed_form(a, i0, b, i1, r, best):
 def solve_interval_problem(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,
                            r: float) -> IntervalSolution:
     """Shortest Dubins path from (A, any heading in I0) to (B, any heading in I1)."""
+    if _ext is None:
+        return solve_interval_problem_py(a, i0, b, i1, r)
+    length, th0, th1, case = _ext.solve(a[0], a[1], i0.start, i0.width,
+                                        b[0], b[1], i1.start, i1.width, r)
+    return IntervalSolution(length, th0, th1, CASES[case])
+
+
+def solve_interval_problem_py(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,
+                              r: float) -> IntervalSolution:
+    """Pure-Python reference for solve_interval_problem (same candidates, same order)."""
     best = None
     best = _corners(a, i0, b, i1, r, best)
     best = _start_fixed_edges(a, i0, b, i1, r, best)
@@ -112,6 +137,11 @@ def solve_interval_problem(a: Point, i0: HeadingInterval, b: Point, i1: HeadingI
     if best is None:  # cannot happen: corners always give a path
         raise RuntimeError("no Dubins path found")
     return best
+
+
+if _ext is None:
+    warnings.warn("C++ interval solver not built, using the pure-Python one (~150x slower). "
+                  "Build it with: python tools/build_interval.py", stacklevel=2)
 
 
 def brute_force_interval(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,

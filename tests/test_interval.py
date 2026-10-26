@@ -5,7 +5,9 @@ import random
 
 import pytest
 
-from src.dubins.interval import brute_force_interval, solve_interval_problem
+from src.dubins import interval
+from src.dubins.interval import (brute_force_interval, solve_interval_problem,
+                                  solve_interval_problem_py)
 from src.dubins.path import shortest_length
 from src.utils.angles import HeadingInterval
 
@@ -52,3 +54,19 @@ def test_full_circle_interval_is_straight_line():
     full = HeadingInterval(0.0, 2 * math.pi)
     sol = solve_interval_problem((0, 0), full, (3, 4), full, 1.0)
     assert math.isclose(sol.length, 5.0, abs_tol=1e-9)
+
+
+@pytest.mark.skipif(interval._ext is None, reason="C++ solver not built (tools/build_interval.py)")
+@pytest.mark.parametrize("seed", range(4))
+def test_cpp_matches_python(seed):
+    """The C++ port gives the Python reference's length. Headings may differ
+    only on ties, so check those give a real path of that length instead."""
+    rng = random.Random(100 + seed)
+    for _ in range(500):
+        a, i0, b, i1, r = _random_case(rng)
+        cpp = solve_interval_problem(a, i0, b, i1, r)
+        ref = solve_interval_problem_py(a, i0, b, i1, r)
+        assert math.isclose(cpp.length, ref.length, rel_tol=1e-12, abs_tol=1e-12)
+        assert i0.contains(cpp.depart_heading) and i1.contains(cpp.arrive_heading)
+        real = shortest_length((*a, cpp.depart_heading), (*b, cpp.arrive_heading), r)
+        assert real <= cpp.length + 1e-9

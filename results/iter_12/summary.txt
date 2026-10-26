@@ -1,26 +1,26 @@
 ITERATION 12
 
 headings added (deg) per target, inside the interval the previous lower bound picked:
-  target 0: 350.00, 355.00
-  target 1: 350.00, 355.00
-  target 2: 116.67, 118.33
-  target 3: 150.00, 165.00
-  target 4: 251.67, 253.33
-  target 5: 21.67, 23.33
+  target 0: 200.00, 205.00
+  target 1: 170.00, 175.00
+  target 2: 296.67, 298.33
+  target 3: 330.00, 345.00
+  target 4: 65.56, 66.11
+  target 5: 191.67, 193.33
 
-UPPER BOUND: 25.165440   (valid upper bound)
-  32 headings per target, solver = lkh, build 0.08s, solve 0.15s
+UPPER BOUND: 25.165394   (valid upper bound)
+  32 headings per target, solver = lkh, build 0.08s, solve 0.16s
   order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
-             4 -> 3      66.7°     5.0°     4.7711
-             3 -> 2       5.0°   291.7°     3.9124
-             2 -> 1     291.7°   180.0°     4.7893
-             1 -> 5     180.0°   196.7°     3.3551
-             5 -> 0     196.7°   190.0°     3.5343
+             4 -> 3      66.7°     6.7°     4.7684
+             3 -> 2       6.7°   291.7°     3.9152
+             2 -> 1     291.7°   185.0°     4.7395
+             1 -> 5     185.0°   195.0°     3.3817
+             5 -> 0     195.0°   190.0°     3.5574
              0 -> 4     190.0°    66.7°     4.8033
 
 LOWER BOUND: 24.911000   (estimate (LKH))
-  32 intervals per target, solver = lkh, build 0.48s, solve 1.84s
+  32 intervals per target, solver = lkh, build 0.05s, solve 0.16s
   order: 4 -> 5 -> 3 -> 2 -> 1 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
              4 -> 5      30.0°    30.0°     3.6808
@@ -33,7 +33,7 @@ LOWER BOUND: 24.911000   (estimate (LKH))
   note: legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound).
 
 lower bound, estimate (LKH): 24.911000
-upper bound, this iteration: 25.165440
-best upper bound so far:     25.164321
+upper bound, this iteration: 25.165394
+best upper bound so far:     25.164751
 max LB estimate so far:      24.911000   (not used for the gap)
-gap = (best UB - LB estimate) / LB estimate = 1.017%
+gap = (best UB - LB estimate) / LB estimate = 1.019%

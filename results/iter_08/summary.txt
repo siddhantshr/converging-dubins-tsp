@@ -20,15 +20,15 @@ UPPER BOUND: 25.187521   (valid upper bound)
              0 -> 4     195.0°    65.0°     4.9018
 
 LOWER BOUND: 24.718000   (estimate (LKH))
-  24 intervals per target, solver = lkh, build 0.24s, solve 1.87s
-  order: 0 -> 5 -> 1 -> 2 -> 3 -> 4 -> 0
+  24 intervals per target, solver = lkh, build 0.04s, solve 0.08s
+  order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
-             0 -> 5      15.0°    20.0°     3.4304
-             5 -> 1      15.0°   315.0°     3.2217
-             1 -> 2       0.0°   120.0°     4.8396
-             2 -> 3     135.0°   180.0°     3.8280
-             3 -> 4     185.0°   245.0°     4.7659
-             4 -> 0     250.0°     0.0°     4.6363
+             4 -> 3      65.0°     5.0°     4.7659
+             3 -> 2       0.0°   315.0°     3.8280
+             2 -> 1     300.0°   180.0°     4.8396
+             1 -> 5     135.0°   195.0°     3.2217
+             5 -> 0     200.0°   195.0°     3.4304
+             0 -> 4     180.0°    70.0°     4.6363
   note: solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.
   note: legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound).
 

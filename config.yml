@@ -24,7 +24,7 @@ lower_bound:
   enabled: true
   num_intervals: 8               # heading intervals per target, each 360/N degrees wide
   solver: lkh                    # lkh only: the lower bound is an ESTIMATE, not certified
-  lazy: true                     # reuse parent-interval costs; compute only edges the
+  lazy: false                     # reuse parent-interval costs; compute only edges the
                                  # solver needs (far fewer interval solves; with LKH the
                                  # value can differ slightly from lazy: false)
   lkh_runs_screening: 1          # LKH restarts in the lazy rounds that only pick edges to

@@ -17,6 +17,7 @@ version fixed (see the end of this file).
 
 ```bash
 pip install -r requirements.txt
+python tools/build_interval.py   # compile the C++ interval solver (needs a C++17 compiler)
 python -m src                    # uses ./config.yml
 python -m src --config other.yml --no-plot
 python -m pytest                 # run the checks
@@ -90,7 +91,8 @@ src/
   dubins/
     path.py              classical Dubins shortest path (6 words)
     free_heading.py      paths with free end headings (CS, CC, S, C)
-    interval.py          two-point Dubins interval problem (+ brute-force reference)
+    interval.py          two-point Dubins interval problem (Python reference + brute force)
+    _interval.cpp        C++ port of interval.py, used by the pipeline
   tsp/
     gtsp.py              clustered graphs for both bounds
     noon_bean.py         Noon-Bean transformation and decoding
@@ -121,6 +123,11 @@ no numerical search is needed.
 
 Every candidate is a real path, so the solver can't undershoot the true
 minimum. The tests check it never exceeds a brute-force grid search.
+
+The pipeline runs the C++ port (`src/dubins/_interval.cpp`, about 2–3 µs per
+solve against about 0.5 ms in Python). Build it with
+`python tools/build_interval.py`; without it, the Python solver is used and a
+warning is printed. The tests check that the two give the same lengths.
 
 ## Reusing previous work (`lower_bound.lazy`)
 

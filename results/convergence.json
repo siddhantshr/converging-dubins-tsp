@@ -87,17 +87,17 @@
         0.7853981633974483,
         0.0
       ],
-      "build_seconds": 0.02690720899408916,
-      "solve_seconds": 0.0152232910040766,
+      "build_seconds": 0.02717875000234926,
+      "solve_seconds": 0.015084458005730994,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.000591666997934226,
+        "transform": 0.0005585000035353005,
         "lkh_screen": 0.0,
-        "lkh": 0.014622000002418645,
-        "dubins": 0.02690720899408916,
-        "other": 9.624003723729402e-06
+        "lkh": 0.014516041002934799,
+        "dubins": 0.02717875000234926,
+        "other": 9.916999260894954e-06
       }
     },
     "lower_bound": {
@@ -155,7 +155,7 @@
           "to_target": 5,
           "depart_heading": 3.141592653589793,
           "arrive_heading": 3.141592653589793,
-          "length": 3.199736350055123,
+          "length": 3.1997363500551224,
           "from_option": "[180.0\u00b0, 225.0\u00b0]",
           "to_option": "[180.0\u00b0, 225.0\u00b0]"
         },
@@ -164,7 +164,7 @@
           "to_target": 0,
           "depart_heading": 3.9269908169872414,
           "arrive_heading": 3.141592653589793,
-          "length": 3.4667688221142443,
+          "length": 3.4667688221142448,
           "from_option": "[180.0\u00b0, 225.0\u00b0]",
           "to_option": "[135.0\u00b0, 180.0\u00b0]"
         },
@@ -204,20 +204,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.012377667000691872,
-      "solve_seconds": 0.8346470420001424,
+      "build_seconds": 0.006593291996978223,
+      "solve_seconds": 0.010927208000794053,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 27,
-      "interval_solves": 1006,
+      "solve_rounds": 1,
+      "interval_solves": 1920,
       "timings": {
-        "transform": 0.0012947890281793661,
+        "transform": 4.762499884236604e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.30027941401931457,
-        "interval": 0.5304071217906312,
-        "other": 0.015043384162709117
+        "lkh": 0.010872833998291753,
+        "interval": 0.0040815710090100765,
+        "other": 0.0025184699916280806
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -653,17 +653,17 @@
         1.0471975511965976,
         3.665191429188092
       ],
-      "build_seconds": 0.017308083006355446,
-      "solve_seconds": 0.01965379100147402,
+      "build_seconds": 0.017579167004441842,
+      "solve_seconds": 0.018838124997273553,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 6.887500057928264e-05,
+        "transform": 7.133299368433654e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.01956883299862966,
-        "dubins": 0.017308083006355446,
-        "other": 1.6083002265077084e-05
+        "lkh": 0.01875958400341915,
+        "dubins": 0.017579167004441842,
+        "other": 7.208000170066953e-06
       }
     },
     "lower_bound": {
@@ -694,7 +694,7 @@
           "to_target": 1,
           "depart_heading": 0.0,
           "arrive_heading": 0.0,
-          "length": 3.199736350055123,
+          "length": 3.1997363500551224,
           "from_option": "[0.0\u00b0, 45.0\u00b0]",
           "to_option": "[0.0\u00b0, 45.0\u00b0]"
         },
@@ -703,7 +703,7 @@
           "to_target": 2,
           "depart_heading": 0.7853981633974483,
           "arrive_heading": 1.5707963267948966,
-          "length": 4.494489603747864,
+          "length": 4.494489603747863,
           "from_option": "[0.0\u00b0, 45.0\u00b0]",
           "to_option": "[90.0\u00b0, 135.0\u00b0]"
         },
@@ -770,20 +770,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.020161124994046986,
-      "solve_seconds": 0.01828912500059232,
+      "build_seconds": 0.008620499997050501,
+      "solve_seconds": 0.02058545799809508,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
       "solve_rounds": 1,
-      "interval_solves": 0,
+      "interval_solves": 1530,
       "timings": {
-        "transform": 6.483300239779055e-05,
+        "transform": 4.562499816529453e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.01821354199637426,
-        "interval": 0.0,
-        "other": 0.020171874995867256
+        "lkh": 0.02053291699849069,
+        "interval": 0.004789639759110287,
+        "other": 0.003837776239379309
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -1309,17 +1309,17 @@
         4.1887902047863905,
         0.5235987755982988
       ],
-      "build_seconds": 0.021763750002719462,
-      "solve_seconds": 0.02446316699933959,
+      "build_seconds": 0.02183725000213599,
+      "solve_seconds": 0.02403500000218628,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 6.416699761757627e-05,
+        "transform": 6.679199577774853e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.02438862500275718,
-        "dubins": 0.021763750002719462,
-        "other": 1.0374998964834958e-05
+        "lkh": 0.023955791002663318,
+        "dubins": 0.02183725000213599,
+        "other": 1.2417003745213151e-05
       }
     },
     "lower_bound": {
@@ -1426,20 +1426,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.035713915996893775,
-      "solve_seconds": 0.5562665420002304,
+      "build_seconds": 0.009422709001228213,
+      "solve_seconds": 0.023337332997471094,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 9,
-      "interval_solves": 667,
+      "solve_rounds": 1,
+      "interval_solves": 1890,
       "timings": {
-        "transform": 0.0006231669976841658,
+        "transform": 5.491699994308874e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.19791399999667192,
-        "interval": 0.3558776871213922,
-        "other": 0.037565603881375864
+        "lkh": 0.023274792001757305,
+        "interval": 0.004052005839184858,
+        "other": 0.005378327157814056
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -2037,17 +2037,17 @@
         1.0471975511965976,
         3.665191429188092
       ],
-      "build_seconds": 0.028623291000258178,
-      "solve_seconds": 0.038561582994589116,
+      "build_seconds": 0.029530791005527135,
+      "solve_seconds": 0.03835545800393447,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 8.70829971972853e-05,
+        "transform": 0.0001020419949782081,
         "lkh_screen": 0.0,
-        "lkh": 0.038459166993561666,
-        "dubins": 0.028623291000258178,
-        "other": 1.533300383016467e-05
+        "lkh": 0.03823966599884443,
+        "dubins": 0.029530791005527135,
+        "other": 1.3750010111834854e-05
       }
     },
     "lower_bound": {
@@ -2154,20 +2154,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.0534779579975293,
-      "solve_seconds": 0.29536095899675274,
+      "build_seconds": 0.0126185830013128,
+      "solve_seconds": 0.0343342090054648,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 4,
-      "interval_solves": 312,
+      "solve_rounds": 1,
+      "interval_solves": 2250,
       "timings": {
-        "transform": 0.0003367500030435622,
+        "transform": 9.379100083606318e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.12695270800031722,
-        "interval": 0.1671068740397459,
-        "other": 0.05444258495117538
+        "lkh": 0.034222333000798244,
+        "interval": 0.00495258292357903,
+        "other": 0.0076840850815642625
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -2837,17 +2837,17 @@
         0.7853981633974483,
         0.2617993877991494
       ],
-      "build_seconds": 0.031183457998849917,
-      "solve_seconds": 0.038552333004190587,
+      "build_seconds": 0.03168816700053867,
+      "solve_seconds": 0.037849792002816685,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 9.824999870033935e-05,
+        "transform": 8.729199907975271e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.03843725000479026,
-        "dubins": 0.031183457998849917,
-        "other": 1.6833000699989498e-05
+        "lkh": 0.0377486659999704,
+        "dubins": 0.03168816700053867,
+        "other": 1.3834003766532987e-05
       }
     },
     "lower_bound": {
@@ -2878,7 +2878,7 @@
           "to_target": 5,
           "depart_heading": 0.7853981633974483,
           "arrive_heading": 0.2617993877991494,
-          "length": 3.2999017248564915,
+          "length": 3.299901724856492,
           "from_option": "[0.0\u00b0, 45.0\u00b0]",
           "to_option": "[0.0\u00b0, 15.0\u00b0]"
         },
@@ -2887,7 +2887,7 @@
           "to_target": 1,
           "depart_heading": 0.0,
           "arrive_heading": 0.0,
-          "length": 3.199736350055123,
+          "length": 3.1997363500551224,
           "from_option": "[0.0\u00b0, 15.0\u00b0]",
           "to_option": "[0.0\u00b0, 15.0\u00b0]"
         },
@@ -2954,20 +2954,20 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.07711320799717214,
-      "solve_seconds": 0.6607967909949366,
+      "build_seconds": 0.016497750002599787,
+      "solve_seconds": 0.03972258299472742,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 8,
-      "interval_solves": 673,
+      "solve_rounds": 1,
+      "interval_solves": 2610,
       "timings": {
-        "transform": 0.0006952490075491369,
+        "transform": 8.229200466303155e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.29580529099621344,
-        "interval": 0.3622793371177977,
-        "other": 0.07913012187054846
+        "lkh": 0.03962987500563031,
+        "interval": 0.0069360408233478665,
+        "other": 0.009572125163685996
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -3709,17 +3709,17 @@
         4.276056667386107,
         0.17453292519943295
       ],
-      "build_seconds": 0.03618691700103227,
-      "solve_seconds": 0.050328666002315,
+      "build_seconds": 0.0362803329990129,
+      "solve_seconds": 0.049380000004020985,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00010275000386172906,
+        "transform": 9.387499449076131e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.05020949999743607,
-        "dubins": 0.03618691700103227,
-        "other": 1.6416001017205417e-05
+        "lkh": 0.04927387500356417,
+        "dubins": 0.0362803329990129,
+        "other": 1.2250005966052413e-05
       }
     },
     "lower_bound": {
@@ -3759,7 +3759,7 @@
           "to_target": 2,
           "depart_heading": 0.08726646259971647,
           "arrive_heading": 5.148721293383272,
-          "length": 3.893992756900205,
+          "length": 3.8939927569002046,
           "from_option": "[5.0\u00b0, 10.0\u00b0]",
           "to_option": "[290.0\u00b0, 295.0\u00b0]"
         },
@@ -3777,7 +3777,7 @@
           "to_target": 5,
           "depart_heading": 3.141592653589793,
           "arrive_heading": 3.141592653589793,
-          "length": 3.199736350055123,
+          "length": 3.1997363500551224,
           "from_option": "[180.0\u00b0, 195.0\u00b0]",
           "to_option": "[180.0\u00b0, 195.0\u00b0]"
         },
@@ -3786,7 +3786,7 @@
           "to_target": 0,
           "depart_heading": 3.4033920413889427,
           "arrive_heading": 3.9269908169872414,
-          "length": 3.2999017248564924,
+          "length": 3.299901724856492,
           "from_option": "[180.0\u00b0, 195.0\u00b0]",
           "to_option": "[180.0\u00b0, 225.0\u00b0]"
         },
@@ -3826,20 +3826,20 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.10513470799924107,
-      "solve_seconds": 0.04749087499658344,
+      "build_seconds": 0.018873042004997842,
+      "solve_seconds": 0.04726916700019501,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
       "solve_rounds": 1,
-      "interval_solves": 0,
+      "interval_solves": 2970,
       "timings": {
-        "transform": 9.475000115344301e-05,
+        "transform": 8.620799781056121e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.047375624999403954,
-        "interval": 0.0,
-        "other": 0.10515520799526712
+        "lkh": 0.04716937500052154,
+        "interval": 0.006402814011380542,
+        "other": 0.01248381199548021
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -4653,17 +4653,17 @@
         1.134464013796314,
         3.665191429188092
       ],
-      "build_seconds": 0.041312458997708745,
-      "solve_seconds": 0.05529183299950091,
+      "build_seconds": 0.04024254099931568,
+      "solve_seconds": 0.0544655830017291,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00013025000225752592,
+        "transform": 0.00010304199531674385,
         "lkh_screen": 0.0,
-        "lkh": 0.055144749996543396,
-        "dubins": 0.041312458997708745,
-        "other": 1.6833000699989498e-05
+        "lkh": 0.05434349999995902,
+        "dubins": 0.04024254099931568,
+        "other": 1.9041006453335285e-05
       }
     },
     "lower_bound": {
@@ -4694,7 +4694,7 @@
           "to_target": 2,
           "depart_heading": 0.6981317007977318,
           "arrive_heading": 1.5707963267948966,
-          "length": 4.499952824420507,
+          "length": 4.4999528244205065,
           "from_option": "[35.0\u00b0, 40.0\u00b0]",
           "to_option": "[90.0\u00b0, 105.0\u00b0]"
         },
@@ -4770,20 +4770,20 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.15309104200423462,
-      "solve_seconds": 1.202834999996412,
+      "build_seconds": 0.02258087499649264,
+      "solve_seconds": 0.04798083299829159,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 10,
-      "interval_solves": 1232,
+      "solve_rounds": 1,
+      "interval_solves": 3330,
       "timings": {
-        "transform": 0.0010887899916269816,
+        "transform": 0.00010441600170452148,
         "lkh_screen": 0.0,
-        "lkh": 0.5410406259907177,
-        "interval": 0.6575600081050652,
-        "other": 0.15623661791323684
+        "lkh": 0.04786183399846777,
+        "interval": 0.00704165186471073,
+        "other": 0.015553806129901204
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -5669,17 +5669,17 @@
         1.134464013796314,
         3.4033920413889427
       ],
-      "build_seconds": 0.045913957997981925,
-      "solve_seconds": 0.07632954199652886,
+      "build_seconds": 0.04597529199963901,
+      "solve_seconds": 0.07233883399749175,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0001277919946005568,
+        "transform": 0.00010137500066775829,
         "lkh_screen": 0.0,
-        "lkh": 0.07618100000399863,
-        "dubins": 0.045913957997981925,
-        "other": 2.0749997929669917e-05
+        "lkh": 0.07222441599878948,
+        "dubins": 0.04597529199963901,
+        "other": 1.3042998034507036e-05
       }
     },
     "lower_bound": {
@@ -5755,7 +5755,7 @@
           "to_target": 4,
           "depart_heading": 2.6179938779914944,
           "arrive_heading": 0.7853981633974483,
-          "length": 4.582370299333221,
+          "length": 4.5823702993332205,
           "from_option": "[150.0\u00b0, 165.0\u00b0]",
           "to_option": "[0.0\u00b0, 45.0\u00b0]"
         }
@@ -5786,20 +5786,20 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.18472679200203856,
-      "solve_seconds": 0.06889529199543176,
+      "build_seconds": 0.026230667004710995,
+      "solve_seconds": 0.06576325000060024,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
       "solve_rounds": 1,
-      "interval_solves": 0,
+      "interval_solves": 3690,
       "timings": {
-        "transform": 0.00013629099703393877,
+        "transform": 9.479099389864132e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.06873049999558134,
-        "interval": 0.0,
-        "other": 0.18475529300485505
+        "lkh": 0.06565691700234311,
+        "interval": 0.00790024915477261,
+        "other": 0.018341959854296874
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -6757,17 +6757,17 @@
         1.134464013796314,
         3.4033920413889427
       ],
-      "build_seconds": 0.05342295800073771,
-      "solve_seconds": 0.08913325000321493,
+      "build_seconds": 0.054578292001679074,
+      "solve_seconds": 0.08699937499477528,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.000151916996401269,
+        "transform": 0.0001540000012028031,
         "lkh_screen": 0.0,
-        "lkh": 0.08895808300439967,
-        "dubins": 0.05342295800073771,
-        "other": 2.3250002413988113e-05
+        "lkh": 0.08683045900397701,
+        "dubins": 0.054578292001679074,
+        "other": 1.4915989595465362e-05
       }
     },
     "lower_bound": {
@@ -6785,109 +6785,109 @@
         24
       ],
       "order": [
-        0,
-        5,
-        1,
-        2,
+        4,
         3,
-        4
+        2,
+        1,
+        5,
+        0
       ],
       "legs": [
         {
-          "from_target": 0,
-          "to_target": 5,
-          "depart_heading": 0.2617993877991494,
-          "arrive_heading": 0.3490658503988659,
-          "length": 3.4303752452894285,
-          "from_option": "[0.0\u00b0, 15.0\u00b0]",
-          "to_option": "[15.0\u00b0, 20.0\u00b0]"
-        },
-        {
-          "from_target": 5,
-          "to_target": 1,
-          "depart_heading": 0.2617993877991494,
-          "arrive_heading": 5.497787143782138,
-          "length": 3.221737117198044,
-          "from_option": "[15.0\u00b0, 20.0\u00b0]",
-          "to_option": "[315.0\u00b0, 360.0\u00b0]"
-        },
-        {
-          "from_target": 1,
-          "to_target": 2,
-          "depart_heading": 0.0,
-          "arrive_heading": 2.0943951023931953,
-          "length": 4.839554184279389,
-          "from_option": "[315.0\u00b0, 360.0\u00b0]",
-          "to_option": "[120.0\u00b0, 135.0\u00b0]"
-        },
-        {
-          "from_target": 2,
+          "from_target": 4,
           "to_target": 3,
-          "depart_heading": 2.356194490192345,
-          "arrive_heading": 3.141592653589793,
-          "length": 3.8279890515848027,
-          "from_option": "[120.0\u00b0, 135.0\u00b0]",
-          "to_option": "[180.0\u00b0, 185.0\u00b0]"
+          "depart_heading": 1.134464013796314,
+          "arrive_heading": 0.08726646259971647,
+          "length": 4.765920647090245,
+          "from_option": "[65.0\u00b0, 70.0\u00b0]",
+          "to_option": "[0.0\u00b0, 5.0\u00b0]"
         },
         {
           "from_target": 3,
-          "to_target": 4,
-          "depart_heading": 3.2288591161895095,
-          "arrive_heading": 4.276056667386107,
-          "length": 4.765920647090244,
-          "from_option": "[180.0\u00b0, 185.0\u00b0]",
-          "to_option": "[245.0\u00b0, 250.0\u00b0]"
+          "to_target": 2,
+          "depart_heading": 0.0,
+          "arrive_heading": 5.497787143782138,
+          "length": 3.8279890515848027,
+          "from_option": "[0.0\u00b0, 5.0\u00b0]",
+          "to_option": "[300.0\u00b0, 315.0\u00b0]"
         },
         {
-          "from_target": 4,
+          "from_target": 2,
+          "to_target": 1,
+          "depart_heading": 5.235987755982989,
+          "arrive_heading": 3.141592653589793,
+          "length": 4.839554184279389,
+          "from_option": "[300.0\u00b0, 315.0\u00b0]",
+          "to_option": "[135.0\u00b0, 180.0\u00b0]"
+        },
+        {
+          "from_target": 1,
+          "to_target": 5,
+          "depart_heading": 2.356194490192345,
+          "arrive_heading": 3.4033920413889427,
+          "length": 3.2217371171980442,
+          "from_option": "[135.0\u00b0, 180.0\u00b0]",
+          "to_option": "[195.0\u00b0, 200.0\u00b0]"
+        },
+        {
+          "from_target": 5,
           "to_target": 0,
-          "depart_heading": 4.363323129985823,
-          "arrive_heading": 0.0,
+          "depart_heading": 3.490658503988659,
+          "arrive_heading": 3.4033920413889427,
+          "length": 3.4303752452894285,
+          "from_option": "[195.0\u00b0, 200.0\u00b0]",
+          "to_option": "[180.0\u00b0, 195.0\u00b0]"
+        },
+        {
+          "from_target": 0,
+          "to_target": 4,
+          "depart_heading": 3.141592653589793,
+          "arrive_heading": 1.2217304763960304,
           "length": 4.63625708178482,
-          "from_option": "[245.0\u00b0, 250.0\u00b0]",
-          "to_option": "[0.0\u00b0, 15.0\u00b0]"
+          "from_option": "[180.0\u00b0, 195.0\u00b0]",
+          "to_option": "[65.0\u00b0, 70.0\u00b0]"
         }
       ],
       "selected": [
         {
-          "start": 0.0,
+          "start": 3.141592653589793,
           "width": 0.2617993877991494
         },
         {
-          "start": 5.497787143782138,
+          "start": 2.356194490192345,
           "width": 0.7853981633974483
         },
         {
-          "start": 2.0943951023931953,
+          "start": 5.235987755982989,
           "width": 0.2617993877991494
         },
         {
-          "start": 3.141592653589793,
+          "start": 0.0,
           "width": 0.08726646259971647
         },
         {
-          "start": 4.276056667386107,
+          "start": 1.134464013796314,
           "width": 0.08726646259971647
         },
         {
-          "start": 0.2617993877991494,
+          "start": 3.4033920413889427,
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.24095254200074123,
-      "solve_seconds": 1.8744520000036573,
+      "build_seconds": 0.04443016600271221,
+      "solve_seconds": 0.07838804100174457,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 12,
-      "interval_solves": 1537,
+      "solve_rounds": 1,
+      "interval_solves": 4050,
       "timings": {
-        "transform": 0.0015690000145696104,
+        "transform": 0.000155083995196037,
         "lkh_screen": 0.0,
-        "lkh": 1.0421830839914037,
-        "interval": 0.8263804120433633,
-        "other": 0.2452720459550619
+        "lkh": 0.07821887500176672,
+        "interval": 0.022248623303312343,
+        "other": 0.022195624704181682
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -7833,7 +7833,7 @@
     "iteration": 9,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.164320595796976,
+      "value": 25.165509119809233,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
@@ -7846,88 +7846,88 @@
         26
       ],
       "order": [
-        5,
-        1,
-        2,
-        3,
         4,
+        3,
+        2,
+        1,
+        5,
         0
       ],
       "legs": [
         {
-          "from_target": 5,
-          "to_target": 1,
-          "depart_heading": 0.29088820866572157,
-          "arrive_heading": 0.0,
-          "length": 3.355068417924056,
-          "from_option": "16.7\u00b0",
-          "to_option": "0.0\u00b0"
-        },
-        {
-          "from_target": 1,
-          "to_target": 2,
-          "depart_heading": 0.0,
-          "arrive_heading": 1.9780398189269066,
-          "length": 4.797730755225416,
-          "from_option": "0.0\u00b0",
-          "to_option": "113.3\u00b0"
-        },
-        {
-          "from_target": 2,
+          "from_target": 4,
           "to_target": 3,
-          "depart_heading": 1.9780398189269066,
-          "arrive_heading": 3.2288591161895095,
-          "length": 3.9027926651800633,
-          "from_option": "113.3\u00b0",
-          "to_option": "185.0\u00b0"
+          "depart_heading": 1.163552834662886,
+          "arrive_heading": 0.11635528346628864,
+          "length": 4.768383047707853,
+          "from_option": "66.7\u00b0",
+          "to_option": "6.7\u00b0"
         },
         {
           "from_target": 3,
-          "to_target": 4,
-          "depart_heading": 3.2288591161895095,
-          "arrive_heading": 4.305145488252679,
-          "length": 4.771112712661716,
-          "from_option": "185.0\u00b0",
-          "to_option": "246.7\u00b0"
+          "to_target": 2,
+          "depart_heading": 0.11635528346628864,
+          "arrive_heading": 5.090543651650127,
+          "length": 3.9151784771935016,
+          "from_option": "6.7\u00b0",
+          "to_option": "291.7\u00b0"
         },
         {
-          "from_target": 4,
+          "from_target": 2,
+          "to_target": 1,
+          "depart_heading": 5.090543651650127,
+          "arrive_heading": 3.141592653589793,
+          "length": 4.789263132178098,
+          "from_option": "291.7\u00b0",
+          "to_option": "180.0\u00b0"
+        },
+        {
+          "from_target": 1,
+          "to_target": 5,
+          "depart_heading": 3.141592653589793,
+          "arrive_heading": 3.432480862255515,
+          "length": 3.355068417924056,
+          "from_option": "180.0\u00b0",
+          "to_option": "196.7\u00b0"
+        },
+        {
+          "from_target": 5,
           "to_target": 0,
-          "depart_heading": 4.305145488252679,
-          "arrive_heading": 0.17453292519943295,
-          "length": 4.803294334578471,
-          "from_option": "246.7\u00b0",
-          "to_option": "10.0\u00b0"
+          "depart_heading": 3.432480862255515,
+          "arrive_heading": 3.316125578789226,
+          "length": 3.5343217102272537,
+          "from_option": "196.7\u00b0",
+          "to_option": "190.0\u00b0"
         },
         {
           "from_target": 0,
-          "to_target": 5,
-          "depart_heading": 0.17453292519943295,
-          "arrive_heading": 0.29088820866572157,
-          "length": 3.534321710227254,
-          "from_option": "10.0\u00b0",
-          "to_option": "16.7\u00b0"
+          "to_target": 4,
+          "depart_heading": 3.316125578789226,
+          "arrive_heading": 1.163552834662886,
+          "length": 4.803294334578471,
+          "from_option": "190.0\u00b0",
+          "to_option": "66.7\u00b0"
         }
       ],
       "selected": [
-        0.17453292519943295,
-        0.0,
-        1.9780398189269066,
-        3.2288591161895095,
-        4.305145488252679,
-        0.29088820866572157
+        3.316125578789226,
+        3.141592653589793,
+        5.090543651650127,
+        0.11635528346628864,
+        1.163552834662886,
+        3.432480862255515
       ],
-      "build_seconds": 0.05718462500226451,
-      "solve_seconds": 0.10925612499704584,
+      "build_seconds": 0.05939912500616629,
+      "solve_seconds": 0.10530500000459142,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0001324580007349141,
+        "transform": 0.00015775000065332279,
         "lkh_screen": 0.0,
-        "lkh": 0.10910541699558962,
-        "dubins": 0.05718462500226451,
-        "other": 1.8250000721309334e-05
+        "lkh": 0.10512766700412612,
+        "dubins": 0.05939912500616629,
+        "other": 1.9582999811973423e-05
       }
     },
     "lower_bound": {
@@ -7945,1354 +7945,120 @@
         26
       ],
       "order": [
-        4,
-        3,
-        2,
-        1,
+        0,
         5,
-        0
+        1,
+        2,
+        3,
+        4
       ],
       "legs": [
-        {
-          "from_target": 4,
-          "to_target": 3,
-          "depart_heading": 1.134464013796314,
-          "arrive_heading": 0.08726646259971647,
-          "length": 4.765920647090245,
-          "from_option": "[65.0\u00b0, 70.0\u00b0]",
-          "to_option": "[0.0\u00b0, 5.0\u00b0]"
-        },
-        {
-          "from_target": 3,
-          "to_target": 2,
-          "depart_heading": 0.0,
-          "arrive_heading": 5.497787143782138,
-          "length": 3.8279890515848027,
-          "from_option": "[0.0\u00b0, 5.0\u00b0]",
-          "to_option": "[300.0\u00b0, 315.0\u00b0]"
-        },
-        {
-          "from_target": 2,
-          "to_target": 1,
-          "depart_heading": 5.235987755982989,
-          "arrive_heading": 3.141592653589793,
-          "length": 4.839554184279389,
-          "from_option": "[300.0\u00b0, 315.0\u00b0]",
-          "to_option": "[135.0\u00b0, 180.0\u00b0]"
-        },
-        {
-          "from_target": 1,
-          "to_target": 5,
-          "depart_heading": 2.356194490192345,
-          "arrive_heading": 3.4033920413889427,
-          "length": 3.2217371171980442,
-          "from_option": "[135.0\u00b0, 180.0\u00b0]",
-          "to_option": "[195.0\u00b0, 200.0\u00b0]"
-        },
-        {
-          "from_target": 5,
-          "to_target": 0,
-          "depart_heading": 3.490658503988659,
-          "arrive_heading": 3.4033920413889427,
-          "length": 3.4303752452894285,
-          "from_option": "[195.0\u00b0, 200.0\u00b0]",
-          "to_option": "[180.0\u00b0, 195.0\u00b0]"
-        },
         {
           "from_target": 0,
-          "to_target": 4,
-          "depart_heading": 3.141592653589793,
-          "arrive_heading": 1.2217304763960304,
-          "length": 4.63625708178482,
-          "from_option": "[180.0\u00b0, 195.0\u00b0]",
-          "to_option": "[65.0\u00b0, 70.0\u00b0]"
-        }
-      ],
-      "selected": [
-        {
-          "start": 3.141592653589793,
-          "width": 0.2617993877991494
+          "to_target": 5,
+          "depart_heading": 0.2617993877991494,
+          "arrive_heading": 0.3490658503988659,
+          "length": 3.4303752452894285,
+          "from_option": "[0.0\u00b0, 15.0\u00b0]",
+          "to_option": "[15.0\u00b0, 20.0\u00b0]"
         },
-        {
-          "start": 2.356194490192345,
-          "width": 0.7853981633974483
-        },
-        {
-          "start": 5.235987755982989,
-          "width": 0.2617993877991494
-        },
-        {
-          "start": 0.0,
-          "width": 0.08726646259971647
-        },
-        {
-          "start": 1.134464013796314,
-          "width": 0.08726646259971647
-        },
-        {
-          "start": 3.4033920413889427,
-          "width": 0.08726646259971647
-        }
-      ],
-      "build_seconds": 0.2738284160004696,
-      "solve_seconds": 0.3064217080027447,
-      "notes": [
-        "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
-        "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
-      ],
-      "solve_rounds": 2,
-      "interval_solves": 203,
-      "timings": {
-        "transform": 0.0003157909959554672,
-        "lkh_screen": 0.0,
-        "lkh": 0.1958347500039963,
-        "interval": 0.10975483299989719,
-        "other": 0.27434475000336533
-      }
-    },
-    "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.164320595796976,
-    "max_lb_estimate": 24.718,
-    "gap_percent": 1.8056501165020482,
-    "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
-    "lb_exceeds_best_upper": false,
-    "headings_deg_per_target": [
-      [
-        0.0,
-        5.0,
-        10.0,
-        15.0,
-        30.0,
-        45.0,
-        90.0,
-        105.0,
-        120.0,
-        135.0,
-        150.0,
-        155.0,
-        160.0,
-        165.0,
-        180.0,
-        195.0,
-        210.0,
-        225.0,
-        270.0,
-        285.0,
-        300.0,
-        315.0,
-        330.0,
-        335.0,
-        340.0,
-        345.0
-      ],
-      [
-        0.0,
-        5.0,
-        10.0,
-        15.0,
-        30.0,
-        35.0,
-        36.6667,
-        38.3333,
-        40.0,
-        45.0,
-        90.0,
-        135.0,
-        180.0,
-        185.0,
-        190.0,
-        195.0,
-        210.0,
-        215.0,
-        216.6667,
-        218.3333,
-        220.0,
-        225.0,
-        270.0,
-        315.0,
-        330.0,
-        345.0
-      ],
-      [
-        0.0,
-        45.0,
-        90.0,
-        95.0,
-        100.0,
-        105.0,
-        110.0,
-        111.6667,
-        113.3333,
-        115.0,
-        120.0,
-        125.0,
-        130.0,
-        135.0,
-        180.0,
-        225.0,
-        270.0,
-        275.0,
-        280.0,
-        285.0,
-        290.0,
-        291.6667,
-        293.3333,
-        295.0,
-        300.0,
-        315.0
-      ],
-      [
-        0.0,
-        5.0,
-        6.6667,
-        8.3333,
-        10.0,
-        15.0,
-        30.0,
-        35.0,
-        40.0,
-        45.0,
-        90.0,
-        135.0,
-        180.0,
-        181.6667,
-        183.3333,
-        185.0,
-        186.6667,
-        188.3333,
-        190.0,
-        195.0,
-        210.0,
-        215.0,
-        220.0,
-        225.0,
-        270.0,
-        315.0
-      ],
-      [
-        0.0,
-        15.0,
-        30.0,
-        45.0,
-        60.0,
-        65.0,
-        70.0,
-        75.0,
-        90.0,
-        105.0,
-        120.0,
-        135.0,
-        180.0,
-        195.0,
-        210.0,
-        225.0,
-        240.0,
-        245.0,
-        246.6667,
-        248.3333,
-        250.0,
-        255.0,
-        270.0,
-        285.0,
-        300.0,
-        315.0
-      ],
-      [
-        0.0,
-        5.0,
-        10.0,
-        15.0,
-        16.6667,
-        18.3333,
-        20.0,
-        25.0,
-        30.0,
-        45.0,
-        90.0,
-        105.0,
-        120.0,
-        135.0,
-        180.0,
-        185.0,
-        190.0,
-        195.0,
-        200.0,
-        205.0,
-        210.0,
-        225.0,
-        270.0,
-        285.0,
-        300.0,
-        315.0
-      ]
-    ],
-    "intervals_deg_per_target": [
-      [
-        "[0.0\u00b0, 5.0\u00b0]",
-        "[5.0\u00b0, 10.0\u00b0]",
-        "[10.0\u00b0, 15.0\u00b0]",
-        "[15.0\u00b0, 30.0\u00b0]",
-        "[30.0\u00b0, 45.0\u00b0]",
-        "[45.0\u00b0, 90.0\u00b0]",
-        "[90.0\u00b0, 105.0\u00b0]",
-        "[105.0\u00b0, 120.0\u00b0]",
-        "[120.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 150.0\u00b0]",
-        "[150.0\u00b0, 155.0\u00b0]",
-        "[155.0\u00b0, 160.0\u00b0]",
-        "[160.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 225.0\u00b0]",
-        "[225.0\u00b0, 270.0\u00b0]",
-        "[270.0\u00b0, 285.0\u00b0]",
-        "[285.0\u00b0, 300.0\u00b0]",
-        "[300.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 330.0\u00b0]",
-        "[330.0\u00b0, 335.0\u00b0]",
-        "[335.0\u00b0, 340.0\u00b0]",
-        "[340.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 360.0\u00b0]"
-      ],
-      [
-        "[0.0\u00b0, 5.0\u00b0]",
-        "[5.0\u00b0, 10.0\u00b0]",
-        "[10.0\u00b0, 15.0\u00b0]",
-        "[15.0\u00b0, 30.0\u00b0]",
-        "[30.0\u00b0, 35.0\u00b0]",
-        "[35.0\u00b0, 36.7\u00b0]",
-        "[36.7\u00b0, 38.3\u00b0]",
-        "[38.3\u00b0, 40.0\u00b0]",
-        "[40.0\u00b0, 45.0\u00b0]",
-        "[45.0\u00b0, 90.0\u00b0]",
-        "[90.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 185.0\u00b0]",
-        "[185.0\u00b0, 190.0\u00b0]",
-        "[190.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 215.0\u00b0]",
-        "[215.0\u00b0, 216.7\u00b0]",
-        "[216.7\u00b0, 218.3\u00b0]",
-        "[218.3\u00b0, 220.0\u00b0]",
-        "[220.0\u00b0, 225.0\u00b0]",
-        "[225.0\u00b0, 270.0\u00b0]",
-        "[270.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 330.0\u00b0]",
-        "[330.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 360.0\u00b0]"
-      ],
-      [
-        "[0.0\u00b0, 45.0\u00b0]",
-        "[45.0\u00b0, 90.0\u00b0]",
-        "[90.0\u00b0, 95.0\u00b0]",
-        "[95.0\u00b0, 100.0\u00b0]",
-        "[100.0\u00b0, 105.0\u00b0]",
-        "[105.0\u00b0, 110.0\u00b0]",
-        "[110.0\u00b0, 111.7\u00b0]",
-        "[111.7\u00b0, 113.3\u00b0]",
-        "[113.3\u00b0, 115.0\u00b0]",
-        "[115.0\u00b0, 120.0\u00b0]",
-        "[120.0\u00b0, 125.0\u00b0]",
-        "[125.0\u00b0, 130.0\u00b0]",
-        "[130.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 225.0\u00b0]",
-        "[225.0\u00b0, 270.0\u00b0]",
-        "[270.0\u00b0, 275.0\u00b0]",
-        "[275.0\u00b0, 280.0\u00b0]",
-        "[280.0\u00b0, 285.0\u00b0]",
-        "[285.0\u00b0, 290.0\u00b0]",
-        "[290.0\u00b0, 291.7\u00b0]",
-        "[291.7\u00b0, 293.3\u00b0]",
-        "[293.3\u00b0, 295.0\u00b0]",
-        "[295.0\u00b0, 300.0\u00b0]",
-        "[300.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 360.0\u00b0]"
-      ],
-      [
-        "[0.0\u00b0, 5.0\u00b0]",
-        "[5.0\u00b0, 6.7\u00b0]",
-        "[6.7\u00b0, 8.3\u00b0]",
-        "[8.3\u00b0, 10.0\u00b0]",
-        "[10.0\u00b0, 15.0\u00b0]",
-        "[15.0\u00b0, 30.0\u00b0]",
-        "[30.0\u00b0, 35.0\u00b0]",
-        "[35.0\u00b0, 40.0\u00b0]",
-        "[40.0\u00b0, 45.0\u00b0]",
-        "[45.0\u00b0, 90.0\u00b0]",
-        "[90.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 181.7\u00b0]",
-        "[181.7\u00b0, 183.3\u00b0]",
-        "[183.3\u00b0, 185.0\u00b0]",
-        "[185.0\u00b0, 186.7\u00b0]",
-        "[186.7\u00b0, 188.3\u00b0]",
-        "[188.3\u00b0, 190.0\u00b0]",
-        "[190.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 215.0\u00b0]",
-        "[215.0\u00b0, 220.0\u00b0]",
-        "[220.0\u00b0, 225.0\u00b0]",
-        "[225.0\u00b0, 270.0\u00b0]",
-        "[270.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 360.0\u00b0]"
-      ],
-      [
-        "[0.0\u00b0, 15.0\u00b0]",
-        "[15.0\u00b0, 30.0\u00b0]",
-        "[30.0\u00b0, 45.0\u00b0]",
-        "[45.0\u00b0, 60.0\u00b0]",
-        "[60.0\u00b0, 65.0\u00b0]",
-        "[65.0\u00b0, 70.0\u00b0]",
-        "[70.0\u00b0, 75.0\u00b0]",
-        "[75.0\u00b0, 90.0\u00b0]",
-        "[90.0\u00b0, 105.0\u00b0]",
-        "[105.0\u00b0, 120.0\u00b0]",
-        "[120.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 225.0\u00b0]",
-        "[225.0\u00b0, 240.0\u00b0]",
-        "[240.0\u00b0, 245.0\u00b0]",
-        "[245.0\u00b0, 246.7\u00b0]",
-        "[246.7\u00b0, 248.3\u00b0]",
-        "[248.3\u00b0, 250.0\u00b0]",
-        "[250.0\u00b0, 255.0\u00b0]",
-        "[255.0\u00b0, 270.0\u00b0]",
-        "[270.0\u00b0, 285.0\u00b0]",
-        "[285.0\u00b0, 300.0\u00b0]",
-        "[300.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 360.0\u00b0]"
-      ],
-      [
-        "[0.0\u00b0, 5.0\u00b0]",
-        "[5.0\u00b0, 10.0\u00b0]",
-        "[10.0\u00b0, 15.0\u00b0]",
-        "[15.0\u00b0, 16.7\u00b0]",
-        "[16.7\u00b0, 18.3\u00b0]",
-        "[18.3\u00b0, 20.0\u00b0]",
-        "[20.0\u00b0, 25.0\u00b0]",
-        "[25.0\u00b0, 30.0\u00b0]",
-        "[30.0\u00b0, 45.0\u00b0]",
-        "[45.0\u00b0, 90.0\u00b0]",
-        "[90.0\u00b0, 105.0\u00b0]",
-        "[105.0\u00b0, 120.0\u00b0]",
-        "[120.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 185.0\u00b0]",
-        "[185.0\u00b0, 190.0\u00b0]",
-        "[190.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 200.0\u00b0]",
-        "[200.0\u00b0, 205.0\u00b0]",
-        "[205.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 225.0\u00b0]",
-        "[225.0\u00b0, 270.0\u00b0]",
-        "[270.0\u00b0, 285.0\u00b0]",
-        "[285.0\u00b0, 300.0\u00b0]",
-        "[300.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 360.0\u00b0]"
-      ]
-    ],
-    "intervals_rad_per_target": [
-      [
-        [
-          0.0,
-          0.08726646259971647
-        ],
-        [
-          0.08726646259971647,
-          0.08726646259971647
-        ],
-        [
-          0.17453292519943295,
-          0.08726646259971647
-        ],
-        [
-          0.2617993877991494,
-          0.2617993877991494
-        ],
-        [
-          0.5235987755982988,
-          0.2617993877991494
-        ],
-        [
-          0.7853981633974483,
-          0.7853981633974483
-        ],
-        [
-          1.5707963267948966,
-          0.2617993877991494
-        ],
-        [
-          1.832595714594046,
-          0.2617993877991494
-        ],
-        [
-          2.0943951023931953,
-          0.2617993877991494
-        ],
-        [
-          2.356194490192345,
-          0.2617993877991494
-        ],
-        [
-          2.6179938779914944,
-          0.08726646259971647
-        ],
-        [
-          2.705260340591211,
-          0.08726646259971647
-        ],
-        [
-          2.792526803190927,
-          0.08726646259971647
-        ],
-        [
-          2.8797932657906435,
-          0.2617993877991494
-        ],
-        [
-          3.141592653589793,
-          0.2617993877991494
-        ],
-        [
-          3.4033920413889427,
-          0.2617993877991494
-        ],
-        [
-          3.665191429188092,
-          0.2617993877991494
-        ],
-        [
-          3.9269908169872414,
-          0.7853981633974483
-        ],
-        [
-          4.71238898038469,
-          0.2617993877991494
-        ],
-        [
-          4.974188368183839,
-          0.2617993877991494
-        ],
-        [
-          5.235987755982989,
-          0.2617993877991494
-        ],
-        [
-          5.497787143782138,
-          0.2617993877991494
-        ],
-        [
-          5.759586531581287,
-          0.08726646259971647
-        ],
-        [
-          5.8468529941810035,
-          0.08726646259971647
-        ],
-        [
-          5.93411945678072,
-          0.08726646259971647
-        ],
-        [
-          6.021385919380437,
-          0.2617993877991494
-        ]
-      ],
-      [
-        [
-          0.0,
-          0.08726646259971647
-        ],
-        [
-          0.08726646259971647,
-          0.08726646259971647
-        ],
-        [
-          0.17453292519943295,
-          0.08726646259971647
-        ],
-        [
-          0.2617993877991494,
-          0.2617993877991494
-        ],
-        [
-          0.5235987755982988,
-          0.08726646259971647
-        ],
-        [
-          0.6108652381980153,
-          0.02908882086657216
-        ],
-        [
-          0.6399540590645875,
-          0.02908882086657216
-        ],
-        [
-          0.6690428799311596,
-          0.02908882086657216
-        ],
-        [
-          0.6981317007977318,
-          0.08726646259971647
-        ],
-        [
-          0.7853981633974483,
-          0.7853981633974483
-        ],
-        [
-          1.5707963267948966,
-          0.7853981633974483
-        ],
-        [
-          2.356194490192345,
-          0.7853981633974483
-        ],
-        [
-          3.141592653589793,
-          0.08726646259971647
-        ],
-        [
-          3.2288591161895095,
-          0.08726646259971647
-        ],
-        [
-          3.316125578789226,
-          0.08726646259971647
-        ],
-        [
-          3.4033920413889427,
-          0.2617993877991494
-        ],
-        [
-          3.665191429188092,
-          0.08726646259971647
-        ],
-        [
-          3.752457891787808,
-          0.02908882086657216
-        ],
-        [
-          3.7815467126543805,
-          0.02908882086657216
-        ],
-        [
-          3.8106355335209523,
-          0.02908882086657216
-        ],
-        [
-          3.8397243543875246,
-          0.08726646259971647
-        ],
-        [
-          3.9269908169872414,
-          0.7853981633974483
-        ],
-        [
-          4.71238898038469,
-          0.7853981633974483
-        ],
-        [
-          5.497787143782138,
-          0.2617993877991494
-        ],
-        [
-          5.759586531581287,
-          0.2617993877991494
-        ],
-        [
-          6.021385919380437,
-          0.2617993877991494
-        ]
-      ],
-      [
-        [
-          0.0,
-          0.7853981633974483
-        ],
-        [
-          0.7853981633974483,
-          0.7853981633974483
-        ],
-        [
-          1.5707963267948966,
-          0.08726646259971647
-        ],
-        [
-          1.658062789394613,
-          0.08726646259971647
-        ],
-        [
-          1.7453292519943295,
-          0.08726646259971647
-        ],
-        [
-          1.832595714594046,
-          0.08726646259971647
-        ],
-        [
-          1.9198621771937623,
-          0.02908882086657216
-        ],
-        [
-          1.9489509980603343,
-          0.02908882086657216
-        ],
-        [
-          1.9780398189269066,
-          0.02908882086657216
-        ],
-        [
-          2.007128639793479,
-          0.08726646259971647
-        ],
-        [
-          2.0943951023931953,
-          0.08726646259971647
-        ],
-        [
-          2.1816615649929116,
-          0.08726646259971647
-        ],
-        [
-          2.268928027592628,
-          0.08726646259971647
-        ],
-        [
-          2.356194490192345,
-          0.7853981633974483
-        ],
-        [
-          3.141592653589793,
-          0.7853981633974483
-        ],
-        [
-          3.9269908169872414,
-          0.7853981633974483
-        ],
-        [
-          4.71238898038469,
-          0.08726646259971647
-        ],
-        [
-          4.799655442984406,
-          0.08726646259971647
-        ],
-        [
-          4.886921905584122,
-          0.08726646259971647
-        ],
-        [
-          4.974188368183839,
-          0.08726646259971647
-        ],
-        [
-          5.061454830783555,
-          0.02908882086657216
-        ],
-        [
-          5.090543651650127,
-          0.02908882086657216
-        ],
-        [
-          5.1196324725167,
-          0.02908882086657216
-        ],
-        [
-          5.148721293383272,
-          0.08726646259971647
-        ],
-        [
-          5.235987755982989,
-          0.2617993877991494
-        ],
-        [
-          5.497787143782138,
-          0.7853981633974483
-        ]
-      ],
-      [
-        [
-          0.0,
-          0.08726646259971647
-        ],
-        [
-          0.08726646259971647,
-          0.02908882086657216
-        ],
-        [
-          0.11635528346628864,
-          0.02908882086657216
-        ],
-        [
-          0.14544410433286079,
-          0.02908882086657216
-        ],
-        [
-          0.17453292519943295,
-          0.08726646259971647
-        ],
-        [
-          0.2617993877991494,
-          0.2617993877991494
-        ],
-        [
-          0.5235987755982988,
-          0.08726646259971647
-        ],
-        [
-          0.6108652381980153,
-          0.08726646259971647
-        ],
-        [
-          0.6981317007977318,
-          0.08726646259971647
-        ],
-        [
-          0.7853981633974483,
-          0.7853981633974483
-        ],
-        [
-          1.5707963267948966,
-          0.7853981633974483
-        ],
-        [
-          2.356194490192345,
-          0.7853981633974483
-        ],
-        [
-          3.141592653589793,
-          0.02908882086657216
-        ],
-        [
-          3.1706814744563654,
-          0.02908882086657216
-        ],
-        [
-          3.199770295322937,
-          0.02908882086657216
-        ],
-        [
-          3.2288591161895095,
-          0.02908882086657216
-        ],
-        [
-          3.2579479370560818,
-          0.02908882086657216
-        ],
-        [
-          3.2870367579226536,
-          0.02908882086657216
-        ],
-        [
-          3.316125578789226,
-          0.08726646259971647
-        ],
-        [
-          3.4033920413889427,
-          0.2617993877991494
-        ],
-        [
-          3.665191429188092,
-          0.08726646259971647
-        ],
-        [
-          3.752457891787808,
-          0.08726646259971647
-        ],
-        [
-          3.8397243543875246,
-          0.08726646259971647
-        ],
-        [
-          3.9269908169872414,
-          0.7853981633974483
-        ],
-        [
-          4.71238898038469,
-          0.7853981633974483
-        ],
-        [
-          5.497787143782138,
-          0.7853981633974483
-        ]
-      ],
-      [
-        [
-          0.0,
-          0.2617993877991494
-        ],
-        [
-          0.2617993877991494,
-          0.2617993877991494
-        ],
-        [
-          0.5235987755982988,
-          0.2617993877991494
-        ],
-        [
-          0.7853981633974483,
-          0.2617993877991494
-        ],
-        [
-          1.0471975511965976,
-          0.08726646259971647
-        ],
-        [
-          1.134464013796314,
-          0.08726646259971647
-        ],
-        [
-          1.2217304763960306,
-          0.08726646259971647
-        ],
-        [
-          1.308996938995747,
-          0.2617993877991494
-        ],
-        [
-          1.5707963267948966,
-          0.2617993877991494
-        ],
-        [
-          1.832595714594046,
-          0.2617993877991494
-        ],
-        [
-          2.0943951023931953,
-          0.2617993877991494
-        ],
-        [
-          2.356194490192345,
-          0.7853981633974483
-        ],
-        [
-          3.141592653589793,
-          0.2617993877991494
-        ],
-        [
-          3.4033920413889427,
-          0.2617993877991494
-        ],
-        [
-          3.665191429188092,
-          0.2617993877991494
-        ],
-        [
-          3.9269908169872414,
-          0.2617993877991494
-        ],
-        [
-          4.1887902047863905,
-          0.08726646259971647
-        ],
-        [
-          4.276056667386107,
-          0.02908882086657216
-        ],
-        [
-          4.305145488252679,
-          0.02908882086657216
-        ],
-        [
-          4.3342343091192514,
-          0.02908882086657216
-        ],
-        [
-          4.363323129985823,
-          0.08726646259971647
-        ],
-        [
-          4.4505895925855405,
-          0.2617993877991494
-        ],
-        [
-          4.71238898038469,
-          0.2617993877991494
-        ],
-        [
-          4.974188368183839,
-          0.2617993877991494
-        ],
-        [
-          5.235987755982989,
-          0.2617993877991494
-        ],
-        [
-          5.497787143782138,
-          0.7853981633974483
-        ]
-      ],
-      [
-        [
-          0.0,
-          0.08726646259971647
-        ],
-        [
-          0.08726646259971647,
-          0.08726646259971647
-        ],
-        [
-          0.17453292519943295,
-          0.08726646259971647
-        ],
-        [
-          0.2617993877991494,
-          0.02908882086657216
-        ],
-        [
-          0.29088820866572157,
-          0.02908882086657216
-        ],
-        [
-          0.31997702953229373,
-          0.02908882086657216
-        ],
-        [
-          0.3490658503988659,
-          0.08726646259971647
-        ],
-        [
-          0.43633231299858233,
-          0.08726646259971647
-        ],
-        [
-          0.5235987755982988,
-          0.2617993877991494
-        ],
-        [
-          0.7853981633974483,
-          0.7853981633974483
-        ],
-        [
-          1.5707963267948966,
-          0.2617993877991494
-        ],
-        [
-          1.832595714594046,
-          0.2617993877991494
-        ],
-        [
-          2.0943951023931953,
-          0.2617993877991494
-        ],
-        [
-          2.356194490192345,
-          0.7853981633974483
-        ],
-        [
-          3.141592653589793,
-          0.08726646259971647
-        ],
-        [
-          3.2288591161895095,
-          0.08726646259971647
-        ],
-        [
-          3.316125578789226,
-          0.08726646259971647
-        ],
-        [
-          3.4033920413889427,
-          0.08726646259971647
-        ],
-        [
-          3.490658503988659,
-          0.08726646259971647
-        ],
-        [
-          3.5779249665883754,
-          0.08726646259971647
-        ],
-        [
-          3.665191429188092,
-          0.2617993877991494
-        ],
-        [
-          3.9269908169872414,
-          0.7853981633974483
-        ],
-        [
-          4.71238898038469,
-          0.2617993877991494
-        ],
-        [
-          4.974188368183839,
-          0.2617993877991494
-        ],
-        [
-          5.235987755982989,
-          0.2617993877991494
-        ],
-        [
-          5.497787143782138,
-          0.7853981633974483
-        ]
-      ]
-    ],
-    "added_headings_deg_per_target": [
-      [
-        5.0,
-        10.0
-      ],
-      [
-        330.0,
-        345.0
-      ],
-      [
-        125.0,
-        130.0
-      ],
-      [
-        181.6667,
-        183.3333
-      ],
-      [
-        246.6667,
-        248.3333
-      ],
-      [
-        16.6667,
-        18.3333
-      ]
-    ]
-  },
-  {
-    "iteration": 10,
-    "upper_bound": {
-      "kind": "upper",
-      "value": 25.164750581583107,
-      "is_valid_bound": true,
-      "status": "valid upper bound",
-      "solver": "lkh",
-      "options_per_target": [
-        28,
-        28,
-        28,
-        28,
-        28,
-        28
-      ],
-      "order": [
-        5,
-        1,
-        2,
-        3,
-        4,
-        0
-      ],
-      "legs": [
         {
           "from_target": 5,
           "to_target": 1,
-          "depart_heading": 0.29088820866572157,
-          "arrive_heading": 0.0,
-          "length": 3.355068417924056,
-          "from_option": "16.7\u00b0",
-          "to_option": "0.0\u00b0"
+          "depart_heading": 0.2617993877991494,
+          "arrive_heading": 5.497787143782138,
+          "length": 3.221737117198044,
+          "from_option": "[15.0\u00b0, 20.0\u00b0]",
+          "to_option": "[315.0\u00b0, 360.0\u00b0]"
         },
         {
           "from_target": 1,
           "to_target": 2,
           "depart_heading": 0.0,
-          "arrive_heading": 2.007128639793479,
-          "length": 4.8069606492914065,
-          "from_option": "0.0\u00b0",
-          "to_option": "115.0\u00b0"
+          "arrive_heading": 2.0943951023931953,
+          "length": 4.839554184279389,
+          "from_option": "[315.0\u00b0, 360.0\u00b0]",
+          "to_option": "[120.0\u00b0, 135.0\u00b0]"
         },
         {
           "from_target": 2,
           "to_target": 3,
-          "depart_heading": 2.007128639793479,
-          "arrive_heading": 3.2288591161895095,
-          "length": 3.8939927569002033,
-          "from_option": "115.0\u00b0",
-          "to_option": "185.0\u00b0"
+          "depart_heading": 2.356194490192345,
+          "arrive_heading": 3.141592653589793,
+          "length": 3.8279890515848027,
+          "from_option": "[120.0\u00b0, 135.0\u00b0]",
+          "to_option": "[180.0\u00b0, 185.0\u00b0]"
         },
         {
           "from_target": 3,
           "to_target": 4,
           "depart_heading": 3.2288591161895095,
-          "arrive_heading": 4.305145488252679,
-          "length": 4.771112712661716,
-          "from_option": "185.0\u00b0",
-          "to_option": "246.7\u00b0"
+          "arrive_heading": 4.276056667386107,
+          "length": 4.765920647090244,
+          "from_option": "[180.0\u00b0, 185.0\u00b0]",
+          "to_option": "[245.0\u00b0, 250.0\u00b0]"
         },
         {
           "from_target": 4,
           "to_target": 0,
-          "depart_heading": 4.305145488252679,
-          "arrive_heading": 0.17453292519943295,
-          "length": 4.803294334578471,
-          "from_option": "246.7\u00b0",
-          "to_option": "10.0\u00b0"
-        },
-        {
-          "from_target": 0,
-          "to_target": 5,
-          "depart_heading": 0.17453292519943295,
-          "arrive_heading": 0.29088820866572157,
-          "length": 3.534321710227254,
-          "from_option": "10.0\u00b0",
-          "to_option": "16.7\u00b0"
-        }
-      ],
-      "selected": [
-        0.17453292519943295,
-        0.0,
-        2.007128639793479,
-        3.2288591161895095,
-        4.305145488252679,
-        0.29088820866572157
-      ],
-      "build_seconds": 0.0819334580010036,
-      "solve_seconds": 0.11682987500535091,
-      "notes": [],
-      "solve_rounds": 1,
-      "interval_solves": 0,
-      "timings": {
-        "transform": 0.00016670900367898867,
-        "lkh_screen": 0.0,
-        "lkh": 0.11664224999549333,
-        "dubins": 0.0819334580010036,
-        "other": 2.0916006178595126e-05
-      }
-    },
-    "lower_bound": {
-      "kind": "lower",
-      "value": 24.822,
-      "is_valid_bound": false,
-      "status": "estimate (LKH)",
-      "solver": "lkh",
-      "options_per_target": [
-        28,
-        28,
-        28,
-        28,
-        28,
-        28
-      ],
-      "order": [
-        4,
-        3,
-        2,
-        1,
-        5,
-        0
-      ],
-      "legs": [
-        {
-          "from_target": 4,
-          "to_target": 3,
-          "depart_heading": 1.2217304763960306,
+          "depart_heading": 4.363323129985823,
           "arrive_heading": 0.0,
-          "length": 4.7936374549846015,
-          "from_option": "[70.0\u00b0, 75.0\u00b0]",
-          "to_option": "[315.0\u00b0, 360.0\u00b0]"
-        },
-        {
-          "from_target": 3,
-          "to_target": 2,
-          "depart_heading": 5.940928206186774,
-          "arrive_heading": 5.235987755982988,
-          "length": 3.857371603061676,
-          "from_option": "[315.0\u00b0, 360.0\u00b0]",
-          "to_option": "[295.0\u00b0, 300.0\u00b0]"
-        },
-        {
-          "from_target": 2,
-          "to_target": 1,
-          "depart_heading": 5.148721293383272,
-          "arrive_heading": 3.141592653589793,
-          "length": 4.8069606492914065,
-          "from_option": "[295.0\u00b0, 300.0\u00b0]",
-          "to_option": "[165.0\u00b0, 180.0\u00b0]"
-        },
-        {
-          "from_target": 1,
-          "to_target": 5,
-          "depart_heading": 2.8797932657906435,
-          "arrive_heading": 3.490658503988659,
-          "length": 3.3074452117336524,
-          "from_option": "[165.0\u00b0, 180.0\u00b0]",
-          "to_option": "[200.0\u00b0, 205.0\u00b0]"
-        },
-        {
-          "from_target": 5,
-          "to_target": 0,
-          "depart_heading": 3.5779249665883754,
-          "arrive_heading": 3.141592653589793,
-          "length": 3.602549831281581,
-          "from_option": "[200.0\u00b0, 205.0\u00b0]",
-          "to_option": "[165.0\u00b0, 180.0\u00b0]"
-        },
-        {
-          "from_target": 0,
-          "to_target": 4,
-          "depart_heading": 2.8797932657906435,
-          "arrive_heading": 1.308996938995747,
-          "length": 4.457095113356615,
-          "from_option": "[165.0\u00b0, 180.0\u00b0]",
-          "to_option": "[70.0\u00b0, 75.0\u00b0]"
+          "length": 4.63625708178482,
+          "from_option": "[245.0\u00b0, 250.0\u00b0]",
+          "to_option": "[0.0\u00b0, 15.0\u00b0]"
         }
       ],
       "selected": [
         {
-          "start": 2.8797932657906435,
+          "start": 0.0,
           "width": 0.2617993877991494
-        },
-        {
-          "start": 2.8797932657906435,
-          "width": 0.2617993877991494
-        },
-        {
-          "start": 5.148721293383272,
-          "width": 0.08726646259971647
         },
         {
           "start": 5.497787143782138,
           "width": 0.7853981633974483
         },
         {
-          "start": 1.2217304763960306,
+          "start": 2.0943951023931953,
+          "width": 0.2617993877991494
+        },
+        {
+          "start": 3.141592653589793,
           "width": 0.08726646259971647
         },
         {
-          "start": 3.490658503988659,
+          "start": 4.276056667386107,
+          "width": 0.08726646259971647
+        },
+        {
+          "start": 0.2617993877991494,
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.34292666600231314,
-      "solve_seconds": 1.6884995000000345,
+      "build_seconds": 0.035226332998718135,
+      "solve_seconds": 0.10346304099948611,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 8,
-      "interval_solves": 1348,
+      "solve_rounds": 1,
+      "interval_solves": 4410,
       "timings": {
-        "transform": 0.0014067500014789402,
+        "transform": 0.00013750000653089955,
         "lkh_screen": 0.0,
-        "lkh": 0.961023000003479,
-        "interval": 0.7223784329253249,
-        "other": 0.3466179830720648
+        "lkh": 0.10331112499989104,
+        "interval": 0.009487451054155827,
+        "other": 0.025753297937626485
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.164320595796976,
-    "max_lb_estimate": 24.822,
-    "gap_percent": 1.379101586483672,
+    "best_upper": 25.165509119809233,
+    "max_lb_estimate": 24.718,
+    "gap_percent": 1.8104584505592398,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
       [
         0.0,
-        5.0,
-        10.0,
         15.0,
         30.0,
         45.0,
@@ -9345,9 +8111,7 @@
         220.0,
         225.0,
         270.0,
-        315.0,
-        330.0,
-        345.0
+        315.0
       ],
       [
         0.0,
@@ -9361,8 +8125,6 @@
         113.3333,
         115.0,
         120.0,
-        125.0,
-        130.0,
         135.0,
         180.0,
         225.0,
@@ -9395,8 +8157,6 @@
         90.0,
         135.0,
         180.0,
-        181.6667,
-        183.3333,
         185.0,
         186.6667,
         188.3333,
@@ -9430,8 +8190,6 @@
         225.0,
         240.0,
         245.0,
-        246.6667,
-        248.3333,
         250.0,
         255.0,
         270.0,
@@ -9444,8 +8202,6 @@
         5.0,
         10.0,
         15.0,
-        16.6667,
-        18.3333,
         20.0,
         25.0,
         30.0,
@@ -9472,9 +8228,7 @@
     ],
     "intervals_deg_per_target": [
       [
-        "[0.0\u00b0, 5.0\u00b0]",
-        "[5.0\u00b0, 10.0\u00b0]",
-        "[10.0\u00b0, 15.0\u00b0]",
+        "[0.0\u00b0, 15.0\u00b0]",
         "[15.0\u00b0, 30.0\u00b0]",
         "[30.0\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 90.0\u00b0]",
@@ -9527,9 +8281,7 @@
         "[220.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 330.0\u00b0]",
-        "[330.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 360.0\u00b0]"
+        "[315.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 45.0\u00b0]",
@@ -9542,9 +8294,7 @@
         "[111.7\u00b0, 113.3\u00b0]",
         "[113.3\u00b0, 115.0\u00b0]",
         "[115.0\u00b0, 120.0\u00b0]",
-        "[120.0\u00b0, 125.0\u00b0]",
-        "[125.0\u00b0, 130.0\u00b0]",
-        "[130.0\u00b0, 135.0\u00b0]",
+        "[120.0\u00b0, 135.0\u00b0]",
         "[135.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
@@ -9576,9 +8326,7 @@
         "[45.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 135.0\u00b0]",
         "[135.0\u00b0, 180.0\u00b0]",
-        "[180.0\u00b0, 181.7\u00b0]",
-        "[181.7\u00b0, 183.3\u00b0]",
-        "[183.3\u00b0, 185.0\u00b0]",
+        "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 186.7\u00b0]",
         "[186.7\u00b0, 188.3\u00b0]",
         "[188.3\u00b0, 190.0\u00b0]",
@@ -9611,9 +8359,7 @@
         "[210.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 240.0\u00b0]",
         "[240.0\u00b0, 245.0\u00b0]",
-        "[245.0\u00b0, 246.7\u00b0]",
-        "[246.7\u00b0, 248.3\u00b0]",
-        "[248.3\u00b0, 250.0\u00b0]",
+        "[245.0\u00b0, 250.0\u00b0]",
         "[250.0\u00b0, 255.0\u00b0]",
         "[255.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 285.0\u00b0]",
@@ -9625,9 +8371,7 @@
         "[0.0\u00b0, 5.0\u00b0]",
         "[5.0\u00b0, 10.0\u00b0]",
         "[10.0\u00b0, 15.0\u00b0]",
-        "[15.0\u00b0, 16.7\u00b0]",
-        "[16.7\u00b0, 18.3\u00b0]",
-        "[18.3\u00b0, 20.0\u00b0]",
+        "[15.0\u00b0, 20.0\u00b0]",
         "[20.0\u00b0, 25.0\u00b0]",
         "[25.0\u00b0, 30.0\u00b0]",
         "[30.0\u00b0, 45.0\u00b0]",
@@ -9656,15 +8400,7 @@
       [
         [
           0.0,
-          0.08726646259971647
-        ],
-        [
-          0.08726646259971647,
-          0.08726646259971647
-        ],
-        [
-          0.17453292519943295,
-          0.08726646259971647
+          0.2617993877991494
         ],
         [
           0.2617993877991494,
@@ -9870,15 +8606,7 @@
         ],
         [
           5.497787143782138,
-          0.2617993877991494
-        ],
-        [
-          5.759586531581287,
-          0.2617993877991494
-        ],
-        [
-          6.021385919380437,
-          0.2617993877991494
+          0.7853981633974483
         ]
       ],
       [
@@ -9924,15 +8652,7 @@
         ],
         [
           2.0943951023931953,
-          0.08726646259971647
-        ],
-        [
-          2.1816615649929116,
-          0.08726646259971647
-        ],
-        [
-          2.268928027592628,
-          0.08726646259971647
+          0.2617993877991494
         ],
         [
           2.356194490192345,
@@ -10054,15 +8774,7 @@
         ],
         [
           3.141592653589793,
-          0.02908882086657216
-        ],
-        [
-          3.1706814744563654,
-          0.02908882086657216
-        ],
-        [
-          3.199770295322937,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           3.2288591161895095,
@@ -10188,15 +8900,7 @@
         ],
         [
           4.276056667386107,
-          0.02908882086657216
-        ],
-        [
-          4.305145488252679,
-          0.02908882086657216
-        ],
-        [
-          4.3342343091192514,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           4.363323129985823,
@@ -10238,15 +8942,7 @@
         ],
         [
           0.2617993877991494,
-          0.02908882086657216
-        ],
-        [
-          0.29088820866572157,
-          0.02908882086657216
-        ],
-        [
-          0.31997702953229373,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           0.3490658503988659,
@@ -10366,20 +9062,20 @@
     ]
   },
   {
-    "iteration": 11,
+    "iteration": 10,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.164995809024212,
+      "value": 25.164750581583107,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
       "options_per_target": [
-        30,
-        30,
-        30,
-        30,
-        30,
-        30
+        28,
+        28,
+        28,
+        28,
+        28,
+        28
       ],
       "order": [
         5,
@@ -10403,36 +9099,36 @@
           "from_target": 1,
           "to_target": 2,
           "depart_heading": 0.0,
-          "arrive_heading": 1.9489509980603343,
-          "length": 4.789263132178099,
+          "arrive_heading": 2.007128639793479,
+          "length": 4.8069606492914065,
           "from_option": "0.0\u00b0",
-          "to_option": "111.7\u00b0"
+          "to_option": "115.0\u00b0"
         },
         {
           "from_target": 2,
           "to_target": 3,
-          "depart_heading": 1.9489509980603343,
+          "depart_heading": 2.007128639793479,
           "arrive_heading": 3.2288591161895095,
-          "length": 3.912379393075831,
-          "from_option": "111.7\u00b0",
+          "length": 3.8939927569002033,
+          "from_option": "115.0\u00b0",
           "to_option": "185.0\u00b0"
         },
         {
           "from_target": 3,
           "to_target": 4,
           "depart_heading": 3.2288591161895095,
-          "arrive_heading": 4.276056667386107,
-          "length": 4.765920647090244,
+          "arrive_heading": 4.305145488252679,
+          "length": 4.771112712661716,
           "from_option": "185.0\u00b0",
-          "to_option": "245.0\u00b0"
+          "to_option": "246.7\u00b0"
         },
         {
           "from_target": 4,
           "to_target": 0,
-          "depart_heading": 4.276056667386107,
+          "depart_heading": 4.305145488252679,
           "arrive_heading": 0.17453292519943295,
-          "length": 4.808042508528729,
-          "from_option": "245.0\u00b0",
+          "length": 4.803294334578471,
+          "from_option": "246.7\u00b0",
           "to_option": "10.0\u00b0"
         },
         {
@@ -10448,148 +9144,148 @@
       "selected": [
         0.17453292519943295,
         0.0,
-        1.9489509980603343,
+        2.007128639793479,
         3.2288591161895095,
-        4.276056667386107,
+        4.305145488252679,
         0.29088820866572157
       ],
-      "build_seconds": 0.06962158399983309,
-      "solve_seconds": 0.15059129200380994,
+      "build_seconds": 0.06426658400596352,
+      "solve_seconds": 0.1191288749978412,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00017999999545281753,
+        "transform": 0.00018558299780124798,
         "lkh_screen": 0.0,
-        "lkh": 0.15039154200349003,
-        "dubins": 0.06962158399983309,
-        "other": 1.9750004867091775e-05
+        "lkh": 0.11892379100027028,
+        "dubins": 0.06426658400596352,
+        "other": 1.9500999769661576e-05
       }
     },
     "lower_bound": {
       "kind": "lower",
-      "value": 24.822,
+      "value": 24.911,
       "is_valid_bound": false,
       "status": "estimate (LKH)",
       "solver": "lkh",
       "options_per_target": [
-        30,
-        30,
-        30,
-        30,
-        30,
-        30
+        28,
+        28,
+        28,
+        28,
+        28,
+        28
       ],
       "order": [
-        5,
         1,
         2,
         3,
+        5,
         4,
         0
       ],
       "legs": [
         {
-          "from_target": 5,
-          "to_target": 1,
-          "depart_heading": 0.3490658503988659,
-          "arrive_heading": 6.021385919380437,
-          "length": 3.3074452117336524,
-          "from_option": "[20.0\u00b0, 25.0\u00b0]",
-          "to_option": "[345.0\u00b0, 360.0\u00b0]"
-        },
-        {
           "from_target": 1,
           "to_target": 2,
-          "depart_heading": 0.0,
-          "arrive_heading": 2.007128639793479,
-          "length": 4.8069606492914065,
-          "from_option": "[345.0\u00b0, 360.0\u00b0]",
-          "to_option": "[115.0\u00b0, 120.0\u00b0]"
+          "depart_heading": 0.7853981633974483,
+          "arrive_heading": 1.832595714594046,
+          "length": 4.545385254747877,
+          "from_option": "[40.0\u00b0, 45.0\u00b0]",
+          "to_option": "[105.0\u00b0, 110.0\u00b0]"
         },
         {
           "from_target": 2,
           "to_target": 3,
-          "depart_heading": 2.0943951023931953,
-          "arrive_heading": 2.799335552596981,
-          "length": 3.8573716030616767,
-          "from_option": "[115.0\u00b0, 120.0\u00b0]",
-          "to_option": "[135.0\u00b0, 180.0\u00b0]"
+          "depart_heading": 1.9198621771937623,
+          "arrive_heading": 3.4033920413889427,
+          "length": 3.946128045871492,
+          "from_option": "[105.0\u00b0, 110.0\u00b0]",
+          "to_option": "[195.0\u00b0, 210.0\u00b0]"
         },
         {
           "from_target": 3,
+          "to_target": 5,
+          "depart_heading": 3.6651914291880923,
+          "arrive_heading": 3.9269908169872414,
+          "length": 3.9692376926511845,
+          "from_option": "[195.0\u00b0, 210.0\u00b0]",
+          "to_option": "[210.0\u00b0, 225.0\u00b0]"
+        },
+        {
+          "from_target": 5,
           "to_target": 4,
-          "depart_heading": 3.141592653589793,
-          "arrive_heading": 4.363323129985823,
-          "length": 4.7936374549846015,
-          "from_option": "[135.0\u00b0, 180.0\u00b0]",
-          "to_option": "[250.0\u00b0, 255.0\u00b0]"
+          "depart_heading": 3.665191429188092,
+          "arrive_heading": 3.665191429188092,
+          "length": 3.6808265851164528,
+          "from_option": "[210.0\u00b0, 225.0\u00b0]",
+          "to_option": "[210.0\u00b0, 225.0\u00b0]"
         },
         {
           "from_target": 4,
           "to_target": 0,
-          "depart_heading": 4.45058959258554,
-          "arrive_heading": 6.021385919380437,
-          "length": 4.457095113356615,
-          "from_option": "[250.0\u00b0, 255.0\u00b0]",
-          "to_option": "[345.0\u00b0, 360.0\u00b0]"
+          "depart_heading": 3.9269908169872414,
+          "arrive_heading": 5.8468529941810035,
+          "length": 4.598156071173326,
+          "from_option": "[210.0\u00b0, 225.0\u00b0]",
+          "to_option": "[335.0\u00b0, 340.0\u00b0]"
         },
         {
           "from_target": 0,
-          "to_target": 5,
-          "depart_heading": 0.0,
-          "arrive_heading": 0.4363323129985824,
-          "length": 3.6025498312815825,
-          "from_option": "[345.0\u00b0, 360.0\u00b0]",
-          "to_option": "[20.0\u00b0, 25.0\u00b0]"
+          "to_target": 1,
+          "depart_heading": 5.93411945678072,
+          "arrive_heading": 0.6981317007977318,
+          "length": 4.173575906509415,
+          "from_option": "[335.0\u00b0, 340.0\u00b0]",
+          "to_option": "[40.0\u00b0, 45.0\u00b0]"
         }
       ],
       "selected": [
         {
-          "start": 6.021385919380437,
+          "start": 5.8468529941810035,
+          "width": 0.08726646259971647
+        },
+        {
+          "start": 0.6981317007977318,
+          "width": 0.08726646259971647
+        },
+        {
+          "start": 1.832595714594046,
+          "width": 0.08726646259971647
+        },
+        {
+          "start": 3.4033920413889427,
           "width": 0.2617993877991494
         },
         {
-          "start": 6.021385919380437,
+          "start": 3.665191429188092,
           "width": 0.2617993877991494
         },
         {
-          "start": 2.007128639793479,
-          "width": 0.08726646259971647
-        },
-        {
-          "start": 2.356194490192345,
-          "width": 0.7853981633974483
-        },
-        {
-          "start": 4.363323129985823,
-          "width": 0.08726646259971647
-        },
-        {
-          "start": 0.3490658503988659,
-          "width": 0.08726646259971647
+          "start": 3.665191429188092,
+          "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.39441529100440675,
-      "solve_seconds": 0.1266029170001275,
+      "build_seconds": 0.04186608399322722,
+      "solve_seconds": 0.11920220899628475,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
       "solve_rounds": 1,
-      "interval_solves": 0,
+      "interval_solves": 4770,
       "timings": {
-        "transform": 0.00033895800152095035,
+        "transform": 0.00019625000277301297,
         "lkh_screen": 0.0,
-        "lkh": 0.1262348749951343,
-        "interval": 0.0,
-        "other": 0.394444375007879
+        "lkh": 0.118984291999368,
+        "interval": 0.011925833183340728,
+        "other": 0.029961917804030236
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.164320595796976,
-    "max_lb_estimate": 24.822,
-    "gap_percent": 1.379101586483672,
+    "best_upper": 25.164750581583107,
+    "max_lb_estimate": 24.911,
+    "gap_percent": 1.0186286443061514,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -10608,8 +9304,6 @@
         155.0,
         160.0,
         165.0,
-        170.0,
-        175.0,
         180.0,
         185.0,
         190.0,
@@ -10640,8 +9334,6 @@
         135.0,
         150.0,
         165.0,
-        170.0,
-        175.0,
         180.0,
         185.0,
         190.0,
@@ -10682,8 +9374,6 @@
         291.6667,
         293.3333,
         295.0,
-        296.6667,
-        298.3333,
         300.0,
         305.0,
         310.0,
@@ -10717,9 +9407,7 @@
         220.0,
         225.0,
         270.0,
-        315.0,
-        330.0,
-        345.0
+        315.0
       ],
       [
         0.0,
@@ -10731,8 +9419,6 @@
         66.6667,
         68.3333,
         70.0,
-        71.6667,
-        73.3333,
         75.0,
         90.0,
         105.0,
@@ -10775,8 +9461,6 @@
         196.6667,
         198.3333,
         200.0,
-        201.6667,
-        203.3333,
         205.0,
         210.0,
         225.0,
@@ -10801,9 +9485,7 @@
         "[150.0\u00b0, 155.0\u00b0]",
         "[155.0\u00b0, 160.0\u00b0]",
         "[160.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 170.0\u00b0]",
-        "[170.0\u00b0, 175.0\u00b0]",
-        "[175.0\u00b0, 180.0\u00b0]",
+        "[165.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 190.0\u00b0]",
         "[190.0\u00b0, 195.0\u00b0]",
@@ -10833,9 +9515,7 @@
         "[90.0\u00b0, 135.0\u00b0]",
         "[135.0\u00b0, 150.0\u00b0]",
         "[150.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 170.0\u00b0]",
-        "[170.0\u00b0, 175.0\u00b0]",
-        "[175.0\u00b0, 180.0\u00b0]",
+        "[165.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 190.0\u00b0]",
         "[190.0\u00b0, 195.0\u00b0]",
@@ -10875,9 +9555,7 @@
         "[290.0\u00b0, 291.7\u00b0]",
         "[291.7\u00b0, 293.3\u00b0]",
         "[293.3\u00b0, 295.0\u00b0]",
-        "[295.0\u00b0, 296.7\u00b0]",
-        "[296.7\u00b0, 298.3\u00b0]",
-        "[298.3\u00b0, 300.0\u00b0]",
+        "[295.0\u00b0, 300.0\u00b0]",
         "[300.0\u00b0, 305.0\u00b0]",
         "[305.0\u00b0, 310.0\u00b0]",
         "[310.0\u00b0, 315.0\u00b0]",
@@ -10911,9 +9589,7 @@
         "[220.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 330.0\u00b0]",
-        "[330.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 360.0\u00b0]"
+        "[315.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 15.0\u00b0]",
@@ -10924,9 +9600,7 @@
         "[65.0\u00b0, 66.7\u00b0]",
         "[66.7\u00b0, 68.3\u00b0]",
         "[68.3\u00b0, 70.0\u00b0]",
-        "[70.0\u00b0, 71.7\u00b0]",
-        "[71.7\u00b0, 73.3\u00b0]",
-        "[73.3\u00b0, 75.0\u00b0]",
+        "[70.0\u00b0, 75.0\u00b0]",
         "[75.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 105.0\u00b0]",
         "[105.0\u00b0, 120.0\u00b0]",
@@ -10968,9 +9642,7 @@
         "[195.0\u00b0, 196.7\u00b0]",
         "[196.7\u00b0, 198.3\u00b0]",
         "[198.3\u00b0, 200.0\u00b0]",
-        "[200.0\u00b0, 201.7\u00b0]",
-        "[201.7\u00b0, 203.3\u00b0]",
-        "[203.3\u00b0, 205.0\u00b0]",
+        "[200.0\u00b0, 205.0\u00b0]",
         "[205.0\u00b0, 210.0\u00b0]",
         "[210.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
@@ -11036,15 +9708,7 @@
         ],
         [
           2.8797932657906435,
-          0.08726646259971647
-        ],
-        [
-          2.96705972839036,
-          0.08726646259971647
-        ],
-        [
-          3.0543261909900763,
-          0.08726646259971647
+          0.2617993877991494
         ],
         [
           3.141592653589793,
@@ -11158,15 +9822,7 @@
         ],
         [
           2.8797932657906435,
-          0.08726646259971647
-        ],
-        [
-          2.96705972839036,
-          0.08726646259971647
-        ],
-        [
-          3.0543261909900763,
-          0.08726646259971647
+          0.2617993877991494
         ],
         [
           3.141592653589793,
@@ -11320,15 +9976,7 @@
         ],
         [
           5.148721293383272,
-          0.02908882086657216
-        ],
-        [
-          5.177810114249843,
-          0.02908882086657216
-        ],
-        [
-          5.206898935116416,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           5.235987755982989,
@@ -11458,15 +10106,7 @@
         ],
         [
           5.497787143782138,
-          0.2617993877991494
-        ],
-        [
-          5.759586531581287,
-          0.2617993877991494
-        ],
-        [
-          6.021385919380437,
-          0.2617993877991494
+          0.7853981633974483
         ]
       ],
       [
@@ -11504,15 +10144,7 @@
         ],
         [
           1.2217304763960306,
-          0.02908882086657216
-        ],
-        [
-          1.2508192972626027,
-          0.02908882086657216
-        ],
-        [
-          1.279908118129175,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           1.308996938995747,
@@ -11674,15 +10306,7 @@
         ],
         [
           3.490658503988659,
-          0.02908882086657216
-        ],
-        [
-          3.5197473248552313,
-          0.02908882086657216
-        ],
-        [
-          3.548836145721803,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           3.5779249665883754,
@@ -11716,28 +10340,1404 @@
     ],
     "added_headings_deg_per_target": [
       [
-        170.0,
-        175.0
-      ],
-      [
-        170.0,
-        175.0
-      ],
-      [
-        296.6667,
-        298.3333
+        5.0,
+        10.0
       ],
       [
         330.0,
         345.0
       ],
       [
-        71.6667,
-        73.3333
+        125.0,
+        130.0
       ],
       [
-        201.6667,
-        203.3333
+        181.6667,
+        183.3333
+      ],
+      [
+        246.6667,
+        248.3333
+      ],
+      [
+        16.6667,
+        18.3333
+      ]
+    ]
+  },
+  {
+    "iteration": 11,
+    "upper_bound": {
+      "kind": "upper",
+      "value": 25.165393999448025,
+      "is_valid_bound": true,
+      "status": "valid upper bound",
+      "solver": "lkh",
+      "options_per_target": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "order": [
+        5,
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "legs": [
+        {
+          "from_target": 5,
+          "to_target": 1,
+          "depart_heading": 0.2617993877991494,
+          "arrive_heading": 0.08726646259971647,
+          "length": 3.3816681129581365,
+          "from_option": "15.0\u00b0",
+          "to_option": "5.0\u00b0"
+        },
+        {
+          "from_target": 1,
+          "to_target": 2,
+          "depart_heading": 0.08726646259971647,
+          "arrive_heading": 1.9489509980603343,
+          "length": 4.739467115203238,
+          "from_option": "5.0\u00b0",
+          "to_option": "111.7\u00b0"
+        },
+        {
+          "from_target": 2,
+          "to_target": 3,
+          "depart_heading": 1.9489509980603343,
+          "arrive_heading": 3.2579479370560818,
+          "length": 3.9151784771935025,
+          "from_option": "111.7\u00b0",
+          "to_option": "186.7\u00b0"
+        },
+        {
+          "from_target": 3,
+          "to_target": 4,
+          "depart_heading": 3.2579479370560818,
+          "arrive_heading": 4.305145488252679,
+          "length": 4.768383047707852,
+          "from_option": "186.7\u00b0",
+          "to_option": "246.7\u00b0"
+        },
+        {
+          "from_target": 4,
+          "to_target": 0,
+          "depart_heading": 4.305145488252679,
+          "arrive_heading": 0.17453292519943295,
+          "length": 4.803294334578471,
+          "from_option": "246.7\u00b0",
+          "to_option": "10.0\u00b0"
+        },
+        {
+          "from_target": 0,
+          "to_target": 5,
+          "depart_heading": 0.17453292519943295,
+          "arrive_heading": 0.2617993877991494,
+          "length": 3.5574029118068244,
+          "from_option": "10.0\u00b0",
+          "to_option": "15.0\u00b0"
+        }
+      ],
+      "selected": [
+        0.17453292519943295,
+        0.08726646259971647,
+        1.9489509980603343,
+        3.2579479370560818,
+        4.305145488252679,
+        0.2617993877991494
+      ],
+      "build_seconds": 0.06877954099763883,
+      "solve_seconds": 0.14865387500321958,
+      "notes": [],
+      "solve_rounds": 1,
+      "interval_solves": 0,
+      "timings": {
+        "transform": 0.00022220899700187147,
+        "lkh_screen": 0.0,
+        "lkh": 0.1484080840018578,
+        "dubins": 0.06877954099763883,
+        "other": 2.3582004359923303e-05
+      }
+    },
+    "lower_bound": {
+      "kind": "lower",
+      "value": 24.895,
+      "is_valid_bound": false,
+      "status": "estimate (LKH)",
+      "solver": "lkh",
+      "options_per_target": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "order": [
+        4,
+        3,
+        2,
+        1,
+        5,
+        0
+      ],
+      "legs": [
+        {
+          "from_target": 4,
+          "to_target": 3,
+          "depart_heading": 1.134464013796314,
+          "arrive_heading": 0.0,
+          "length": 4.776907217049989,
+          "from_option": "[65.0\u00b0, 66.7\u00b0]",
+          "to_option": "[315.0\u00b0, 360.0\u00b0]"
+        },
+        {
+          "from_target": 3,
+          "to_target": 2,
+          "depart_heading": 5.940928206186774,
+          "arrive_heading": 5.235987755982988,
+          "length": 3.857371603061676,
+          "from_option": "[315.0\u00b0, 360.0\u00b0]",
+          "to_option": "[295.0\u00b0, 300.0\u00b0]"
+        },
+        {
+          "from_target": 2,
+          "to_target": 1,
+          "depart_heading": 5.148721293383272,
+          "arrive_heading": 3.141592653589793,
+          "length": 4.8069606492914065,
+          "from_option": "[295.0\u00b0, 300.0\u00b0]",
+          "to_option": "[165.0\u00b0, 180.0\u00b0]"
+        },
+        {
+          "from_target": 1,
+          "to_target": 5,
+          "depart_heading": 2.8797932657906435,
+          "arrive_heading": 3.316125578789226,
+          "length": 3.2061986678366763,
+          "from_option": "[165.0\u00b0, 180.0\u00b0]",
+          "to_option": "[190.0\u00b0, 195.0\u00b0]"
+        },
+        {
+          "from_target": 5,
+          "to_target": 0,
+          "depart_heading": 3.4033920413889422,
+          "arrive_heading": 3.6651914291880923,
+          "length": 3.353868549002943,
+          "from_option": "[190.0\u00b0, 195.0\u00b0]",
+          "to_option": "[195.0\u00b0, 210.0\u00b0]"
+        },
+        {
+          "from_target": 0,
+          "to_target": 4,
+          "depart_heading": 3.4033920413889427,
+          "arrive_heading": 1.163552834662886,
+          "length": 4.897530081896142,
+          "from_option": "[195.0\u00b0, 210.0\u00b0]",
+          "to_option": "[65.0\u00b0, 66.7\u00b0]"
+        }
+      ],
+      "selected": [
+        {
+          "start": 3.4033920413889427,
+          "width": 0.2617993877991494
+        },
+        {
+          "start": 2.8797932657906435,
+          "width": 0.2617993877991494
+        },
+        {
+          "start": 5.148721293383272,
+          "width": 0.08726646259971647
+        },
+        {
+          "start": 5.497787143782138,
+          "width": 0.7853981633974483
+        },
+        {
+          "start": 1.134464013796314,
+          "width": 0.02908882086657216
+        },
+        {
+          "start": 3.316125578789226,
+          "width": 0.08726646259971647
+        }
+      ],
+      "build_seconds": 0.04691370799992001,
+      "solve_seconds": 0.12639395800215425,
+      "notes": [
+        "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
+        "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
+      ],
+      "solve_rounds": 1,
+      "interval_solves": 5130,
+      "timings": {
+        "transform": 0.0002952920040115714,
+        "lkh_screen": 0.0,
+        "lkh": 0.12607383399881655,
+        "interval": 0.012256433059519622,
+        "other": 0.03468210693972651
+      }
+    },
+    "lower_bound_status": "estimate (LKH)",
+    "best_upper": 25.164750581583107,
+    "max_lb_estimate": 24.911,
+    "gap_percent": 1.0835532499823546,
+    "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
+    "lb_exceeds_best_upper": false,
+    "headings_deg_per_target": [
+      [
+        0.0,
+        5.0,
+        10.0,
+        15.0,
+        30.0,
+        45.0,
+        90.0,
+        105.0,
+        120.0,
+        135.0,
+        150.0,
+        155.0,
+        160.0,
+        165.0,
+        180.0,
+        185.0,
+        190.0,
+        195.0,
+        210.0,
+        225.0,
+        270.0,
+        285.0,
+        300.0,
+        315.0,
+        330.0,
+        335.0,
+        336.6667,
+        338.3333,
+        340.0,
+        345.0
+      ],
+      [
+        0.0,
+        5.0,
+        10.0,
+        15.0,
+        30.0,
+        35.0,
+        36.6667,
+        38.3333,
+        40.0,
+        41.6667,
+        43.3333,
+        45.0,
+        90.0,
+        135.0,
+        150.0,
+        165.0,
+        180.0,
+        185.0,
+        190.0,
+        195.0,
+        210.0,
+        215.0,
+        216.6667,
+        218.3333,
+        220.0,
+        225.0,
+        270.0,
+        315.0,
+        330.0,
+        345.0
+      ],
+      [
+        0.0,
+        45.0,
+        90.0,
+        95.0,
+        100.0,
+        105.0,
+        106.6667,
+        108.3333,
+        110.0,
+        111.6667,
+        113.3333,
+        115.0,
+        120.0,
+        125.0,
+        130.0,
+        135.0,
+        180.0,
+        225.0,
+        270.0,
+        275.0,
+        280.0,
+        285.0,
+        290.0,
+        291.6667,
+        293.3333,
+        295.0,
+        300.0,
+        305.0,
+        310.0,
+        315.0
+      ],
+      [
+        0.0,
+        1.6667,
+        3.3333,
+        5.0,
+        6.6667,
+        8.3333,
+        10.0,
+        15.0,
+        30.0,
+        35.0,
+        40.0,
+        45.0,
+        90.0,
+        135.0,
+        180.0,
+        181.6667,
+        183.3333,
+        185.0,
+        186.6667,
+        188.3333,
+        190.0,
+        195.0,
+        200.0,
+        205.0,
+        210.0,
+        215.0,
+        220.0,
+        225.0,
+        270.0,
+        315.0
+      ],
+      [
+        0.0,
+        15.0,
+        30.0,
+        45.0,
+        60.0,
+        65.0,
+        66.6667,
+        68.3333,
+        70.0,
+        75.0,
+        90.0,
+        105.0,
+        120.0,
+        135.0,
+        180.0,
+        195.0,
+        210.0,
+        215.0,
+        220.0,
+        225.0,
+        240.0,
+        245.0,
+        246.6667,
+        248.3333,
+        250.0,
+        255.0,
+        270.0,
+        285.0,
+        300.0,
+        315.0
+      ],
+      [
+        0.0,
+        5.0,
+        10.0,
+        15.0,
+        16.6667,
+        18.3333,
+        20.0,
+        25.0,
+        30.0,
+        45.0,
+        90.0,
+        105.0,
+        120.0,
+        135.0,
+        180.0,
+        185.0,
+        190.0,
+        195.0,
+        196.6667,
+        198.3333,
+        200.0,
+        205.0,
+        210.0,
+        215.0,
+        220.0,
+        225.0,
+        270.0,
+        285.0,
+        300.0,
+        315.0
+      ]
+    ],
+    "intervals_deg_per_target": [
+      [
+        "[0.0\u00b0, 5.0\u00b0]",
+        "[5.0\u00b0, 10.0\u00b0]",
+        "[10.0\u00b0, 15.0\u00b0]",
+        "[15.0\u00b0, 30.0\u00b0]",
+        "[30.0\u00b0, 45.0\u00b0]",
+        "[45.0\u00b0, 90.0\u00b0]",
+        "[90.0\u00b0, 105.0\u00b0]",
+        "[105.0\u00b0, 120.0\u00b0]",
+        "[120.0\u00b0, 135.0\u00b0]",
+        "[135.0\u00b0, 150.0\u00b0]",
+        "[150.0\u00b0, 155.0\u00b0]",
+        "[155.0\u00b0, 160.0\u00b0]",
+        "[160.0\u00b0, 165.0\u00b0]",
+        "[165.0\u00b0, 180.0\u00b0]",
+        "[180.0\u00b0, 185.0\u00b0]",
+        "[185.0\u00b0, 190.0\u00b0]",
+        "[190.0\u00b0, 195.0\u00b0]",
+        "[195.0\u00b0, 210.0\u00b0]",
+        "[210.0\u00b0, 225.0\u00b0]",
+        "[225.0\u00b0, 270.0\u00b0]",
+        "[270.0\u00b0, 285.0\u00b0]",
+        "[285.0\u00b0, 300.0\u00b0]",
+        "[300.0\u00b0, 315.0\u00b0]",
+        "[315.0\u00b0, 330.0\u00b0]",
+        "[330.0\u00b0, 335.0\u00b0]",
+        "[335.0\u00b0, 336.7\u00b0]",
+        "[336.7\u00b0, 338.3\u00b0]",
+        "[338.3\u00b0, 340.0\u00b0]",
+        "[340.0\u00b0, 345.0\u00b0]",
+        "[345.0\u00b0, 360.0\u00b0]"
+      ],
+      [
+        "[0.0\u00b0, 5.0\u00b0]",
+        "[5.0\u00b0, 10.0\u00b0]",
+        "[10.0\u00b0, 15.0\u00b0]",
+        "[15.0\u00b0, 30.0\u00b0]",
+        "[30.0\u00b0, 35.0\u00b0]",
+        "[35.0\u00b0, 36.7\u00b0]",
+        "[36.7\u00b0, 38.3\u00b0]",
+        "[38.3\u00b0, 40.0\u00b0]",
+        "[40.0\u00b0, 41.7\u00b0]",
+        "[41.7\u00b0, 43.3\u00b0]",
+        "[43.3\u00b0, 45.0\u00b0]",
+        "[45.0\u00b0, 90.0\u00b0]",
+        "[90.0\u00b0, 135.0\u00b0]",
+        "[135.0\u00b0, 150.0\u00b0]",
+        "[150.0\u00b0, 165.0\u00b0]",
+        "[165.0\u00b0, 180.0\u00b0]",
+        "[180.0\u00b0, 185.0\u00b0]",
+        "[185.0\u00b0, 190.0\u00b0]",
+        "[190.0\u00b0, 195.0\u00b0]",
+        "[195.0\u00b0, 210.0\u00b0]",
+        "[210.0\u00b0, 215.0\u00b0]",
+        "[215.0\u00b0, 216.7\u00b0]",
+        "[216.7\u00b0, 218.3\u00b0]",
+        "[218.3\u00b0, 220.0\u00b0]",
+        "[220.0\u00b0, 225.0\u00b0]",
+        "[225.0\u00b0, 270.0\u00b0]",
+        "[270.0\u00b0, 315.0\u00b0]",
+        "[315.0\u00b0, 330.0\u00b0]",
+        "[330.0\u00b0, 345.0\u00b0]",
+        "[345.0\u00b0, 360.0\u00b0]"
+      ],
+      [
+        "[0.0\u00b0, 45.0\u00b0]",
+        "[45.0\u00b0, 90.0\u00b0]",
+        "[90.0\u00b0, 95.0\u00b0]",
+        "[95.0\u00b0, 100.0\u00b0]",
+        "[100.0\u00b0, 105.0\u00b0]",
+        "[105.0\u00b0, 106.7\u00b0]",
+        "[106.7\u00b0, 108.3\u00b0]",
+        "[108.3\u00b0, 110.0\u00b0]",
+        "[110.0\u00b0, 111.7\u00b0]",
+        "[111.7\u00b0, 113.3\u00b0]",
+        "[113.3\u00b0, 115.0\u00b0]",
+        "[115.0\u00b0, 120.0\u00b0]",
+        "[120.0\u00b0, 125.0\u00b0]",
+        "[125.0\u00b0, 130.0\u00b0]",
+        "[130.0\u00b0, 135.0\u00b0]",
+        "[135.0\u00b0, 180.0\u00b0]",
+        "[180.0\u00b0, 225.0\u00b0]",
+        "[225.0\u00b0, 270.0\u00b0]",
+        "[270.0\u00b0, 275.0\u00b0]",
+        "[275.0\u00b0, 280.0\u00b0]",
+        "[280.0\u00b0, 285.0\u00b0]",
+        "[285.0\u00b0, 290.0\u00b0]",
+        "[290.0\u00b0, 291.7\u00b0]",
+        "[291.7\u00b0, 293.3\u00b0]",
+        "[293.3\u00b0, 295.0\u00b0]",
+        "[295.0\u00b0, 300.0\u00b0]",
+        "[300.0\u00b0, 305.0\u00b0]",
+        "[305.0\u00b0, 310.0\u00b0]",
+        "[310.0\u00b0, 315.0\u00b0]",
+        "[315.0\u00b0, 360.0\u00b0]"
+      ],
+      [
+        "[0.0\u00b0, 1.7\u00b0]",
+        "[1.7\u00b0, 3.3\u00b0]",
+        "[3.3\u00b0, 5.0\u00b0]",
+        "[5.0\u00b0, 6.7\u00b0]",
+        "[6.7\u00b0, 8.3\u00b0]",
+        "[8.3\u00b0, 10.0\u00b0]",
+        "[10.0\u00b0, 15.0\u00b0]",
+        "[15.0\u00b0, 30.0\u00b0]",
+        "[30.0\u00b0, 35.0\u00b0]",
+        "[35.0\u00b0, 40.0\u00b0]",
+        "[40.0\u00b0, 45.0\u00b0]",
+        "[45.0\u00b0, 90.0\u00b0]",
+        "[90.0\u00b0, 135.0\u00b0]",
+        "[135.0\u00b0, 180.0\u00b0]",
+        "[180.0\u00b0, 181.7\u00b0]",
+        "[181.7\u00b0, 183.3\u00b0]",
+        "[183.3\u00b0, 185.0\u00b0]",
+        "[185.0\u00b0, 186.7\u00b0]",
+        "[186.7\u00b0, 188.3\u00b0]",
+        "[188.3\u00b0, 190.0\u00b0]",
+        "[190.0\u00b0, 195.0\u00b0]",
+        "[195.0\u00b0, 200.0\u00b0]",
+        "[200.0\u00b0, 205.0\u00b0]",
+        "[205.0\u00b0, 210.0\u00b0]",
+        "[210.0\u00b0, 215.0\u00b0]",
+        "[215.0\u00b0, 220.0\u00b0]",
+        "[220.0\u00b0, 225.0\u00b0]",
+        "[225.0\u00b0, 270.0\u00b0]",
+        "[270.0\u00b0, 315.0\u00b0]",
+        "[315.0\u00b0, 360.0\u00b0]"
+      ],
+      [
+        "[0.0\u00b0, 15.0\u00b0]",
+        "[15.0\u00b0, 30.0\u00b0]",
+        "[30.0\u00b0, 45.0\u00b0]",
+        "[45.0\u00b0, 60.0\u00b0]",
+        "[60.0\u00b0, 65.0\u00b0]",
+        "[65.0\u00b0, 66.7\u00b0]",
+        "[66.7\u00b0, 68.3\u00b0]",
+        "[68.3\u00b0, 70.0\u00b0]",
+        "[70.0\u00b0, 75.0\u00b0]",
+        "[75.0\u00b0, 90.0\u00b0]",
+        "[90.0\u00b0, 105.0\u00b0]",
+        "[105.0\u00b0, 120.0\u00b0]",
+        "[120.0\u00b0, 135.0\u00b0]",
+        "[135.0\u00b0, 180.0\u00b0]",
+        "[180.0\u00b0, 195.0\u00b0]",
+        "[195.0\u00b0, 210.0\u00b0]",
+        "[210.0\u00b0, 215.0\u00b0]",
+        "[215.0\u00b0, 220.0\u00b0]",
+        "[220.0\u00b0, 225.0\u00b0]",
+        "[225.0\u00b0, 240.0\u00b0]",
+        "[240.0\u00b0, 245.0\u00b0]",
+        "[245.0\u00b0, 246.7\u00b0]",
+        "[246.7\u00b0, 248.3\u00b0]",
+        "[248.3\u00b0, 250.0\u00b0]",
+        "[250.0\u00b0, 255.0\u00b0]",
+        "[255.0\u00b0, 270.0\u00b0]",
+        "[270.0\u00b0, 285.0\u00b0]",
+        "[285.0\u00b0, 300.0\u00b0]",
+        "[300.0\u00b0, 315.0\u00b0]",
+        "[315.0\u00b0, 360.0\u00b0]"
+      ],
+      [
+        "[0.0\u00b0, 5.0\u00b0]",
+        "[5.0\u00b0, 10.0\u00b0]",
+        "[10.0\u00b0, 15.0\u00b0]",
+        "[15.0\u00b0, 16.7\u00b0]",
+        "[16.7\u00b0, 18.3\u00b0]",
+        "[18.3\u00b0, 20.0\u00b0]",
+        "[20.0\u00b0, 25.0\u00b0]",
+        "[25.0\u00b0, 30.0\u00b0]",
+        "[30.0\u00b0, 45.0\u00b0]",
+        "[45.0\u00b0, 90.0\u00b0]",
+        "[90.0\u00b0, 105.0\u00b0]",
+        "[105.0\u00b0, 120.0\u00b0]",
+        "[120.0\u00b0, 135.0\u00b0]",
+        "[135.0\u00b0, 180.0\u00b0]",
+        "[180.0\u00b0, 185.0\u00b0]",
+        "[185.0\u00b0, 190.0\u00b0]",
+        "[190.0\u00b0, 195.0\u00b0]",
+        "[195.0\u00b0, 196.7\u00b0]",
+        "[196.7\u00b0, 198.3\u00b0]",
+        "[198.3\u00b0, 200.0\u00b0]",
+        "[200.0\u00b0, 205.0\u00b0]",
+        "[205.0\u00b0, 210.0\u00b0]",
+        "[210.0\u00b0, 215.0\u00b0]",
+        "[215.0\u00b0, 220.0\u00b0]",
+        "[220.0\u00b0, 225.0\u00b0]",
+        "[225.0\u00b0, 270.0\u00b0]",
+        "[270.0\u00b0, 285.0\u00b0]",
+        "[285.0\u00b0, 300.0\u00b0]",
+        "[300.0\u00b0, 315.0\u00b0]",
+        "[315.0\u00b0, 360.0\u00b0]"
+      ]
+    ],
+    "intervals_rad_per_target": [
+      [
+        [
+          0.0,
+          0.08726646259971647
+        ],
+        [
+          0.08726646259971647,
+          0.08726646259971647
+        ],
+        [
+          0.17453292519943295,
+          0.08726646259971647
+        ],
+        [
+          0.2617993877991494,
+          0.2617993877991494
+        ],
+        [
+          0.5235987755982988,
+          0.2617993877991494
+        ],
+        [
+          0.7853981633974483,
+          0.7853981633974483
+        ],
+        [
+          1.5707963267948966,
+          0.2617993877991494
+        ],
+        [
+          1.832595714594046,
+          0.2617993877991494
+        ],
+        [
+          2.0943951023931953,
+          0.2617993877991494
+        ],
+        [
+          2.356194490192345,
+          0.2617993877991494
+        ],
+        [
+          2.6179938779914944,
+          0.08726646259971647
+        ],
+        [
+          2.705260340591211,
+          0.08726646259971647
+        ],
+        [
+          2.792526803190927,
+          0.08726646259971647
+        ],
+        [
+          2.8797932657906435,
+          0.2617993877991494
+        ],
+        [
+          3.141592653589793,
+          0.08726646259971647
+        ],
+        [
+          3.2288591161895095,
+          0.08726646259971647
+        ],
+        [
+          3.316125578789226,
+          0.08726646259971647
+        ],
+        [
+          3.4033920413889427,
+          0.2617993877991494
+        ],
+        [
+          3.665191429188092,
+          0.2617993877991494
+        ],
+        [
+          3.9269908169872414,
+          0.7853981633974483
+        ],
+        [
+          4.71238898038469,
+          0.2617993877991494
+        ],
+        [
+          4.974188368183839,
+          0.2617993877991494
+        ],
+        [
+          5.235987755982989,
+          0.2617993877991494
+        ],
+        [
+          5.497787143782138,
+          0.2617993877991494
+        ],
+        [
+          5.759586531581287,
+          0.08726646259971647
+        ],
+        [
+          5.8468529941810035,
+          0.02908882086657216
+        ],
+        [
+          5.875941815047575,
+          0.02908882086657216
+        ],
+        [
+          5.905030635914148,
+          0.02908882086657216
+        ],
+        [
+          5.93411945678072,
+          0.08726646259971647
+        ],
+        [
+          6.021385919380437,
+          0.2617993877991494
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.08726646259971647
+        ],
+        [
+          0.08726646259971647,
+          0.08726646259971647
+        ],
+        [
+          0.17453292519943295,
+          0.08726646259971647
+        ],
+        [
+          0.2617993877991494,
+          0.2617993877991494
+        ],
+        [
+          0.5235987755982988,
+          0.08726646259971647
+        ],
+        [
+          0.6108652381980153,
+          0.02908882086657216
+        ],
+        [
+          0.6399540590645875,
+          0.02908882086657216
+        ],
+        [
+          0.6690428799311596,
+          0.02908882086657216
+        ],
+        [
+          0.6981317007977318,
+          0.02908882086657216
+        ],
+        [
+          0.727220521664304,
+          0.02908882086657216
+        ],
+        [
+          0.7563093425308761,
+          0.02908882086657216
+        ],
+        [
+          0.7853981633974483,
+          0.7853981633974483
+        ],
+        [
+          1.5707963267948966,
+          0.7853981633974483
+        ],
+        [
+          2.356194490192345,
+          0.2617993877991494
+        ],
+        [
+          2.6179938779914944,
+          0.2617993877991494
+        ],
+        [
+          2.8797932657906435,
+          0.2617993877991494
+        ],
+        [
+          3.141592653589793,
+          0.08726646259971647
+        ],
+        [
+          3.2288591161895095,
+          0.08726646259971647
+        ],
+        [
+          3.316125578789226,
+          0.08726646259971647
+        ],
+        [
+          3.4033920413889427,
+          0.2617993877991494
+        ],
+        [
+          3.665191429188092,
+          0.08726646259971647
+        ],
+        [
+          3.752457891787808,
+          0.02908882086657216
+        ],
+        [
+          3.7815467126543805,
+          0.02908882086657216
+        ],
+        [
+          3.8106355335209523,
+          0.02908882086657216
+        ],
+        [
+          3.8397243543875246,
+          0.08726646259971647
+        ],
+        [
+          3.9269908169872414,
+          0.7853981633974483
+        ],
+        [
+          4.71238898038469,
+          0.7853981633974483
+        ],
+        [
+          5.497787143782138,
+          0.2617993877991494
+        ],
+        [
+          5.759586531581287,
+          0.2617993877991494
+        ],
+        [
+          6.021385919380437,
+          0.2617993877991494
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.7853981633974483
+        ],
+        [
+          0.7853981633974483,
+          0.7853981633974483
+        ],
+        [
+          1.5707963267948966,
+          0.08726646259971647
+        ],
+        [
+          1.658062789394613,
+          0.08726646259971647
+        ],
+        [
+          1.7453292519943295,
+          0.08726646259971647
+        ],
+        [
+          1.832595714594046,
+          0.02908882086657216
+        ],
+        [
+          1.861684535460618,
+          0.02908882086657216
+        ],
+        [
+          1.8907733563271902,
+          0.02908882086657216
+        ],
+        [
+          1.9198621771937623,
+          0.02908882086657216
+        ],
+        [
+          1.9489509980603343,
+          0.02908882086657216
+        ],
+        [
+          1.9780398189269066,
+          0.02908882086657216
+        ],
+        [
+          2.007128639793479,
+          0.08726646259971647
+        ],
+        [
+          2.0943951023931953,
+          0.08726646259971647
+        ],
+        [
+          2.1816615649929116,
+          0.08726646259971647
+        ],
+        [
+          2.268928027592628,
+          0.08726646259971647
+        ],
+        [
+          2.356194490192345,
+          0.7853981633974483
+        ],
+        [
+          3.141592653589793,
+          0.7853981633974483
+        ],
+        [
+          3.9269908169872414,
+          0.7853981633974483
+        ],
+        [
+          4.71238898038469,
+          0.08726646259971647
+        ],
+        [
+          4.799655442984406,
+          0.08726646259971647
+        ],
+        [
+          4.886921905584122,
+          0.08726646259971647
+        ],
+        [
+          4.974188368183839,
+          0.08726646259971647
+        ],
+        [
+          5.061454830783555,
+          0.02908882086657216
+        ],
+        [
+          5.090543651650127,
+          0.02908882086657216
+        ],
+        [
+          5.1196324725167,
+          0.02908882086657216
+        ],
+        [
+          5.148721293383272,
+          0.08726646259971647
+        ],
+        [
+          5.235987755982989,
+          0.08726646259971647
+        ],
+        [
+          5.323254218582705,
+          0.08726646259971647
+        ],
+        [
+          5.410520681182422,
+          0.08726646259971647
+        ],
+        [
+          5.497787143782138,
+          0.7853981633974483
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.02908882086657216
+        ],
+        [
+          0.02908882086657216,
+          0.02908882086657216
+        ],
+        [
+          0.05817764173314432,
+          0.02908882086657216
+        ],
+        [
+          0.08726646259971647,
+          0.02908882086657216
+        ],
+        [
+          0.11635528346628864,
+          0.02908882086657216
+        ],
+        [
+          0.14544410433286079,
+          0.02908882086657216
+        ],
+        [
+          0.17453292519943295,
+          0.08726646259971647
+        ],
+        [
+          0.2617993877991494,
+          0.2617993877991494
+        ],
+        [
+          0.5235987755982988,
+          0.08726646259971647
+        ],
+        [
+          0.6108652381980153,
+          0.08726646259971647
+        ],
+        [
+          0.6981317007977318,
+          0.08726646259971647
+        ],
+        [
+          0.7853981633974483,
+          0.7853981633974483
+        ],
+        [
+          1.5707963267948966,
+          0.7853981633974483
+        ],
+        [
+          2.356194490192345,
+          0.7853981633974483
+        ],
+        [
+          3.141592653589793,
+          0.02908882086657216
+        ],
+        [
+          3.1706814744563654,
+          0.02908882086657216
+        ],
+        [
+          3.199770295322937,
+          0.02908882086657216
+        ],
+        [
+          3.2288591161895095,
+          0.02908882086657216
+        ],
+        [
+          3.2579479370560818,
+          0.02908882086657216
+        ],
+        [
+          3.2870367579226536,
+          0.02908882086657216
+        ],
+        [
+          3.316125578789226,
+          0.08726646259971647
+        ],
+        [
+          3.4033920413889427,
+          0.08726646259971647
+        ],
+        [
+          3.490658503988659,
+          0.08726646259971647
+        ],
+        [
+          3.5779249665883754,
+          0.08726646259971647
+        ],
+        [
+          3.665191429188092,
+          0.08726646259971647
+        ],
+        [
+          3.752457891787808,
+          0.08726646259971647
+        ],
+        [
+          3.8397243543875246,
+          0.08726646259971647
+        ],
+        [
+          3.9269908169872414,
+          0.7853981633974483
+        ],
+        [
+          4.71238898038469,
+          0.7853981633974483
+        ],
+        [
+          5.497787143782138,
+          0.7853981633974483
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.2617993877991494
+        ],
+        [
+          0.2617993877991494,
+          0.2617993877991494
+        ],
+        [
+          0.5235987755982988,
+          0.2617993877991494
+        ],
+        [
+          0.7853981633974483,
+          0.2617993877991494
+        ],
+        [
+          1.0471975511965976,
+          0.08726646259971647
+        ],
+        [
+          1.134464013796314,
+          0.02908882086657216
+        ],
+        [
+          1.163552834662886,
+          0.02908882086657216
+        ],
+        [
+          1.1926416555294583,
+          0.02908882086657216
+        ],
+        [
+          1.2217304763960306,
+          0.08726646259971647
+        ],
+        [
+          1.308996938995747,
+          0.2617993877991494
+        ],
+        [
+          1.5707963267948966,
+          0.2617993877991494
+        ],
+        [
+          1.832595714594046,
+          0.2617993877991494
+        ],
+        [
+          2.0943951023931953,
+          0.2617993877991494
+        ],
+        [
+          2.356194490192345,
+          0.7853981633974483
+        ],
+        [
+          3.141592653589793,
+          0.2617993877991494
+        ],
+        [
+          3.4033920413889427,
+          0.2617993877991494
+        ],
+        [
+          3.665191429188092,
+          0.08726646259971647
+        ],
+        [
+          3.752457891787808,
+          0.08726646259971647
+        ],
+        [
+          3.8397243543875246,
+          0.08726646259971647
+        ],
+        [
+          3.9269908169872414,
+          0.2617993877991494
+        ],
+        [
+          4.1887902047863905,
+          0.08726646259971647
+        ],
+        [
+          4.276056667386107,
+          0.02908882086657216
+        ],
+        [
+          4.305145488252679,
+          0.02908882086657216
+        ],
+        [
+          4.3342343091192514,
+          0.02908882086657216
+        ],
+        [
+          4.363323129985823,
+          0.08726646259971647
+        ],
+        [
+          4.4505895925855405,
+          0.2617993877991494
+        ],
+        [
+          4.71238898038469,
+          0.2617993877991494
+        ],
+        [
+          4.974188368183839,
+          0.2617993877991494
+        ],
+        [
+          5.235987755982989,
+          0.2617993877991494
+        ],
+        [
+          5.497787143782138,
+          0.7853981633974483
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.08726646259971647
+        ],
+        [
+          0.08726646259971647,
+          0.08726646259971647
+        ],
+        [
+          0.17453292519943295,
+          0.08726646259971647
+        ],
+        [
+          0.2617993877991494,
+          0.02908882086657216
+        ],
+        [
+          0.29088820866572157,
+          0.02908882086657216
+        ],
+        [
+          0.31997702953229373,
+          0.02908882086657216
+        ],
+        [
+          0.3490658503988659,
+          0.08726646259971647
+        ],
+        [
+          0.43633231299858233,
+          0.08726646259971647
+        ],
+        [
+          0.5235987755982988,
+          0.2617993877991494
+        ],
+        [
+          0.7853981633974483,
+          0.7853981633974483
+        ],
+        [
+          1.5707963267948966,
+          0.2617993877991494
+        ],
+        [
+          1.832595714594046,
+          0.2617993877991494
+        ],
+        [
+          2.0943951023931953,
+          0.2617993877991494
+        ],
+        [
+          2.356194490192345,
+          0.7853981633974483
+        ],
+        [
+          3.141592653589793,
+          0.08726646259971647
+        ],
+        [
+          3.2288591161895095,
+          0.08726646259971647
+        ],
+        [
+          3.316125578789226,
+          0.08726646259971647
+        ],
+        [
+          3.4033920413889427,
+          0.02908882086657216
+        ],
+        [
+          3.432480862255515,
+          0.02908882086657216
+        ],
+        [
+          3.461569683122087,
+          0.02908882086657216
+        ],
+        [
+          3.490658503988659,
+          0.08726646259971647
+        ],
+        [
+          3.5779249665883754,
+          0.08726646259971647
+        ],
+        [
+          3.665191429188092,
+          0.08726646259971647
+        ],
+        [
+          3.752457891787808,
+          0.08726646259971647
+        ],
+        [
+          3.8397243543875246,
+          0.08726646259971647
+        ],
+        [
+          3.9269908169872414,
+          0.7853981633974483
+        ],
+        [
+          4.71238898038469,
+          0.2617993877991494
+        ],
+        [
+          4.974188368183839,
+          0.2617993877991494
+        ],
+        [
+          5.235987755982989,
+          0.2617993877991494
+        ],
+        [
+          5.497787143782138,
+          0.7853981633974483
+        ]
+      ]
+    ],
+    "added_headings_deg_per_target": [
+      [
+        336.6667,
+        338.3333
+      ],
+      [
+        41.6667,
+        43.3333
+      ],
+      [
+        106.6667,
+        108.3333
+      ],
+      [
+        200.0,
+        205.0
+      ],
+      [
+        215.0,
+        220.0
+      ],
+      [
+        215.0,
+        220.0
       ]
     ]
   },
@@ -11745,7 +11745,7 @@
     "iteration": 12,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.165439700645425,
+      "value": 25.165393999448025,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
@@ -11770,45 +11770,45 @@
           "from_target": 4,
           "to_target": 3,
           "depart_heading": 1.163552834662886,
-          "arrive_heading": 0.08726646259971647,
-          "length": 4.771112712661716,
+          "arrive_heading": 0.11635528346628864,
+          "length": 4.768383047707853,
           "from_option": "66.7\u00b0",
-          "to_option": "5.0\u00b0"
+          "to_option": "6.7\u00b0"
         },
         {
           "from_target": 3,
           "to_target": 2,
-          "depart_heading": 0.08726646259971647,
+          "depart_heading": 0.11635528346628864,
           "arrive_heading": 5.090543651650127,
-          "length": 3.912379393075831,
-          "from_option": "5.0\u00b0",
+          "length": 3.9151784771935016,
+          "from_option": "6.7\u00b0",
           "to_option": "291.7\u00b0"
         },
         {
           "from_target": 2,
           "to_target": 1,
           "depart_heading": 5.090543651650127,
-          "arrive_heading": 3.141592653589793,
-          "length": 4.789263132178098,
+          "arrive_heading": 3.2288591161895095,
+          "length": 4.7394671152032375,
           "from_option": "291.7\u00b0",
-          "to_option": "180.0\u00b0"
+          "to_option": "185.0\u00b0"
         },
         {
           "from_target": 1,
           "to_target": 5,
-          "depart_heading": 3.141592653589793,
-          "arrive_heading": 3.432480862255515,
-          "length": 3.355068417924056,
-          "from_option": "180.0\u00b0",
-          "to_option": "196.7\u00b0"
+          "depart_heading": 3.2288591161895095,
+          "arrive_heading": 3.4033920413889427,
+          "length": 3.3816681129581374,
+          "from_option": "185.0\u00b0",
+          "to_option": "195.0\u00b0"
         },
         {
           "from_target": 5,
           "to_target": 0,
-          "depart_heading": 3.432480862255515,
+          "depart_heading": 3.4033920413889427,
           "arrive_heading": 3.316125578789226,
-          "length": 3.5343217102272537,
-          "from_option": "196.7\u00b0",
+          "length": 3.5574029118068244,
+          "from_option": "195.0\u00b0",
           "to_option": "190.0\u00b0"
         },
         {
@@ -11823,23 +11823,23 @@
       ],
       "selected": [
         3.316125578789226,
-        3.141592653589793,
+        3.2288591161895095,
         5.090543651650127,
-        0.08726646259971647,
+        0.11635528346628864,
         1.163552834662886,
-        3.432480862255515
+        3.4033920413889427
       ],
-      "build_seconds": 0.08053954200295266,
-      "solve_seconds": 0.14719275000243215,
+      "build_seconds": 0.07533854099892778,
+      "solve_seconds": 0.15781670899741584,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0016600000017206185,
+        "transform": 0.002133625006536022,
         "lkh_screen": 0.0,
-        "lkh": 0.1455078329963726,
-        "dubins": 0.08053954200295266,
-        "other": 2.4917004338931292e-05
+        "lkh": 0.15566000000399072,
+        "dubins": 0.07533854099892778,
+        "other": 2.308398688910529e-05
       }
     },
     "lower_bound": {
@@ -11870,7 +11870,7 @@
           "to_target": 5,
           "depart_heading": 0.5235987755982988,
           "arrive_heading": 0.5235987755982988,
-          "length": 3.6808265851164537,
+          "length": 3.6808265851164546,
           "from_option": "[30.0\u00b0, 45.0\u00b0]",
           "to_option": "[30.0\u00b0, 45.0\u00b0]"
         },
@@ -11896,7 +11896,7 @@
           "from_target": 2,
           "to_target": 1,
           "depart_heading": 4.974188368183839,
-          "arrive_heading": 3.9269908169872414,
+          "arrive_heading": 3.926990816987241,
           "length": 4.545385254747877,
           "from_option": "[285.0\u00b0, 290.0\u00b0]",
           "to_option": "[220.0\u00b0, 225.0\u00b0]"
@@ -11946,26 +11946,26 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.48467379200155847,
-      "solve_seconds": 1.8409628750014235,
+      "build_seconds": 0.052173750002111774,
+      "solve_seconds": 0.15910845799953677,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 7,
-      "interval_solves": 1500,
+      "solve_rounds": 1,
+      "interval_solves": 5490,
       "timings": {
-        "transform": 0.0014882929899613373,
+        "transform": 0.0003313749984954484,
         "lkh_screen": 0.0,
-        "lkh": 1.0283327519937302,
-        "interval": 0.8074300748776295,
-        "other": 0.48838554714166094
+        "lkh": 0.15875483299896587,
+        "interval": 0.013029071778873913,
+        "other": 0.03916692822531331
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.164320595796976,
+    "best_upper": 25.164750581583107,
     "max_lb_estimate": 24.911,
-    "gap_percent": 1.0169025562882856,
+    "gap_percent": 1.0186286443061514,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -11984,12 +11984,12 @@
         155.0,
         160.0,
         165.0,
-        170.0,
-        175.0,
         180.0,
         185.0,
         190.0,
         195.0,
+        200.0,
+        205.0,
         210.0,
         225.0,
         270.0,
@@ -11998,10 +11998,10 @@
         315.0,
         330.0,
         335.0,
+        336.6667,
+        338.3333,
         340.0,
-        345.0,
-        350.0,
-        355.0
+        345.0
       ],
       [
         0.0,
@@ -12013,6 +12013,8 @@
         36.6667,
         38.3333,
         40.0,
+        41.6667,
+        43.3333,
         45.0,
         90.0,
         135.0,
@@ -12033,9 +12035,7 @@
         270.0,
         315.0,
         330.0,
-        345.0,
-        350.0,
-        355.0
+        345.0
       ],
       [
         0.0,
@@ -12044,12 +12044,12 @@
         95.0,
         100.0,
         105.0,
+        106.6667,
+        108.3333,
         110.0,
         111.6667,
         113.3333,
         115.0,
-        116.6667,
-        118.3333,
         120.0,
         125.0,
         130.0,
@@ -12086,8 +12086,6 @@
         45.0,
         90.0,
         135.0,
-        150.0,
-        165.0,
         180.0,
         181.6667,
         183.3333,
@@ -12096,6 +12094,8 @@
         188.3333,
         190.0,
         195.0,
+        200.0,
+        205.0,
         210.0,
         215.0,
         220.0,
@@ -12112,11 +12112,11 @@
         45.0,
         60.0,
         65.0,
+        65.5556,
+        66.1111,
         66.6667,
         68.3333,
         70.0,
-        71.6667,
-        73.3333,
         75.0,
         90.0,
         105.0,
@@ -12125,14 +12125,14 @@
         180.0,
         195.0,
         210.0,
+        215.0,
+        220.0,
         225.0,
         240.0,
         245.0,
         246.6667,
         248.3333,
         250.0,
-        251.6667,
-        253.3333,
         255.0,
         270.0,
         285.0,
@@ -12147,8 +12147,6 @@
         16.6667,
         18.3333,
         20.0,
-        21.6667,
-        23.3333,
         25.0,
         30.0,
         45.0,
@@ -12159,14 +12157,16 @@
         180.0,
         185.0,
         190.0,
+        191.6667,
+        193.3333,
         195.0,
         196.6667,
         198.3333,
         200.0,
-        201.6667,
-        203.3333,
         205.0,
         210.0,
+        215.0,
+        220.0,
         225.0,
         270.0,
         285.0,
@@ -12189,13 +12189,13 @@
         "[150.0\u00b0, 155.0\u00b0]",
         "[155.0\u00b0, 160.0\u00b0]",
         "[160.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 170.0\u00b0]",
-        "[170.0\u00b0, 175.0\u00b0]",
-        "[175.0\u00b0, 180.0\u00b0]",
+        "[165.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 190.0\u00b0]",
         "[190.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 210.0\u00b0]",
+        "[195.0\u00b0, 200.0\u00b0]",
+        "[200.0\u00b0, 205.0\u00b0]",
+        "[205.0\u00b0, 210.0\u00b0]",
         "[210.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 285.0\u00b0]",
@@ -12203,11 +12203,11 @@
         "[300.0\u00b0, 315.0\u00b0]",
         "[315.0\u00b0, 330.0\u00b0]",
         "[330.0\u00b0, 335.0\u00b0]",
-        "[335.0\u00b0, 340.0\u00b0]",
+        "[335.0\u00b0, 336.7\u00b0]",
+        "[336.7\u00b0, 338.3\u00b0]",
+        "[338.3\u00b0, 340.0\u00b0]",
         "[340.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 350.0\u00b0]",
-        "[350.0\u00b0, 355.0\u00b0]",
-        "[355.0\u00b0, 360.0\u00b0]"
+        "[345.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 5.0\u00b0]",
@@ -12218,7 +12218,9 @@
         "[35.0\u00b0, 36.7\u00b0]",
         "[36.7\u00b0, 38.3\u00b0]",
         "[38.3\u00b0, 40.0\u00b0]",
-        "[40.0\u00b0, 45.0\u00b0]",
+        "[40.0\u00b0, 41.7\u00b0]",
+        "[41.7\u00b0, 43.3\u00b0]",
+        "[43.3\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 135.0\u00b0]",
         "[135.0\u00b0, 150.0\u00b0]",
@@ -12239,9 +12241,7 @@
         "[270.0\u00b0, 315.0\u00b0]",
         "[315.0\u00b0, 330.0\u00b0]",
         "[330.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 350.0\u00b0]",
-        "[350.0\u00b0, 355.0\u00b0]",
-        "[355.0\u00b0, 360.0\u00b0]"
+        "[345.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 45.0\u00b0]",
@@ -12249,13 +12249,13 @@
         "[90.0\u00b0, 95.0\u00b0]",
         "[95.0\u00b0, 100.0\u00b0]",
         "[100.0\u00b0, 105.0\u00b0]",
-        "[105.0\u00b0, 110.0\u00b0]",
+        "[105.0\u00b0, 106.7\u00b0]",
+        "[106.7\u00b0, 108.3\u00b0]",
+        "[108.3\u00b0, 110.0\u00b0]",
         "[110.0\u00b0, 111.7\u00b0]",
         "[111.7\u00b0, 113.3\u00b0]",
         "[113.3\u00b0, 115.0\u00b0]",
-        "[115.0\u00b0, 116.7\u00b0]",
-        "[116.7\u00b0, 118.3\u00b0]",
-        "[118.3\u00b0, 120.0\u00b0]",
+        "[115.0\u00b0, 120.0\u00b0]",
         "[120.0\u00b0, 125.0\u00b0]",
         "[125.0\u00b0, 130.0\u00b0]",
         "[130.0\u00b0, 135.0\u00b0]",
@@ -12291,9 +12291,7 @@
         "[40.0\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 150.0\u00b0]",
-        "[150.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 180.0\u00b0]",
+        "[135.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 181.7\u00b0]",
         "[181.7\u00b0, 183.3\u00b0]",
         "[183.3\u00b0, 185.0\u00b0]",
@@ -12301,7 +12299,9 @@
         "[186.7\u00b0, 188.3\u00b0]",
         "[188.3\u00b0, 190.0\u00b0]",
         "[190.0\u00b0, 195.0\u00b0]",
-        "[195.0\u00b0, 210.0\u00b0]",
+        "[195.0\u00b0, 200.0\u00b0]",
+        "[200.0\u00b0, 205.0\u00b0]",
+        "[205.0\u00b0, 210.0\u00b0]",
         "[210.0\u00b0, 215.0\u00b0]",
         "[215.0\u00b0, 220.0\u00b0]",
         "[220.0\u00b0, 225.0\u00b0]",
@@ -12317,12 +12317,12 @@
         "[30.0\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 60.0\u00b0]",
         "[60.0\u00b0, 65.0\u00b0]",
-        "[65.0\u00b0, 66.7\u00b0]",
+        "[65.0\u00b0, 65.6\u00b0]",
+        "[65.6\u00b0, 66.1\u00b0]",
+        "[66.1\u00b0, 66.7\u00b0]",
         "[66.7\u00b0, 68.3\u00b0]",
         "[68.3\u00b0, 70.0\u00b0]",
-        "[70.0\u00b0, 71.7\u00b0]",
-        "[71.7\u00b0, 73.3\u00b0]",
-        "[73.3\u00b0, 75.0\u00b0]",
+        "[70.0\u00b0, 75.0\u00b0]",
         "[75.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 105.0\u00b0]",
         "[105.0\u00b0, 120.0\u00b0]",
@@ -12330,15 +12330,15 @@
         "[135.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 195.0\u00b0]",
         "[195.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 225.0\u00b0]",
+        "[210.0\u00b0, 215.0\u00b0]",
+        "[215.0\u00b0, 220.0\u00b0]",
+        "[220.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 240.0\u00b0]",
         "[240.0\u00b0, 245.0\u00b0]",
         "[245.0\u00b0, 246.7\u00b0]",
         "[246.7\u00b0, 248.3\u00b0]",
         "[248.3\u00b0, 250.0\u00b0]",
-        "[250.0\u00b0, 251.7\u00b0]",
-        "[251.7\u00b0, 253.3\u00b0]",
-        "[253.3\u00b0, 255.0\u00b0]",
+        "[250.0\u00b0, 255.0\u00b0]",
         "[255.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 285.0\u00b0]",
         "[285.0\u00b0, 300.0\u00b0]",
@@ -12352,9 +12352,7 @@
         "[15.0\u00b0, 16.7\u00b0]",
         "[16.7\u00b0, 18.3\u00b0]",
         "[18.3\u00b0, 20.0\u00b0]",
-        "[20.0\u00b0, 21.7\u00b0]",
-        "[21.7\u00b0, 23.3\u00b0]",
-        "[23.3\u00b0, 25.0\u00b0]",
+        "[20.0\u00b0, 25.0\u00b0]",
         "[25.0\u00b0, 30.0\u00b0]",
         "[30.0\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 90.0\u00b0]",
@@ -12364,15 +12362,17 @@
         "[135.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 190.0\u00b0]",
-        "[190.0\u00b0, 195.0\u00b0]",
+        "[190.0\u00b0, 191.7\u00b0]",
+        "[191.7\u00b0, 193.3\u00b0]",
+        "[193.3\u00b0, 195.0\u00b0]",
         "[195.0\u00b0, 196.7\u00b0]",
         "[196.7\u00b0, 198.3\u00b0]",
         "[198.3\u00b0, 200.0\u00b0]",
-        "[200.0\u00b0, 201.7\u00b0]",
-        "[201.7\u00b0, 203.3\u00b0]",
-        "[203.3\u00b0, 205.0\u00b0]",
+        "[200.0\u00b0, 205.0\u00b0]",
         "[205.0\u00b0, 210.0\u00b0]",
-        "[210.0\u00b0, 225.0\u00b0]",
+        "[210.0\u00b0, 215.0\u00b0]",
+        "[215.0\u00b0, 220.0\u00b0]",
+        "[220.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 285.0\u00b0]",
         "[285.0\u00b0, 300.0\u00b0]",
@@ -12436,15 +12436,7 @@
         ],
         [
           2.8797932657906435,
-          0.08726646259971647
-        ],
-        [
-          2.96705972839036,
-          0.08726646259971647
-        ],
-        [
-          3.0543261909900763,
-          0.08726646259971647
+          0.2617993877991494
         ],
         [
           3.141592653589793,
@@ -12460,7 +12452,15 @@
         ],
         [
           3.4033920413889427,
-          0.2617993877991494
+          0.08726646259971647
+        ],
+        [
+          3.490658503988659,
+          0.08726646259971647
+        ],
+        [
+          3.5779249665883754,
+          0.08726646259971647
         ],
         [
           3.665191429188092,
@@ -12492,7 +12492,15 @@
         ],
         [
           5.8468529941810035,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          5.875941815047575,
+          0.02908882086657216
+        ],
+        [
+          5.905030635914148,
+          0.02908882086657216
         ],
         [
           5.93411945678072,
@@ -12500,15 +12508,7 @@
         ],
         [
           6.021385919380437,
-          0.08726646259971647
-        ],
-        [
-          6.1086523819801535,
-          0.08726646259971647
-        ],
-        [
-          6.19591884457987,
-          0.08726646259971647
+          0.2617993877991494
         ]
       ],
       [
@@ -12546,7 +12546,15 @@
         ],
         [
           0.6981317007977318,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          0.727220521664304,
+          0.02908882086657216
+        ],
+        [
+          0.7563093425308761,
+          0.02908882086657216
         ],
         [
           0.7853981633974483,
@@ -12630,15 +12638,7 @@
         ],
         [
           6.021385919380437,
-          0.08726646259971647
-        ],
-        [
-          6.1086523819801535,
-          0.08726646259971647
-        ],
-        [
-          6.19591884457987,
-          0.08726646259971647
+          0.2617993877991494
         ]
       ],
       [
@@ -12664,7 +12664,15 @@
         ],
         [
           1.832595714594046,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          1.861684535460618,
+          0.02908882086657216
+        ],
+        [
+          1.8907733563271902,
+          0.02908882086657216
         ],
         [
           1.9198621771937623,
@@ -12680,15 +12688,7 @@
         ],
         [
           2.007128639793479,
-          0.02908882086657216
-        ],
-        [
-          2.036217460660051,
-          0.02908882086657216
-        ],
-        [
-          2.065306281526623,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           2.0943951023931953,
@@ -12826,15 +12826,7 @@
         ],
         [
           2.356194490192345,
-          0.2617993877991494
-        ],
-        [
-          2.6179938779914944,
-          0.2617993877991494
-        ],
-        [
-          2.8797932657906435,
-          0.2617993877991494
+          0.7853981633974483
         ],
         [
           3.141592653589793,
@@ -12866,7 +12858,15 @@
         ],
         [
           3.4033920413889427,
-          0.2617993877991494
+          0.08726646259971647
+        ],
+        [
+          3.490658503988659,
+          0.08726646259971647
+        ],
+        [
+          3.5779249665883754,
+          0.08726646259971647
         ],
         [
           3.665191429188092,
@@ -12924,7 +12924,15 @@
         ],
         [
           1.134464013796314,
-          0.02908882086657216
+          0.009696273622190719
+        ],
+        [
+          1.1441602874185046,
+          0.009696273622190719
+        ],
+        [
+          1.1538565610406954,
+          0.009696273622190719
         ],
         [
           1.163552834662886,
@@ -12936,15 +12944,7 @@
         ],
         [
           1.2217304763960306,
-          0.02908882086657216
-        ],
-        [
-          1.2508192972626027,
-          0.02908882086657216
-        ],
-        [
-          1.279908118129175,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           1.308996938995747,
@@ -12976,7 +12976,15 @@
         ],
         [
           3.665191429188092,
-          0.2617993877991494
+          0.08726646259971647
+        ],
+        [
+          3.752457891787808,
+          0.08726646259971647
+        ],
+        [
+          3.8397243543875246,
+          0.08726646259971647
         ],
         [
           3.9269908169872414,
@@ -13000,15 +13008,7 @@
         ],
         [
           4.363323129985823,
-          0.02908882086657216
-        ],
-        [
-          4.392411950852395,
-          0.02908882086657216
-        ],
-        [
-          4.421500771718968,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           4.4505895925855405,
@@ -13058,15 +13058,7 @@
         ],
         [
           0.3490658503988659,
-          0.02908882086657216
-        ],
-        [
-          0.37815467126543806,
-          0.02908882086657216
-        ],
-        [
-          0.4072434921320102,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           0.43633231299858233,
@@ -13106,7 +13098,15 @@
         ],
         [
           3.316125578789226,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          3.345214399655798,
+          0.02908882086657216
+        ],
+        [
+          3.37430322052237,
+          0.02908882086657216
         ],
         [
           3.4033920413889427,
@@ -13122,15 +13122,7 @@
         ],
         [
           3.490658503988659,
-          0.02908882086657216
-        ],
-        [
-          3.5197473248552313,
-          0.02908882086657216
-        ],
-        [
-          3.548836145721803,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           3.5779249665883754,
@@ -13138,7 +13130,15 @@
         ],
         [
           3.665191429188092,
-          0.2617993877991494
+          0.08726646259971647
+        ],
+        [
+          3.752457891787808,
+          0.08726646259971647
+        ],
+        [
+          3.8397243543875246,
+          0.08726646259971647
         ],
         [
           3.9269908169872414,
@@ -13164,28 +13164,28 @@
     ],
     "added_headings_deg_per_target": [
       [
-        350.0,
-        355.0
+        200.0,
+        205.0
       ],
       [
-        350.0,
-        355.0
+        170.0,
+        175.0
       ],
       [
-        116.6667,
-        118.3333
+        296.6667,
+        298.3333
       ],
       [
-        150.0,
-        165.0
+        330.0,
+        345.0
       ],
       [
-        251.6667,
-        253.3333
+        65.5556,
+        66.1111
       ],
       [
-        21.6667,
-        23.3333
+        191.6667,
+        193.3333
       ]
     ]
   }

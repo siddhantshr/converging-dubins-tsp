@@ -20,7 +20,7 @@ UPPER BOUND: 25.293841   (valid upper bound)
              4 -> 0     240.0°     0.0°     4.6735
 
 LOWER BOUND: 24.137000   (estimate (LKH))
-  12 intervals per target, solver = lkh, build 0.04s, solve 0.56s
+  12 intervals per target, solver = lkh, build 0.01s, solve 0.02s
   order: 5 -> 4 -> 3 -> 2 -> 1 -> 0 -> 5
   legs:   from -> to   leave     arrive    length
              5 -> 4     135.0°   135.0°     3.2585

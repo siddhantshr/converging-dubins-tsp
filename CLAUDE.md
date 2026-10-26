@@ -7,6 +7,7 @@ LKH, with lower-bound-driven refinement (lambda, mu). See README.md for the meth
 
 ```bash
 source venv/bin/activate
+python tools/build_interval.py                     # compile the C++ interval solver
 python -m src [--config config.yml] [--no-plot]   # writes results/
 python -m pytest -q                                # ~20 s
 python tools/lb_stability.py <iteration>           # needs results/ from a run
@@ -54,7 +55,18 @@ else refresh its edges and go back to screening.
 - `results/iter_XX/results.json`: includes `intervals_rad_per_target`, which
   `tools/lb_stability.py` reads.
 
+## Interval solver: C++ + Python reference
+
+- `src/dubins/_interval.cpp` is a line-by-line port of `interval.py`,
+  `path.py::shortest_length` and `free_heading.py`. `solve_interval_problem`
+  uses it; `solve_interval_problem_py` is the reference
+  (`test_cpp_matches_python`). Change both together: same candidates, order,
+  tolerances and strict-`<` tie-break. Rebuild after editing the .cpp.
+- The .so is not committed (`.gitignore`). Without it, the Python solver runs
+  (~150x slower) with a warning.
+- Never build with `-ffast-math` (the solver relies on NaN checks).
+
 ## Don't change without asking
 
-The interval solver (`src/dubins/interval.py`) and the refinement rule
-(`src/refine.py::refine`).
+The interval solver (`src/dubins/interval.py`, `src/dubins/_interval.cpp`) and
+the refinement rule (`src/refine.py::refine`).
