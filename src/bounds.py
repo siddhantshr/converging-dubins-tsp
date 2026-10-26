@@ -29,7 +29,7 @@ import numpy as np
 from .config import Config
 from .tsp import noon_bean, solvers
 from .tsp.gtsp import (ClusteredGraph, IntervalEdgeCosts, build_heading_graph,
-                       build_interval_graph, refresh_edge, uniform_headings, uniform_intervals)
+                       build_interval_graph, uniform_headings, uniform_intervals)
 from .utils.angles import HeadingInterval
 
 
@@ -58,9 +58,8 @@ class BoundResult:
     build_seconds: float
     solve_seconds: float
     notes: list[str] = field(default_factory=list)
-    solve_rounds: int = 1        # > 1 when lazy edge evaluation had to re-solve
     interval_solves: int = 0     # interval problems actually solved for this bound
-    # seconds per stage: dubins | interval | transform | lkh | exact | other
+    # seconds per stage: dubins | interval | transform | lkh | other
     timings: dict[str, float] = field(default_factory=dict)
 
 
@@ -82,84 +81,20 @@ def _integer_costs(graph: ClusteredGraph, scale: float, round_down: bool) -> np.
     return (np.floor(scaled) if round_down else np.rint(scaled)).astype(np.int64)
 
 
-def _refresh_tour_neighbourhood(graph: ClusteredGraph, chosen: list[int],
-                                edge_costs: IntervalEdgeCosts) -> bool:
-    """If the tour uses an estimated edge, make a batch of edges exact and
-    return True (solve again). Return False when the tour is all exact."""
-    tour_edges = [(chosen[k], chosen[(k + 1) % len(chosen)]) for k in range(len(chosen))]
-    if all(graph.exact[u, v] for u, v in tour_edges):
-        return False
-    for u, v in _lazy_batch(graph, tour_edges):
-        refresh_edge(graph, edge_costs, u, v)
-    return True
-
-
-def _lazy_batch(graph: ClusteredGraph, tour_edges) -> set[tuple[int, int]]:
-    """Estimated edges to make exact after one lazy round.
-
-    Only fixing the tour's own edges would let the solver swap to a
-    neighbouring estimated edge next round, and the next, one at a time. So
-    for every tour edge u -> v we also fix the edges u -> (any option of v's
-    target) and (any option of u's target) -> v: the alternatives the solver
-    would most likely try next.
-    """
-    batch = set()
-    for u, v in tour_edges:
-        tu, tv = graph.node_target[u], graph.node_target[v]
-        batch.update((u, w) for w in graph.clusters[tv])
-        batch.update((w, v) for w in graph.clusters[tu])
-    return {(a, b) for a, b in batch if not graph.exact[a, b]}
-
-
-def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config,
-                 build_seconds: float, edge_costs: IntervalEdgeCosts | None = None):
-    """Noon-Bean + LKH + decode.
-
-    Lazy edge evaluation (lower bound only): some graph costs may be lower
-    estimates (graph.exact == False). Solve with them; if the tour uses any
-    estimated edge, compute its exact cost and solve again. Stop when the tour
-    uses exact edges only. With an optimal solver that tour would be optimal
-    for the exact costs too:
-        estimated optimum  <=  exact optimum  <=  exact cost of this tour
-                                              =   its estimated cost = estimated optimum.
-    LKH is not optimal, so here it is only LKH's best tour on the exact costs.
-
-    Screening: the lazy rounds only decide which edges to make exact, so they
-    use a cheap LKH (cfg.lkh_runs_screening restarts). Once a screening tour
-    uses exact edges only, solve once more with the full cfg.lkh_runs. If that
-    tour is all exact too, stop; otherwise make its edges exact and go back
-    to screening.
-    """
+def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config, build_seconds: float):
+    """Noon-Bean + LKH (cfg.lkh_runs restarts) + decode."""
     is_lower = kind == "lower"
-    lazy = graph.exact is not None and not graph.exact.all()
-    rounds = 0
-    timings = {"transform": 0.0, "lkh_screen": 0.0, "lkh": 0.0}
+    timings = {"transform": 0.0, "lkh": 0.0}
     t0 = time.perf_counter()
-
-    def solve_once(runs, stage):
-        t = time.perf_counter()
-        int_cost = _integer_costs(graph, cfg.cost_scale, round_down=is_lower)
-        atsp = noon_bean.transform(int_cost, graph.clusters)
-        timings["transform"] += time.perf_counter() - t
-        t = time.perf_counter()
-        tour = solvers.solve_lkh(atsp, runs)
-        timings[stage] += time.perf_counter() - t
-        return atsp, tour, noon_bean.decode(tour, atsp)
-
-    no_screening = not lazy or cfg.lkh_runs_screening >= cfg.lkh_runs
-    final = no_screening
-    while True:
-        rounds += 1
-        if final:
-            atsp, tour, chosen = solve_once(cfg.lkh_runs, "lkh")
-        else:
-            atsp, tour, chosen = solve_once(cfg.lkh_runs_screening, "lkh_screen")
-        if lazy and _refresh_tour_neighbourhood(graph, chosen, edge_costs):
-            final = no_screening        # tour used estimated edges: screen again
-        elif final:
-            break
-        else:
-            final = True                # screening tour is all exact: full solve
+    int_cost = _integer_costs(graph, cfg.cost_scale, round_down=is_lower)
+    atsp = noon_bean.transform(int_cost, graph.clusters)
+    timings["transform"] = time.perf_counter() - t0
+    t = time.perf_counter()
+    tour = solvers.solve_lkh(atsp, cfg.lkh_runs)
+    timings["lkh"] = time.perf_counter() - t
+    t = time.perf_counter()
+    chosen = noon_bean.decode(tour, atsp)
+    timings["transform"] += time.perf_counter() - t
     solve_seconds = time.perf_counter() - t0
 
     n = len(chosen)
@@ -197,7 +132,7 @@ def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config,
         options_per_target=[len(c) for c in graph.clusters],
         order=[leg.from_target for leg in legs], legs=legs, selected=selected,
         build_seconds=build_seconds, solve_seconds=solve_seconds, notes=notes,
-        solve_rounds=rounds, timings=timings,
+        timings=timings,
     )
 
 
@@ -242,13 +177,11 @@ def compute_lower_bound(cfg: Config, intervals: list[list[HeadingInterval]] | No
     intervals = intervals or initial_intervals(cfg)
     if costs is None:
         costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
-        costs.register_initial(intervals)
     solves_before, seconds_before = costs.solves, costs.solve_seconds
     graph = build_interval_graph(cfg.points, intervals, cfg.turning_radius, costs,
-                                 lazy=cfg.lower.lazy, progress=_progress)
-    result = _solve_graph(graph, "lower", cfg, time.perf_counter() - t0, costs)
+                                 progress=_progress)
+    result = _solve_graph(graph, "lower", cfg, time.perf_counter() - t0)
     result.interval_solves = costs.solves - solves_before
-    # interval solves happen both while building and in the lazy re-solve rounds
     result.timings["interval"] = costs.solve_seconds - seconds_before
     _finish_timings(result)
     return result

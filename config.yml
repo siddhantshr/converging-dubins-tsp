@@ -24,11 +24,6 @@ lower_bound:
   enabled: true
   num_intervals: 8               # heading intervals per target, each 360/N degrees wide
   solver: lkh                    # lkh only: the lower bound is an ESTIMATE, not certified
-  lazy: false                     # reuse parent-interval costs; compute only edges the
-                                 # solver needs (far fewer interval solves; with LKH the
-                                 # value can differ slightly from lazy: false)
-  lkh_runs_screening: 1          # LKH restarts in the lazy rounds that only pick edges to
-                                 # make exact; the final solve uses solver.lkh_runs
 
 # Iterative refinement driven by the lower bound (see src/refine.py).
 # Each iteration, at every target: take the interval picked by the last
@@ -40,8 +35,7 @@ refinement:
   mu: 12                         # number of refinement iterations after iteration 0
 
 solver:
-  lkh_runs: 1                    # LKH restarts (more = better tours, slower); upper bound
-                                 # and the final lower-bound solve
+  lkh_runs: 1                    # LKH restarts (more = better tours, slower), both bounds
   cost_scale: 1000               # costs are multiplied by this and made integers
 
 output:

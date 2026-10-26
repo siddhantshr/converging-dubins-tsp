@@ -129,33 +129,13 @@ solve against about 0.5 ms in Python). Build it with
 `python tools/build_interval.py`; without it, the Python solver is used and a
 warning is printed. The tests check that the two give the same lengths.
 
-## Reusing previous work (`lower_bound.lazy`)
+## Reusing previous work
 
-Most of the runtime is solving interval problems for the lower-bound edges.
-Between refinement iterations they are reused in three ways:
-
-1. **Cache.** Every interval problem solved is kept; unchanged edges are free.
-2. **Inheritance (exact).** A split piece is a subset of its parent, so its
-   edge cost is >= the parent's. If the parent's optimal path departs and
-   arrives with headings inside the pieces, the piece's cost is *exactly* the
-   parent's: no solve needed.
-3. **Lazy evaluation.** Every other new edge starts with its parent's cost as
-   a lower estimate (for the first iteration: the straight-line distance).
-   Solve, make the edges around the tour exact, and repeat until the tour uses
-   exact edges only. With an optimal solver that tour would be optimal for the
-   exact costs as well:
-
-       estimated optimum <= exact optimum <= exact cost of the tour = estimated optimum
-
-   With LKH it is only LKH's best tour, so lazy and eager evaluation can give
-   slightly different estimates.
-
-   The rounds that only pick edges to make exact use a cheap LKH
-   (`lower_bound.lkh_runs_screening`, default 1 restart). Once a screening
-   tour is all exact, the graph is solved again with the full
-   `solver.lkh_runs` (default 1; if it equals the screening value there is no
-   separate final solve); if that tour is all exact too we stop,
-   otherwise its edges are made exact and screening continues.
+Every interval problem solved is cached. An edge depends only on its two
+targets and two intervals, so when the refinement splits one interval per
+target, all other edges are cache hits and only edges touching the new
+pieces are solved. Every edge of the lower-bound graph is exact: no
+estimates, one LKH solve per bound.
 
 ## Solver
 
@@ -177,11 +157,11 @@ with more LKH restarts.
 * a refinement step adds headings inside the chosen interval and keeps the
   interval partition covering the circle exactly once;
 * the LB estimate stays below the upper bound on the small test instance;
-* lazy and eager evaluation give the same LB estimates there (both LKH);
 * best UB / max LB estimate / gap are reported as defined above, with a
   warning when an LB estimate exceeds the best UB;
-* LKH is deterministic; lazy rounds end with a full LKH solve;
-* a split piece containing the parent's optimal headings inherits its cost exactly.
+* LKH is deterministic;
+* interval costs are cached between iterations;
+* the C++ interval solver gives the Python reference's lengths.
 
 ## Changes from the Julia version
 

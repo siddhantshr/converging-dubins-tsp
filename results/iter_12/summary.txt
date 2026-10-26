@@ -9,7 +9,7 @@ headings added (deg) per target, inside the interval the previous lower bound pi
   target 5: 191.67, 193.33
 
 UPPER BOUND: 25.165394   (valid upper bound)
-  32 headings per target, solver = lkh, build 0.08s, solve 0.16s
+  32 headings per target, solver = lkh, build 0.10s, solve 0.17s
   order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
              4 -> 3      66.7°     6.7°     4.7684

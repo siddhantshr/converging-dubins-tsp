@@ -50,8 +50,8 @@ class ExactATSP:
     cycle S and solve again. The ring of every cluster is cut from the start,
     because those zero-cost rings are the first subtours the solver would find.
 
-    The model can be solved again after the costs change (lazy edge
-    evaluation does this): the constraints only depend on which edges exist,
+    The model can be solved again after the costs change: the constraints
+    only depend on which edges exist,
     so all cuts found so far stay valid and are kept, and the previous tour
     is given to CBC as a starting solution.
     """

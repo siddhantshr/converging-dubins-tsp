@@ -20,7 +20,6 @@ class BoundConfig:
     enabled: bool
     resolution: int        # number of headings (upper) or intervals (lower)
     solver: str
-    lazy: bool = False     # lower bound only: lazy edge evaluation
 
 
 @dataclass
@@ -36,7 +35,6 @@ class Config:
     refine_mu: int                  # number of refinement iterations (0 = single run)
     plot: bool
     results_dir: str
-    lkh_runs_screening: int = 1     # LKH restarts in the lazy screening rounds (lower bound)
 
 
 def _require(cond: bool, message: str):
@@ -50,7 +48,6 @@ def _bound(raw: dict, name: str, count_key: str, default_solver: str) -> BoundCo
         enabled=bool(section.get("enabled", True)),
         resolution=int(section.get(count_key, 8)),
         solver=str(section.get("solver", default_solver)).lower(),
-        lazy=bool(section.get("lazy", True)),
     )
     _require(cfg.resolution >= 1, f"{name}.{count_key} must be >= 1")
     _require(cfg.solver in SOLVERS,
@@ -86,11 +83,9 @@ def load_config(path: str | Path) -> Config:
         refine_mu=int(refinement.get("mu", 0)) if refinement.get("enabled", True) else 0,
         plot=bool(output.get("plot", True)),
         results_dir=str(output.get("results_dir", "results")),
-        lkh_runs_screening=int((raw.get("lower_bound", {}) or {}).get("lkh_runs_screening", 1)),
     )
     _require(cfg.turning_radius > 0, "vehicle.turning_radius must be > 0")
     _require(cfg.lkh_runs >= 1, "solver.lkh_runs must be >= 1")
-    _require(cfg.lkh_runs_screening >= 1, "lower_bound.lkh_runs_screening must be >= 1")
     _require(cfg.cost_scale > 0, "solver.cost_scale must be > 0")
     _require(cfg.upper.enabled or cfg.lower.enabled, "enable at least one bound")
     _require(cfg.refine_lambda >= 1, "refinement.lambda must be >= 1")

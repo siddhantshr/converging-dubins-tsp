@@ -71,12 +71,8 @@ def _same_heading(a: float, b: float, tol: float = 1e-9) -> bool:
     return diff < tol or diff > 2 * math.pi - tol
 
 
-def refine(headings, intervals, selected, lam: int, costs: IntervalEdgeCosts | None = None):
-    """One refinement step. Returns new heading sets, new intervals, added headings.
-
-    If `costs` is given, it is told which interval each new piece came from,
-    so the next lower bound can reuse the parent's edge costs.
-    """
+def refine(headings, intervals, selected, lam: int):
+    """One refinement step. Returns new heading sets, new intervals, added headings."""
     new_headings = [list(h) for h in headings]
     new_intervals = [list(iv) for iv in intervals]
     added = []
@@ -92,8 +88,6 @@ def refine(headings, intervals, selected, lam: int, costs: IntervalEdgeCosts | N
                   for j in range(lam + 1)]
         k = new_intervals[t].index(chosen)
         new_intervals[t][k:k + 1] = pieces
-        if costs is not None:
-            costs.register_split(chosen, pieces)
     return new_headings, new_intervals, added
 
 
@@ -102,7 +96,6 @@ def run(cfg: Config, lam: int, mu: int, on_iteration=None) -> list[Iteration]:
     headings, intervals = initial_headings(cfg), initial_intervals(cfg)
     upper_cache = {}
     lower_costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
-    lower_costs.register_initial(intervals)
     iterations: list[Iteration] = []
     added: list[list[float]] = [[] for _ in cfg.points]
 
@@ -123,5 +116,5 @@ def run(cfg: Config, lam: int, mu: int, on_iteration=None) -> list[Iteration]:
             on_iteration(it)
 
         if k < mu:
-            headings, intervals, added = refine(headings, intervals, lower.selected, lam, lower_costs)
+            headings, intervals, added = refine(headings, intervals, lower.selected, lam)
     return iterations

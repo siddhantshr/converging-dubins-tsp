@@ -87,17 +87,15 @@
         0.7853981633974483,
         0.0
       ],
-      "build_seconds": 0.02717875000234926,
-      "solve_seconds": 0.015084458005730994,
+      "build_seconds": 0.029136417004338,
+      "solve_seconds": 0.01619383400247898,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0005585000035353005,
-        "lkh_screen": 0.0,
-        "lkh": 0.014516041002934799,
-        "dubins": 0.02717875000234926,
-        "other": 9.916999260894954e-06
+        "transform": 0.0007798749938956462,
+        "lkh": 0.015412999993714038,
+        "dubins": 0.029136417004338,
+        "other": 9.590148692950606e-07
       }
     },
     "lower_bound": {
@@ -204,20 +202,18 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.006593291996978223,
-      "solve_seconds": 0.010927208000794053,
+      "build_seconds": 0.00666987500153482,
+      "solve_seconds": 0.011571459006518126,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 1920,
       "timings": {
-        "transform": 4.762499884236604e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.010872833998291753,
-        "interval": 0.0040815710090100765,
-        "other": 0.0025184699916280806
+        "transform": 5.7792000006884336e-05,
+        "lkh": 0.011513042001752183,
+        "interval": 0.004231081824400462,
+        "other": 0.0024394181818934157
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -653,17 +649,15 @@
         1.0471975511965976,
         3.665191429188092
       ],
-      "build_seconds": 0.017579167004441842,
-      "solve_seconds": 0.018838124997273553,
+      "build_seconds": 0.01720487499551382,
+      "solve_seconds": 0.02070941700367257,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 7.133299368433654e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.01875958400341915,
-        "dubins": 0.017579167004441842,
-        "other": 7.208000170066953e-06
+        "transform": 7.166699651861563e-05,
+        "lkh": 0.02063708299829159,
+        "dubins": 0.01720487499551382,
+        "other": 6.670088623650372e-07
       }
     },
     "lower_bound": {
@@ -770,20 +764,18 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.008620499997050501,
-      "solve_seconds": 0.02058545799809508,
+      "build_seconds": 0.008490749998600222,
+      "solve_seconds": 0.02211199999874225,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 1530,
       "timings": {
-        "transform": 4.562499816529453e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.02053291699849069,
-        "interval": 0.004789639759110287,
-        "other": 0.003837776239379309
+        "transform": 6.849999772384763e-05,
+        "lkh": 0.022043124998162966,
+        "interval": 0.004927945185045246,
+        "other": 0.003563179816410411
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -1309,17 +1301,15 @@
         4.1887902047863905,
         0.5235987755982988
       ],
-      "build_seconds": 0.02183725000213599,
-      "solve_seconds": 0.02403500000218628,
+      "build_seconds": 0.02164437499595806,
+      "solve_seconds": 0.025919792002241593,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 6.679199577774853e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.023955791002663318,
-        "dubins": 0.02183725000213599,
-        "other": 1.2417003745213151e-05
+        "transform": 6.77920033922419e-05,
+        "lkh": 0.025851500002318062,
+        "dubins": 0.02164437499595806,
+        "other": 4.999965312890708e-07
       }
     },
     "lower_bound": {
@@ -1426,20 +1416,18 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.009422709001228213,
-      "solve_seconds": 0.023337332997471094,
+      "build_seconds": 0.009509541996521875,
+      "solve_seconds": 0.025742333004018292,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 1890,
       "timings": {
-        "transform": 5.491699994308874e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.023274792001757305,
-        "interval": 0.004052005839184858,
-        "other": 0.005378327157814056
+        "transform": 5.6958000641316175e-05,
+        "lkh": 0.02568500000052154,
+        "interval": 0.00429483808693476,
+        "other": 0.00521507891244255
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -2037,17 +2025,15 @@
         1.0471975511965976,
         3.665191429188092
       ],
-      "build_seconds": 0.029530791005527135,
-      "solve_seconds": 0.03835545800393447,
+      "build_seconds": 0.026592542002617847,
+      "solve_seconds": 0.04207212500477908,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0001020419949782081,
-        "lkh_screen": 0.0,
-        "lkh": 0.03823966599884443,
-        "dubins": 0.029530791005527135,
-        "other": 1.3750010111834854e-05
+        "transform": 0.00011808300769189373,
+        "lkh": 0.041952665997087024,
+        "dubins": 0.026592542002617847,
+        "other": 1.3760000001639128e-06
       }
     },
     "lower_bound": {
@@ -2154,20 +2140,18 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.0126185830013128,
-      "solve_seconds": 0.0343342090054648,
+      "build_seconds": 0.012235125002916902,
+      "solve_seconds": 0.03603504200145835,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 2250,
       "timings": {
-        "transform": 9.379100083606318e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.034222333000798244,
-        "interval": 0.00495258292357903,
-        "other": 0.0076840850815642625
+        "transform": 9.962500917026773e-05,
+        "lkh": 0.03593504200398456,
+        "interval": 0.00504202821321087,
+        "other": 0.0071934717780095525
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -2837,17 +2821,15 @@
         0.7853981633974483,
         0.2617993877991494
       ],
-      "build_seconds": 0.03168816700053867,
-      "solve_seconds": 0.037849792002816685,
+      "build_seconds": 0.030716000001120847,
+      "solve_seconds": 0.039949666999746114,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 8.729199907975271e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.0377486659999704,
-        "dubins": 0.03168816700053867,
-        "other": 1.3834003766532987e-05
+        "transform": 0.00011595799878705293,
+        "lkh": 0.03983275000064168,
+        "dubins": 0.030716000001120847,
+        "other": 9.590003173798323e-07
       }
     },
     "lower_bound": {
@@ -2954,20 +2936,18 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.016497750002599787,
-      "solve_seconds": 0.03972258299472742,
+      "build_seconds": 0.016021833995182533,
+      "solve_seconds": 0.04299758300476242,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 2610,
       "timings": {
-        "transform": 8.229200466303155e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.03962987500563031,
-        "interval": 0.0069360408233478665,
-        "other": 0.009572125163685996
+        "transform": 9.020799916470423e-05,
+        "lkh": 0.04290691699861782,
+        "interval": 0.007084664881404024,
+        "other": 0.008937627120758407
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -3709,17 +3689,15 @@
         4.276056667386107,
         0.17453292519943295
       ],
-      "build_seconds": 0.0362803329990129,
-      "solve_seconds": 0.049380000004020985,
+      "build_seconds": 0.03558958299981896,
+      "solve_seconds": 0.05341979199874913,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 9.387499449076131e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.04927387500356417,
-        "dubins": 0.0362803329990129,
-        "other": 1.2250005966052413e-05
+        "transform": 8.77089987625368e-05,
+        "lkh": 0.05333137499837903,
+        "dubins": 0.03558958299981896,
+        "other": 7.080016075633466e-07
       }
     },
     "lower_bound": {
@@ -3826,20 +3804,18 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.018873042004997842,
-      "solve_seconds": 0.04726916700019501,
+      "build_seconds": 0.01816629200038733,
+      "solve_seconds": 0.05040679199737497,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 2970,
       "timings": {
-        "transform": 8.620799781056121e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.04716937500052154,
-        "interval": 0.006402814011380542,
-        "other": 0.01248381199548021
+        "transform": 9.420799324288964e-05,
+        "lkh": 0.05031220900127664,
+        "interval": 0.0064530400559306145,
+        "other": 0.01171362694731215
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -4653,17 +4629,15 @@
         1.134464013796314,
         3.665191429188092
       ],
-      "build_seconds": 0.04024254099931568,
-      "solve_seconds": 0.0544655830017291,
+      "build_seconds": 0.05386595799791394,
+      "solve_seconds": 0.05888020799466176,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00010304199531674385,
-        "lkh_screen": 0.0,
-        "lkh": 0.05434349999995902,
-        "dubins": 0.04024254099931568,
-        "other": 1.9041006453335285e-05
+        "transform": 0.00015049999637994915,
+        "lkh": 0.05872808399726637,
+        "dubins": 0.05386595799791394,
+        "other": 1.6240010154433548e-06
       }
     },
     "lower_bound": {
@@ -4770,20 +4744,18 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.02258087499649264,
-      "solve_seconds": 0.04798083299829159,
+      "build_seconds": 0.022307582999928854,
+      "solve_seconds": 0.053686833001847845,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 3330,
       "timings": {
-        "transform": 0.00010441600170452148,
-        "lkh_screen": 0.0,
-        "lkh": 0.04786183399846777,
-        "interval": 0.00704165186471073,
-        "other": 0.015553806129901204
+        "transform": 0.00032274900149786845,
+        "lkh": 0.05336291700223228,
+        "interval": 0.007403318100841716,
+        "other": 0.014905431897204835
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -5669,17 +5641,15 @@
         1.134464013796314,
         3.4033920413889427
       ],
-      "build_seconds": 0.04597529199963901,
-      "solve_seconds": 0.07233883399749175,
+      "build_seconds": 0.04605608400015626,
+      "solve_seconds": 0.08082441599981394,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00010137500066775829,
-        "lkh_screen": 0.0,
-        "lkh": 0.07222441599878948,
-        "dubins": 0.04597529199963901,
-        "other": 1.3042998034507036e-05
+        "transform": 0.00014674900012323633,
+        "lkh": 0.08067633400060004,
+        "dubins": 0.04605608400015626,
+        "other": 1.3329990906640887e-06
       }
     },
     "lower_bound": {
@@ -5786,20 +5756,18 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.026230667004710995,
-      "solve_seconds": 0.06576325000060024,
+      "build_seconds": 0.029524417004722636,
+      "solve_seconds": 0.07193870799528668,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 3690,
       "timings": {
-        "transform": 9.479099389864132e-05,
-        "lkh_screen": 0.0,
-        "lkh": 0.06565691700234311,
-        "interval": 0.00790024915477261,
-        "other": 0.018341959854296874
+        "transform": 0.0003486659988993779,
+        "lkh": 0.07158916600019438,
+        "interval": 0.009053491819940973,
+        "other": 0.02047180118097458
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -6757,17 +6725,15 @@
         1.134464013796314,
         3.4033920413889427
       ],
-      "build_seconds": 0.054578292001679074,
-      "solve_seconds": 0.08699937499477528,
+      "build_seconds": 0.05196929199883016,
+      "solve_seconds": 0.09342229199683061,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0001540000012028031,
-        "lkh_screen": 0.0,
-        "lkh": 0.08683045900397701,
-        "dubins": 0.054578292001679074,
-        "other": 1.4915989595465362e-05
+        "transform": 0.00015120900206966326,
+        "lkh": 0.09326987499662209,
+        "dubins": 0.05196929199883016,
+        "other": 1.2079981388524175e-06
       }
     },
     "lower_bound": {
@@ -6874,20 +6840,18 @@
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.04443016600271221,
-      "solve_seconds": 0.07838804100174457,
+      "build_seconds": 0.042958583995641675,
+      "solve_seconds": 0.08379670899739722,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 4050,
       "timings": {
-        "transform": 0.000155083995196037,
-        "lkh_screen": 0.0,
-        "lkh": 0.07821887500176672,
-        "interval": 0.022248623303312343,
-        "other": 0.022195624704181682
+        "transform": 0.00017200099682668224,
+        "lkh": 0.08362383300118381,
+        "interval": 0.022411836122046225,
+        "other": 0.020547622872982174
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -7917,17 +7881,15 @@
         1.163552834662886,
         3.432480862255515
       ],
-      "build_seconds": 0.05939912500616629,
-      "solve_seconds": 0.10530500000459142,
+      "build_seconds": 0.06020137499581324,
+      "solve_seconds": 0.11194837500079302,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00015775000065332279,
-        "lkh_screen": 0.0,
-        "lkh": 0.10512766700412612,
-        "dubins": 0.05939912500616629,
-        "other": 1.9582999811973423e-05
+        "transform": 0.00019629099551821128,
+        "lkh": 0.11175120800180594,
+        "dubins": 0.06020137499581324,
+        "other": 8.760034688748419e-07
       }
     },
     "lower_bound": {
@@ -8034,20 +7996,18 @@
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.035226332998718135,
-      "solve_seconds": 0.10346304099948611,
+      "build_seconds": 0.03313766700011911,
+      "solve_seconds": 0.11074495800130535,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 4410,
       "timings": {
-        "transform": 0.00013750000653089955,
-        "lkh_screen": 0.0,
-        "lkh": 0.10331112499989104,
-        "interval": 0.009487451054155827,
-        "other": 0.025753297937626485
+        "transform": 0.00017787499382393435,
+        "lkh": 0.1105663749985979,
+        "interval": 0.009439698224014137,
+        "other": 0.023698676784988493
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -9149,17 +9109,15 @@
         4.305145488252679,
         0.29088820866572157
       ],
-      "build_seconds": 0.06426658400596352,
-      "solve_seconds": 0.1191288749978412,
+      "build_seconds": 0.062361125004827045,
+      "solve_seconds": 0.13682983400212834,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00018558299780124798,
-        "lkh_screen": 0.0,
-        "lkh": 0.11892379100027028,
-        "dubins": 0.06426658400596352,
-        "other": 1.9500999769661576e-05
+        "transform": 0.0002231250036857091,
+        "lkh": 0.13660525000159396,
+        "dubins": 0.062361125004827045,
+        "other": 1.4589968486689031e-06
       }
     },
     "lower_bound": {
@@ -9266,20 +9224,18 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.04186608399322722,
-      "solve_seconds": 0.11920220899628475,
+      "build_seconds": 0.04100808300427161,
+      "solve_seconds": 0.12715737499820534,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 4770,
       "timings": {
-        "transform": 0.00019625000277301297,
-        "lkh_screen": 0.0,
-        "lkh": 0.118984291999368,
-        "interval": 0.011925833183340728,
-        "other": 0.029961917804030236
+        "transform": 0.00022037499002180994,
+        "lkh": 0.12693612500152085,
+        "interval": 0.011917047930182889,
+        "other": 0.029091910080751404
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -10453,17 +10409,15 @@
         4.305145488252679,
         0.2617993877991494
       ],
-      "build_seconds": 0.06877954099763883,
-      "solve_seconds": 0.14865387500321958,
+      "build_seconds": 0.06832270899758441,
+      "solve_seconds": 0.15554829100437928,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00022220899700187147,
-        "lkh_screen": 0.0,
-        "lkh": 0.1484080840018578,
-        "dubins": 0.06877954099763883,
-        "other": 2.3582004359923303e-05
+        "transform": 0.00022550000721821561,
+        "lkh": 0.15532133400120074,
+        "dubins": 0.06832270899758441,
+        "other": 1.4569959603250027e-06
       }
     },
     "lower_bound": {
@@ -10570,20 +10524,18 @@
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.04691370799992001,
-      "solve_seconds": 0.12639395800215425,
+      "build_seconds": 0.04506791599851567,
+      "solve_seconds": 0.17205145800107857,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 5130,
       "timings": {
-        "transform": 0.0002952920040115714,
-        "lkh_screen": 0.0,
-        "lkh": 0.12607383399881655,
-        "interval": 0.012256433059519622,
-        "other": 0.03468210693972651
+        "transform": 0.00026183300360571593,
+        "lkh": 0.1717889169958653,
+        "interval": 0.01258228922233684,
+        "other": 0.032486334777786396
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -11829,17 +11781,15 @@
         1.163552834662886,
         3.4033920413889427
       ],
-      "build_seconds": 0.07533854099892778,
-      "solve_seconds": 0.15781670899741584,
+      "build_seconds": 0.10125495799729833,
+      "solve_seconds": 0.16524145899893483,
       "notes": [],
-      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.002133625006536022,
-        "lkh_screen": 0.0,
-        "lkh": 0.15566000000399072,
-        "dubins": 0.07533854099892778,
-        "other": 2.308398688910529e-05
+        "transform": 0.0024135840067174286,
+        "lkh": 0.16282650000357535,
+        "dubins": 0.10125495799729833,
+        "other": 1.3749886420555413e-06
       }
     },
     "lower_bound": {
@@ -11946,20 +11896,18 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.052173750002111774,
-      "solve_seconds": 0.15910845799953677,
+      "build_seconds": 0.049567917005333584,
+      "solve_seconds": 0.16465908399550244,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 1,
       "interval_solves": 5490,
       "timings": {
-        "transform": 0.0003313749984954484,
-        "lkh_screen": 0.0,
-        "lkh": 0.15875483299896587,
-        "interval": 0.013029071778873913,
-        "other": 0.03916692822531331
+        "transform": 0.0004475840032682754,
+        "lkh": 0.16421037499821978,
+        "interval": 0.011628716943960171,
+        "other": 0.0379403250553878
       }
     },
     "lower_bound_status": "estimate (LKH)",

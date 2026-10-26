@@ -30,27 +30,26 @@ python tools/lb_stability.py <iteration>           # needs results/ from a run
 - elkai has no seed argument. LKH's default `SEED = 1` makes runs
   deterministic (`test_lkh_is_deterministic`).
 
-## Lazy loop (`src/bounds.py::_solve_graph`)
+## Lower-bound graph: eager, cached
 
-With `lower_bound.lazy: true`, edges start as parent-interval lower estimates.
-Rounds that only pick which edges to make exact use LKH with
-`lower_bound.lkh_runs_screening` restarts. Once a screening tour is all-exact,
-the graph is re-solved with `solver.lkh_runs`. Stop if that tour is all-exact,
-else refresh its edges and go back to screening.
+Every lower-bound edge is solved exactly (`IntervalEdgeCosts.edge`, cached
+across refinement iterations), then one LKH solve per bound.
+- Why: the lazy loop (parent-interval lower estimates + LKH screening rounds)
+  was removed. With the C++ interval solver (~2–3 µs per solve) its extra
+  LKH rounds cost more than the solves it saved (default config: 9.0 s lazy
+  vs 2.7 s eager, same final bounds). Don't reintroduce it.
 
 ## Config keys
 
-- `solver.lkh_runs` (default 1): upper bound and the final lower-bound solve.
-  When it equals `lkh_runs_screening` (the default: both 1) there is no separate
-  final solve: every lazy round is one 1-restart LKH call, stop when all-exact.
-- `lower_bound.lkh_runs_screening` (default 1): lazy screening rounds.
-- `lower_bound.lazy` (default true).
-- Removed: `solver.exact_time_limit`, `solver: exact`.
+- `solver.lkh_runs` (default 1): LKH restarts, both bounds.
+- Removed: `solver.exact_time_limit`, `solver: exact`, `lower_bound.lazy`,
+  `lower_bound.lkh_runs_screening` (old configs that set them still load;
+  the keys are ignored).
 
 ## Output
 
 - `results/summary.txt`: per-iteration time by stage (Dubins, interval
-  problems, Noon–Bean, LKH screening / final, other), #interval solves, LKH rounds.
+  problems, Noon–Bean, LKH, other) and #interval solves (cache misses).
 - `results/convergence.txt|json|png`: bounds, gap, warnings.
 - `results/iter_XX/results.json`: includes `intervals_rad_per_target`, which
   `tools/lb_stability.py` reads.

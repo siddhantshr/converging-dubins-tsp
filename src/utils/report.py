@@ -107,38 +107,36 @@ def format_convergence(iterations) -> str:
 def format_timings(iterations) -> str:
     """Seconds per iteration, split by stage, for both bounds."""
     ub_cols = [("dubins", "dubins"), ("transform", "NB"), ("lkh", "lkh"), ("other", "other")]
-    lb_cols = [("interval", "interval"), ("transform", "NB"), ("lkh_screen", "lkh scr"),
-               ("lkh", "lkh fin"), ("other", "other")]
+    lb_cols = [("interval", "interval"), ("transform", "NB"), ("lkh", "lkh"), ("other", "other")]
 
     def total(res):
         return res.build_seconds + res.solve_seconds
 
-    def row(label, ub, lb, solves, rounds):
+    def row(label, ub, lb, solves):
         cells = [f"{label:>5}"]
         cells += [f"{ub[k]:>8.2f}" for k, _ in ub_cols] + [f"{ub['total']:>8.2f}", " |"]
         cells += [f"{lb[k]:>8.2f}" for k, _ in lb_cols] + [f"{lb['total']:>8.2f}"]
-        cells += [f"{solves:>7}", f"{rounds:>6}", " |", f"{ub['total'] + lb['total']:>8.2f}"]
+        cells += [f"{solves:>7}", " |", f"{ub['total'] + lb['total']:>8.2f}"]
         return " ".join(cells)
 
     head = " ".join([f"{'iter':>5}"] + [f"{h:>8}" for _, h in ub_cols] + [f"{'total':>8}", " |"]
                     + [f"{h:>8}" for _, h in lb_cols] + [f"{'total':>8}", f"{'#solves':>7}",
-                    f"{'rounds':>6}", " |", f"{'iter':>8}"])
+                    " |", f"{'iter':>8}"])
     ub_width = 6 + 9 * (len(ub_cols) + 1)
     group = (f"{'':6}{' UPPER BOUND ':-^{ub_width - 6}}  |"
-             f"{' LOWER BOUND ':-^{9 * (len(lb_cols) + 1) + 15}}  |")
+             f"{' LOWER BOUND ':-^{9 * (len(lb_cols) + 1) + 8}}  |")
     lines = ["TIME PER ITERATION (seconds)", "", group, head, "-" * len(head)]
 
-    sums_ub, sums_lb, sum_solves, sum_rounds = {}, {}, 0, 0
+    sums_ub, sums_lb, sum_solves = {}, {}, 0
     for it in iterations:
         ub = {k: it.upper.timings.get(k, 0.0) for k, _ in ub_cols} | {"total": total(it.upper)}
         lb = {k: it.lower.timings.get(k, 0.0) for k, _ in lb_cols} | {"total": total(it.lower)}
-        lines.append(row(it.index, ub, lb, it.lower.interval_solves, it.lower.solve_rounds))
+        lines.append(row(it.index, ub, lb, it.lower.interval_solves))
         for sums, vals in ((sums_ub, ub), (sums_lb, lb)):
             for k, v in vals.items():
                 sums[k] = sums.get(k, 0.0) + v
         sum_solves += it.lower.interval_solves
-        sum_rounds += it.lower.solve_rounds
-    lines += ["-" * len(head), row("total", sums_ub, sums_lb, sum_solves, sum_rounds)]
+    lines += ["-" * len(head), row("total", sums_ub, sums_lb, sum_solves)]
 
     grand = sums_ub["total"] + sums_lb["total"]
     if grand > 0:
@@ -150,14 +148,11 @@ def format_timings(iterations) -> str:
         "",
         "columns:",
         "  dubins    building the upper-bound graph (point-to-point Dubins lengths, cached)",
-        "  interval  time inside the interval-problem solver (graph build + lazy refreshes)",
-        "  NB        integer cost scaling + Noon-Bean transform (+ decode), all solve rounds",
+        "  interval  time inside the interval-problem solver (cached between iterations)",
+        "  NB        integer cost scaling + Noon-Bean transform (+ decode)",
         "  lkh       LKH solve with solver.lkh_runs restarts",
-        "  lkh scr   lower bound: lazy screening rounds, lower_bound.lkh_runs_screening restarts",
-        "  lkh fin   lower bound: full solves (solver.lkh_runs) once a screening tour is all exact",
-        "  other     everything else (lazy cost estimates from parents, bookkeeping)",
-        "  #solves   interval problems actually solved in that iteration",
-        "  rounds    lower-bound LKH calls (screening + full)",
+        "  other     everything else (graph build around the cached costs, bookkeeping)",
+        "  #solves   interval problems actually solved in that iteration (cache misses)",
         "  iter      upper total + lower total (plotting and file output not included)",
     ]
     return "\n".join(lines)
