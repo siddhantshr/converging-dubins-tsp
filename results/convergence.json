@@ -87,17 +87,17 @@
         0.7853981633974483,
         0.0
       ],
-      "build_seconds": 0.028180832974612713,
-      "solve_seconds": 0.0770071669248864,
+      "build_seconds": 0.028918874995724764,
+      "solve_seconds": 0.014002833006088622,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 7.70840561017394e-05,
+        "transform": 8.870799501892179e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.07691545807756484,
-        "dubins": 0.028180832974612713,
-        "other": 1.4624791219830513e-05
+        "lkh": 0.013903207996918354,
+        "dubins": 0.028918874995724764,
+        "other": 1.0917014151345938e-05
       }
     },
     "lower_bound": {
@@ -204,20 +204,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.013242292101494968,
-      "solve_seconds": 2.1002499170135707,
+      "build_seconds": 0.01310070799809182,
+      "solve_seconds": 2.0105996659985976,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 28,
+      "solve_rounds": 27,
       "interval_solves": 1006,
       "timings": {
-        "transform": 0.0012492897221818566,
-        "lkh_screen": 0.321903582313098,
-        "lkh": 0.06521920894738287,
-        "interval": 1.708732460392639,
-        "other": 0.016387667739763856
+        "transform": 0.001116459010518156,
+        "lkh_screen": 0.0,
+        "lkh": 0.3122264979974716,
+        "interval": 1.6942508619176806,
+        "other": 0.016106555071019102
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -653,17 +653,17 @@
         1.0471975511965976,
         3.665191429188092
       ],
-      "build_seconds": 0.017462499905377626,
-      "solve_seconds": 0.11057633301243186,
+      "build_seconds": 0.017671749999863096,
+      "solve_seconds": 0.01974037499894621,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 5.841709207743406e-05,
+        "transform": 6.52919989079237e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.11050762503873557,
-        "dubins": 0.017462499905377626,
-        "other": 1.0290881618857384e-05
+        "lkh": 0.01966770899889525,
+        "dubins": 0.017671749999863096,
+        "other": 7.3740011430345476e-06
       }
     },
     "lower_bound": {
@@ -770,20 +770,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.0209637499647215,
-      "solve_seconds": 0.12864120805170387,
+      "build_seconds": 0.02100145900476491,
+      "solve_seconds": 0.018657708998944145,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 2,
+      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00010124989785254002,
-        "lkh_screen": 0.01910325000062585,
-        "lkh": 0.10941212496254593,
+        "transform": 4.3791005737148225e-05,
+        "lkh_screen": 0.0,
+        "lkh": 0.018603709002491087,
         "interval": 0.0,
-        "other": 0.02098833315540105
+        "other": 0.02101166799548082
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -1309,17 +1309,17 @@
         4.1887902047863905,
         0.5235987755982988
       ],
-      "build_seconds": 0.022047083009965718,
-      "solve_seconds": 0.17978379200212657,
+      "build_seconds": 0.022246749998885207,
+      "solve_seconds": 0.025821374998486135,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00014637492131441832,
+        "transform": 7.354199624387547e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.17961991706397384,
-        "dubins": 0.022047083009965718,
-        "other": 1.750001683831215e-05
+        "lkh": 0.025730458000907674,
+        "dubins": 0.022246749998885207,
+        "other": 1.737500133458525e-05
       }
     },
     "lower_bound": {
@@ -1426,20 +1426,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.037179249920882285,
-      "solve_seconds": 1.3965680829714984,
+      "build_seconds": 0.03702162500121631,
+      "solve_seconds": 1.237746208003955,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 10,
+      "solve_rounds": 9,
       "interval_solves": 667,
       "timings": {
-        "transform": 0.0007355849957093596,
-        "lkh_screen": 0.2127685829764232,
-        "lkh": 0.13435712503269315,
-        "interval": 1.0465707037365064,
-        "other": 0.03931533615104854
+        "transform": 0.0005579589997068979,
+        "lkh_screen": 0.0,
+        "lkh": 0.2055763320022379,
+        "interval": 1.029556695924839,
+        "other": 0.03907684607838746
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -2037,17 +2037,17 @@
         1.0471975511965976,
         3.665191429188092
       ],
-      "build_seconds": 0.028481333050876856,
-      "solve_seconds": 0.21593349997419864,
+      "build_seconds": 0.02853370800585253,
+      "solve_seconds": 0.040259583001898136,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00010525004472583532,
+        "transform": 7.404100324492902e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.21581320906989276,
-        "dubins": 0.028481333050876856,
-        "other": 1.5040859580039978e-05
+        "lkh": 0.04017187499994179,
+        "dubins": 0.02853370800585253,
+        "other": 1.3666998711414635e-05
       }
     },
     "lower_bound": {
@@ -2154,20 +2154,20 @@
           "width": 0.7853981633974483
         }
       ],
-      "build_seconds": 0.05343695799820125,
-      "solve_seconds": 0.8006445000646636,
+      "build_seconds": 0.05345541599672288,
+      "solve_seconds": 0.598809250004706,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 5,
+      "solve_rounds": 4,
       "interval_solves": 312,
       "timings": {
-        "transform": 0.0003630010178312659,
-        "lkh_screen": 0.13293487497139722,
-        "lkh": 0.19393425004091114,
-        "interval": 0.4723462904803455,
-        "other": 0.05450304155237973
+        "transform": 0.00032133300555869937,
+        "lkh_screen": 0.0,
+        "lkh": 0.12877775000379188,
+        "interval": 0.46877575995313236,
+        "other": 0.054389823038945906
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -2753,7 +2753,7 @@
     "iteration": 4,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.279130535313843,
+      "value": 25.392234493913016,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
@@ -2766,88 +2766,88 @@
         16
       ],
       "order": [
-        0,
+        4,
         5,
-        1,
-        2,
         3,
-        4
+        2,
+        1,
+        0
       ],
       "legs": [
         {
-          "from_target": 0,
+          "from_target": 4,
           "to_target": 5,
-          "depart_heading": 0.0,
-          "arrive_heading": 0.5235987755982988,
-          "length": 3.551968474207056,
-          "from_option": "0.0\u00b0",
-          "to_option": "30.0\u00b0"
+          "depart_heading": 0.7853981633974483,
+          "arrive_heading": 0.2617993877991494,
+          "length": 3.748974542888357,
+          "from_option": "45.0\u00b0",
+          "to_option": "15.0\u00b0"
         },
         {
           "from_target": 5,
-          "to_target": 1,
-          "depart_heading": 0.5235987755982988,
-          "arrive_heading": 0.0,
-          "length": 3.5992139654101787,
-          "from_option": "30.0\u00b0",
-          "to_option": "0.0\u00b0"
-        },
-        {
-          "from_target": 1,
-          "to_target": 2,
-          "depart_heading": 0.0,
-          "arrive_heading": 2.007128639793479,
-          "length": 4.8069606492914065,
-          "from_option": "0.0\u00b0",
-          "to_option": "115.0\u00b0"
-        },
-        {
-          "from_target": 2,
           "to_target": 3,
-          "depart_heading": 2.007128639793479,
-          "arrive_heading": 3.2288591161895095,
-          "length": 3.8939927569002033,
-          "from_option": "115.0\u00b0",
-          "to_option": "185.0\u00b0"
+          "depart_heading": 0.2617993877991494,
+          "arrive_heading": 0.5235987755982988,
+          "length": 4.240536801200058,
+          "from_option": "15.0\u00b0",
+          "to_option": "30.0\u00b0"
         },
         {
           "from_target": 3,
-          "to_target": 4,
-          "depart_heading": 3.2288591161895095,
-          "arrive_heading": 4.1887902047863905,
-          "length": 4.75346721581973,
-          "from_option": "185.0\u00b0",
-          "to_option": "240.0\u00b0"
+          "to_target": 2,
+          "depart_heading": 0.5235987755982988,
+          "arrive_heading": 5.061454830783555,
+          "length": 4.025117011514104,
+          "from_option": "30.0\u00b0",
+          "to_option": "290.0\u00b0"
         },
         {
-          "from_target": 4,
+          "from_target": 2,
+          "to_target": 1,
+          "depart_heading": 5.061454830783555,
+          "arrive_heading": 3.8397243543875246,
+          "length": 4.577892417869357,
+          "from_option": "290.0\u00b0",
+          "to_option": "220.0\u00b0"
+        },
+        {
+          "from_target": 1,
           "to_target": 0,
-          "depart_heading": 4.1887902047863905,
-          "arrive_heading": 0.0,
-          "length": 4.67352747368527,
-          "from_option": "240.0\u00b0",
-          "to_option": "0.0\u00b0"
+          "depart_heading": 3.8397243543875246,
+          "arrive_heading": 2.6179938779914944,
+          "length": 4.217343421107919,
+          "from_option": "220.0\u00b0",
+          "to_option": "150.0\u00b0"
+        },
+        {
+          "from_target": 0,
+          "to_target": 4,
+          "depart_heading": 2.6179938779914944,
+          "arrive_heading": 0.7853981633974483,
+          "length": 4.582370299333221,
+          "from_option": "150.0\u00b0",
+          "to_option": "45.0\u00b0"
         }
       ],
       "selected": [
-        0.0,
-        0.0,
-        2.007128639793479,
-        3.2288591161895095,
-        4.1887902047863905,
-        0.5235987755982988
+        2.6179938779914944,
+        3.8397243543875246,
+        5.061454830783555,
+        0.5235987755982988,
+        0.7853981633974483,
+        0.2617993877991494
       ],
-      "build_seconds": 0.03149629198014736,
-      "solve_seconds": 0.2850919159827754,
+      "build_seconds": 0.03133108300244203,
+      "solve_seconds": 0.03908729200338712,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 8.204206824302673e-05,
+        "transform": 8.162500307662413e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.2849929170915857,
-        "dubins": 0.03149629198014736,
-        "other": 1.695682294666767e-05
+        "lkh": 0.03899295799783431,
+        "dubins": 0.03133108300244203,
+        "other": 1.270900247618556e-05
       }
     },
     "lower_bound": {
@@ -2954,26 +2954,26 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.07772462500724941,
-      "solve_seconds": 1.6283594169653952,
+      "build_seconds": 0.07765320799808251,
+      "solve_seconds": 1.3256871249977848,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 9,
+      "solve_rounds": 8,
       "interval_solves": 673,
       "timings": {
-        "transform": 0.0007824169006198645,
-        "lkh_screen": 0.3088485432090238,
-        "lkh": 0.27679825003724545,
-        "interval": 1.0397755783051252,
-        "other": 0.0798792535206303
+        "transform": 0.0008579159912187606,
+        "lkh_screen": 0.0,
+        "lkh": 0.2969450400050846,
+        "interval": 1.0257419120462146,
+        "other": 0.07979546495334944
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.279130535313843,
+    "best_upper": 25.279130535313847,
     "max_lb_estimate": 24.416,
-    "gap_percent": 3.535102126940707,
+    "gap_percent": 3.5351021269407217,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -3625,7 +3625,7 @@
     "iteration": 5,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.187521133534187,
+      "value": 25.196425739909962,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
@@ -3649,10 +3649,10 @@
         {
           "from_target": 5,
           "to_target": 1,
-          "depart_heading": 0.2617993877991494,
+          "depart_heading": 0.17453292519943295,
           "arrive_heading": 0.08726646259971647,
-          "length": 3.3816681129581365,
-          "from_option": "15.0\u00b0",
+          "length": 3.3194884896443337,
+          "from_option": "10.0\u00b0",
           "to_option": "5.0\u00b0"
         },
         {
@@ -3695,10 +3695,10 @@
           "from_target": 0,
           "to_target": 5,
           "depart_heading": 0.2617993877991494,
-          "arrive_heading": 0.2617993877991494,
-          "length": 3.4863186821172474,
+          "arrive_heading": 0.17453292519943295,
+          "length": 3.5574029118068244,
           "from_option": "15.0\u00b0",
-          "to_option": "15.0\u00b0"
+          "to_option": "10.0\u00b0"
         }
       ],
       "selected": [
@@ -3707,19 +3707,19 @@
         1.9489509980603343,
         3.2288591161895095,
         4.276056667386107,
-        0.2617993877991494
+        0.17453292519943295
       ],
-      "build_seconds": 0.036259332904592156,
-      "solve_seconds": 0.355801957892254,
+      "build_seconds": 0.03614558299886994,
+      "solve_seconds": 0.05050120800297009,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 9.233294986188412e-05,
+        "transform": 8.479100506519899e-05,
         "lkh_screen": 0.0,
-        "lkh": 0.35569183295592666,
-        "dubins": 0.036259332904592156,
-        "other": 1.77919864654541e-05
+        "lkh": 0.0504047080030432,
+        "dubins": 0.03614558299886994,
+        "other": 1.170899486169219e-05
       }
     },
     "lower_bound": {
@@ -3826,26 +3826,26 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.12839425005950034,
-      "solve_seconds": 0.42436041694600135,
+      "build_seconds": 0.10636425000120653,
+      "solve_seconds": 0.0483755419991212,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 2,
+      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00020350003615021706,
-        "lkh_screen": 0.050118208047933877,
-        "lkh": 0.37398604198824614,
+        "transform": 9.475000115344301e-05,
+        "lkh_screen": 0.0,
+        "lkh": 0.04826291599601973,
         "interval": 0.0,
-        "other": 0.12844691693317145
+        "other": 0.10638212600315455
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.187521133534187,
+    "best_upper": 25.196425739909962,
     "max_lb_estimate": 24.416,
-    "gap_percent": 3.1598997933084303,
+    "gap_percent": 3.1963701667347717,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -4569,7 +4569,7 @@
     "iteration": 6,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.187521133534187,
+      "value": 25.269747801902444,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
@@ -4594,76 +4594,76 @@
           "from_target": 4,
           "to_target": 3,
           "depart_heading": 1.134464013796314,
-          "arrive_heading": 0.08726646259971647,
-          "length": 4.765920647090245,
+          "arrive_heading": 0.11635528346628864,
+          "length": 4.763135749729659,
           "from_option": "65.0\u00b0",
-          "to_option": "5.0\u00b0"
+          "to_option": "6.7\u00b0"
         },
         {
           "from_target": 3,
           "to_target": 2,
-          "depart_heading": 0.08726646259971647,
-          "arrive_heading": 5.090543651650127,
-          "length": 3.912379393075831,
-          "from_option": "5.0\u00b0",
-          "to_option": "291.7\u00b0"
+          "depart_heading": 0.11635528346628864,
+          "arrive_heading": 5.1196324725167,
+          "length": 3.9056945931554536,
+          "from_option": "6.7\u00b0",
+          "to_option": "293.3\u00b0"
         },
         {
           "from_target": 2,
           "to_target": 1,
-          "depart_heading": 5.090543651650127,
-          "arrive_heading": 3.2288591161895095,
-          "length": 4.7394671152032375,
-          "from_option": "291.7\u00b0",
-          "to_option": "185.0\u00b0"
+          "depart_heading": 5.1196324725167,
+          "arrive_heading": 3.141592653589793,
+          "length": 4.797730755225416,
+          "from_option": "293.3\u00b0",
+          "to_option": "180.0\u00b0"
         },
         {
           "from_target": 1,
           "to_target": 5,
-          "depart_heading": 3.2288591161895095,
-          "arrive_heading": 3.4033920413889427,
-          "length": 3.3816681129581374,
-          "from_option": "185.0\u00b0",
-          "to_option": "195.0\u00b0"
+          "depart_heading": 3.141592653589793,
+          "arrive_heading": 3.665191429188092,
+          "length": 3.5992139654101787,
+          "from_option": "180.0\u00b0",
+          "to_option": "210.0\u00b0"
         },
         {
           "from_target": 5,
           "to_target": 0,
-          "depart_heading": 3.4033920413889427,
-          "arrive_heading": 3.4033920413889427,
-          "length": 3.4863186821172474,
-          "from_option": "195.0\u00b0",
-          "to_option": "195.0\u00b0"
+          "depart_heading": 3.665191429188092,
+          "arrive_heading": 3.141592653589793,
+          "length": 3.551968474207056,
+          "from_option": "210.0\u00b0",
+          "to_option": "180.0\u00b0"
         },
         {
           "from_target": 0,
           "to_target": 4,
-          "depart_heading": 3.4033920413889427,
+          "depart_heading": 3.141592653589793,
           "arrive_heading": 1.134464013796314,
-          "length": 4.901767183089488,
-          "from_option": "195.0\u00b0",
+          "length": 4.65200426417468,
+          "from_option": "180.0\u00b0",
           "to_option": "65.0\u00b0"
         }
       ],
       "selected": [
-        3.4033920413889427,
-        3.2288591161895095,
-        5.090543651650127,
-        0.08726646259971647,
+        3.141592653589793,
+        3.141592653589793,
+        5.1196324725167,
+        0.11635528346628864,
         1.134464013796314,
-        3.4033920413889427
+        3.665191429188092
       ],
-      "build_seconds": 0.04150891595054418,
-      "solve_seconds": 0.3746327499393374,
+      "build_seconds": 0.05657962500117719,
+      "solve_seconds": 0.05561887499789009,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00013233302161097527,
+        "transform": 0.00011524999717948958,
         "lkh_screen": 0.0,
-        "lkh": 0.3744810000061989,
-        "dubins": 0.04150891595054418,
-        "other": 1.9416911527514458e-05
+        "lkh": 0.05549083300138591,
+        "dubins": 0.05657962500117719,
+        "other": 1.279199932469055e-05
       }
     },
     "lower_bound": {
@@ -4770,26 +4770,26 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.15664258401375264,
-      "solve_seconds": 2.7910497080301866,
+      "build_seconds": 0.1543403749965364,
+      "solve_seconds": 2.416980166999565,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 11,
+      "solve_rounds": 10,
       "interval_solves": 1232,
       "timings": {
-        "transform": 0.001109373988583684,
-        "lkh_screen": 0.5702382070012391,
-        "lkh": 0.35730470798444003,
-        "interval": 1.858575250953436,
-        "other": 0.16046475211624056
+        "transform": 0.001164251021691598,
+        "lkh_screen": 0.0,
+        "lkh": 0.5522150010074256,
+        "interval": 1.8596146750860498,
+        "other": 0.15832661488093436
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.187521133534187,
+    "best_upper": 25.196425739909962,
     "max_lb_estimate": 24.556,
-    "gap_percent": 2.571758973506213,
+    "gap_percent": 2.608021420060113,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -5669,17 +5669,17 @@
         1.134464013796314,
         3.4033920413889427
       ],
-      "build_seconds": 0.04608579201158136,
-      "solve_seconds": 0.5641189159359783,
+      "build_seconds": 0.046605666997493245,
+      "solve_seconds": 0.07638845900510205,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00011179200373589993,
+        "transform": 0.00010629200551193208,
         "lkh_screen": 0.0,
-        "lkh": 0.5639870839659125,
-        "dubins": 0.04608579201158136,
-        "other": 2.0039966329932213e-05
+        "lkh": 0.07626654199702898,
+        "dubins": 0.046605666997493245,
+        "other": 1.562500256113708e-05
       }
     },
     "lower_bound": {
@@ -5786,26 +5786,26 @@
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.1806529579916969,
-      "solve_seconds": 0.47240774997044355,
+      "build_seconds": 0.18151162499998463,
+      "solve_seconds": 0.06880337499751477,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 2,
+      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00034187501296401024,
-        "lkh_screen": 0.07112887501716614,
-        "lkh": 0.40088279196061194,
+        "transform": 0.0001412919955328107,
+        "lkh_screen": 0.0,
+        "lkh": 0.06863699999667006,
         "interval": 0.0,
-        "other": 0.18070716597139835
+        "other": 0.18153670800529653
       }
     },
     "lower_bound_status": "estimate (LKH)",
-    "best_upper": 25.187521133534187,
+    "best_upper": 25.18753532029127,
     "max_lb_estimate": 24.556,
-    "gap_percent": 2.571758973506213,
+    "gap_percent": 2.5718167465844206,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -6757,17 +6757,17 @@
         1.134464013796314,
         3.4033920413889427
       ],
-      "build_seconds": 0.05197649996262044,
-      "solve_seconds": 0.6231933329254389,
+      "build_seconds": 0.05260933400131762,
+      "solve_seconds": 0.09128133400372462,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00012600002810359,
+        "transform": 0.00015462500596186146,
         "lkh_screen": 0.0,
-        "lkh": 0.6230452080490068,
-        "dubins": 0.05197649996262044,
-        "other": 2.212484832853079e-05
+        "lkh": 0.09110495899949456,
+        "dubins": 0.05260933400131762,
+        "other": 2.1749998268205673e-05
       }
     },
     "lower_bound": {
@@ -6874,20 +6874,20 @@
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.23856395797338337,
-      "solve_seconds": 4.8374122499953955,
+      "build_seconds": 0.2448650419974001,
+      "solve_seconds": 3.386138875001052,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 15,
-      "interval_solves": 1617,
+      "solve_rounds": 12,
+      "interval_solves": 1537,
       "timings": {
-        "transform": 0.0018276270711794496,
-        "lkh_screen": 1.1692215849179775,
-        "lkh": 1.2337076660478488,
-        "interval": 2.4271413281094283,
-        "other": 0.24407800182234496
+        "transform": 0.002022500993916765,
+        "lkh_screen": 0.0,
+        "lkh": 1.063598874010495,
+        "interval": 2.315281696013699,
+        "other": 0.25010084598034155
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -7917,17 +7917,17 @@
         4.305145488252679,
         0.29088820866572157
       ],
-      "build_seconds": 0.057531542028300464,
-      "solve_seconds": 0.7307243749964982,
+      "build_seconds": 0.05807366600492969,
+      "solve_seconds": 0.11033041699556634,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00012862507719546556,
+        "transform": 0.000148667000757996,
         "lkh_screen": 0.0,
-        "lkh": 0.7305728750070557,
-        "dubins": 0.057531542028300464,
-        "other": 2.287491224706173e-05
+        "lkh": 0.1101612499987823,
+        "dubins": 0.05807366600492969,
+        "other": 2.0499996026046574e-05
       }
     },
     "lower_bound": {
@@ -8034,20 +8034,20 @@
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.27632629103027284,
-      "solve_seconds": 1.7028480420121923,
+      "build_seconds": 0.278053333000571,
+      "solve_seconds": 0.5048722079955041,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 4,
-      "interval_solves": 404,
+      "solve_rounds": 2,
+      "interval_solves": 203,
       "timings": {
-        "transform": 0.0005975839449092746,
-        "lkh_screen": 0.3393657080596313,
-        "lkh": 0.757233958109282,
-        "interval": 0.6042340721469373,
-        "other": 0.2777430107817054
+        "transform": 0.0004774589979206212,
+        "lkh_screen": 0.0,
+        "lkh": 0.19846491699718172,
+        "interval": 0.3052637479559053,
+        "other": 0.27871941704506753
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -9149,17 +9149,17 @@
         4.305145488252679,
         0.29088820866572157
       ],
-      "build_seconds": 0.08120787504594773,
-      "solve_seconds": 0.8865129170008004,
+      "build_seconds": 0.08416820900310995,
+      "solve_seconds": 0.12113033300556708,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0003144169459119439,
+        "transform": 0.0002224160052719526,
         "lkh_screen": 0.0,
-        "lkh": 0.8861734590027481,
-        "dubins": 0.08120787504594773,
-        "other": 2.5041052140295506e-05
+        "lkh": 0.12088345899974229,
+        "dubins": 0.08416820900310995,
+        "other": 2.445800055284053e-05
       }
     },
     "lower_bound": {
@@ -9177,109 +9177,109 @@
         28
       ],
       "order": [
-        5,
-        1,
-        2,
-        3,
         4,
+        3,
+        2,
+        1,
+        5,
         0
       ],
       "legs": [
         {
-          "from_target": 5,
-          "to_target": 1,
-          "depart_heading": 0.3490658503988659,
-          "arrive_heading": 6.021385919380437,
-          "length": 3.3074452117336524,
-          "from_option": "[20.0\u00b0, 25.0\u00b0]",
-          "to_option": "[345.0\u00b0, 360.0\u00b0]"
-        },
-        {
-          "from_target": 1,
-          "to_target": 2,
-          "depart_heading": 0.0,
-          "arrive_heading": 2.007128639793479,
-          "length": 4.8069606492914065,
-          "from_option": "[345.0\u00b0, 360.0\u00b0]",
-          "to_option": "[115.0\u00b0, 120.0\u00b0]"
-        },
-        {
-          "from_target": 2,
+          "from_target": 4,
           "to_target": 3,
-          "depart_heading": 2.0943951023931953,
-          "arrive_heading": 2.799335552596981,
-          "length": 3.8573716030616767,
-          "from_option": "[115.0\u00b0, 120.0\u00b0]",
-          "to_option": "[135.0\u00b0, 180.0\u00b0]"
+          "depart_heading": 1.2217304763960306,
+          "arrive_heading": 0.0,
+          "length": 4.7936374549846015,
+          "from_option": "[70.0\u00b0, 75.0\u00b0]",
+          "to_option": "[315.0\u00b0, 360.0\u00b0]"
         },
         {
           "from_target": 3,
-          "to_target": 4,
-          "depart_heading": 3.141592653589793,
-          "arrive_heading": 4.363323129985823,
-          "length": 4.7936374549846015,
-          "from_option": "[135.0\u00b0, 180.0\u00b0]",
-          "to_option": "[250.0\u00b0, 255.0\u00b0]"
+          "to_target": 2,
+          "depart_heading": 5.940928206186774,
+          "arrive_heading": 5.235987755982988,
+          "length": 3.857371603061676,
+          "from_option": "[315.0\u00b0, 360.0\u00b0]",
+          "to_option": "[295.0\u00b0, 300.0\u00b0]"
         },
         {
-          "from_target": 4,
+          "from_target": 2,
+          "to_target": 1,
+          "depart_heading": 5.148721293383272,
+          "arrive_heading": 3.141592653589793,
+          "length": 4.8069606492914065,
+          "from_option": "[295.0\u00b0, 300.0\u00b0]",
+          "to_option": "[165.0\u00b0, 180.0\u00b0]"
+        },
+        {
+          "from_target": 1,
+          "to_target": 5,
+          "depart_heading": 2.8797932657906435,
+          "arrive_heading": 3.490658503988659,
+          "length": 3.3074452117336524,
+          "from_option": "[165.0\u00b0, 180.0\u00b0]",
+          "to_option": "[200.0\u00b0, 205.0\u00b0]"
+        },
+        {
+          "from_target": 5,
           "to_target": 0,
-          "depart_heading": 4.45058959258554,
-          "arrive_heading": 6.021385919380437,
-          "length": 4.457095113356615,
-          "from_option": "[250.0\u00b0, 255.0\u00b0]",
-          "to_option": "[345.0\u00b0, 360.0\u00b0]"
+          "depart_heading": 3.5779249665883754,
+          "arrive_heading": 3.141592653589793,
+          "length": 3.602549831281581,
+          "from_option": "[200.0\u00b0, 205.0\u00b0]",
+          "to_option": "[165.0\u00b0, 180.0\u00b0]"
         },
         {
           "from_target": 0,
-          "to_target": 5,
-          "depart_heading": 0.0,
-          "arrive_heading": 0.4363323129985824,
-          "length": 3.6025498312815825,
-          "from_option": "[345.0\u00b0, 360.0\u00b0]",
-          "to_option": "[20.0\u00b0, 25.0\u00b0]"
+          "to_target": 4,
+          "depart_heading": 2.8797932657906435,
+          "arrive_heading": 1.308996938995747,
+          "length": 4.457095113356615,
+          "from_option": "[165.0\u00b0, 180.0\u00b0]",
+          "to_option": "[70.0\u00b0, 75.0\u00b0]"
         }
       ],
       "selected": [
         {
-          "start": 6.021385919380437,
+          "start": 2.8797932657906435,
           "width": 0.2617993877991494
         },
         {
-          "start": 6.021385919380437,
+          "start": 2.8797932657906435,
           "width": 0.2617993877991494
         },
         {
-          "start": 2.007128639793479,
+          "start": 5.148721293383272,
           "width": 0.08726646259971647
         },
         {
-          "start": 2.356194490192345,
+          "start": 5.497787143782138,
           "width": 0.7853981633974483
         },
         {
-          "start": 4.363323129985823,
+          "start": 1.2217304763960306,
           "width": 0.08726646259971647
         },
         {
-          "start": 0.3490658503988659,
+          "start": 3.490658503988659,
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.34547133406158537,
-      "solve_seconds": 3.278857707977295,
+      "build_seconds": 0.3560449590004282,
+      "solve_seconds": 2.9817160410020733,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
       "solve_rounds": 8,
-      "interval_solves": 1087,
+      "interval_solves": 1348,
       "timings": {
-        "transform": 0.001281291013583541,
-        "lkh_screen": 0.8357090840581805,
-        "lkh": 0.834318874985911,
-        "interval": 1.6040179524570704,
-        "other": 0.349001839524135
+        "transform": 0.0015252889934345149,
+        "lkh_screen": 0.0,
+        "lkh": 0.9726622509915615,
+        "interval": 2.002775428976747,
+        "other": 0.36079803104075836
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -10369,7 +10369,7 @@
     "iteration": 11,
     "upper_bound": {
       "kind": "upper",
-      "value": 25.16489487542009,
+      "value": 25.164995809024212,
       "is_valid_bound": true,
       "status": "valid upper bound",
       "solver": "lkh",
@@ -10382,88 +10382,88 @@
         30
       ],
       "order": [
-        4,
-        3,
-        2,
-        1,
         5,
+        1,
+        2,
+        3,
+        4,
         0
       ],
       "legs": [
         {
-          "from_target": 4,
-          "to_target": 3,
-          "depart_heading": 1.134464013796314,
-          "arrive_heading": 0.11635528346628864,
-          "length": 4.763135749729659,
-          "from_option": "65.0\u00b0",
-          "to_option": "6.7\u00b0"
-        },
-        {
-          "from_target": 3,
-          "to_target": 2,
-          "depart_heading": 0.11635528346628864,
-          "arrive_heading": 5.090543651650127,
-          "length": 3.9151784771935016,
-          "from_option": "6.7\u00b0",
-          "to_option": "291.7\u00b0"
-        },
-        {
-          "from_target": 2,
+          "from_target": 5,
           "to_target": 1,
-          "depart_heading": 5.090543651650127,
-          "arrive_heading": 3.2288591161895095,
-          "length": 4.7394671152032375,
-          "from_option": "291.7\u00b0",
-          "to_option": "185.0\u00b0"
+          "depart_heading": 0.29088820866572157,
+          "arrive_heading": 0.0,
+          "length": 3.355068417924056,
+          "from_option": "16.7\u00b0",
+          "to_option": "0.0\u00b0"
         },
         {
           "from_target": 1,
-          "to_target": 5,
-          "depart_heading": 3.2288591161895095,
-          "arrive_heading": 3.4033920413889427,
-          "length": 3.3816681129581374,
-          "from_option": "185.0\u00b0",
-          "to_option": "195.0\u00b0"
+          "to_target": 2,
+          "depart_heading": 0.0,
+          "arrive_heading": 1.9489509980603343,
+          "length": 4.789263132178099,
+          "from_option": "0.0\u00b0",
+          "to_option": "111.7\u00b0"
         },
         {
-          "from_target": 5,
+          "from_target": 2,
+          "to_target": 3,
+          "depart_heading": 1.9489509980603343,
+          "arrive_heading": 3.2288591161895095,
+          "length": 3.912379393075831,
+          "from_option": "111.7\u00b0",
+          "to_option": "185.0\u00b0"
+        },
+        {
+          "from_target": 3,
+          "to_target": 4,
+          "depart_heading": 3.2288591161895095,
+          "arrive_heading": 4.276056667386107,
+          "length": 4.765920647090244,
+          "from_option": "185.0\u00b0",
+          "to_option": "245.0\u00b0"
+        },
+        {
+          "from_target": 4,
           "to_target": 0,
-          "depart_heading": 3.4033920413889427,
-          "arrive_heading": 3.316125578789226,
-          "length": 3.5574029118068244,
-          "from_option": "195.0\u00b0",
-          "to_option": "190.0\u00b0"
+          "depart_heading": 4.276056667386107,
+          "arrive_heading": 0.17453292519943295,
+          "length": 4.808042508528729,
+          "from_option": "245.0\u00b0",
+          "to_option": "10.0\u00b0"
         },
         {
           "from_target": 0,
-          "to_target": 4,
-          "depart_heading": 3.316125578789226,
-          "arrive_heading": 1.134464013796314,
-          "length": 4.808042508528729,
-          "from_option": "190.0\u00b0",
-          "to_option": "65.0\u00b0"
+          "to_target": 5,
+          "depart_heading": 0.17453292519943295,
+          "arrive_heading": 0.29088820866572157,
+          "length": 3.534321710227254,
+          "from_option": "10.0\u00b0",
+          "to_option": "16.7\u00b0"
         }
       ],
       "selected": [
-        3.316125578789226,
+        0.17453292519943295,
+        0.0,
+        1.9489509980603343,
         3.2288591161895095,
-        5.090543651650127,
-        0.11635528346628864,
-        1.134464013796314,
-        3.4033920413889427
+        4.276056667386107,
+        0.29088820866572157
       ],
-      "build_seconds": 0.0692801249679178,
-      "solve_seconds": 0.9776534169213846,
+      "build_seconds": 0.06923491600173293,
+      "solve_seconds": 0.1548958749990561,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.00018708291463553905,
+        "transform": 0.00017174999811686575,
         "lkh_screen": 0.0,
-        "lkh": 0.977439625072293,
-        "dubins": 0.0692801249679178,
-        "other": 2.670893445611e-05
+        "lkh": 0.15469887500512414,
+        "dubins": 0.06923491600173293,
+        "other": 2.524999581510201e-05
       }
     },
     "lower_bound": {
@@ -10481,109 +10481,109 @@
         30
       ],
       "order": [
-        4,
-        3,
-        2,
-        1,
         5,
+        1,
+        2,
+        3,
+        4,
         0
       ],
       "legs": [
         {
-          "from_target": 4,
-          "to_target": 3,
-          "depart_heading": 1.2217304763960306,
-          "arrive_heading": 0.0,
-          "length": 4.7936374549846015,
-          "from_option": "[70.0\u00b0, 75.0\u00b0]",
-          "to_option": "[315.0\u00b0, 360.0\u00b0]"
-        },
-        {
-          "from_target": 3,
-          "to_target": 2,
-          "depart_heading": 5.940928206186774,
-          "arrive_heading": 5.235987755982988,
-          "length": 3.857371603061676,
-          "from_option": "[315.0\u00b0, 360.0\u00b0]",
-          "to_option": "[295.0\u00b0, 300.0\u00b0]"
-        },
-        {
-          "from_target": 2,
+          "from_target": 5,
           "to_target": 1,
-          "depart_heading": 5.148721293383272,
-          "arrive_heading": 3.141592653589793,
-          "length": 4.8069606492914065,
-          "from_option": "[295.0\u00b0, 300.0\u00b0]",
-          "to_option": "[165.0\u00b0, 180.0\u00b0]"
+          "depart_heading": 0.3490658503988659,
+          "arrive_heading": 6.021385919380437,
+          "length": 3.3074452117336524,
+          "from_option": "[20.0\u00b0, 25.0\u00b0]",
+          "to_option": "[345.0\u00b0, 360.0\u00b0]"
         },
         {
           "from_target": 1,
-          "to_target": 5,
-          "depart_heading": 2.8797932657906435,
-          "arrive_heading": 3.490658503988659,
-          "length": 3.3074452117336524,
-          "from_option": "[165.0\u00b0, 180.0\u00b0]",
-          "to_option": "[200.0\u00b0, 205.0\u00b0]"
+          "to_target": 2,
+          "depart_heading": 0.0,
+          "arrive_heading": 2.007128639793479,
+          "length": 4.8069606492914065,
+          "from_option": "[345.0\u00b0, 360.0\u00b0]",
+          "to_option": "[115.0\u00b0, 120.0\u00b0]"
         },
         {
-          "from_target": 5,
+          "from_target": 2,
+          "to_target": 3,
+          "depart_heading": 2.0943951023931953,
+          "arrive_heading": 2.799335552596981,
+          "length": 3.8573716030616767,
+          "from_option": "[115.0\u00b0, 120.0\u00b0]",
+          "to_option": "[135.0\u00b0, 180.0\u00b0]"
+        },
+        {
+          "from_target": 3,
+          "to_target": 4,
+          "depart_heading": 3.141592653589793,
+          "arrive_heading": 4.363323129985823,
+          "length": 4.7936374549846015,
+          "from_option": "[135.0\u00b0, 180.0\u00b0]",
+          "to_option": "[250.0\u00b0, 255.0\u00b0]"
+        },
+        {
+          "from_target": 4,
           "to_target": 0,
-          "depart_heading": 3.5779249665883754,
-          "arrive_heading": 3.141592653589793,
-          "length": 3.602549831281581,
-          "from_option": "[200.0\u00b0, 205.0\u00b0]",
-          "to_option": "[165.0\u00b0, 180.0\u00b0]"
+          "depart_heading": 4.45058959258554,
+          "arrive_heading": 6.021385919380437,
+          "length": 4.457095113356615,
+          "from_option": "[250.0\u00b0, 255.0\u00b0]",
+          "to_option": "[345.0\u00b0, 360.0\u00b0]"
         },
         {
           "from_target": 0,
-          "to_target": 4,
-          "depart_heading": 2.8797932657906435,
-          "arrive_heading": 1.308996938995747,
-          "length": 4.457095113356615,
-          "from_option": "[165.0\u00b0, 180.0\u00b0]",
-          "to_option": "[70.0\u00b0, 75.0\u00b0]"
+          "to_target": 5,
+          "depart_heading": 0.0,
+          "arrive_heading": 0.4363323129985824,
+          "length": 3.6025498312815825,
+          "from_option": "[345.0\u00b0, 360.0\u00b0]",
+          "to_option": "[20.0\u00b0, 25.0\u00b0]"
         }
       ],
       "selected": [
         {
-          "start": 2.8797932657906435,
+          "start": 6.021385919380437,
           "width": 0.2617993877991494
         },
         {
-          "start": 2.8797932657906435,
+          "start": 6.021385919380437,
           "width": 0.2617993877991494
         },
         {
-          "start": 5.148721293383272,
+          "start": 2.007128639793479,
           "width": 0.08726646259971647
         },
         {
-          "start": 5.497787143782138,
+          "start": 2.356194490192345,
           "width": 0.7853981633974483
         },
         {
-          "start": 1.2217304763960306,
+          "start": 4.363323129985823,
           "width": 0.08726646259971647
         },
         {
-          "start": 3.490658503988659,
+          "start": 0.3490658503988659,
           "width": 0.08726646259971647
         }
       ],
-      "build_seconds": 0.40142529201693833,
-      "solve_seconds": 1.0610826250631362,
+      "build_seconds": 0.4011117089976324,
+      "solve_seconds": 0.12729720800416544,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 2,
+      "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0004144171252846718,
-        "lkh_screen": 0.13758312503341585,
-        "lkh": 0.9230197919532657,
+        "transform": 0.00022562500089406967,
+        "lkh_screen": 0.0,
+        "lkh": 0.12704870800371282,
         "interval": 0.0,
-        "other": 0.40149058296810836
+        "other": 0.40113458399719093
       }
     },
     "lower_bound_status": "estimate (LKH)",
@@ -10608,6 +10608,8 @@
         155.0,
         160.0,
         165.0,
+        170.0,
+        175.0,
         180.0,
         185.0,
         190.0,
@@ -10621,9 +10623,7 @@
         330.0,
         335.0,
         340.0,
-        345.0,
-        350.0,
-        355.0
+        345.0
       ],
       [
         0.0,
@@ -10640,6 +10640,8 @@
         135.0,
         150.0,
         165.0,
+        170.0,
+        175.0,
         180.0,
         185.0,
         190.0,
@@ -10653,9 +10655,7 @@
         270.0,
         315.0,
         330.0,
-        345.0,
-        350.0,
-        355.0
+        345.0
       ],
       [
         0.0,
@@ -10668,8 +10668,6 @@
         111.6667,
         113.3333,
         115.0,
-        116.6667,
-        118.3333,
         120.0,
         125.0,
         130.0,
@@ -10684,6 +10682,8 @@
         291.6667,
         293.3333,
         295.0,
+        296.6667,
+        298.3333,
         300.0,
         305.0,
         310.0,
@@ -10704,8 +10704,6 @@
         45.0,
         90.0,
         135.0,
-        150.0,
-        165.0,
         180.0,
         181.6667,
         183.3333,
@@ -10719,7 +10717,9 @@
         220.0,
         225.0,
         270.0,
-        315.0
+        315.0,
+        330.0,
+        345.0
       ],
       [
         0.0,
@@ -10731,6 +10731,8 @@
         66.6667,
         68.3333,
         70.0,
+        71.6667,
+        73.3333,
         75.0,
         90.0,
         105.0,
@@ -10745,8 +10747,6 @@
         246.6667,
         248.3333,
         250.0,
-        251.6667,
-        253.3333,
         255.0,
         270.0,
         285.0,
@@ -10761,8 +10761,6 @@
         16.6667,
         18.3333,
         20.0,
-        21.6667,
-        23.3333,
         25.0,
         30.0,
         45.0,
@@ -10777,6 +10775,8 @@
         196.6667,
         198.3333,
         200.0,
+        201.6667,
+        203.3333,
         205.0,
         210.0,
         225.0,
@@ -10801,7 +10801,9 @@
         "[150.0\u00b0, 155.0\u00b0]",
         "[155.0\u00b0, 160.0\u00b0]",
         "[160.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 180.0\u00b0]",
+        "[165.0\u00b0, 170.0\u00b0]",
+        "[170.0\u00b0, 175.0\u00b0]",
+        "[175.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 190.0\u00b0]",
         "[190.0\u00b0, 195.0\u00b0]",
@@ -10815,9 +10817,7 @@
         "[330.0\u00b0, 335.0\u00b0]",
         "[335.0\u00b0, 340.0\u00b0]",
         "[340.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 350.0\u00b0]",
-        "[350.0\u00b0, 355.0\u00b0]",
-        "[355.0\u00b0, 360.0\u00b0]"
+        "[345.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 5.0\u00b0]",
@@ -10833,7 +10833,9 @@
         "[90.0\u00b0, 135.0\u00b0]",
         "[135.0\u00b0, 150.0\u00b0]",
         "[150.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 180.0\u00b0]",
+        "[165.0\u00b0, 170.0\u00b0]",
+        "[170.0\u00b0, 175.0\u00b0]",
+        "[175.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 185.0\u00b0]",
         "[185.0\u00b0, 190.0\u00b0]",
         "[190.0\u00b0, 195.0\u00b0]",
@@ -10847,9 +10849,7 @@
         "[270.0\u00b0, 315.0\u00b0]",
         "[315.0\u00b0, 330.0\u00b0]",
         "[330.0\u00b0, 345.0\u00b0]",
-        "[345.0\u00b0, 350.0\u00b0]",
-        "[350.0\u00b0, 355.0\u00b0]",
-        "[355.0\u00b0, 360.0\u00b0]"
+        "[345.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 45.0\u00b0]",
@@ -10861,9 +10861,7 @@
         "[110.0\u00b0, 111.7\u00b0]",
         "[111.7\u00b0, 113.3\u00b0]",
         "[113.3\u00b0, 115.0\u00b0]",
-        "[115.0\u00b0, 116.7\u00b0]",
-        "[116.7\u00b0, 118.3\u00b0]",
-        "[118.3\u00b0, 120.0\u00b0]",
+        "[115.0\u00b0, 120.0\u00b0]",
         "[120.0\u00b0, 125.0\u00b0]",
         "[125.0\u00b0, 130.0\u00b0]",
         "[130.0\u00b0, 135.0\u00b0]",
@@ -10877,7 +10875,9 @@
         "[290.0\u00b0, 291.7\u00b0]",
         "[291.7\u00b0, 293.3\u00b0]",
         "[293.3\u00b0, 295.0\u00b0]",
-        "[295.0\u00b0, 300.0\u00b0]",
+        "[295.0\u00b0, 296.7\u00b0]",
+        "[296.7\u00b0, 298.3\u00b0]",
+        "[298.3\u00b0, 300.0\u00b0]",
         "[300.0\u00b0, 305.0\u00b0]",
         "[305.0\u00b0, 310.0\u00b0]",
         "[310.0\u00b0, 315.0\u00b0]",
@@ -10897,9 +10897,7 @@
         "[40.0\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 135.0\u00b0]",
-        "[135.0\u00b0, 150.0\u00b0]",
-        "[150.0\u00b0, 165.0\u00b0]",
-        "[165.0\u00b0, 180.0\u00b0]",
+        "[135.0\u00b0, 180.0\u00b0]",
         "[180.0\u00b0, 181.7\u00b0]",
         "[181.7\u00b0, 183.3\u00b0]",
         "[183.3\u00b0, 185.0\u00b0]",
@@ -10913,7 +10911,9 @@
         "[220.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 315.0\u00b0]",
-        "[315.0\u00b0, 360.0\u00b0]"
+        "[315.0\u00b0, 330.0\u00b0]",
+        "[330.0\u00b0, 345.0\u00b0]",
+        "[345.0\u00b0, 360.0\u00b0]"
       ],
       [
         "[0.0\u00b0, 15.0\u00b0]",
@@ -10924,7 +10924,9 @@
         "[65.0\u00b0, 66.7\u00b0]",
         "[66.7\u00b0, 68.3\u00b0]",
         "[68.3\u00b0, 70.0\u00b0]",
-        "[70.0\u00b0, 75.0\u00b0]",
+        "[70.0\u00b0, 71.7\u00b0]",
+        "[71.7\u00b0, 73.3\u00b0]",
+        "[73.3\u00b0, 75.0\u00b0]",
         "[75.0\u00b0, 90.0\u00b0]",
         "[90.0\u00b0, 105.0\u00b0]",
         "[105.0\u00b0, 120.0\u00b0]",
@@ -10938,9 +10940,7 @@
         "[245.0\u00b0, 246.7\u00b0]",
         "[246.7\u00b0, 248.3\u00b0]",
         "[248.3\u00b0, 250.0\u00b0]",
-        "[250.0\u00b0, 251.7\u00b0]",
-        "[251.7\u00b0, 253.3\u00b0]",
-        "[253.3\u00b0, 255.0\u00b0]",
+        "[250.0\u00b0, 255.0\u00b0]",
         "[255.0\u00b0, 270.0\u00b0]",
         "[270.0\u00b0, 285.0\u00b0]",
         "[285.0\u00b0, 300.0\u00b0]",
@@ -10954,9 +10954,7 @@
         "[15.0\u00b0, 16.7\u00b0]",
         "[16.7\u00b0, 18.3\u00b0]",
         "[18.3\u00b0, 20.0\u00b0]",
-        "[20.0\u00b0, 21.7\u00b0]",
-        "[21.7\u00b0, 23.3\u00b0]",
-        "[23.3\u00b0, 25.0\u00b0]",
+        "[20.0\u00b0, 25.0\u00b0]",
         "[25.0\u00b0, 30.0\u00b0]",
         "[30.0\u00b0, 45.0\u00b0]",
         "[45.0\u00b0, 90.0\u00b0]",
@@ -10970,7 +10968,9 @@
         "[195.0\u00b0, 196.7\u00b0]",
         "[196.7\u00b0, 198.3\u00b0]",
         "[198.3\u00b0, 200.0\u00b0]",
-        "[200.0\u00b0, 205.0\u00b0]",
+        "[200.0\u00b0, 201.7\u00b0]",
+        "[201.7\u00b0, 203.3\u00b0]",
+        "[203.3\u00b0, 205.0\u00b0]",
         "[205.0\u00b0, 210.0\u00b0]",
         "[210.0\u00b0, 225.0\u00b0]",
         "[225.0\u00b0, 270.0\u00b0]",
@@ -11036,7 +11036,15 @@
         ],
         [
           2.8797932657906435,
-          0.2617993877991494
+          0.08726646259971647
+        ],
+        [
+          2.96705972839036,
+          0.08726646259971647
+        ],
+        [
+          3.0543261909900763,
+          0.08726646259971647
         ],
         [
           3.141592653589793,
@@ -11092,15 +11100,7 @@
         ],
         [
           6.021385919380437,
-          0.08726646259971647
-        ],
-        [
-          6.1086523819801535,
-          0.08726646259971647
-        ],
-        [
-          6.19591884457987,
-          0.08726646259971647
+          0.2617993877991494
         ]
       ],
       [
@@ -11158,7 +11158,15 @@
         ],
         [
           2.8797932657906435,
-          0.2617993877991494
+          0.08726646259971647
+        ],
+        [
+          2.96705972839036,
+          0.08726646259971647
+        ],
+        [
+          3.0543261909900763,
+          0.08726646259971647
         ],
         [
           3.141592653589793,
@@ -11214,15 +11222,7 @@
         ],
         [
           6.021385919380437,
-          0.08726646259971647
-        ],
-        [
-          6.1086523819801535,
-          0.08726646259971647
-        ],
-        [
-          6.19591884457987,
-          0.08726646259971647
+          0.2617993877991494
         ]
       ],
       [
@@ -11264,15 +11264,7 @@
         ],
         [
           2.007128639793479,
-          0.02908882086657216
-        ],
-        [
-          2.036217460660051,
-          0.02908882086657216
-        ],
-        [
-          2.065306281526623,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           2.0943951023931953,
@@ -11328,7 +11320,15 @@
         ],
         [
           5.148721293383272,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          5.177810114249843,
+          0.02908882086657216
+        ],
+        [
+          5.206898935116416,
+          0.02908882086657216
         ],
         [
           5.235987755982989,
@@ -11402,15 +11402,7 @@
         ],
         [
           2.356194490192345,
-          0.2617993877991494
-        ],
-        [
-          2.6179938779914944,
-          0.2617993877991494
-        ],
-        [
-          2.8797932657906435,
-          0.2617993877991494
+          0.7853981633974483
         ],
         [
           3.141592653589793,
@@ -11466,7 +11458,15 @@
         ],
         [
           5.497787143782138,
-          0.7853981633974483
+          0.2617993877991494
+        ],
+        [
+          5.759586531581287,
+          0.2617993877991494
+        ],
+        [
+          6.021385919380437,
+          0.2617993877991494
         ]
       ],
       [
@@ -11504,7 +11504,15 @@
         ],
         [
           1.2217304763960306,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          1.2508192972626027,
+          0.02908882086657216
+        ],
+        [
+          1.279908118129175,
+          0.02908882086657216
         ],
         [
           1.308996938995747,
@@ -11560,15 +11568,7 @@
         ],
         [
           4.363323129985823,
-          0.02908882086657216
-        ],
-        [
-          4.392411950852395,
-          0.02908882086657216
-        ],
-        [
-          4.421500771718968,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           4.4505895925855405,
@@ -11618,15 +11618,7 @@
         ],
         [
           0.3490658503988659,
-          0.02908882086657216
-        ],
-        [
-          0.37815467126543806,
-          0.02908882086657216
-        ],
-        [
-          0.4072434921320102,
-          0.02908882086657216
+          0.08726646259971647
         ],
         [
           0.43633231299858233,
@@ -11682,7 +11674,15 @@
         ],
         [
           3.490658503988659,
-          0.08726646259971647
+          0.02908882086657216
+        ],
+        [
+          3.5197473248552313,
+          0.02908882086657216
+        ],
+        [
+          3.548836145721803,
+          0.02908882086657216
         ],
         [
           3.5779249665883754,
@@ -11716,28 +11716,28 @@
     ],
     "added_headings_deg_per_target": [
       [
-        350.0,
-        355.0
+        170.0,
+        175.0
       ],
       [
-        350.0,
-        355.0
+        170.0,
+        175.0
       ],
       [
-        116.6667,
-        118.3333
+        296.6667,
+        298.3333
       ],
       [
-        150.0,
-        165.0
+        330.0,
+        345.0
       ],
       [
-        251.6667,
-        253.3333
+        71.6667,
+        73.3333
       ],
       [
-        21.6667,
-        23.3333
+        201.6667,
+        203.3333
       ]
     ]
   },
@@ -11829,22 +11829,22 @@
         1.163552834662886,
         3.432480862255515
       ],
-      "build_seconds": 0.07490712497383356,
-      "solve_seconds": 1.0842735000187531,
+      "build_seconds": 0.07560299999749986,
+      "solve_seconds": 0.14839650000067195,
       "notes": [],
       "solve_rounds": 1,
       "interval_solves": 0,
       "timings": {
-        "transform": 0.0017677090363577008,
+        "transform": 0.00218341700383462,
         "lkh_screen": 0.0,
-        "lkh": 1.0824785419972613,
-        "dubins": 0.07490712497383356,
-        "other": 2.724898513406515e-05
+        "lkh": 0.1461911250007688,
+        "dubins": 0.07560299999749986,
+        "other": 2.1957996068522334e-05
       }
     },
     "lower_bound": {
       "kind": "lower",
-      "value": 24.849,
+      "value": 24.911,
       "is_valid_bound": false,
       "status": "estimate (LKH)",
       "solver": "lkh",
@@ -11857,115 +11857,115 @@
         32
       ],
       "order": [
-        1,
-        2,
-        3,
         4,
         5,
+        3,
+        2,
+        1,
         0
       ],
       "legs": [
         {
-          "from_target": 1,
-          "to_target": 2,
-          "depart_heading": 0.7853981633974483,
-          "arrive_heading": 1.832595714594046,
-          "length": 4.545385254747877,
-          "from_option": "[40.0\u00b0, 45.0\u00b0]",
-          "to_option": "[105.0\u00b0, 110.0\u00b0]"
-        },
-        {
-          "from_target": 2,
-          "to_target": 3,
-          "depart_heading": 1.9198621771937623,
-          "arrive_heading": 2.8797932657906435,
-          "length": 3.9120515212052798,
-          "from_option": "[105.0\u00b0, 110.0\u00b0]",
-          "to_option": "[165.0\u00b0, 180.0\u00b0]"
-        },
-        {
-          "from_target": 3,
-          "to_target": 4,
-          "depart_heading": 3.141592653589793,
-          "arrive_heading": 4.71238898038469,
-          "length": 4.92489829304458,
-          "from_option": "[165.0\u00b0, 180.0\u00b0]",
-          "to_option": "[270.0\u00b0, 285.0\u00b0]"
-        },
-        {
           "from_target": 4,
           "to_target": 5,
-          "depart_heading": 4.974188368183839,
-          "arrive_heading": 5.235987755982988,
-          "length": 3.5249842678713224,
-          "from_option": "[270.0\u00b0, 285.0\u00b0]",
-          "to_option": "[285.0\u00b0, 300.0\u00b0]"
+          "depart_heading": 0.5235987755982988,
+          "arrive_heading": 0.5235987755982988,
+          "length": 3.6808265851164537,
+          "from_option": "[30.0\u00b0, 45.0\u00b0]",
+          "to_option": "[30.0\u00b0, 45.0\u00b0]"
         },
         {
           "from_target": 5,
-          "to_target": 0,
+          "to_target": 3,
+          "depart_heading": 0.7853981633974483,
+          "arrive_heading": 0.5235987755982988,
+          "length": 3.9692376926511836,
+          "from_option": "[30.0\u00b0, 45.0\u00b0]",
+          "to_option": "[15.0\u00b0, 30.0\u00b0]"
+        },
+        {
+          "from_target": 3,
+          "to_target": 2,
+          "depart_heading": 0.2617993877991494,
+          "arrive_heading": 5.061454830783555,
+          "length": 3.9461280458714922,
+          "from_option": "[15.0\u00b0, 30.0\u00b0]",
+          "to_option": "[285.0\u00b0, 290.0\u00b0]"
+        },
+        {
+          "from_target": 2,
+          "to_target": 1,
           "depart_heading": 4.974188368183839,
-          "arrive_heading": 4.974188368183839,
-          "length": 3.4054775202935708,
-          "from_option": "[285.0\u00b0, 300.0\u00b0]",
-          "to_option": "[285.0\u00b0, 300.0\u00b0]"
+          "arrive_heading": 3.9269908169872414,
+          "length": 4.545385254747877,
+          "from_option": "[285.0\u00b0, 290.0\u00b0]",
+          "to_option": "[220.0\u00b0, 225.0\u00b0]"
+        },
+        {
+          "from_target": 1,
+          "to_target": 0,
+          "depart_heading": 3.8397243543875246,
+          "arrive_heading": 2.792526803190927,
+          "length": 4.173575906509415,
+          "from_option": "[220.0\u00b0, 225.0\u00b0]",
+          "to_option": "[155.0\u00b0, 160.0\u00b0]"
         },
         {
           "from_target": 0,
-          "to_target": 1,
-          "depart_heading": 5.235987755982988,
-          "arrive_heading": 0.6981317007977318,
-          "length": 4.5397667864194595,
-          "from_option": "[285.0\u00b0, 300.0\u00b0]",
-          "to_option": "[40.0\u00b0, 45.0\u00b0]"
+          "to_target": 4,
+          "depart_heading": 2.705260340591211,
+          "arrive_heading": 0.7853981633974483,
+          "length": 4.598156071173325,
+          "from_option": "[155.0\u00b0, 160.0\u00b0]",
+          "to_option": "[30.0\u00b0, 45.0\u00b0]"
         }
       ],
       "selected": [
         {
-          "start": 4.974188368183839,
-          "width": 0.2617993877991494
-        },
-        {
-          "start": 0.6981317007977318,
+          "start": 2.705260340591211,
           "width": 0.08726646259971647
         },
         {
-          "start": 1.832595714594046,
+          "start": 3.8397243543875246,
           "width": 0.08726646259971647
         },
         {
-          "start": 2.8797932657906435,
-          "width": 0.2617993877991494
-        },
-        {
-          "start": 4.71238898038469,
-          "width": 0.2617993877991494
-        },
-        {
           "start": 4.974188368183839,
+          "width": 0.08726646259971647
+        },
+        {
+          "start": 0.2617993877991494,
+          "width": 0.2617993877991494
+        },
+        {
+          "start": 0.5235987755982988,
+          "width": 0.2617993877991494
+        },
+        {
+          "start": 0.5235987755982988,
           "width": 0.2617993877991494
         }
       ],
-      "build_seconds": 0.4898009999888018,
-      "solve_seconds": 4.4800227920059115,
+      "build_seconds": 0.4915199160022894,
+      "solve_seconds": 3.2300186669963296,
       "notes": [
         "solved with LKH (heuristic): this is an ESTIMATE, not a certified lower bound. If LKH misses the optimal GTSP tour it is too high.",
         "legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound)."
       ],
-      "solve_rounds": 8,
-      "interval_solves": 1505,
+      "solve_rounds": 7,
+      "interval_solves": 1500,
       "timings": {
-        "transform": 0.0017932099290192127,
-        "lkh_screen": 1.1380309589440003,
-        "lkh": 1.1142988330684602,
-        "interval": 2.2210860478226095,
-        "other": 0.49461474223062396
+        "transform": 0.001858874995377846,
+        "lkh_screen": 0.0,
+        "lkh": 1.0378789589958615,
+        "interval": 2.18590705308452,
+        "other": 0.4958936959228595
       }
     },
     "lower_bound_status": "estimate (LKH)",
     "best_upper": 25.164320595796976,
-    "max_lb_estimate": 24.849,
-    "gap_percent": 1.2689468219927402,
+    "max_lb_estimate": 24.911,
+    "gap_percent": 1.0169025562882856,
     "gap_definition": "(best_upper - lower_bound.value) / lower_bound.value * 100",
     "lb_exceeds_best_upper": false,
     "headings_deg_per_target": [
@@ -13164,28 +13164,28 @@
     ],
     "added_headings_deg_per_target": [
       [
-        170.0,
-        175.0
+        350.0,
+        355.0
       ],
       [
-        170.0,
-        175.0
+        350.0,
+        355.0
       ],
       [
-        296.6667,
-        298.3333
+        116.6667,
+        118.3333
       ],
       [
-        330.0,
-        345.0
+        150.0,
+        165.0
       ],
       [
-        71.6667,
-        73.3333
+        251.6667,
+        253.3333
       ],
       [
-        201.6667,
-        203.3333
+        21.6667,
+        23.3333
       ]
     ]
   }

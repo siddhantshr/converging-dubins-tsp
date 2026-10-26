@@ -142,7 +142,8 @@ Between refinement iterations they are reused in three ways:
    The rounds that only pick edges to make exact use a cheap LKH
    (`lower_bound.lkh_runs_screening`, default 1 restart). Once a screening
    tour is all exact, the graph is solved again with the full
-   `solver.lkh_runs` (default 10); if that tour is all exact too we stop,
+   `solver.lkh_runs` (default 1; if it equals the screening value there is no
+   separate final solve); if that tour is all exact too we stop,
    otherwise its edges are made exact and screening continues.
 
 ## Solver

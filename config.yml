@@ -41,7 +41,7 @@ refinement:
   mu: 12                         # number of refinement iterations after iteration 0
 
 solver:
-  lkh_runs: 10                   # LKH restarts (more = better tours, slower); upper bound
+  lkh_runs: 1                    # LKH restarts (more = better tours, slower); upper bound
                                  # and the final lower-bound solve
   cost_scale: 1000               # costs are multiplied by this and made integers
 

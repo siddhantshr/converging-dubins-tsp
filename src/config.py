@@ -82,7 +82,7 @@ def load_config(path: str | Path) -> Config:
         upper=_bound(raw, "upper_bound", "num_headings", "lkh"),
         lower=_bound(raw, "lower_bound", "num_intervals", "lkh"),
         sweep_samples=int((raw.get("lower_bound", {}) or {}).get("sweep_samples", 128)),
-        lkh_runs=int(solver.get("lkh_runs", 10)),
+        lkh_runs=int(solver.get("lkh_runs", 1)),
         cost_scale=float(solver.get("cost_scale", 1000)),
         refine_lambda=int(refinement.get("lambda", 2)),
         refine_mu=int(refinement.get("mu", 0)) if refinement.get("enabled", True) else 0,

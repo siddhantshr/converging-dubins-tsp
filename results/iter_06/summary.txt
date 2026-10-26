@@ -8,19 +8,19 @@ headings added (deg) per target, inside the interval the previous lower bound pi
   target 4: 65.00, 70.00
   target 5: 185.00, 190.00
 
-UPPER BOUND: 25.187521   (valid upper bound)
-  20 headings per target, solver = lkh, build 0.04s, solve 0.37s
+UPPER BOUND: 25.269748   (valid upper bound)
+  20 headings per target, solver = lkh, build 0.06s, solve 0.06s
   order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
-             4 -> 3      65.0°     5.0°     4.7659
-             3 -> 2       5.0°   291.7°     3.9124
-             2 -> 1     291.7°   185.0°     4.7395
-             1 -> 5     185.0°   195.0°     3.3817
-             5 -> 0     195.0°   195.0°     3.4863
-             0 -> 4     195.0°    65.0°     4.9018
+             4 -> 3      65.0°     6.7°     4.7631
+             3 -> 2       6.7°   293.3°     3.9057
+             2 -> 1     293.3°   180.0°     4.7977
+             1 -> 5     180.0°   210.0°     3.5992
+             5 -> 0     210.0°   180.0°     3.5520
+             0 -> 4     180.0°    65.0°     4.6520
 
 LOWER BOUND: 24.556000   (estimate (LKH))
-  20 intervals per target, solver = lkh, build 0.16s, solve 2.79s
+  20 intervals per target, solver = lkh, build 0.15s, solve 2.42s
   order: 1 -> 2 -> 3 -> 5 -> 4 -> 0 -> 1
   legs:   from -> to   leave     arrive    length
              1 -> 2      40.0°    90.0°     4.5000
@@ -33,7 +33,7 @@ LOWER BOUND: 24.556000   (estimate (LKH))
   note: legs may use different headings when arriving at and leaving a target, so this tour is not flyable (that is why it is a lower bound).
 
 lower bound, estimate (LKH): 24.556000
-upper bound, this iteration: 25.187521
-best upper bound so far:     25.187521
+upper bound, this iteration: 25.269748
+best upper bound so far:     25.196426
 max LB estimate so far:      24.556000   (not used for the gap)
-gap = (best UB - LB estimate) / LB estimate = 2.572%
+gap = (best UB - LB estimate) / LB estimate = 2.608%

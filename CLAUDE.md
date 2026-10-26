@@ -39,7 +39,9 @@ else refresh its edges and go back to screening.
 
 ## Config keys
 
-- `solver.lkh_runs` (default 10): upper bound and the final lower-bound solve.
+- `solver.lkh_runs` (default 1): upper bound and the final lower-bound solve.
+  When it equals `lkh_runs_screening` (the default: both 1) there is no separate
+  final solve: every lazy round is one 1-restart LKH call, stop when all-exact.
 - `lower_bound.lkh_runs_screening` (default 1): lazy screening rounds.
 - `lower_bound.lazy` (default true).
 - Removed: `solver.exact_time_limit`, `solver: exact`.
