@@ -79,31 +79,193 @@ Edge costs are cached between iterations; only edges touching new options are co
 
 Increasing `N` tightens both bounds.
 
-## Code layout
+## Architecture
+
+### The big picture
+
+One run of `python -m src` is a loop. Each pass of the loop is one
+**iteration**, and every iteration does the same three things:
+
+1. compute the **upper bound** (a real, flyable tour);
+2. compute the **lower bound estimate** (a tour that may "kink" at targets);
+3. **refine**: use the lower-bound tour to decide where to add detail for the
+   next iteration.
 
 ```
-config.yml               points + settings
+config.yml
+    │
+    ▼
+ start: 8 headings and 8 intervals per target (uniform)
+    │
+    ▼
+┌──────────────────────── one iteration ────────────────────────┐
+│                                                               │
+│   upper bound  ── same 5-step pipeline ──►  real tour length  │
+│   lower bound  ── same 5-step pipeline ──►  estimate          │
+│                                                               │
+│   refine: at every target, split the interval the lower-bound │
+│   tour used, and add the same headings to the upper bound     │
+│                                                               │
+└───────────────────────────────┬───────────────────────────────┘
+                                │  repeat mu times
+                                ▼
+                 results/ (text, JSON, plots)
+```
+
+Iteration 0 uses the uniform grids. Each later iteration adds `lambda`
+options per target, so the problems grow steadily (default config, 6
+targets: 48 options in iteration 0, 192 in iteration 12).
+
+### The pipeline (shared by both bounds)
+
+Both bounds are the same kind of problem: **at every target, pick one option
+(a heading, or a heading interval), and pick the order of the targets, so
+that the closed tour is as short as possible.** This is a "one-in-a-set" (or
+generalised) TSP. Both bounds go through the same five steps, in
+`src/bounds.py`:
+
+```
+ 1. build graph  ─►  2. integer costs  ─►  3. Noon–Bean  ─►  4. LKH  ─►  5. decode
+   (gtsp.py)          (bounds.py)          (noon_bean.py)    (solvers.py)  (noon_bean.py)
+```
+
+**1. Build the graph** (`src/tsp/gtsp.py`). One node per (target, option).
+Every target's nodes form a **cluster**. There is an edge between every two
+nodes of different targets; its cost is the shortest way to fly between
+them. The two bounds differ only here:
+
+| | Upper bound | Lower bound |
+|---|---|---|
+| option at a target | one heading | a heading interval |
+| edge cost | Dubins path between two fixed headings (`dubins/path.py`) | shortest Dubins path with *any* heading inside each interval: the **interval problem** (`dubins/interval.py`, run in C++) |
+| cache | dict keyed by (targets, headings) | `IntervalEdgeCosts`, keyed by (targets, intervals) |
+
+Both caches live for the whole run. When the refinement splits one interval
+per target, only edges touching the new pieces are new; everything else is
+a cache hit. (Default config: 44,040 interval problems solved over 13
+iterations, out of 177,840 lower-bound edges built.)
+
+**2. Integer costs** (`bounds._integer_costs`). LKH works with integers, so
+every cost is multiplied by `solver.cost_scale` (default 1000). The upper
+bound rounds to the nearest integer. The lower bound rounds **down**, so
+rounding can only make the estimate smaller, never too high.
+
+**3. Noon–Bean transformation** (`src/tsp/noon_bean.py`). LKH solves the
+ordinary TSP, which visits *every* node. We want *one* node per cluster.
+The Noon–Bean transformation rewrites the costs so that the two problems
+have the same answer:
+
+- inside each cluster, the nodes are joined in a free (zero-cost) ring, so
+  the tour can pass through the unused options for nothing;
+- each edge leaving a cluster is charged as if it left from the ring
+  neighbour, so a cluster costs exactly what its first-visited option costs;
+- a large constant M is added to every edge between clusters, so a tour that
+  enters a cluster more than once is always worse.
+
+The resulting matrix has the same number of nodes as the graph. It is
+asymmetric (cost A→B ≠ B→A). If the integers get too large for LKH, the
+run stops and asks for a smaller `cost_scale`.
+
+**4. LKH** (`src/tsp/solvers.py::solve_lkh`). The matrix goes to LKH, a
+fast heuristic TSP solver, through the `elkai` package (which hands it to
+LKH as a text problem). `solver.lkh_runs` sets the number of restarts
+(default 1). LKH is deterministic (fixed seed), so runs are reproducible.
+LKH is the one heuristic step: it usually finds the optimal tour, but not
+always.
+
+**5. Decode** (`noon_bean.decode`). The first node the tour visits in each
+cluster is the chosen option; the order of the clusters is the visiting
+order. Then:
+
+- **upper bound** = sum of the real Dubins lengths of the legs. This tour
+  can be flown, so it is always a valid upper bound, whatever LKH did;
+- **lower bound estimate** = the tour's integer cost ÷ `cost_scale`. It is a
+  true lower bound only if LKH found the optimal tour. When LKH misses it,
+  the value is too high, which is why it is always labelled
+  "estimate (LKH)".
+
+### The refinement loop (`src/refine.py`)
+
+`refine.run` holds the state that carries over between iterations: each
+target's heading list, each target's interval list, and the two edge-cost
+caches. After both bounds are solved, it:
+
+1. records the iteration: both values, the best upper bound so far, and
+   the gap `(best UB − this LB estimate) / this LB estimate`. If the
+   estimate is above the best upper bound, LKH must have missed the optimum,
+   and a warning is printed;
+2. calls `refine.refine`: at every target, take the interval the lower-bound
+   tour chose, cut it into `lambda + 1` equal pieces, and add the `lambda`
+   cut points as new upper-bound headings.
+
+If only one bound is enabled in `config.yml`, there is no loop: that bound
+is computed once (`__main__._run_single`).
+
+### The interval solver (lower-bound edges)
+
+Each lower-bound edge asks: what is the shortest Dubins path from point A,
+leaving with any heading in interval I0, to point B, arriving with any
+heading in interval I1? The answer is always one of a short list of
+candidate paths (see "Interval solver" below for why): the solver builds all
+of them, throws away those whose headings fall outside the intervals, and
+keeps the shortest. There is no search or iteration, so a solve is fast and
+exact.
+
+- `src/dubins/_interval.cpp` is the C++ version used by the pipeline: about
+  2–3 µs per solve. Build it once with `python tools/build_interval.py`.
+- `src/dubins/interval.py` is the same algorithm in Python (about 0.5 ms
+  per solve). It is the reference the tests compare against, and the
+  fallback (with a warning) if the C++ module has not been built.
+
+### Where the time goes
+
+Default config, whole run (13 iterations), from `results/summary.txt`:
+
+| Stage | Seconds |
+|---|---|
+| Upper bound: Dubins edge costs (Python) | 0.60 |
+| Upper bound: LKH | 1.00 |
+| Lower bound: interval problems (C++) | 0.12 |
+| Lower bound: LKH | 0.97 |
+| Lower bound: everything else (graph building, bookkeeping) | 0.22 |
+| **Total** | **2.91** |
+
+LKH is now about two thirds of the run. A single LKH call on the largest
+lower-bound graph (192 nodes) takes about 0.15 s.
+
+### Output (`src/utils/report.py`, `src/utils/plotting.py`)
+
+After every iteration, `iter_XX/` gets a text summary, a JSON record (it
+includes the interval list, which `tools/lb_stability.py` reads) and a plot
+of both tours. At the end, `convergence.txt|json|png` show the bounds and
+gap across iterations and `summary.txt` shows the time per stage.
+
+### Files
+
+```
+config.yml                 points and settings
 src/
-  __main__.py            entry point: python -m src
-  config.py              load / validate config.yml
-  bounds.py              pipeline: graph -> Noon-Bean -> solve -> decode
-  refine.py              lower-bound-driven refinement (lambda, mu)
+  __main__.py              entry point (python -m src): runs the loop, writes results/
+  config.py                reads and checks config.yml
+  refine.py                the iteration loop and the refinement step
+  bounds.py                the 5-step pipeline, for either bound
   dubins/
-    path.py              classical Dubins shortest path (6 words)
-    free_heading.py      paths with free end headings (CS, CC, S, C)
-    interval.py          two-point Dubins interval problem (Python reference + brute force)
-    _interval.cpp        C++ port of interval.py, used by the pipeline
+    path.py                Dubins shortest path between two fixed headings
+    free_heading.py        Dubins paths when one or both end headings are free
+    interval.py            interval problem: Python reference (+ brute-force check)
+    _interval.cpp          interval problem: C++ version used by the pipeline
   tsp/
-    gtsp.py              clustered graphs for both bounds
-    noon_bean.py         Noon-Bean transformation and decoding
-    solvers.py           LKH (elkai); exact MILP (pulp/CBC) kept only as a test reference
+    gtsp.py                builds the clustered graphs, caches interval costs
+    noon_bean.py           Noon–Bean transformation and decoding
+    solvers.py             LKH via elkai (+ an exact MILP solver, used only in tests)
   utils/
-    angles.py            angle wrapping, HeadingInterval
-    plotting.py          plots of the tours
-    report.py            text report, JSON export
+    angles.py              angle wrapping, HeadingInterval
+    report.py              text tables and JSON
+    plotting.py            tour and convergence plots
 tools/
-  lb_stability.py        LB estimate vs number of LKH restarts for one iteration
-tests/                   correctness checks (see below)
+  build_interval.py        compiles _interval.cpp
+  lb_stability.py          re-solves one iteration with more LKH restarts
+tests/                     correctness checks (see "Tests")
 ```
 
 ## Interval solver (how the lower-bound edge costs are computed)
@@ -128,23 +290,6 @@ The pipeline runs the C++ port (`src/dubins/_interval.cpp`, about 2–3 µs per
 solve against about 0.5 ms in Python). Build it with
 `python tools/build_interval.py`; without it, the Python solver is used and a
 warning is printed. The tests check that the two give the same lengths.
-
-## Reusing previous work
-
-Every interval problem solved is cached. An edge depends only on its two
-targets and two intervals, so when the refinement splits one interval per
-target, all other edges are cache hits and only edges touching the new
-pieces are solved. Every edge of the lower-bound graph is exact: no
-estimates, one LKH solve per bound.
-
-## Solver
-
-Both bounds use LKH (via `elkai`, deterministic: LKH's default seed is 1).
-`solver: lkh` is the only accepted value. For the lower bound, costs are
-rounded **down** to integers and the value is the tour's integer cost divided
-by `cost_scale`, so rounding never pushes the estimate up; LKH missing the
-optimum still can. `tools/lb_stability.py` shows how much the estimate moves
-with more LKH restarts.
 
 ## Tests
 
