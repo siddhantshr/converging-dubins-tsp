@@ -22,12 +22,10 @@ from __future__ import annotations
 
 import sys
 import time
-from concurrent.futures import Future
 from dataclasses import dataclass, field
 
 import numpy as np
 
-from . import parallel
 from .config import Config
 from .tsp import noon_bean, solvers
 from .tsp.gtsp import (
@@ -89,48 +87,21 @@ def _integer_costs(graph: ClusteredGraph, scale: float, round_down: bool) -> np.
     return (np.floor(scaled) if round_down else np.rint(scaled)).astype(np.int64)
 
 
-def _timed_lkh(atsp: noon_bean.NoonBeanATSP, runs: int):
-    """LKH solve and its duration (runs in a worker process with use_all_cores)."""
-    t = time.perf_counter()
-    tour = solvers.solve_lkh(atsp, runs)
-    return tour, time.perf_counter() - t
-
-
-@dataclass
-class _Started:
-    """A bound whose LKH solve has been started (possibly in a worker process)."""
-
-    graph: ClusteredGraph
-    kind: str
-    atsp: noon_bean.NoonBeanATSP
-    build_seconds: float
-    transform_seconds: float
-    lkh: Future  # -> (tour, LKH seconds)
-
-
-def _start_solve(graph: ClusteredGraph, kind: str, cfg: Config, build_seconds: float, pool):
-    """Integer costs + Noon-Bean, then start LKH (cfg.lkh_runs restarts)."""
-    t0 = time.perf_counter()
-    int_cost = _integer_costs(graph, cfg.cost_scale, round_down=kind == "lower")
-    atsp = noon_bean.transform(int_cost, graph.clusters)
-    transform_seconds = time.perf_counter() - t0
-    lkh = parallel.submit(pool, _timed_lkh, atsp, cfg.lkh_runs)
-    return _Started(graph, kind, atsp, build_seconds, transform_seconds, lkh)
-
-
-def _finish_solve(started: _Started, cfg: Config) -> BoundResult:
-    """Wait for LKH, decode the tour and build the result."""
-    graph, kind, atsp = started.graph, started.kind, started.atsp
+def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config, build_seconds: float):
+    """Noon-Bean + LKH (cfg.lkh_runs restarts) + decode."""
     is_lower = kind == "lower"
-    tour, lkh_seconds = started.lkh.result()
+    timings = {"transform": 0.0, "lkh": 0.0}
+    t0 = time.perf_counter()
+    int_cost = _integer_costs(graph, cfg.cost_scale, round_down=is_lower)
+    atsp = noon_bean.transform(int_cost, graph.clusters)
+    timings["transform"] = time.perf_counter() - t0
+    t = time.perf_counter()
+    tour = solvers.solve_lkh(atsp, cfg.lkh_runs)
+    timings["lkh"] = time.perf_counter() - t
     t = time.perf_counter()
     chosen = noon_bean.decode(tour, atsp)
-    timings = {
-        "transform": started.transform_seconds + time.perf_counter() - t,
-        "lkh": lkh_seconds,
-    }
-    # Stage times only: waiting for a solve that ran in parallel is not counted.
-    solve_seconds = sum(timings.values())
+    timings["transform"] += time.perf_counter() - t
+    solve_seconds = time.perf_counter() - t0
 
     n = len(chosen)
     legs = []
@@ -179,7 +150,7 @@ def _finish_solve(started: _Started, cfg: Config) -> BoundResult:
         order=[leg.from_target for leg in legs],
         legs=legs,
         selected=selected,
-        build_seconds=started.build_seconds,
+        build_seconds=build_seconds,
         solve_seconds=solve_seconds,
         notes=notes,
         timings=timings,
@@ -204,78 +175,39 @@ def initial_intervals(cfg: Config) -> list[list[HeadingInterval]]:
     return [list(grid) for _ in cfg.points]
 
 
-def _build_upper(cfg: Config, headings, cache, pool):
+def compute_upper_bound(
+    cfg: Config, headings: list[list[float]] | None = None, cache: dict | None = None
+) -> BoundResult:
+    """Upper bound with the given headings per target (default: uniform grid)."""
     t0 = time.perf_counter()
     headings = headings or initial_headings(cfg)
-    graph = build_heading_graph(cfg.points, headings, cfg.turning_radius, cache, pool)
-    return graph, time.perf_counter() - t0
-
-
-def _finish_upper(started: _Started, cfg: Config) -> BoundResult:
-    result = _finish_solve(started, cfg)
+    graph = build_heading_graph(cfg.points, headings, cfg.turning_radius, cache)
+    result = _solve_graph(graph, "upper", cfg, time.perf_counter() - t0)
     result.timings["dubins"] = result.build_seconds  # building = Dubins path lengths
     _finish_timings(result)
     return result
-
-
-def _build_lower(cfg: Config, intervals, costs: IntervalEdgeCosts, pool):
-    t0 = time.perf_counter()
-    intervals = intervals or initial_intervals(cfg)
-    graph = build_interval_graph(
-        cfg.points, intervals, cfg.turning_radius, costs, progress=_progress, pool=pool
-    )
-    return graph, time.perf_counter() - t0
-
-
-def _finish_lower(started: _Started, cfg: Config, costs: IntervalEdgeCosts, before) -> BoundResult:
-    result = _finish_solve(started, cfg)
-    result.interval_solves = costs.solves - before[0]
-    result.timings["interval"] = costs.solve_seconds - before[1]
-    _finish_timings(result)
-    return result
-
-
-def compute_upper_bound(
-    cfg: Config,
-    headings: list[list[float]] | None = None,
-    cache: dict | None = None,
-    pool=None,
-) -> BoundResult:
-    """Upper bound with the given headings per target (default: uniform grid)."""
-    graph, build_seconds = _build_upper(cfg, headings, cache, pool)
-    return _finish_upper(_start_solve(graph, "upper", cfg, build_seconds, pool), cfg)
 
 
 def compute_lower_bound(
     cfg: Config,
     intervals: list[list[HeadingInterval]] | None = None,
     costs: IntervalEdgeCosts | None = None,
-    pool=None,
 ) -> BoundResult:
     """Lower bound with the given intervals per target (default: uniform partition).
 
     Pass the same `costs` object between refinement iterations to reuse every
     interval problem solved so far.
     """
-    costs = costs or IntervalEdgeCosts(cfg.points, cfg.turning_radius)
-    before = (costs.solves, costs.solve_seconds)
-    graph, build_seconds = _build_lower(cfg, intervals, costs, pool)
-    return _finish_lower(_start_solve(graph, "lower", cfg, build_seconds, pool), cfg, costs, before)
-
-
-def compute_bounds(
-    cfg: Config,
-    headings: list[list[float]],
-    intervals: list[list[HeadingInterval]],
-    upper_cache: dict,
-    lower_costs: IntervalEdgeCosts,
-    pool=None,
-) -> tuple[BoundResult, BoundResult]:
-    """Both bounds. With a pool, the upper-bound LKH solve runs in a worker
-    while this process builds the lower-bound graph and starts its solve."""
-    graph, build_seconds = _build_upper(cfg, headings, upper_cache, pool)
-    upper = _start_solve(graph, "upper", cfg, build_seconds, pool)
-    before = (lower_costs.solves, lower_costs.solve_seconds)
-    graph, build_seconds = _build_lower(cfg, intervals, lower_costs, pool)
-    lower = _start_solve(graph, "lower", cfg, build_seconds, pool)
-    return _finish_upper(upper, cfg), _finish_lower(lower, cfg, lower_costs, before)
+    t0 = time.perf_counter()
+    intervals = intervals or initial_intervals(cfg)
+    if costs is None:
+        costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
+    solves_before, seconds_before = costs.solves, costs.solve_seconds
+    graph = build_interval_graph(
+        cfg.points, intervals, cfg.turning_radius, costs, progress=_progress
+    )
+    result = _solve_graph(graph, "lower", cfg, time.perf_counter() - t0)
+    result.interval_solves = costs.solves - solves_before
+    result.timings["interval"] = costs.solve_seconds - seconds_before
+    _finish_timings(result)
+    return result

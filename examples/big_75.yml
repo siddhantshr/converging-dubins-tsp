@@ -84,7 +84,6 @@ points:
   - [17.43, 21.90]
 
 heading_offset_deg: 0.0
-use_all_cores: true                # worker processes for edge costs and LKH (same results)
 
 upper_bound:
   enabled: true
@@ -106,4 +105,4 @@ solver:
   cost_scale: 1000
 
 output:
-  plot: true
+  plot: false

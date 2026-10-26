@@ -12,10 +12,6 @@ points:                          # targets [x, y]; the tour is closed
   - [-1.5, 4.0]
   - [1.5, 2.8]
 
-# Use every CPU core (worker processes): edge costs are split across cores, and
-# the upper-bound LKH solve overlaps the lower-bound work. Same results, less time.
-use_all_cores: true
-
 # Rotate the whole heading grid / interval grid by this angle (degrees).
 heading_offset_deg: 0.0
 
