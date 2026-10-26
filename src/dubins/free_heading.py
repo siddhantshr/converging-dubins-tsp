@@ -8,9 +8,9 @@ These are the building blocks of the interval problem (see interval.py).
   The function is vectorised over the start heading so it can be swept cheaply.
 
 * `paths_between_points`: both headings free.
-  Candidates are the straight line S and the four single arcs C through both
-  points. (The CC family with both headings free is swept numerically in
-  interval.py, using `paths_to_point`.)
+  Candidates are the straight line S, the four single arcs C through both
+  points, and the CC paths whose turns switch at the midpoint of AB
+  (Manyam et al.: S, C_psi, C_psi C_psi).
 
 Notation: a turn of side s (+1 = left, -1 = right) from a point p with
 heading th goes round the circle centred at  c = p + s * r * (-sin th, cos th).
@@ -100,10 +100,24 @@ def paths_to_point(start_xy, theta0, target_xy, r):
 
 
 def paths_between_points(a_xy, b_xy, r) -> list[tuple[float, float, float]]:
-    """Straight line and single-arc paths from A to B, both headings free.
+    """S, C and CC paths from A to B, both headings free.
 
     Returns a list of (length, heading at A, heading at B).
     """
+    candidates = _line_and_arcs(a_xy, b_xy, r)
+    # CC: with both headings free, lambda_theta vanishes at A and at B, and it
+    # is zero along a straight line, so A, the switch point J and B are
+    # collinear. The two tangent circles are point reflections of each other
+    # through J, hence J is the midpoint of AB, the second arc is the first
+    # one reflected through J, and the heading at B equals the heading at A.
+    mid = (0.5 * (a_xy[0] + b_xy[0]), 0.5 * (a_xy[1] + b_xy[1]))
+    for length, head_a, _ in _line_and_arcs(a_xy, mid, r)[1:]:
+        candidates.append((2.0 * length, head_a, head_a))
+    return candidates
+
+
+def _line_and_arcs(a_xy, b_xy, r) -> list[tuple[float, float, float]]:
+    """Straight line S and the four single arcs C from A to B."""
     ax, ay = a_xy
     bx, by = b_xy
     dx, dy = bx - ax, by - ay

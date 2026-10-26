@@ -30,7 +30,6 @@ class Config:
     heading_offset: float           # radians; rotates every heading / interval grid
     upper: BoundConfig
     lower: BoundConfig
-    sweep_samples: int
     lkh_runs: int
     cost_scale: float
     refine_lambda: int              # headings added per target per iteration
@@ -81,7 +80,6 @@ def load_config(path: str | Path) -> Config:
         heading_offset=math.radians(float(raw.get("heading_offset_deg", 0.0))),
         upper=_bound(raw, "upper_bound", "num_headings", "lkh"),
         lower=_bound(raw, "lower_bound", "num_intervals", "lkh"),
-        sweep_samples=int((raw.get("lower_bound", {}) or {}).get("sweep_samples", 128)),
         lkh_runs=int(solver.get("lkh_runs", 1)),
         cost_scale=float(solver.get("cost_scale", 1000)),
         refine_lambda=int(refinement.get("lambda", 2)),
@@ -91,7 +89,6 @@ def load_config(path: str | Path) -> Config:
         lkh_runs_screening=int((raw.get("lower_bound", {}) or {}).get("lkh_runs_screening", 1)),
     )
     _require(cfg.turning_radius > 0, "vehicle.turning_radius must be > 0")
-    _require(cfg.sweep_samples >= 8, "lower_bound.sweep_samples must be >= 8")
     _require(cfg.lkh_runs >= 1, "solver.lkh_runs must be >= 1")
     _require(cfg.lkh_runs_screening >= 1, "lower_bound.lkh_runs_screening must be >= 1")
     _require(cfg.cost_scale > 0, "solver.cost_scale must be > 0")

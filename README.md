@@ -112,8 +112,12 @@ The best heading pair `(θ0, θ1)` in the rectangle `I0 × I1` is at
 2. an **edge**: one heading on a boundary, the other free inside its interval.
    Transversality makes the free end a "free heading" end, so the path is CS
    or CC. The end-fixed case is done by flying the path backwards;
-3. the **interior**: both headings free. S and single arcs C in closed form;
-   the CC family is swept over `θ0` and every local minimum is refined.
+3. the **interior**: both headings free. S, single arcs C, and CC paths that
+   switch at the midpoint of AB (`λθ` vanishes on a line through A, the
+   switch point and B), all in closed form.
+
+These are the candidates of Manyam et al. for the two-point interval problem;
+no numerical search is needed.
 
 Every candidate is a real path, so the solver can't undershoot the true
 minimum. The tests check it never exceeds a brute-force grid search.

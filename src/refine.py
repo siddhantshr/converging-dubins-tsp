@@ -101,7 +101,7 @@ def run(cfg: Config, lam: int, mu: int, on_iteration=None) -> list[Iteration]:
     """Iteration 0 plus `mu` refinement iterations; calls on_iteration(it) after each."""
     headings, intervals = initial_headings(cfg), initial_intervals(cfg)
     upper_cache = {}
-    lower_costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius, cfg.sweep_samples)
+    lower_costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
     lower_costs.register_initial(intervals)
     iterations: list[Iteration] = []
     added: list[list[float]] = [[] for _ in cfg.points]

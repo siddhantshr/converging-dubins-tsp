@@ -19,11 +19,14 @@ rectangle I0 x I1:
      (Dubins to a point), see free_heading.paths_to_point. The case with the
      *end* heading fixed is handled by reversing the path;
   3. the interior: both headings free. Candidates are S, single arcs C, and
-     CC paths. S and C have closed forms; the CC family is a 1-D family in th0,
-     which we sweep and refine numerically.
+     CC paths that switch at the midpoint of AB, all in closed form, see
+     free_heading.paths_between_points.
 
-The CC families include the CC paths with a pi-length arc, which is where the
-abnormal extremals of this problem live.
+This is the candidate list of Manyam et al. for the two-point interval problem
+(normal extremals, lambda_0 = 1). We keep every C and CC path, not only those
+with arcs longer than pi: the extra ones are real paths, so they cannot push
+the minimum too low, and the pi-length arcs are where the abnormal extremals
+of this problem live.
 
 Every candidate is a real, flyable path, so the result can never be *below*
 the true minimum by more than floating-point error. `brute_force_interval`
@@ -94,53 +97,18 @@ def _end_fixed_edges(a, i0, b, i1, r, best):
 def _interior_closed_form(a, i0, b, i1, r, best):
     for length, th0, th1 in paths_between_points(a, b, r):
         if i0.contains(th0) and i1.contains(th1):
-            best = _better(best, length, th0, th1, "interior(S/C)")
-    return best
-
-
-def _family_values(a, b, r, i1, thetas, family):
-    length, th1 = paths_to_point(a, thetas, b, r)[family]
-    ok = np.isfinite(length) & i1.contains(th1)
-    return np.where(ok, length, np.inf), th1
-
-
-def _interior_sweep(a, i0, b, i1, r, best, samples, zoom_rounds=3, zoom_points=33):
-    """Both headings free: sweep th0 across I0 and refine every local minimum.
-
-    For each th0 the CS/CC paths to B are known in closed form, so the sweep
-    is over a single variable. Each local minimum found on the coarse grid is
-    refined by repeatedly re-sampling a shrinking window around it.
-    """
-    thetas = i0.start + i0.width * np.linspace(0.0, 1.0, samples)
-    step = thetas[1] - thetas[0] if samples > 1 else i0.width
-    lo_lim, hi_lim = i0.start, i0.end
-    for family in range(6):
-        values, _ = _family_values(a, b, r, i1, thetas, family)
-        padded = np.concatenate(([np.inf], values, [np.inf]))
-        is_min = np.isfinite(values) & (values <= padded[:-2]) & (values <= padded[2:])
-        for k in np.flatnonzero(is_min):
-            centre, half = thetas[k], step
-            for _ in range(zoom_rounds):
-                window = np.linspace(max(centre - half, lo_lim), min(centre + half, hi_lim), zoom_points)
-                vals, _ = _family_values(a, b, r, i1, window, family)
-                j = int(np.argmin(vals))
-                if np.isfinite(vals[j]):
-                    centre = window[j]
-                half *= 2.0 / (zoom_points - 1)
-            vals, th1 = _family_values(a, b, r, i1, np.array([centre]), family)
-            best = _better(best, vals[0], centre, th1[0], "interior(CC/CS sweep)")
+            best = _better(best, length, th0, th1, "interior(S/C/CC)")
     return best
 
 
 def solve_interval_problem(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,
-                           r: float, sweep_samples: int = 128) -> IntervalSolution:
+                           r: float) -> IntervalSolution:
     """Shortest Dubins path from (A, any heading in I0) to (B, any heading in I1)."""
     best = None
     best = _corners(a, i0, b, i1, r, best)
     best = _start_fixed_edges(a, i0, b, i1, r, best)
     best = _end_fixed_edges(a, i0, b, i1, r, best)
     best = _interior_closed_form(a, i0, b, i1, r, best)
-    best = _interior_sweep(a, i0, b, i1, r, best, sweep_samples)
     if best is None:  # cannot happen: corners always give a path
         raise RuntimeError("no Dubins path found")
     return best

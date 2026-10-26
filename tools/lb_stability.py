@@ -58,7 +58,7 @@ def main(argv=None) -> int:
 
     # One cost cache for all solves: the interval problems are solved once, and
     # every LKH call below gets exactly the same (fully exact) matrix.
-    costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius, cfg.sweep_samples)
+    costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
     rows = []
     for runs in args.runs:
         t0 = time.perf_counter()

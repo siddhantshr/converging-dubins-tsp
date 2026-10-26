@@ -24,7 +24,6 @@ lower_bound:
   enabled: true
   num_intervals: 8               # heading intervals per target, each 360/N degrees wide
   solver: lkh                    # lkh only: the lower bound is an ESTIMATE, not certified
-  sweep_samples: 128             # grid size of the interior search in the interval solver
   lazy: true                     # reuse parent-interval costs; compute only edges the
                                  # solver needs (far fewer interval solves; with LKH the
                                  # value can differ slightly from lazy: false)

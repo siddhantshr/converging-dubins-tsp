@@ -1,7 +1,7 @@
 ITERATION 0
 
 UPPER BOUND: 25.705210   (valid upper bound)
-  8 headings per target, solver = lkh, build 0.03s, solve 0.01s
+  8 headings per target, solver = lkh, build 0.03s, solve 0.02s
   order: 4 -> 5 -> 3 -> 2 -> 1 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
              4 -> 5      45.0°     0.0°     3.6191
@@ -12,7 +12,7 @@ UPPER BOUND: 25.705210   (valid upper bound)
              0 -> 4     135.0°    45.0°     4.5602
 
 LOWER BOUND: 23.997000   (estimate (LKH))
-  8 intervals per target, solver = lkh, build 0.01s, solve 2.01s
+  8 intervals per target, solver = lkh, build 0.01s, solve 0.83s
   order: 4 -> 3 -> 2 -> 1 -> 5 -> 0 -> 4
   legs:   from -> to   leave     arrive    length
              4 -> 3      45.0°    31.7°     4.7190

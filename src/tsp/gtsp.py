@@ -134,8 +134,8 @@ class IntervalEdgeCosts:
     without calling the interval solver.
     """
 
-    def __init__(self, points: list[Point], r: float, sweep_samples: int = 128):
-        self.points, self.r, self.sweep_samples = points, r, sweep_samples
+    def __init__(self, points: list[Point], r: float):
+        self.points, self.r = points, r
         self.exact_cache: dict = {}
         self.parent: dict[HeadingInterval, HeadingInterval] = {}
         self.solves = 0  # number of interval problems actually solved
@@ -171,8 +171,7 @@ class IntervalEdgeCosts:
                 self.exact_cache[key] = (math.hypot(x1 - x0, y1 - y0), heading, heading)
             else:
                 t0 = time.perf_counter()
-                sol = solve_interval_problem(self.points[i], a, self.points[j], b, self.r,
-                                             self.sweep_samples)
+                sol = solve_interval_problem(self.points[i], a, self.points[j], b, self.r)
                 self.solve_seconds += time.perf_counter() - t0
                 self.solves += 1
                 self.exact_cache[key] = (sol.length, sol.depart_heading, sol.arrive_heading)

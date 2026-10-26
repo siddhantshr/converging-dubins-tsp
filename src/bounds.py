@@ -241,7 +241,7 @@ def compute_lower_bound(cfg: Config, intervals: list[list[HeadingInterval]] | No
     t0 = time.perf_counter()
     intervals = intervals or initial_intervals(cfg)
     if costs is None:
-        costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius, cfg.sweep_samples)
+        costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
         costs.register_initial(intervals)
     solves_before, seconds_before = costs.solves, costs.solve_seconds
     graph = build_interval_graph(cfg.points, intervals, cfg.turning_radius, costs,

@@ -12,7 +12,7 @@ POINTS = [(0.0, 0.0), (4.0, 1.0), (5.0, 5.0), (1.0, 4.0), (2.0, 2.0)]
 def _config(**kw):
     base = Config(points=POINTS, turning_radius=1.0, heading_offset=0.0,
                   upper=BoundConfig(True, 6, "lkh"), lower=BoundConfig(True, 6, "lkh"),
-                  sweep_samples=64, lkh_runs=5, cost_scale=1000,
+                  lkh_runs=5, cost_scale=1000,
                   refine_lambda=1, refine_mu=0, plot=False, results_dir="")
     return dataclasses.replace(base, **kw)
 
