@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 Upper and lower bounds for the Dubins TSP via one-in-a-set TSP + Noon–Bean +
-LKH, with lower-bound-driven refinement (lambda, mu). See README.md for the method.
+LKH, with lower-bound-driven refinement (lambda, gap_target). See README.md for the method.
 
 ## Commands
 
@@ -9,7 +9,8 @@ LKH, with lower-bound-driven refinement (lambda, mu). See README.md for the meth
 source venv/bin/activate
 python tools/build_interval.py                     # compile the C++ interval solver
 python -m src [--config config.yml] [--no-plot]   # writes results/
-python -m pytest -q                                # ~20 s
+python -m pytest -q                                # ~5 s
+ruff check . && ruff format .                      # must be clean before committing
 python tools/lb_stability.py <iteration>           # needs results/ from a run
 ```
 
@@ -27,6 +28,11 @@ python tools/lb_stability.py <iteration>           # needs results/ from a run
   exceeds the best UB, `refine.run` and the reports print a warning.
 - `ExactATSP` in `src/tsp/solvers.py` (and the pulp dependency) stays only as
   the reference solver in `tests/test_noon_bean.py`. Don't reconnect it to `bounds.py`.
+- LKH (via elkai) multiplies costs by PRECISION = 100 in 32-bit ints and
+  aborts the whole process (`Assertion failed: Gain % Precision == 0`) when an
+  ATSP entry reaches ~21e6 (measured). `noon_bean.transform` keeps entries
+  <= `LKH_MAX_ENTRY` (~10.7e6) with a tight M (sum of each cluster's largest
+  outgoing cost) and forbidden = 2M; don't loosen these.
 - elkai has no seed argument. LKH's default `SEED = 1` makes runs
   deterministic (`test_lkh_is_deterministic`).
 
@@ -42,12 +48,19 @@ across refinement iterations), then one LKH solve per bound.
 ## Config keys
 
 - `solver.lkh_runs` (default 1): LKH restarts, both bounds.
+- `refinement.gap_target` (percent, default 5): `refine.run` stops at the first
+  iteration with gap <= target. No iteration cap in the pipeline
+  (`max_iterations` exists only as a `refine.run` argument for tests).
+  `refinement.mu` was removed; a config that sets it is rejected with a message.
 - Removed: `solver.exact_time_limit`, `solver: exact`, `lower_bound.lazy`,
   `lower_bound.lkh_runs_screening` (old configs that set them still load;
   the keys are ignored).
 
 ## Output
 
+- Every run writes to the repo's `results/` (`config.RESULTS_DIR`), whatever
+  the config; `output.results_dir` was removed and is rejected. `results/` is
+  git-ignored: don't commit run output.
 - `results/summary.txt`: per-iteration time by stage (Dubins, interval
   problems, Noon–Bean, LKH, other) and #interval solves (cache misses).
 - `results/convergence.txt|json|png`: bounds, gap, warnings.

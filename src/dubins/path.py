@@ -21,7 +21,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ..utils.angles import mod2pi, turn_angle as _turn
+from ..utils.angles import mod2pi
+from ..utils.angles import turn_angle as _turn
 
 Config = tuple[float, float, float]  # (x, y, heading)
 
@@ -31,7 +32,7 @@ WORDS = ("LSL", "RSR", "LSR", "RSL", "RLR", "LRL")
 @dataclass(frozen=True)
 class DubinsPath:
     start: Config
-    word: str                          # e.g. "LSR"
+    word: str  # e.g. "LSR"
     params: tuple[float, float, float]  # see module docstring
     radius: float
 
@@ -133,16 +134,21 @@ def shortest_length(q0: Config, q1: Config, r: float) -> float:
 
 # --- Following a path -------------------------------------------------------
 
+
 def _advance(x: float, y: float, th: float, kind: str, amount: float, r: float):
     """Move along one segment. `amount` is an angle for L/R and a length for S."""
     if kind == "L":
-        return (x + r * (math.sin(th + amount) - math.sin(th)),
-                y - r * (math.cos(th + amount) - math.cos(th)),
-                th + amount)
+        return (
+            x + r * (math.sin(th + amount) - math.sin(th)),
+            y - r * (math.cos(th + amount) - math.cos(th)),
+            th + amount,
+        )
     if kind == "R":
-        return (x - r * (math.sin(th - amount) - math.sin(th)),
-                y + r * (math.cos(th - amount) - math.cos(th)),
-                th - amount)
+        return (
+            x - r * (math.sin(th - amount) - math.sin(th)),
+            y + r * (math.cos(th - amount) - math.cos(th)),
+            th - amount,
+        )
     return x + amount * math.cos(th), y + amount * math.sin(th), th
 
 
@@ -153,7 +159,7 @@ def _segment_amount(kind: str, param: float, r: float) -> float:
 def endpoint(path: DubinsPath) -> Config:
     """Configuration reached at the end of the path."""
     x, y, th = path.start
-    for kind, param in zip(path.word, path.params):
+    for kind, param in zip(path.word, path.params, strict=True):
         x, y, th = _advance(x, y, th, kind, _segment_amount(kind, param, path.radius), path.radius)
     return x, y, float(mod2pi(th))
 
@@ -163,7 +169,7 @@ def sample(path: DubinsPath, step: float) -> np.ndarray:
     points = [path.start[:2]]
     x, y, th = path.start
     r = path.radius
-    for kind, param in zip(path.word, path.params):
+    for kind, param in zip(path.word, path.params, strict=True):
         seg_len = param * r  # arc length or straight length
         n = max(1, int(math.ceil(seg_len / step)))
         for i in range(1, n + 1):

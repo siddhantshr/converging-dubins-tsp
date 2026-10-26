@@ -61,8 +61,12 @@ class ExactATSP:
 
         self._pulp = pulp
         size = atsp.matrix.shape[0]
-        self.arcs = [(u, v) for u in range(size) for v in range(size)
-                     if u != v and atsp.matrix[u, v] < atsp.forbidden]
+        self.arcs = [
+            (u, v)
+            for u in range(size)
+            for v in range(size)
+            if u != v and atsp.matrix[u, v] < atsp.forbidden
+        ]
         self.prob = pulp.LpProblem("noon_bean_atsp", pulp.LpMinimize)
         self.x = {(u, v): pulp.LpVariable(f"x_{u}_{v}", cat="Binary") for u, v in self.arcs}
         self.last_tour: list[int] | None = None
@@ -83,32 +87,38 @@ class ExactATSP:
 
     def _add_subtour_cut(self, nodes):
         members = set(nodes)
-        self.prob.addConstraint(self._pulp.lpSum(
-            var for (u, v), var in self.x.items() if u in members and v in members)
-            <= len(members) - 1)
+        self.prob.addConstraint(
+            self._pulp.lpSum(var for (u, v), var in self.x.items() if u in members and v in members)
+            <= len(members) - 1
+        )
 
     def solve(self, atsp: NoonBeanATSP, time_limit: float = 120.0) -> list[int]:
         pulp = self._pulp
-        self.prob.setObjective(pulp.lpSum(int(atsp.matrix[u, v]) * var
-                                          for (u, v), var in self.x.items()))
+        self.prob.setObjective(
+            pulp.lpSum(int(atsp.matrix[u, v]) * var for (u, v), var in self.x.items())
+        )
         deadline = time.monotonic() + time_limit
         while True:
             warm = self.last_tour is not None
             if warm:
-                used = {(self.last_tour[i], self.last_tour[(i + 1) % len(self.last_tour)])
-                        for i in range(len(self.last_tour))}
+                used = {
+                    (self.last_tour[i], self.last_tour[(i + 1) % len(self.last_tour)])
+                    for i in range(len(self.last_tour))
+                }
                 for arc, var in self.x.items():
                     var.setInitialValue(1 if arc in used else 0)
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise TimeoutError("exact ATSP solve hit the time limit")
-            status = self.prob.solve(pulp.PULP_CBC_CMD(
-                msg=False, timeLimit=max(1, int(remaining)), warmStart=warm))
+            status = self.prob.solve(
+                pulp.PULP_CBC_CMD(msg=False, timeLimit=max(1, int(remaining)), warmStart=warm)
+            )
             # sol_status distinguishes "proved optimal" from "stopped with some
             # integer solution" (e.g. on a time limit); only the first is a proof.
             if self.prob.sol_status != pulp.LpSolutionOptimal:
                 raise TimeoutError(
-                    f"exact ATSP solve did not prove optimality ({pulp.LpStatus[status]})")
+                    f"exact ATSP solve did not prove optimality ({pulp.LpStatus[status]})"
+                )
 
             successor = {u: v for (u, v), var in self.x.items() if var.value() > 0.5}
             cycles = _cycles(successor)

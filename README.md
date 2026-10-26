@@ -20,15 +20,21 @@ pip install -r requirements.txt
 python tools/build_interval.py   # compile the C++ interval solver (needs a C++17 compiler)
 python -m src                    # uses ./config.yml
 python -m src --config other.yml --no-plot
+python -m src --config examples/big_75.yml   # 75 targets
 python -m pytest                 # run the checks
-python tools/lb_stability.py 12  # LB estimate of iteration 12 with 1 / 10 / 50 LKH restarts
+ruff check . && ruff format .    # lint + format (settings in ruff.toml)
+python tools/lb_stability.py 4   # LB estimate of iteration 4 with 1 / 10 / 50 LKH restarts
 ```
 
 Edit `config.yml` to set the points, the turning radius, the number of
 discrete headings (upper bound), the number of heading intervals (lower bound)
-and the refinement settings `lambda` and `mu`.
+and the refinement settings `lambda` and `gap_target`.
 
 ## Output
+
+Every run writes to the repository's `results/` folder, whichever config it
+uses, and replaces the previous run's results there. The folder is not
+tracked by git.
 
 ```
 results/
@@ -41,7 +47,7 @@ results/
   convergence.png    bounds and gap against iteration
 ```
 
-## Iterative refinement (lambda, mu)
+## Iterative refinement (lambda, gap_target)
 
 The lower-bound tour picks one heading interval at every target. Each
 refinement iteration, for every target:
@@ -50,7 +56,10 @@ refinement iteration, for every target:
 2. add them to the target's upper-bound heading set;
 3. split the interval at the same headings (lower bound gets finer there);
 
-then both bounds are solved again. Repeated `mu` times.
+then both bounds are solved again. This repeats until the gap is at most
+`gap_target` percent (default 5). There is no iteration limit: a run ends
+only when the target is met, so a very small target can run for a long time.
+Results of each iteration are written as soon as it finishes.
 
 Both parts are needed: if only headings were added, the next lower bound would
 pick the same intervals and every later iteration would repeat the first.
@@ -95,7 +104,7 @@ One run of `python -m src` is a loop. Each pass of the loop is one
 config.yml
     │
     ▼
- start: 8 headings and 8 intervals per target (uniform)
+ start: num_headings headings, num_intervals intervals per target
     │
     ▼
 ┌──────────────────────── one iteration ────────────────────────┐
@@ -107,14 +116,16 @@ config.yml
 │   tour used, and add the same headings to the upper bound     │
 │                                                               │
 └───────────────────────────────┬───────────────────────────────┘
-                                │  repeat mu times
+                                │  repeat until gap <= gap_target
                                 ▼
                  results/ (text, JSON, plots)
 ```
 
 Iteration 0 uses the uniform grids. Each later iteration adds `lambda`
-options per target, so the problems grow steadily (default config, 6
-targets: 48 options in iteration 0, 192 in iteration 12).
+options per target, so the problems grow steadily. Default config (6
+targets, 4 options each, `lambda = 1`): 24 options in iteration 0, 48 in
+iteration 4. `examples/big_75.yml` (75 targets, same settings): 300, 375,
+450, 525.
 
 ### The pipeline (shared by both bounds)
 
@@ -142,8 +153,8 @@ them. The two bounds differ only here:
 
 Both caches live for the whole run. When the refinement splits one interval
 per target, only edges touching the new pieces are new; everything else is
-a cache hit. (Default config: 44,040 interval problems solved over 13
-iterations, out of 177,840 lower-bound edges built.)
+a cache hit. (`examples/big_75.yml`: 88,800 interval problems in
+iteration 0; in iteration 3, 133,200 of the 271,950 edges.)
 
 **2. Integer costs** (`bounds._integer_costs`). LKH works with integers, so
 every cost is multiplied by `solver.cost_scale` (default 1000). The upper
@@ -160,11 +171,17 @@ have the same answer:
 - each edge leaving a cluster is charged as if it left from the ring
   neighbour, so a cluster costs exactly what its first-visited option costs;
 - a large constant M is added to every edge between clusters, so a tour that
-  enters a cluster more than once is always worse.
+  enters a cluster more than once is always worse. M only has to beat any
+  real tour, so it is the sum over targets of each target's largest
+  outgoing cost, plus 1;
+- every other edge inside a cluster is forbidden, with cost 2M.
 
 The resulting matrix has the same number of nodes as the graph. It is
-asymmetric (cost A→B ≠ B→A). If the integers get too large for LKH, the
-run stops and asks for a smaller `cost_scale`.
+asymmetric (cost A→B ≠ B→A). LKH multiplies every cost by 100 internally
+in 32-bit integers and crashes when an entry reaches about 21 million
+(measured), so entries are kept at most about 10.7 million. If a problem
+needs more, the run stops and asks for a smaller `cost_scale`. (75 targets
+in a 30 × 30 square: largest entry about 5 million.)
 
 **4. LKH** (`src/tsp/solvers.py::solve_lkh`). The matrix goes to LKH, a
 fast heuristic TSP solver, through the `elkai` package (which hands it to
@@ -194,7 +211,10 @@ caches. After both bounds are solved, it:
    the gap `(best UB − this LB estimate) / this LB estimate`. If the
    estimate is above the best upper bound, LKH must have missed the optimum,
    and a warning is printed;
-2. calls `refine.refine`: at every target, take the interval the lower-bound
+2. stops if the gap is at most `gap_target`. Because the gap uses the
+   lower-bound *estimate*, an estimate that is too high (LKH missed the
+   optimum) makes the gap look smaller and can stop the loop early;
+3. otherwise calls `refine.refine`: at every target, take the interval the lower-bound
    tour chose, cut it into `lambda + 1` equal pieces, and add the `lambda`
    cut points as new upper-bound headings.
 
@@ -219,19 +239,23 @@ exact.
 
 ### Where the time goes
 
-Default config, whole run (13 iterations), from `results/summary.txt`:
+`examples/big_75.yml` (75 targets, 4 iterations: gap 10.68 % -> 7.53 % ->
+6.84 % -> 4.51 %), from `results/summary.txt`:
 
 | Stage | Seconds |
 |---|---|
-| Upper bound: Dubins edge costs (Python) | 0.60 |
-| Upper bound: LKH | 1.00 |
-| Lower bound: interval problems (C++) | 0.12 |
-| Lower bound: LKH | 0.97 |
-| Lower bound: everything else (graph building, bookkeeping) | 0.22 |
-| **Total** | **2.91** |
+| Upper bound: Dubins edge costs (Python) | 4.12 |
+| Upper bound: LKH | 6.40 |
+| Lower bound: interval problems (C++) | 1.05 |
+| Lower bound: LKH | 5.99 |
+| Lower bound: everything else (graph building, bookkeeping) | 1.04 |
+| **Total** | **18.6** |
 
-LKH is now about two thirds of the run. A single LKH call on the largest
-lower-bound graph (192 nodes) takes about 0.15 s.
+LKH is about two thirds of the run; one LKH call takes 0.7 s on 300 nodes
+and 2.4 s on 525. Next is the upper bound's Dubins edge costs, still
+computed in Python (about 15 µs per edge, against about 2.4 µs per interval
+problem in C++).
+The default 6-target config runs in about 0.1 s (5 iterations).
 
 ### Output (`src/utils/report.py`, `src/utils/plotting.py`)
 

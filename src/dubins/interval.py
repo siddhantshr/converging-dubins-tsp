@@ -65,9 +65,9 @@ CASES = ("corner", "edge(start fixed)", "edge(end fixed)", "interior(S/C/CC)")
 @dataclass(frozen=True)
 class IntervalSolution:
     length: float
-    depart_heading: float   # heading at A, inside I0
-    arrive_heading: float   # heading at B, inside I1
-    case: str               # which candidate won, for debugging
+    depart_heading: float  # heading at A, inside I0
+    arrive_heading: float  # heading at B, inside I1
+    case: str  # which candidate won, for debugging
 
 
 def _better(best: IntervalSolution | None, length, th0, th1, case) -> IntervalSolution | None:
@@ -116,18 +116,21 @@ def _interior_closed_form(a, i0, b, i1, r, best):
     return best
 
 
-def solve_interval_problem(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,
-                           r: float) -> IntervalSolution:
+def solve_interval_problem(
+    a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval, r: float
+) -> IntervalSolution:
     """Shortest Dubins path from (A, any heading in I0) to (B, any heading in I1)."""
     if _ext is None:
         return solve_interval_problem_py(a, i0, b, i1, r)
-    length, th0, th1, case = _ext.solve(a[0], a[1], i0.start, i0.width,
-                                        b[0], b[1], i1.start, i1.width, r)
+    length, th0, th1, case = _ext.solve(
+        a[0], a[1], i0.start, i0.width, b[0], b[1], i1.start, i1.width, r
+    )
     return IntervalSolution(length, th0, th1, CASES[case])
 
 
-def solve_interval_problem_py(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,
-                              r: float) -> IntervalSolution:
+def solve_interval_problem_py(
+    a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval, r: float
+) -> IntervalSolution:
     """Pure-Python reference for solve_interval_problem (same candidates, same order)."""
     best = None
     best = _corners(a, i0, b, i1, r, best)
@@ -140,12 +143,16 @@ def solve_interval_problem_py(a: Point, i0: HeadingInterval, b: Point, i1: Headi
 
 
 if _ext is None:
-    warnings.warn("C++ interval solver not built, using the pure-Python one (~150x slower). "
-                  "Build it with: python tools/build_interval.py", stacklevel=2)
+    warnings.warn(
+        "C++ interval solver not built, using the pure-Python one (~150x slower). "
+        "Build it with: python tools/build_interval.py",
+        stacklevel=2,
+    )
 
 
-def brute_force_interval(a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval,
-                         r: float, grid: int = 120) -> float:
+def brute_force_interval(
+    a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval, r: float, grid: int = 120
+) -> float:
     """Reference answer: minimum over a grid of heading pairs (slow, for tests)."""
     best = math.inf
     for th0 in i0.start + i0.width * np.linspace(0, 1, grid):

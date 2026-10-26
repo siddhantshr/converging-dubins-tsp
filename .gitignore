@@ -5,3 +5,6 @@ results.json
 tour.png
 venv/
 *.so
+results/
+results_big/
+.ruff_cache/

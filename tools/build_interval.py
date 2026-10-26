@@ -23,7 +23,7 @@ def main() -> int:
     cmd = shlex.split(sysconfig.get_config_var("CXX") or "c++")
     cmd += ["-O3", "-std=c++17", "-shared", "-fPIC", f"-I{sysconfig.get_paths()['include']}"]
     if sys.platform == "darwin":
-        cmd += ["-undefined", "dynamic_lookup"]   # symbols come from the running Python
+        cmd += ["-undefined", "dynamic_lookup"]  # symbols come from the running Python
     cmd += [str(SRC), "-o", str(out)]
     print(shlex.join(cmd))
     subprocess.run(cmd, check=True)

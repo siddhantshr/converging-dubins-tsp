@@ -10,6 +10,9 @@ import yaml
 
 SOLVERS = ("lkh",)  # the exact MILP solver was removed: too slow for refinement
 
+# Every run writes here (the repository's results/ folder), whatever the config.
+RESULTS_DIR = Path(__file__).resolve().parent.parent / "results"
+
 
 class ConfigError(ValueError):
     pass
@@ -18,7 +21,7 @@ class ConfigError(ValueError):
 @dataclass
 class BoundConfig:
     enabled: bool
-    resolution: int        # number of headings (upper) or intervals (lower)
+    resolution: int  # number of headings (upper) or intervals (lower)
     solver: str
 
 
@@ -26,15 +29,14 @@ class BoundConfig:
 class Config:
     points: list[tuple[float, float]]
     turning_radius: float
-    heading_offset: float           # radians; rotates every heading / interval grid
+    heading_offset: float  # radians; rotates every heading / interval grid
     upper: BoundConfig
     lower: BoundConfig
     lkh_runs: int
     cost_scale: float
-    refine_lambda: int              # headings added per target per iteration
-    refine_mu: int                  # number of refinement iterations (0 = single run)
+    refine_lambda: int  # headings added per target per iteration
+    gap_target: float | None  # stop once gap (%) <= this; None = single iteration
     plot: bool
-    results_dir: str
 
 
 def _require(cond: bool, message: str):
@@ -50,9 +52,11 @@ def _bound(raw: dict, name: str, count_key: str, default_solver: str) -> BoundCo
         solver=str(section.get("solver", default_solver)).lower(),
     )
     _require(cfg.resolution >= 1, f"{name}.{count_key} must be >= 1")
-    _require(cfg.solver in SOLVERS,
-             f"{name}.solver must be 'lkh' (the exact MILP solver was removed; "
-             f"the lower bound is now an LKH estimate)")
+    _require(
+        cfg.solver in SOLVERS,
+        f"{name}.solver must be 'lkh' (the exact MILP solver was removed; "
+        f"the lower bound is now an LKH estimate)",
+    )
     return cfg
 
 
@@ -80,16 +84,27 @@ def load_config(path: str | Path) -> Config:
         lkh_runs=int(solver.get("lkh_runs", 1)),
         cost_scale=float(solver.get("cost_scale", 1000)),
         refine_lambda=int(refinement.get("lambda", 2)),
-        refine_mu=int(refinement.get("mu", 0)) if refinement.get("enabled", True) else 0,
+        gap_target=(
+            float(refinement.get("gap_target", 5.0)) if refinement.get("enabled", True) else None
+        ),
         plot=bool(output.get("plot", True)),
-        results_dir=str(output.get("results_dir", "results")),
     )
     _require(cfg.turning_radius > 0, "vehicle.turning_radius must be > 0")
     _require(cfg.lkh_runs >= 1, "solver.lkh_runs must be >= 1")
     _require(cfg.cost_scale > 0, "solver.cost_scale must be > 0")
     _require(cfg.upper.enabled or cfg.lower.enabled, "enable at least one bound")
     _require(cfg.refine_lambda >= 1, "refinement.lambda must be >= 1")
-    _require(cfg.refine_mu >= 0, "refinement.mu must be >= 0")
-    _require(cfg.refine_mu == 0 or (cfg.upper.enabled and cfg.lower.enabled),
-             "refinement needs both upper_bound and lower_bound enabled")
+    _require(
+        "results_dir" not in output, "output.results_dir was removed: every run writes to results/"
+    )
+    _require(
+        "mu" not in refinement,
+        "refinement.mu was removed: the loop now runs until the gap is <= "
+        "refinement.gap_target (percent)",
+    )
+    _require(cfg.gap_target is None or cfg.gap_target > 0, "refinement.gap_target must be > 0")
+    _require(
+        cfg.gap_target is None or (cfg.upper.enabled and cfg.lower.enabled),
+        "refinement needs both upper_bound and lower_bound enabled",
+    )
     return cfg

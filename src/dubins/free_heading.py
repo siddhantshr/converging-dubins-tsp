@@ -65,12 +65,12 @@ def _curve_curve(ax, ay, theta0, bx, by, side, branch, r):
     feasible = (dist >= r - 1e-12) & (dist <= 3 * r + 1e-12)
     dist_safe = np.where(dist > 0, dist, 1.0)
     ux, uy = vx / dist_safe, vy / dist_safe
-    along = (3 * r * r + dist * dist) / (2 * dist_safe)   # from circle-circle intersection
+    along = (3 * r * r + dist * dist) / (2 * dist_safe)  # from circle-circle intersection
     across = np.sqrt(np.clip(4 * r * r - along * along, 0.0, None))
     c2x = c1x + along * ux - branch * across * uy
     c2y = c1y + along * uy + branch * across * ux
 
-    jx, jy = 0.5 * (c1x + c2x), 0.5 * (c1y + c2y)        # junction point
+    jx, jy = 0.5 * (c1x + c2x), 0.5 * (c1y + c2y)  # junction point
     heading_j = np.arctan2(jy - c1y, jx - c1x) + side * HALF_PI
     heading_b = np.arctan2(by - c2y, bx - c2x) - side * HALF_PI
     arc1 = turn_angle(side * (heading_j - theta0))

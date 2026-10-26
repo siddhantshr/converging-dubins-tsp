@@ -19,8 +19,8 @@ from __future__ import annotations
 
 import math
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 import numpy as np
 
@@ -34,12 +34,12 @@ ProgressFn = Callable[[int, int], None]
 
 @dataclass
 class ClusteredGraph:
-    cost: np.ndarray            # (N, N) float, inf inside a cluster
+    cost: np.ndarray  # (N, N) float, inf inside a cluster
     depart_heading: np.ndarray  # heading used when leaving u towards v
     arrive_heading: np.ndarray  # heading used when arriving at v from u
-    node_target: list[int]      # target of every node
-    node_option: list           # heading (float) or HeadingInterval of every node
-    clusters: list[list[int]]   # node ids of every target
+    node_target: list[int]  # target of every node
+    node_option: list  # heading (float) or HeadingInterval of every node
+    clusters: list[list[int]]  # node ids of every target
 
     @property
     def num_targets(self) -> int:
@@ -54,6 +54,7 @@ class ClusteredGraph:
 
 # --- option grids -------------------------------------------------------------
 
+
 def uniform_headings(count: int, offset: float = 0.0) -> list[float]:
     return [float(mod2pi(offset + k * TWO_PI / count)) for k in range(count)]
 
@@ -64,6 +65,7 @@ def uniform_intervals(count: int, offset: float = 0.0) -> list[HeadingInterval]:
 
 
 # --- graph construction ---------------------------------------------------------
+
 
 def _layout(options_per_target):
     node_target, node_option, clusters = [], [], []
@@ -89,16 +91,16 @@ def _build(options_per_target, edge_fn, progress=None) -> ClusteredGraph:
                 continue
             for u in clusters[i]:
                 for v in clusters[j]:
-                    cost[u, v], dep[u, v], arr[u, v] = edge_fn(
-                        i, node_option[u], j, node_option[v])
+                    cost[u, v], dep[u, v], arr[u, v] = edge_fn(i, node_option[u], j, node_option[v])
             done += 1
             if progress:
                 progress(done, total)
     return ClusteredGraph(cost, dep, arr, node_target, node_option, clusters)
 
 
-def build_heading_graph(points: list[Point], headings_per_target: list[list[float]], r: float,
-                        cache: dict | None = None) -> ClusteredGraph:
+def build_heading_graph(
+    points: list[Point], headings_per_target: list[list[float]], r: float, cache: dict | None = None
+) -> ClusteredGraph:
     """Graph for the upper bound."""
     cache = {} if cache is None else cache
 
@@ -126,13 +128,20 @@ class IntervalEdgeCosts:
 
     @staticmethod
     def _key(i, a, j, b):
-        return (i, round(a.start, 12), round(a.width, 12), j, round(b.start, 12), round(b.width, 12))
+        return (
+            i,
+            round(a.start, 12),
+            round(a.width, 12),
+            j,
+            round(b.start, 12),
+            round(b.width, 12),
+        )
 
     def edge(self, i, a, j, b):
         """(cost, depart heading, arrive heading), solving the interval problem if needed."""
         key = self._key(i, a, j, b)
         if key not in self.cache:
-            if a.is_full_circle and b.is_full_circle:   # both headings free: straight line
+            if a.is_full_circle and b.is_full_circle:  # both headings free: straight line
                 (x0, y0), (x1, y1) = self.points[i], self.points[j]
                 heading = float(mod2pi(math.atan2(y1 - y0, x1 - x0)))
                 self.cache[key] = (math.hypot(x1 - x0, y1 - y0), heading, heading)
@@ -145,8 +154,12 @@ class IntervalEdgeCosts:
         return self.cache[key]
 
 
-def build_interval_graph(points: list[Point], intervals_per_target: list[list[HeadingInterval]],
-                         r: float, costs: IntervalEdgeCosts,
-                         progress: ProgressFn | None = None) -> ClusteredGraph:
+def build_interval_graph(
+    points: list[Point],
+    intervals_per_target: list[list[HeadingInterval]],
+    r: float,
+    costs: IntervalEdgeCosts,
+    progress: ProgressFn | None = None,
+) -> ClusteredGraph:
     """Graph for the lower bound: every edge is an interval-problem minimum."""
     return _build(intervals_per_target, costs.edge, progress)

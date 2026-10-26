@@ -1,20 +1,26 @@
 """The interval solver must never be above brute force (needed for a valid
 lower bound) and must always return a path that really exists."""
+
 import math
 import random
 
 import pytest
 
 from src.dubins import interval
-from src.dubins.interval import (brute_force_interval, solve_interval_problem,
-                                  solve_interval_problem_py)
+from src.dubins.interval import (
+    brute_force_interval,
+    solve_interval_problem,
+    solve_interval_problem_py,
+)
 from src.dubins.path import shortest_length
 from src.utils.angles import HeadingInterval
 
 
 def _random_case(rng):
     r = rng.uniform(0.5, 2.0)
-    dist = r * rng.choice([rng.uniform(0.05, 1), rng.uniform(1, 2), rng.uniform(2, 4), rng.uniform(4, 8)])
+    dist = r * rng.choice(
+        [rng.uniform(0.05, 1), rng.uniform(1, 2), rng.uniform(2, 4), rng.uniform(4, 8)]
+    )
     ang = rng.uniform(0, 2 * math.pi)
     a = (rng.uniform(-3, 3), rng.uniform(-3, 3))
     b = (a[0] + dist * math.cos(ang), a[1] + dist * math.sin(ang))

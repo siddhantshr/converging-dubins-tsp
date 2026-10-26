@@ -20,7 +20,20 @@ Three tricks make the two problems equivalent:
 3. Big M: add M to every edge between different clusters. An honest tour
    uses exactly n such edges; a tour that leaves a cluster's ring early needs
    at least n + 1. With M larger than any real tour cost, honest tours are
-   always cheaper.
+   always cheaper. A one-in-a-set tour leaves every cluster exactly once, so
+       M = sum over clusters of (largest cost leaving that cluster) + 1
+   is enough.
+
+Every other edge (inside a cluster, off the ring) is forbidden, with cost
+2M: any tour must leave all n clusters, so a tour that uses a forbidden edge
+costs >= n*M + 2M, more than any honest tour (< n*M + M). 2M is also above
+every allowed entry (<= M + largest cost), so "cost >= forbidden" means "no
+edge".
+
+Size limit: LKH multiplies every cost by its PRECISION (100) in 32-bit
+integers. Measured with elkai on a 75-target instance: entries of 20e6 work,
+21.5e6 crash LKH (assertion in LinKernighan.c). We keep every entry at most
+half of 2**31 / 100.
 
 Decoding: the first node visited in each cluster is the chosen option, and
     GTSP cost = ATSP cost - n * M.
@@ -32,17 +45,19 @@ from dataclasses import dataclass
 
 import numpy as np
 
+LKH_MAX_ENTRY = (2**31 - 1) // 100 // 2  # see "Size limit" above
+
 
 class DecodeError(RuntimeError):
-    """The ATSP tour does not visit each cluster as one consecutive block."""
+    """The ATSP tour does not visit each cluster as one block, or uses a forbidden edge."""
 
 
 @dataclass
 class NoonBeanATSP:
-    matrix: np.ndarray      # int64 ATSP costs
+    matrix: np.ndarray  # int64 ATSP costs
     big_m: int
-    forbidden: int          # cost of edges that must never be used
-    successor: np.ndarray   # ring successor of every node
+    forbidden: int  # cost of edges that must never be used
+    successor: np.ndarray  # ring successor of every node
     cluster_of: np.ndarray  # cluster index of every node
     num_clusters: int
 
@@ -70,13 +85,15 @@ def transform(cost: np.ndarray, clusters: list[list[int]]) -> NoonBeanATSP:
             successor[u] = members[(idx + 1) % len(members)]
 
     different = cluster_of[:, None] != cluster_of[None, :]
-    max_cost = int(cost[different].max())
-    big_m = n * max_cost + 1          # strictly larger than any GTSP tour cost
-    forbidden = (n + 1) * big_m       # larger than any honest ATSP tour
+    leaving = np.where(different, cost, np.iinfo(np.int64).min).max(axis=1)
+    big_m = int(sum(leaving[members].max() for members in clusters)) + 1  # > any GTSP tour
+    forbidden = 2 * big_m  # above every allowed entry and any honest tour
 
-    if forbidden >= 2**31 - 1:
+    if forbidden > LKH_MAX_ENTRY:
         raise OverflowError(
-            "ATSP costs too large for the solver; lower `solver.cost_scale` in config.yml")
+            f"ATSP costs too large for LKH (largest entry {forbidden:,} > {LKH_MAX_ENTRY:,}); "
+            "lower `solver.cost_scale` in config.yml"
+        )
 
     # Trick 2 + 3: rows of the successor, plus M, for edges between clusters.
     matrix = np.where(different, cost[successor, :] + big_m, forbidden).astype(np.int64)
@@ -93,10 +110,16 @@ def decode(tour: list[int], atsp: NoonBeanATSP) -> list[int]:
 
     The chosen node is the one where the tour *enters* the cluster.
     """
-    entries = [tour[i] for i in range(len(tour))
-               if atsp.cluster_of[tour[i]] != atsp.cluster_of[tour[i - 1]]]
+    entries = [
+        tour[i]
+        for i in range(len(tour))
+        if atsp.cluster_of[tour[i]] != atsp.cluster_of[tour[i - 1]]
+    ]
     if len(entries) != atsp.num_clusters:
         raise DecodeError(
             f"tour enters clusters {len(entries)} times, expected {atsp.num_clusters}; "
-            "the solver broke a zero-cost ring")
+            "the solver broke a zero-cost ring"
+        )
+    if any(atsp.matrix[tour[i - 1], tour[i]] >= atsp.forbidden for i in range(len(tour))):
+        raise DecodeError("tour uses a forbidden edge (off the ring inside a cluster)")
     return entries

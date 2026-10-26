@@ -28,8 +28,11 @@ def turn_angle(angle, snap: float = 1e-7):
     because of rounding.
     """
     value = mod2pi(angle)
-    return np.where(value > TWO_PI - snap, 0.0, value) if np.ndim(value) else (
-        0.0 if value > TWO_PI - snap else float(value))
+    return (
+        np.where(value > TWO_PI - snap, 0.0, value)
+        if np.ndim(value)
+        else (0.0 if value > TWO_PI - snap else float(value))
+    )
 
 
 @dataclass(frozen=True)

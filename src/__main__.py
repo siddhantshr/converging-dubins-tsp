@@ -1,6 +1,6 @@
 """Run with:  python -m src  [--config config.yml] [--no-plot]
 
-Output goes to the results folder (output.results_dir in config.yml):
+Output always goes to the repository's results/ folder:
 
     results/
       iter_00/  summary.txt  results.json  tour.png     <- uniform grids
@@ -20,10 +20,17 @@ from pathlib import Path
 
 from . import refine
 from .bounds import compute_lower_bound, compute_upper_bound
-from .config import ConfigError, load_config
+from .config import RESULTS_DIR, ConfigError, load_config
 from .utils.plotting import plot_convergence, plot_results
-from .utils.report import (format_convergence, format_iteration, format_result,
-                           format_timings, iteration_record, save_records, save_text)
+from .utils.report import (
+    format_convergence,
+    format_iteration,
+    format_result,
+    format_timings,
+    iteration_record,
+    save_records,
+    save_text,
+)
 
 
 def _clean(results_dir: Path) -> None:
@@ -46,17 +53,30 @@ def _run_refinement(cfg, results_dir: Path, plot: bool) -> None:
         records.append(iteration_record(it))
         save_records(records[-1], folder / "results.json")
         if plot:
-            plot_results(cfg.points, [it.upper, it.lower], cfg.turning_radius,
-                         str(folder / "tour.png"),
-                         suptitle=f"Iteration {it.index}  |  gap {it.gap_percent:.2f}%  "
-                                  f"(lower bound is an LKH estimate)")
+            plot_results(
+                cfg.points,
+                [it.upper, it.lower],
+                cfg.turning_radius,
+                str(folder / "tour.png"),
+                suptitle=f"Iteration {it.index}  |  gap {it.gap_percent:.2f}%  "
+                f"(lower bound is an LKH estimate)",
+            )
 
-    iterations = refine.run(cfg, cfg.refine_lambda, cfg.refine_mu, on_iteration=save_iteration)
+    iterations = refine.run(cfg, cfg.refine_lambda, cfg.gap_target, on_iteration=save_iteration)
 
+    last = iterations[-1]
+    stop = (
+        f"stopped at iteration {last.index}: gap {last.gap_percent:.3f}% <= "
+        f"target {cfg.gap_target:g}%"
+        if cfg.gap_target is not None
+        else "refinement disabled: iteration 0 only"
+    )
     table = format_convergence(iterations)
-    print(table)
-    save_text(f"lambda = {cfg.refine_lambda}, mu = {cfg.refine_mu}\n\n{table}",
-              results_dir / "convergence.txt")
+    print(table + "\n" + stop)
+    save_text(
+        f"lambda = {cfg.refine_lambda}, gap target = {cfg.gap_target}%\n{stop}\n\n{table}",
+        results_dir / "convergence.txt",
+    )
     timings = format_timings(iterations)
     print("\n" + timings)
     save_text(timings, results_dir / "summary.txt")
@@ -89,11 +109,13 @@ def main(argv: list[str] | None = None) -> int:
         print(f"config error: {err}", file=sys.stderr)
         return 2
 
-    results_dir = Path(cfg.results_dir)
+    results_dir = RESULTS_DIR
     _clean(results_dir)
     plot = cfg.plot and not args.no_plot
-    print(f"{len(cfg.points)} targets, turning radius {cfg.turning_radius}, "
-          f"lambda = {cfg.refine_lambda}, mu = {cfg.refine_mu}\n")
+    print(
+        f"{len(cfg.points)} targets, turning radius {cfg.turning_radius}, "
+        f"lambda = {cfg.refine_lambda}, gap target = {cfg.gap_target}%\n"
+    )
 
     if cfg.upper.enabled and cfg.lower.enabled:
         _run_refinement(cfg, results_dir, plot)

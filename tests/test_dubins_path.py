@@ -1,4 +1,5 @@
 """Every Dubins word must actually end at the goal configuration."""
+
 import math
 import random
 

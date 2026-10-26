@@ -6,8 +6,10 @@ import json
 import math
 from dataclasses import asdict
 
-LB_WARNING = ("WARNING: iteration {k}: lower-bound estimate {lb:.6f} exceeds the best upper "
-              "bound {ub:.6f}. LKH missed the optimal GTSP tour, so this estimate is too high.")
+LB_WARNING = (
+    "WARNING: iteration {k}: lower-bound estimate {lb:.6f} exceeds the best upper "
+    "bound {ub:.6f}. LKH missed the optimal GTSP tour, so this estimate is too high."
+)
 
 
 def _deg(rad: float) -> str:
@@ -33,13 +35,16 @@ def format_result(res) -> str:
         "  legs:   from -> to   leave     arrive    length",
     ]
     for leg in res.legs:
-        lines.append(f"          {leg.from_target:>4} -> {leg.to_target:<4} "
-                     f"{_deg(leg.depart_heading)}  {_deg(leg.arrive_heading)}  {leg.length:9.4f}")
+        lines.append(
+            f"          {leg.from_target:>4} -> {leg.to_target:<4} "
+            f"{_deg(leg.depart_heading)}  {_deg(leg.arrive_heading)}  {leg.length:9.4f}"
+        )
     lines += [f"  note: {note}" for note in res.notes]
     return "\n".join(lines)
 
 
 # --- refinement output ------------------------------------------------------------
+
 
 def _deg_list(headings):
     return [round(math.degrees(h) % 360, 4) for h in headings]
@@ -48,17 +53,23 @@ def _deg_list(headings):
 def format_iteration(it) -> str:
     lines = [f"ITERATION {it.index}", ""]
     if it.index > 0:
-        lines.append("headings added (deg) per target, inside the interval the previous "
-                     "lower bound picked:")
+        lines.append(
+            "headings added (deg) per target, inside the interval the previous lower bound picked:"
+        )
         for t, fresh in enumerate(it.added):
             lines.append(f"  target {t}: {', '.join(f'{d:.2f}' for d in _deg_list(fresh)) or '-'}")
         lines.append("")
-    lines += [format_result(it.upper), "", format_result(it.lower), "",
-              f"lower bound, estimate (LKH): {it.lower.value:.6f}",
-              f"upper bound, this iteration: {it.upper.value:.6f}",
-              f"best upper bound so far:     {it.best_upper:.6f}",
-              f"max LB estimate so far:      {it.max_lb_estimate:.6f}   (not used for the gap)",
-              f"gap = (best UB - LB estimate) / LB estimate = {it.gap_percent:.3f}%"]
+    lines += [
+        format_result(it.upper),
+        "",
+        format_result(it.lower),
+        "",
+        f"lower bound, estimate (LKH): {it.lower.value:.6f}",
+        f"upper bound, this iteration: {it.upper.value:.6f}",
+        f"best upper bound so far:     {it.best_upper:.6f}",
+        f"max LB estimate so far:      {it.max_lb_estimate:.6f}   (not used for the gap)",
+        f"gap = (best UB - LB estimate) / LB estimate = {it.gap_percent:.3f}%",
+    ]
     if it.lb_exceeds_ub:
         lines += ["", LB_WARNING.format(k=it.index, lb=it.lower.value, ub=it.best_upper)]
     return "\n".join(lines)
@@ -83,8 +94,10 @@ def iteration_record(it) -> dict:
 
 
 def format_convergence(iterations) -> str:
-    header = (f"{'iter':>4}  {'nodes UB':>8}  {'nodes LB':>8}  {'upper':>11}  {'LB est.':>11}  "
-              f"{'best UB':>11}  {'max LB est.':>11}  {'gap %':>7}  {'time s':>7}")
+    header = (
+        f"{'iter':>4}  {'nodes UB':>8}  {'nodes LB':>8}  {'upper':>11}  {'LB est.':>11}  "
+        f"{'best UB':>11}  {'max LB est.':>11}  {'gap %':>7}  {'time s':>7}"
+    )
     lines = [header, "-" * len(header)]
     for it in iterations:
         secs = sum(r.build_seconds + r.solve_seconds for r in (it.upper, it.lower))
@@ -92,12 +105,16 @@ def format_convergence(iterations) -> str:
             f"{it.index:>4}  {sum(it.upper.options_per_target):>8}  "
             f"{sum(it.lower.options_per_target):>8}  {it.upper.value:>11.6f}  "
             f"{it.lower.value:>11.6f}  {it.best_upper:>11.6f}  {it.max_lb_estimate:>11.6f}  "
-            f"{it.gap_percent:>7.3f}  {secs:>7.1f}" + ("  <- LB > best UB" if it.lb_exceeds_ub else ""))
-    lines += ["",
-              "LB est. = lower bound, estimate (LKH): LKH may miss the optimal GTSP tour, and",
-              "          then the value is too high. It is not a certified lower bound.",
-              "gap %   = (best UB - LB est. of that iteration) / LB est. of that iteration.",
-              "          'max LB est.' is shown for reference only and not used for the gap."]
+            f"{it.gap_percent:>7.3f}  {secs:>7.1f}"
+            + ("  <- LB > best UB" if it.lb_exceeds_ub else "")
+        )
+    lines += [
+        "",
+        "LB est. = lower bound, estimate (LKH): LKH may miss the optimal GTSP tour, and",
+        "          then the value is too high. It is not a certified lower bound.",
+        "gap %   = (best UB - LB est. of that iteration) / LB est. of that iteration.",
+        "          'max LB est.' is shown for reference only and not used for the gap.",
+    ]
     for it in iterations:
         if it.lb_exceeds_ub:
             lines.append(LB_WARNING.format(k=it.index, lb=it.lower.value, ub=it.best_upper))
@@ -119,12 +136,18 @@ def format_timings(iterations) -> str:
         cells += [f"{solves:>7}", " |", f"{ub['total'] + lb['total']:>8.2f}"]
         return " ".join(cells)
 
-    head = " ".join([f"{'iter':>5}"] + [f"{h:>8}" for _, h in ub_cols] + [f"{'total':>8}", " |"]
-                    + [f"{h:>8}" for _, h in lb_cols] + [f"{'total':>8}", f"{'#solves':>7}",
-                    " |", f"{'iter':>8}"])
+    head = " ".join(
+        [f"{'iter':>5}"]
+        + [f"{h:>8}" for _, h in ub_cols]
+        + [f"{'total':>8}", " |"]
+        + [f"{h:>8}" for _, h in lb_cols]
+        + [f"{'total':>8}", f"{'#solves':>7}", " |", f"{'iter':>8}"]
+    )
     ub_width = 6 + 9 * (len(ub_cols) + 1)
-    group = (f"{'':6}{' UPPER BOUND ':-^{ub_width - 6}}  |"
-             f"{' LOWER BOUND ':-^{9 * (len(lb_cols) + 1) + 8}}  |")
+    group = (
+        f"{'':6}{' UPPER BOUND ':-^{ub_width - 6}}  |"
+        f"{' LOWER BOUND ':-^{9 * (len(lb_cols) + 1) + 8}}  |"
+    )
     lines = ["TIME PER ITERATION (seconds)", "", group, head, "-" * len(head)]
 
     sums_ub, sums_lb, sum_solves = {}, {}, 0
@@ -140,8 +163,9 @@ def format_timings(iterations) -> str:
 
     grand = sums_ub["total"] + sums_lb["total"]
     if grand > 0:
-        share = [f"UB {h} {sums_ub[k] / grand:.1%}" for k, h in ub_cols] + \
-                [f"LB {h} {sums_lb[k] / grand:.1%}" for k, h in lb_cols]
+        share = [f"UB {h} {sums_ub[k] / grand:.1%}" for k, h in ub_cols] + [
+            f"LB {h} {sums_lb[k] / grand:.1%}" for k, h in lb_cols
+        ]
         lines += ["", "share of total time: " + ", ".join(share)]
 
     lines += [

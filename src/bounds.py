@@ -28,8 +28,14 @@ import numpy as np
 
 from .config import Config
 from .tsp import noon_bean, solvers
-from .tsp.gtsp import (ClusteredGraph, IntervalEdgeCosts, build_heading_graph,
-                       build_interval_graph, uniform_headings, uniform_intervals)
+from .tsp.gtsp import (
+    ClusteredGraph,
+    IntervalEdgeCosts,
+    build_heading_graph,
+    build_interval_graph,
+    uniform_headings,
+    uniform_intervals,
+)
 from .utils.angles import HeadingInterval
 
 
@@ -46,19 +52,19 @@ class Leg:
 
 @dataclass
 class BoundResult:
-    kind: str                 # "upper" or "lower"
+    kind: str  # "upper" or "lower"
     value: float
-    is_valid_bound: bool      # True for the upper bound; the LKH lower bound is an estimate
-    status: str               # "valid upper bound" or "estimate (LKH)"
+    is_valid_bound: bool  # True for the upper bound; the LKH lower bound is an estimate
+    status: str  # "valid upper bound" or "estimate (LKH)"
     solver: str
     options_per_target: list[int]
-    order: list[int]          # targets in visiting order
+    order: list[int]  # targets in visiting order
     legs: list[Leg]
-    selected: list            # chosen heading / interval of every target (index = target)
+    selected: list  # chosen heading / interval of every target (index = target)
     build_seconds: float
     solve_seconds: float
     notes: list[str] = field(default_factory=list)
-    interval_solves: int = 0     # interval problems actually solved for this bound
+    interval_solves: int = 0  # interval problems actually solved for this bound
     # seconds per stage: dubins | interval | transform | lkh | other
     timings: dict[str, float] = field(default_factory=dict)
 
@@ -101,13 +107,17 @@ def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config, build_seconds: f
     legs = []
     for idx in range(n):
         u, v = chosen[idx], chosen[(idx + 1) % n]
-        legs.append(Leg(
-            from_target=graph.node_target[u], to_target=graph.node_target[v],
-            depart_heading=float(graph.depart_heading[u, v]),
-            arrive_heading=float(graph.arrive_heading[u, v]),
-            length=float(graph.cost[u, v]),
-            from_option=graph.label(u), to_option=graph.label(v),
-        ))
+        legs.append(
+            Leg(
+                from_target=graph.node_target[u],
+                to_target=graph.node_target[v],
+                depart_heading=float(graph.depart_heading[u, v]),
+                arrive_heading=float(graph.arrive_heading[u, v]),
+                length=float(graph.cost[u, v]),
+                from_option=graph.label(u),
+                to_option=graph.label(v),
+            )
+        )
     selected = [None] * graph.num_targets
     for node in chosen:
         selected[graph.node_target[node]] = graph.node_option[node]
@@ -118,20 +128,31 @@ def _solve_graph(graph: ClusteredGraph, kind: str, cfg: Config, build_seconds: f
         # but LKH's tour may cost more than the integer optimum: an estimate only.
         value = atsp.gtsp_cost(tour) / cfg.cost_scale
         valid = False
-        notes.append("solved with LKH (heuristic): this is an ESTIMATE, not a certified "
-                     "lower bound. If LKH misses the optimal GTSP tour it is too high.")
-        notes.append("legs may use different headings when arriving at and leaving a "
-                     "target, so this tour is not flyable (that is why it is a lower bound).")
+        notes.append(
+            "solved with LKH (heuristic): this is an ESTIMATE, not a certified "
+            "lower bound. If LKH misses the optimal GTSP tour it is too high."
+        )
+        notes.append(
+            "legs may use different headings when arriving at and leaving a "
+            "target, so this tour is not flyable (that is why it is a lower bound)."
+        )
     else:
         value = sum(leg.length for leg in legs)  # real length of a flyable tour
         valid = True
 
     return BoundResult(
-        kind=kind, value=value, is_valid_bound=valid,
-        status="valid upper bound" if valid else "estimate (LKH)", solver="lkh",
+        kind=kind,
+        value=value,
+        is_valid_bound=valid,
+        status="valid upper bound" if valid else "estimate (LKH)",
+        solver="lkh",
         options_per_target=[len(c) for c in graph.clusters],
-        order=[leg.from_target for leg in legs], legs=legs, selected=selected,
-        build_seconds=build_seconds, solve_seconds=solve_seconds, notes=notes,
+        order=[leg.from_target for leg in legs],
+        legs=legs,
+        selected=selected,
+        build_seconds=build_seconds,
+        solve_seconds=solve_seconds,
+        notes=notes,
         timings=timings,
     )
 
@@ -154,20 +175,24 @@ def initial_intervals(cfg: Config) -> list[list[HeadingInterval]]:
     return [list(grid) for _ in cfg.points]
 
 
-def compute_upper_bound(cfg: Config, headings: list[list[float]] | None = None,
-                        cache: dict | None = None) -> BoundResult:
+def compute_upper_bound(
+    cfg: Config, headings: list[list[float]] | None = None, cache: dict | None = None
+) -> BoundResult:
     """Upper bound with the given headings per target (default: uniform grid)."""
     t0 = time.perf_counter()
     headings = headings or initial_headings(cfg)
     graph = build_heading_graph(cfg.points, headings, cfg.turning_radius, cache)
     result = _solve_graph(graph, "upper", cfg, time.perf_counter() - t0)
-    result.timings["dubins"] = result.build_seconds   # building = Dubins path lengths
+    result.timings["dubins"] = result.build_seconds  # building = Dubins path lengths
     _finish_timings(result)
     return result
 
 
-def compute_lower_bound(cfg: Config, intervals: list[list[HeadingInterval]] | None = None,
-                        costs: IntervalEdgeCosts | None = None) -> BoundResult:
+def compute_lower_bound(
+    cfg: Config,
+    intervals: list[list[HeadingInterval]] | None = None,
+    costs: IntervalEdgeCosts | None = None,
+) -> BoundResult:
     """Lower bound with the given intervals per target (default: uniform partition).
 
     Pass the same `costs` object between refinement iterations to reuse every
@@ -178,8 +203,9 @@ def compute_lower_bound(cfg: Config, intervals: list[list[HeadingInterval]] | No
     if costs is None:
         costs = IntervalEdgeCosts(cfg.points, cfg.turning_radius)
     solves_before, seconds_before = costs.solves, costs.solve_seconds
-    graph = build_interval_graph(cfg.points, intervals, cfg.turning_radius, costs,
-                                 progress=_progress)
+    graph = build_interval_graph(
+        cfg.points, intervals, cfg.turning_radius, costs, progress=_progress
+    )
     result = _solve_graph(graph, "lower", cfg, time.perf_counter() - t0)
     result.interval_solves = costs.solves - solves_before
     result.timings["interval"] = costs.solve_seconds - seconds_before

@@ -1,4 +1,5 @@
 """Noon-Bean + ATSP solver must reproduce the brute-force one-in-a-set optimum."""
+
 import itertools
 
 import numpy as np
@@ -28,7 +29,7 @@ def test_matches_brute_force(method):
         tour = solvers.solve(atsp, method, lkh_runs=10, time_limit=60)
         chosen = noon_bean.decode(tour, atsp)
         real = sum(cost[chosen[i], chosen[(i + 1) % n]] for i in range(n))
-        assert real == atsp.gtsp_cost(tour)          # successor shift is exact
+        assert real == atsp.gtsp_cost(tour)  # successor shift is exact
         assert real == brute_force_gtsp(cost, clusters)
 
 
@@ -37,3 +38,10 @@ def test_decode_rejects_broken_ring():
     atsp = noon_bean.transform(np.ones((6, 6), dtype=int), clusters)
     with pytest.raises(noon_bean.DecodeError):
         noon_bean.decode([0, 2, 1, 3, 4, 5], atsp)  # leaves cluster 0 twice
+
+
+def test_decode_rejects_forbidden_edge():
+    clusters = [[0, 1, 2], [3, 4, 5]]
+    atsp = noon_bean.transform(np.ones((6, 6), dtype=int), clusters)
+    with pytest.raises(noon_bean.DecodeError):
+        noon_bean.decode([0, 2, 1, 3, 4, 5], atsp)  # 0 -> 2 skips the ring: forbidden
