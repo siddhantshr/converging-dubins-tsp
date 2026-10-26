@@ -28,7 +28,8 @@ python tools/lb_stability.py 4   # LB estimate of iteration 4 with 1 / 10 / 50 L
 
 Edit `config.yml` to set the points, the turning radius, the number of
 discrete headings (upper bound), the number of heading intervals (lower bound)
-and the refinement settings `lambda` and `gap_target`.
+and the refinement settings `lambda` and `gap_target`. `use_all_cores: true`
+runs the work on every CPU core (same results, less time).
 
 ## Output
 
@@ -124,8 +125,8 @@ config.yml
 Iteration 0 uses the uniform grids. Each later iteration adds `lambda`
 options per target, so the problems grow steadily. Default config (6
 targets, 4 options each, `lambda = 1`): 24 options in iteration 0, 48 in
-iteration 4. `examples/big_75.yml` (75 targets, same settings): 300, 375,
-450, 525.
+iteration 4. `examples/big_75.yml` (75 targets, 6 options each,
+`lambda = 1`): 450 in iteration 0, then 525, 600, 675, 750.
 
 ### The pipeline (shared by both bounds)
 
@@ -153,8 +154,8 @@ them. The two bounds differ only here:
 
 Both caches live for the whole run. When the refinement splits one interval
 per target, only edges touching the new pieces are new; everything else is
-a cache hit. (`examples/big_75.yml`: 88,800 interval problems in
-iteration 0; in iteration 3, 133,200 of the 271,950 edges.)
+a cache hit. (`examples/big_75.yml`: 199,800 interval problems in
+iteration 0; in iteration 4, 199,800 of the 555,000 edges.)
 
 **2. Integer costs** (`bounds._integer_costs`). LKH works with integers, so
 every cost is multiplied by `solver.cost_scale` (default 1000). The upper
@@ -237,24 +238,47 @@ exact.
   per solve). It is the reference the tests compare against, and the
   fallback (with a warning) if the C++ module has not been built.
 
+### Using all cores (`use_all_cores: true`)
+
+With this setting, `refine.run` starts one worker process per CPU core
+(`src/parallel.py`) and keeps them for the whole run. Two things use them:
+
+- **Edge costs.** Before a graph is built, every edge that is not in the
+  cache yet is collected and the list is split into chunks, about four per
+  worker. Workers compute the Dubins lengths (upper bound) or solve the
+  interval problems (lower bound) and send the results back to the cache.
+- **The two LKH solves overlap.** The upper bound's LKH solve is sent to a
+  worker; while it runs, the main process builds the lower-bound graph and
+  starts its solve. LKH itself is single-threaded, so this is the only way
+  to run LKH on two cores.
+
+Workers are separate processes, not threads, because LKH (through elkai)
+keeps the Python interpreter locked and keeps global state in C. Every
+computation is the same as without the setting, so the bounds, tours and
+gaps are identical; only the time changes. Worker start-up costs a fraction
+of a second, so tiny problems gain nothing.
+
 ### Where the time goes
 
-`examples/big_75.yml` (75 targets, 4 iterations: gap 10.68 % -> 7.53 % ->
-6.84 % -> 4.51 %), from `results/summary.txt`:
+`examples/big_75.yml` (75 targets, 6 headings / 6 intervals, `lambda = 1`,
+3 % target; 5 iterations: gap 7.17 % -> 5.36 % -> 4.76 % -> 4.62 % ->
+1.98 %), from `results/summary.txt`, on an 8-core laptop:
 
-| Stage | Seconds |
-|---|---|
-| Upper bound: Dubins edge costs (Python) | 4.12 |
-| Upper bound: LKH | 6.40 |
-| Lower bound: interval problems (C++) | 1.05 |
-| Lower bound: LKH | 5.99 |
-| Lower bound: everything else (graph building, bookkeeping) | 1.04 |
-| **Total** | **18.6** |
+| Stage | One core | `use_all_cores` |
+|---|---|---|
+| Upper bound: Dubins edge costs (Python) | 8.36 | 4.15 |
+| Upper bound: LKH | 17.08 | 17.61 |
+| Lower bound: interval problems (C++) | 1.88 | 0.69 |
+| Lower bound: LKH | 16.83 | 16.90 |
+| Lower bound: everything else (graph building, bookkeeping) | 2.40 | 4.86 |
+| **Elapsed** | **46.6** | **26.7** |
 
-LKH is about two thirds of the run; one LKH call takes 0.7 s on 300 nodes
-and 2.4 s on 525. Next is the upper bound's Dubins edge costs, still
-computed in Python (about 15 µs per edge, against about 2.4 µs per interval
-problem in C++).
+Both runs give identical bounds and tours. LKH is most of the work: one
+call takes about 2.3 s on 450 nodes and 5–6 s on 750, and LKH itself is
+single-threaded, so with all cores the two LKH solves of an iteration run
+side by side but each one is no faster. The upper bound's Dubins edge
+costs are still computed in Python (about 13 µs per edge on one core,
+against about 2.2 µs per interval problem in C++).
 The default 6-target config runs in about 0.1 s (5 iterations).
 
 ### Output (`src/utils/report.py`, `src/utils/plotting.py`)
@@ -272,6 +296,7 @@ src/
   __main__.py              entry point (python -m src): runs the loop, writes results/
   config.py                reads and checks config.yml
   refine.py                the iteration loop and the refinement step
+  parallel.py              worker processes for use_all_cores
   bounds.py                the 5-step pipeline, for either bound
   dubins/
     path.py                Dubins shortest path between two fixed headings

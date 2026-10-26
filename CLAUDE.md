@@ -56,6 +56,17 @@ across refinement iterations), then one LKH solve per bound.
   `lower_bound.lkh_runs_screening` (old configs that set them still load;
   the keys are ignored).
 
+## use_all_cores (`src/parallel.py`)
+
+- Worker processes (spawn), never threads: elkai holds the GIL and LKH has
+  global C state. Workers compute uncached edge costs in chunks
+  (`IntervalEdgeCosts.prefetch`, `build_heading_graph(pool=...)`) and run
+  the upper-bound LKH while the lower-bound graph is built
+  (`bounds.compute_bounds`).
+- Results must stay identical to the serial path
+  (`test_use_all_cores_gives_the_same_results`). Timing columns are stage
+  times; `Iteration.wall_seconds` is the elapsed time.
+
 ## Output
 
 - Every run writes to the repo's `results/` (`config.RESULTS_DIR`), whatever

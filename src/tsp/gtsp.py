@@ -24,6 +24,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from .. import parallel
 from ..dubins.interval import solve_interval_problem
 from ..dubins.path import shortest_length
 from ..utils.angles import TWO_PI, HeadingInterval, mod2pi
@@ -98,11 +99,37 @@ def _build(options_per_target, edge_fn, progress=None) -> ClusteredGraph:
     return ClusteredGraph(cost, dep, arr, node_target, node_option, clusters)
 
 
+def _dubins_lengths(points, r, items):
+    """Worker task: point-to-point Dubins lengths for (i, th_a, j, th_b) items."""
+    return [shortest_length((*points[i], a), (*points[j], b), r) for i, a, j, b in items]
+
+
+def _target_pairs(options_per_target):
+    for i, options_i in enumerate(options_per_target):
+        for j, options_j in enumerate(options_per_target):
+            if i != j:
+                for a in options_i:
+                    for b in options_j:
+                        yield i, a, j, b
+
+
 def build_heading_graph(
-    points: list[Point], headings_per_target: list[list[float]], r: float, cache: dict | None = None
+    points: list[Point],
+    headings_per_target: list[list[float]],
+    r: float,
+    cache: dict | None = None,
+    pool=None,
 ) -> ClusteredGraph:
-    """Graph for the upper bound."""
+    """Graph for the upper bound. With a pool, uncached lengths are computed in parallel."""
     cache = {} if cache is None else cache
+    if pool is not None:
+        missing = {}
+        for i, a, j, b in _target_pairs(headings_per_target):
+            key = (i, round(a, 12), j, round(b, 12))
+            if key not in cache and key not in missing:  # first one wins, as in edge()
+                missing[key] = (i, a, j, b)
+        lengths = parallel.map_chunked(pool, _dubins_lengths, list(missing.values()), points, r)
+        cache.update(zip(missing, lengths, strict=True))
 
     def edge(i, th_a, j, th_b):
         key = (i, round(th_a, 12), j, round(th_b, 12))
@@ -111,6 +138,15 @@ def build_heading_graph(
         return cache[key], th_a, th_b
 
     return _build(headings_per_target, edge)
+
+
+def _interval_solutions(points, r, items):
+    """Worker task: (cost, depart, arrive) for (i, interval_a, j, interval_b) items."""
+    out = []
+    for i, a, j, b in items:
+        sol = solve_interval_problem(points[i], a, points[j], b, r)
+        out.append((sol.length, sol.depart_heading, sol.arrive_heading))
+    return out
 
 
 class IntervalEdgeCosts:
@@ -137,6 +173,22 @@ class IntervalEdgeCosts:
             round(b.width, 12),
         )
 
+    def prefetch(self, intervals_per_target, pool) -> None:
+        """Solve every uncached interval problem of this graph, in parallel."""
+        missing = {}
+        for i, a, j, b in _target_pairs(intervals_per_target):
+            if not (a.is_full_circle and b.is_full_circle):  # edge() does those inline
+                key = self._key(i, a, j, b)
+                if key not in self.cache and key not in missing:
+                    missing[key] = (i, a, j, b)
+        t0 = time.perf_counter()
+        solutions = parallel.map_chunked(
+            pool, _interval_solutions, list(missing.values()), self.points, self.r
+        )
+        self.solve_seconds += time.perf_counter() - t0  # wall time of the parallel batch
+        self.solves += len(solutions)
+        self.cache.update(zip(missing, solutions, strict=True))
+
     def edge(self, i, a, j, b):
         """(cost, depart heading, arrive heading), solving the interval problem if needed."""
         key = self._key(i, a, j, b)
@@ -160,6 +212,12 @@ def build_interval_graph(
     r: float,
     costs: IntervalEdgeCosts,
     progress: ProgressFn | None = None,
+    pool=None,
 ) -> ClusteredGraph:
-    """Graph for the lower bound: every edge is an interval-problem minimum."""
+    """Graph for the lower bound: every edge is an interval-problem minimum.
+
+    With a pool, the uncached interval problems are solved in parallel first.
+    """
+    if pool is not None:
+        costs.prefetch(intervals_per_target, pool)
     return _build(intervals_per_target, costs.edge, progress)

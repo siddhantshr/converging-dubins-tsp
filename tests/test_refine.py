@@ -89,3 +89,21 @@ def test_config_rejects_removed_mu(tmp_path):
         assert "gap_target" in str(err)
     else:
         raise AssertionError("mu should be rejected")
+
+
+def test_use_all_cores_gives_the_same_results(monkeypatch):
+    from src import parallel
+
+    monkeypatch.setattr(parallel, "MIN_PARALLEL_ITEMS", 0)  # chunk even this small instance
+    cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh"))
+
+    def summary(use_all_cores):
+        its = refine.run(
+            dataclasses.replace(cfg, use_all_cores=use_all_cores), 1, 1e-9, max_iterations=3
+        )
+        return [
+            (it.upper.value, it.lower.value, it.upper.order, it.lower.order, it.lower.selected)
+            for it in its
+        ]
+
+    assert summary(True) == summary(False)
