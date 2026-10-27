@@ -43,6 +43,30 @@ The two shipped configs:
 | `gap_target` | 2 % | 3 % |
 | result | 9 iterations, gap 1.90 %, ~1 s | 5 iterations, gap 1.98 %, ~23 s |
 
+### TSPLIB examples
+
+`examples/` also has four instances from
+[TSPLIB](https://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/tspindex.html),
+made by `tools/tsplib_to_config.py` from the original files in
+`examples/tsplib/` (`python tools/tsplib_to_config.py examples/tsplib/<name>.tsp`
+for another one). TSPLIB has no turning radius, so the converter uses
+r = 0.4 × the mean nearest-neighbour distance; all four use 6 headings,
+6 intervals, `lambda = 1` and a 3 % gap target.
+
+| Instance | Targets | Points | r | Iterations | Gap | Best UB | LB estimate | TSPLIB optimum (straight lines) | Time |
+|---|---|---|---|---|---|---|---|---|---|
+| burma14 | 14 | latitude / longitude used as x, y | 0.54 | 6 | 2.98 % | 32.93 | 31.97 | (GEO distances, not comparable) | 1.2 s |
+| swiss42 | 42 | **approximate**: from the distance matrix by MDS | 8.7 | 9 | 2.49 % | 1421.83 | 1387.31 | 1273 | 20 s |
+| berlin52 | 52 | TSPLIB coordinates | 41 | 10 | 1.52 % | 8201.12 | 8078.50 | 7542 | 34 s |
+| bier127 | 127 | TSPLIB coordinates | 240 | 6 | 2.50 % | 131785.89 | 128572.00 | 118282 | 106 s |
+
+The Dubins lengths are above TSPLIB's straight-line optima, as they must
+be: the vehicle has to turn. swiss42 has no coordinates in TSPLIB; MDS
+places its cities so that 90 % of the distances are within 1 % of the
+matrix (worst pair 12 %), so it is a close approximation, not the original
+instance. Large coordinates need a smaller `cost_scale` (berlin52 10,
+bier127 1) to stay within LKH's integer limit.
+
 ## Output
 
 Every run writes to the repository's `results/` folder, whichever config it
@@ -310,6 +334,10 @@ gap across iterations and `summary.txt` shows the time per stage.
 
 ```
 config.yml                 points and settings
+examples/
+  big_75.yml               75 random targets
+  berlin52.yml, burma14.yml, swiss42.yml, bier127.yml   TSPLIB instances
+  tsplib/                  the original TSPLIB files
 src/
   __main__.py              entry point (python -m src): runs the loop, writes results/
   config.py                reads and checks config.yml
@@ -331,6 +359,7 @@ src/
 tools/
   build_interval.py        compiles _interval.cpp
   lb_stability.py          re-solves one iteration with more LKH restarts
+  tsplib_to_config.py      TSPLIB file -> examples/<name>.yml
 tests/                     correctness checks (see "Tests")
 ```
 
