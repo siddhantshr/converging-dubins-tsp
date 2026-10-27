@@ -128,6 +128,17 @@ def solve_interval_problem(
     return IntervalSolution(length, th0, th1, CASES[case])
 
 
+def dubins_length(q0: tuple, q1: tuple, r: float) -> float:
+    """Point-to-point Dubins shortest length, for the upper-bound edges.
+
+    C++ port of path.shortest_length (~13 us -> under 1 us per call); the
+    Python version is used if the C++ module is not built.
+    """
+    if _ext is None:
+        return shortest_length(q0, q1, r)
+    return _ext.shortest_length(q0[0], q0[1], q0[2], q1[0], q1[1], q1[2], r)
+
+
 def solve_interval_problem_py(
     a: Point, i0: HeadingInterval, b: Point, i1: HeadingInterval, r: float
 ) -> IntervalSolution:

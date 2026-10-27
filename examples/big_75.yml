@@ -84,6 +84,10 @@ points:
   - [17.43, 21.90]
 
 heading_offset_deg: 0.0
+# Run the upper bound's LKH solve in a worker process while the lower bound is
+# computed (only for graphs of 300+ nodes; same results, less time).
+parallelise: true
+
 
 upper_bound:
   enabled: true
@@ -105,4 +109,4 @@ solver:
   cost_scale: 1000
 
 output:
-  plot: false
+  plot: true

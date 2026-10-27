@@ -1,5 +1,6 @@
 // Two-point Dubins interval problem in C++: a line-by-line port of
-// interval.py, path.py (shortest_length) and free_heading.py.
+// interval.py, path.py (shortest_length) and free_heading.py. Also exposes
+// shortest_length itself, for the upper-bound edges.
 //
 // The Python version stays the reference (tests/test_interval.py compares
 // the two). Keep both in sync: same candidates, same order, same tolerances,
@@ -301,10 +302,29 @@ PyObject* py_solve(PyObject*, PyObject* const* args, Py_ssize_t nargs) {
     return Py_BuildValue("(dddi)", best.length, best.th0, best.th1, best.which);
 }
 
+// shortest_length(x0, y0, th0, x1, y1, th1, r) -> length
+// Point-to-point Dubins shortest path (path.py::shortest_length): upper-bound edges.
+PyObject* py_shortest_length(PyObject*, PyObject* const* args, Py_ssize_t nargs) {
+    if (nargs != 7) {
+        PyErr_SetString(PyExc_TypeError,
+                        "shortest_length(x0, y0, th0, x1, y1, th1, r) takes 7 arguments");
+        return nullptr;
+    }
+    double v[7];
+    for (int k = 0; k < 7; ++k) {
+        v[k] = PyFloat_AsDouble(args[k]);
+        if (v[k] == -1.0 && PyErr_Occurred()) return nullptr;
+    }
+    return PyFloat_FromDouble(shortest_length(v[0], v[1], v[2], v[3], v[4], v[5], v[6]));
+}
+
 PyMethodDef methods[] = {
     {"solve", reinterpret_cast<PyCFunction>(reinterpret_cast<void (*)()>(py_solve)), METH_FASTCALL,
      "solve(ax, ay, start0, width0, bx, by, start1, width1, r) -> "
      "(length, depart_heading, arrive_heading, case)"},
+    {"shortest_length",
+     reinterpret_cast<PyCFunction>(reinterpret_cast<void (*)()>(py_shortest_length)),
+     METH_FASTCALL, "shortest_length(x0, y0, th0, x1, y1, th1, r) -> length"},
     {nullptr, nullptr, 0, nullptr},
 };
 

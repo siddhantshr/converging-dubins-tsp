@@ -76,3 +76,19 @@ def test_cpp_matches_python(seed):
         assert i0.contains(cpp.depart_heading) and i1.contains(cpp.arrive_heading)
         real = shortest_length((*a, cpp.depart_heading), (*b, cpp.arrive_heading), r)
         assert real <= cpp.length + 1e-9
+
+
+@pytest.mark.skipif(interval._ext is None, reason="C++ solver not built (tools/build_interval.py)")
+def test_cpp_shortest_length_matches_python():
+    """Upper-bound edges use the C++ port of path.shortest_length."""
+    rng = random.Random(7)
+    for _ in range(2000):
+        r = rng.uniform(0.5, 2.0)
+        q0 = (rng.uniform(-5, 5), rng.uniform(-5, 5), rng.uniform(-7, 14))
+        q1 = (rng.uniform(-5, 5), rng.uniform(-5, 5), rng.uniform(-7, 14))
+        assert math.isclose(
+            interval.dubins_length(q0, q1, r),
+            shortest_length(q0, q1, r),
+            rel_tol=1e-12,
+            abs_tol=1e-12,
+        )

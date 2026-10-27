@@ -37,6 +37,7 @@ class Config:
     refine_lambda: int  # headings added per target per iteration
     gap_target: float | None  # stop once gap (%) <= this; None = single iteration
     plot: bool
+    parallelise: bool = True  # UB LKH in a worker process during the LB (big graphs only)
 
 
 def _require(cond: bool, message: str):
@@ -88,6 +89,7 @@ def load_config(path: str | Path) -> Config:
             float(refinement.get("gap_target", 5.0)) if refinement.get("enabled", True) else None
         ),
         plot=bool(output.get("plot", True)),
+        parallelise=bool(raw.get("parallelise", True)),
     )
     _require(cfg.turning_radius > 0, "vehicle.turning_radius must be > 0")
     _require(cfg.lkh_runs >= 1, "solver.lkh_runs must be >= 1")

@@ -28,7 +28,9 @@ python tools/lb_stability.py 4   # LB estimate of iteration 4 with 1 / 10 / 50 L
 
 Edit `config.yml` to set the points, the turning radius, the number of
 discrete headings (upper bound), the number of heading intervals (lower bound)
-and the refinement settings `lambda` and `gap_target`.
+and the refinement settings `lambda` and `gap_target`. `parallelise: true`
+(the default) runs the two LKH solves of an iteration at the same time on big
+problems; the results are the same.
 
 ## Output
 
@@ -148,7 +150,7 @@ them. The two bounds differ only here:
 | | Upper bound | Lower bound |
 |---|---|---|
 | option at a target | one heading | a heading interval |
-| edge cost | Dubins path between two fixed headings (`dubins/path.py`) | shortest Dubins path with *any* heading inside each interval: the **interval problem** (`dubins/interval.py`, run in C++) |
+| edge cost | Dubins path between two fixed headings (`dubins/path.py`, run in C++) | shortest Dubins path with *any* heading inside each interval: the **interval problem** (`dubins/interval.py`, run in C++) |
 | cache | dict keyed by (targets, headings) | `IntervalEdgeCosts`, keyed by (targets, intervals) |
 
 Both caches live for the whole run. When the refinement splits one interval
@@ -237,24 +239,45 @@ exact.
   per solve). It is the reference the tests compare against, and the
   fallback (with a warning) if the C++ module has not been built.
 
+### Parallel LKH (`parallelise: true`)
+
+LKH is the slowest step, and each iteration calls it twice (upper bound,
+then lower bound). The two calls don't depend on each other, so
+`bounds.compute_bounds` sends the upper-bound solve to a worker process and
+builds and solves the lower bound in the meantime.
+
+- **Only for big graphs.** Starting the worker costs about a second, so it
+  only starts once an upper-bound graph has at least 300 nodes
+  (`MIN_PARALLEL_NODES` in `src/bounds.py`). Small problems, like the
+  default 6-target config, never start it.
+- **One worker, a process.** elkai keeps Python locked while LKH runs, and
+  LKH keeps global state in C, so a thread would not run in parallel.
+- **Same results.** Every computation is the same as with
+  `parallelise: false`; only the elapsed time changes. On
+  `examples/big_75.yml` (temporary test): 44.9 s -> 29.6 s.
+- **Timings.** `summary.txt` still shows each stage's own time; the `iter`
+  column and `time s` in `convergence.txt` are elapsed time.
+
 ### Where the time goes
 
 `examples/big_75.yml` (75 targets, 6 headings / 6 intervals, `lambda = 1`,
 3 % target; 5 iterations: gap 7.17 % -> 5.36 % -> 4.76 % -> 4.62 % ->
-1.98 %), from `results/summary.txt`:
+1.98 %), from `results/summary.txt`, with `parallelise: true`:
 
 | Stage | Seconds |
 |---|---|
-| Upper bound: Dubins edge costs (Python) | 8.36 |
-| Upper bound: LKH | 17.08 |
-| Lower bound: interval problems (C++) | 1.88 |
+| Upper bound: Dubins edge costs (C++) | 1.51 |
+| Upper bound: LKH (in the worker, overlaps the lower bound) | 16.98 |
+| Lower bound: interval problems (C++) | 1.99 |
 | Lower bound: LKH | 16.83 |
-| Lower bound: everything else (graph building, bookkeeping) | 2.40 |
-| **Total** | **46.6** |
+| Lower bound: everything else (graph building, bookkeeping) | 2.53 |
+| **Elapsed** | **23.0** |
 
 LKH is most of the work: one call takes about 2.3 s on 450 nodes and 5–6 s
-on 750. The upper bound's Dubins edge costs are still computed in Python
-(about 13 µs per edge, against about 2.2 µs per interval problem in C++).
+on 750. Before the upper bound's Dubins edges moved to C++ they took 8.2 s
+(about 13 µs per edge in Python); the whole run took 29.9 s. Most of the
+remaining graph-building time is Python bookkeeping per edge, not the C++
+calls.
 The default 6-target config runs in about 0.1 s (5 iterations).
 
 ### Output (`src/utils/report.py`, `src/utils/plotting.py`)
@@ -277,7 +300,7 @@ src/
     path.py                Dubins shortest path between two fixed headings
     free_heading.py        Dubins paths when one or both end headings are free
     interval.py            interval problem: Python reference (+ brute-force check)
-    _interval.cpp          interval problem: C++ version used by the pipeline
+    _interval.cpp          C++ version used by the pipeline: interval problem + Dubins length
   tsp/
     gtsp.py                builds the clustered graphs, caches interval costs
     noon_bean.py           Noon–Bean transformation and decoding
@@ -311,7 +334,8 @@ Every candidate is a real path, so the solver can't undershoot the true
 minimum. The tests check it never exceeds a brute-force grid search.
 
 The pipeline runs the C++ port (`src/dubins/_interval.cpp`, about 2–3 µs per
-solve against about 0.5 ms in Python). Build it with
+solve against about 0.5 ms in Python). The same module also computes the
+upper bound's point-to-point Dubins lengths (`interval.dubins_length`). Build it with
 `python tools/build_interval.py`; without it, the Python solver is used and a
 warning is printed. The tests check that the two give the same lengths.
 

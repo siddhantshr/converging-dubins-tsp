@@ -89,3 +89,21 @@ def test_config_rejects_removed_mu(tmp_path):
         assert "gap_target" in str(err)
     else:
         raise AssertionError("mu should be rejected")
+
+
+def test_parallelise_gives_the_same_results(monkeypatch):
+    from src import bounds
+
+    monkeypatch.setattr(bounds, "MIN_PARALLEL_NODES", 0)  # use the worker even here
+    cfg = _config(upper=BoundConfig(True, 4, "lkh"), lower=BoundConfig(True, 4, "lkh"))
+
+    def summary(parallelise):
+        its = refine.run(
+            dataclasses.replace(cfg, parallelise=parallelise), 1, 1e-9, max_iterations=3
+        )
+        return [
+            (it.upper.value, it.lower.value, it.upper.order, it.lower.order, it.lower.selected)
+            for it in its
+        ]
+
+    assert summary(True) == summary(False)

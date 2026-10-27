@@ -24,8 +24,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ..dubins.interval import solve_interval_problem
-from ..dubins.path import shortest_length
+from ..dubins.interval import dubins_length, solve_interval_problem
 from ..utils.angles import TWO_PI, HeadingInterval, mod2pi
 
 Point = tuple[float, float]
@@ -107,7 +106,7 @@ def build_heading_graph(
     def edge(i, th_a, j, th_b):
         key = (i, round(th_a, 12), j, round(th_b, 12))
         if key not in cache:
-            cache[key] = shortest_length((*points[i], th_a), (*points[j], th_b), r)
+            cache[key] = dubins_length((*points[i], th_a), (*points[j], th_b), r)
         return cache[key], th_a, th_b
 
     return _build(headings_per_target, edge)

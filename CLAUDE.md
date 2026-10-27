@@ -56,6 +56,16 @@ across refinement iterations), then one LKH solve per bound.
   `lower_bound.lkh_runs_screening` (old configs that set them still load;
   the keys are ignored).
 
+## parallelise (`bounds.LKHWorker`, `bounds.compute_bounds`)
+
+- The upper-bound LKH solve runs in one spawn-started worker process while
+  the lower bound is built and solved; nothing else is parallel (an earlier
+  all-cores version was reverted as too complicated).
+- Lazy: the worker starts only for graphs of >= `MIN_PARALLEL_NODES` (300)
+  nodes; smaller solves run inline, so small configs pay no start-up.
+- Results must equal `parallelise: false` (`test_parallelise_gives_the_same_results`).
+  `Iteration.wall_seconds` is elapsed time; stage timings exclude waiting.
+
 ## Output
 
 - Every run writes to the repo's `results/` (`config.RESULTS_DIR`), whatever
@@ -74,6 +84,10 @@ across refinement iterations), then one LKH solve per bound.
   uses it; `solve_interval_problem_py` is the reference
   (`test_cpp_matches_python`). Change both together: same candidates, order,
   tolerances and strict-`<` tie-break. Rebuild after editing the .cpp.
+- The upper-bound edges also use it: `interval.dubins_length` calls the C++
+  `shortest_length` (reference: `path.shortest_length`,
+  `test_cpp_shortest_length_matches_python`; up to ~4e-14 apart, from libm
+  `hypot`). `path.py` itself stays pure Python (plots, brute force, reference).
 - The .so is not committed (`.gitignore`). Without it, the Python solver runs
   (~150x slower) with a warning.
 - Never build with `-ffast-math` (the solver relies on NaN checks).

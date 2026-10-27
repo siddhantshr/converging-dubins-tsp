@@ -33,14 +33,16 @@ iteration's estimate, never the maximum over iterations.
 
 from __future__ import annotations
 
+import contextlib
 import math
 import sys
+import time
 from dataclasses import dataclass, field
 
 from .bounds import (
     BoundResult,
-    compute_lower_bound,
-    compute_upper_bound,
+    LKHWorker,
+    compute_bounds,
     initial_headings,
     initial_intervals,
 )
@@ -61,6 +63,7 @@ class Iteration:
     headings: list[list[float]]  # heading set of every target
     intervals: list[list[HeadingInterval]]  # interval partition of every target
     added: list[list[float]] = field(default_factory=list)  # headings added per target
+    wall_seconds: float = 0.0  # elapsed time for both bounds (stages may overlap)
 
     @property
     def gap_percent(self) -> float:
@@ -117,36 +120,41 @@ def run(
     iterations: list[Iteration] = []
     added: list[list[float]] = [[] for _ in cfg.points]
 
-    k = 0
-    while True:
-        print(f"iteration {k}: upper bound ...", file=sys.stderr)
-        upper = compute_upper_bound(cfg, headings, upper_cache)
-        print(f"iteration {k}: lower bound ...", file=sys.stderr)
-        lower = compute_lower_bound(cfg, intervals, lower_costs)
+    worker = LKHWorker() if cfg.parallelise else None
+    with worker or contextlib.nullcontext():
+        k = 0
+        while True:
+            print(f"iteration {k}: bounds ...", file=sys.stderr)
+            t0 = time.perf_counter()
+            upper, lower = compute_bounds(
+                cfg, headings, intervals, upper_cache, lower_costs, worker
+            )
+            wall = time.perf_counter() - t0
 
-        best_upper = min([upper.value] + [it.best_upper for it in iterations])
-        max_lb = max([lower.value] + [it.max_lb_estimate for it in iterations])
-        it = Iteration(
-            k,
-            upper,
-            lower,
-            best_upper,
-            max_lb,
-            [list(h) for h in headings],
-            [list(iv) for iv in intervals],
-            added,
-        )
-        iterations.append(it)
-        if it.lb_exceeds_ub:
-            print(LB_WARNING.format(k=k, lb=lower.value, ub=best_upper), file=sys.stderr)
-        if on_iteration:
-            on_iteration(it)
+            best_upper = min([upper.value] + [it.best_upper for it in iterations])
+            max_lb = max([lower.value] + [it.max_lb_estimate for it in iterations])
+            it = Iteration(
+                k,
+                upper,
+                lower,
+                best_upper,
+                max_lb,
+                [list(h) for h in headings],
+                [list(iv) for iv in intervals],
+                added,
+                wall,
+            )
+            iterations.append(it)
+            if it.lb_exceeds_ub:
+                print(LB_WARNING.format(k=k, lb=lower.value, ub=best_upper), file=sys.stderr)
+            if on_iteration:
+                on_iteration(it)
 
-        print(f"iteration {k}: gap {it.gap_percent:.3f}%", file=sys.stderr)
+            print(f"iteration {k}: gap {it.gap_percent:.3f}%", file=sys.stderr)
 
-        if gap_target is None or it.gap_percent <= gap_target:
-            return iterations
-        if max_iterations is not None and len(iterations) >= max_iterations:
-            return iterations
-        headings, intervals, added = refine(headings, intervals, lower.selected, lam)
-        k += 1
+            if gap_target is None or it.gap_percent <= gap_target:
+                return iterations
+            if max_iterations is not None and len(iterations) >= max_iterations:
+                return iterations
+            headings, intervals, added = refine(headings, intervals, lower.selected, lam)
+            k += 1

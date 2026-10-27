@@ -100,12 +100,11 @@ def format_convergence(iterations) -> str:
     )
     lines = [header, "-" * len(header)]
     for it in iterations:
-        secs = sum(r.build_seconds + r.solve_seconds for r in (it.upper, it.lower))
         lines.append(
             f"{it.index:>4}  {sum(it.upper.options_per_target):>8}  "
             f"{sum(it.lower.options_per_target):>8}  {it.upper.value:>11.6f}  "
             f"{it.lower.value:>11.6f}  {it.best_upper:>11.6f}  {it.max_lb_estimate:>11.6f}  "
-            f"{it.gap_percent:>7.3f}  {secs:>7.1f}"
+            f"{it.gap_percent:>7.3f}  {it.wall_seconds:>7.1f}"
             + ("  <- LB > best UB" if it.lb_exceeds_ub else "")
         )
     lines += [
@@ -129,11 +128,11 @@ def format_timings(iterations) -> str:
     def total(res):
         return res.build_seconds + res.solve_seconds
 
-    def row(label, ub, lb, solves):
+    def row(label, ub, lb, solves, wall):
         cells = [f"{label:>5}"]
         cells += [f"{ub[k]:>8.2f}" for k, _ in ub_cols] + [f"{ub['total']:>8.2f}", " |"]
         cells += [f"{lb[k]:>8.2f}" for k, _ in lb_cols] + [f"{lb['total']:>8.2f}"]
-        cells += [f"{solves:>7}", " |", f"{ub['total'] + lb['total']:>8.2f}"]
+        cells += [f"{solves:>7}", " |", f"{wall:>8.2f}"]
         return " ".join(cells)
 
     head = " ".join(
@@ -154,19 +153,20 @@ def format_timings(iterations) -> str:
     for it in iterations:
         ub = {k: it.upper.timings.get(k, 0.0) for k, _ in ub_cols} | {"total": total(it.upper)}
         lb = {k: it.lower.timings.get(k, 0.0) for k, _ in lb_cols} | {"total": total(it.lower)}
-        lines.append(row(it.index, ub, lb, it.lower.interval_solves))
+        lines.append(row(it.index, ub, lb, it.lower.interval_solves, it.wall_seconds))
         for sums, vals in ((sums_ub, ub), (sums_lb, lb)):
             for k, v in vals.items():
                 sums[k] = sums.get(k, 0.0) + v
         sum_solves += it.lower.interval_solves
-    lines += ["-" * len(head), row("total", sums_ub, sums_lb, sum_solves)]
+    wall = sum(it.wall_seconds for it in iterations)
+    lines += ["-" * len(head), row("total", sums_ub, sums_lb, sum_solves, wall)]
 
     grand = sums_ub["total"] + sums_lb["total"]
     if grand > 0:
         share = [f"UB {h} {sums_ub[k] / grand:.1%}" for k, h in ub_cols] + [
             f"LB {h} {sums_lb[k] / grand:.1%}" for k, h in lb_cols
         ]
-        lines += ["", "share of total time: " + ", ".join(share)]
+        lines += ["", "share of the summed stage times: " + ", ".join(share)]
 
     lines += [
         "",
@@ -177,7 +177,11 @@ def format_timings(iterations) -> str:
         "  lkh       LKH solve with solver.lkh_runs restarts",
         "  other     everything else (graph build around the cached costs, bookkeeping)",
         "  #solves   interval problems actually solved in that iteration (cache misses)",
-        "  iter      upper total + lower total (plotting and file output not included)",
+        "  iter      elapsed time for both bounds (plotting and file output not included)",
+        "",
+        "With parallelise: true, the upper bound's LKH solve runs in a worker process",
+        "while the lower bound is built and solved (graphs of 300+ nodes only), so the",
+        "stage times can add up to more than the elapsed 'iter' time.",
     ]
     return "\n".join(lines)
 

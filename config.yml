@@ -12,17 +12,21 @@ points:                          # targets [x, y]; the tour is closed
   - [-1.5, 4.0]
   - [1.5, 2.8]
 
+# Run the upper bound's LKH solve in a worker process while the lower bound is
+# computed (only for graphs of 300+ nodes; same results, less time).
+parallelise: true
+
 # Rotate the whole heading grid / interval grid by this angle (degrees).
 heading_offset_deg: 0.0
 
 upper_bound:
   enabled: true
-  num_headings: 4                # discrete headings per target: 4 -> 0, 90, 180, 270 degrees
+  num_headings: 8                # discrete headings per target: 4 -> 0, 90, 180, 270 degrees
   solver: lkh                    # lkh only   (any tour found is a valid upper bound)
 
 lower_bound:
   enabled: true
-  num_intervals: 4               # heading intervals per target, each 360/N degrees wide
+  num_intervals: 8               # heading intervals per target, each 360/N degrees wide
   solver: lkh                    # lkh only: the lower bound is an ESTIMATE, not certified
 
 # Iterative refinement driven by the lower bound (see src/refine.py).
@@ -31,8 +35,8 @@ lower_bound:
 # upper-bound headings, and split that interval at the same headings.
 refinement:
   enabled: true
-  lambda: 1                      # headings added per target per iteration
-  gap_target: 5.0                # stop once (best UB - LB est.) / LB est. <= this (percent)
+  lambda: 2                      # headings added per target per iteration
+  gap_target: 2.0                # stop once (best UB - LB est.) / LB est. <= this (percent)
 
 solver:
   lkh_runs: 1                    # LKH restarts (more = better tours, slower), both bounds
