@@ -11,19 +11,20 @@ optimal GTSP tour, the reported lower bound is too high. It is labelled
 it dominated the runtime; it was removed.)
 
 Python rewrite of the Julia `Dubins-TSP` code, with the issues found in that
-version fixed (see the end of this file).
+version fixed (see the end of this file). The Dubins edge costs of both bounds
+are computed by a small C++ extension; everything else is Python.
 
 ## Quick start
 
 ```bash
 pip install -r requirements.txt
-python tools/build_interval.py   # compile the C++ interval solver (needs a C++17 compiler)
+python tools/build_interval.py   # compile the C++ extension (needs a C++17 compiler)
 python -m src                    # uses ./config.yml
 python -m src --config other.yml --no-plot
 python -m src --config examples/big_75.yml   # 75 targets
 python -m pytest                 # run the checks
 ruff check . && ruff format .    # lint + format (settings in ruff.toml)
-python tools/lb_stability.py 4   # LB estimate of iteration 4 with 1 / 10 / 50 LKH restarts
+python tools/lb_stability.py 8   # LB estimate of iteration 8 with 1 / 10 / 50 LKH restarts
 ```
 
 Edit `config.yml` to set the points, the turning radius, the number of
@@ -31,6 +32,16 @@ discrete headings (upper bound), the number of heading intervals (lower bound)
 and the refinement settings `lambda` and `gap_target`. `parallelise: true`
 (the default) runs the two LKH solves of an iteration at the same time on big
 problems; the results are the same.
+
+The two shipped configs:
+
+| | `config.yml` | `examples/big_75.yml` |
+|---|---|---|
+| targets | 6 | 75 (random, seed 75, 30 × 30 square) |
+| headings / intervals per target | 8 / 8 | 6 / 6 |
+| `lambda` | 2 | 1 |
+| `gap_target` | 2 % | 3 % |
+| result | 9 iterations, gap 1.90 %, ~1 s | 5 iterations, gap 1.98 %, ~23 s |
 
 ## Output
 
@@ -59,7 +70,7 @@ refinement iteration, for every target:
 3. split the interval at the same headings (lower bound gets finer there);
 
 then both bounds are solved again. This repeats until the gap is at most
-`gap_target` percent (default 5). There is no iteration limit: a run ends
+`gap_target` percent (5 if the key is missing). There is no iteration limit: a run ends
 only when the target is met, so a very small target can run for a long time.
 Results of each iteration are written as soon as it finishes.
 
@@ -125,8 +136,8 @@ config.yml
 
 Iteration 0 uses the uniform grids. Each later iteration adds `lambda`
 options per target, so the problems grow steadily. Default config (6
-targets, 4 options each, `lambda = 1`): 24 options in iteration 0, 48 in
-iteration 4. `examples/big_75.yml` (75 targets, 6 options each,
+targets, 8 options each, `lambda = 2`): 48 options in iteration 0, 144 in
+iteration 8. `examples/big_75.yml` (75 targets, 6 options each,
 `lambda = 1`): 450 in iteration 0, then 525, 600, 675, 750.
 
 ### The pipeline (shared by both bounds)
@@ -234,7 +245,10 @@ keeps the shortest. There is no search or iteration, so a solve is fast and
 exact.
 
 - `src/dubins/_interval.cpp` is the C++ version used by the pipeline: about
-  2–3 µs per solve. Build it once with `python tools/build_interval.py`.
+  2–3 µs per solve. It also computes the upper bound's point-to-point Dubins
+  lengths (`interval.dubins_length`): about 1.7 µs per edge including the
+  Python bookkeeping, against about 13 µs in pure Python. Build it once with
+  `python tools/build_interval.py`.
 - `src/dubins/interval.py` is the same algorithm in Python (about 0.5 ms
   per solve). It is the reference the tests compare against, and the
   fallback (with a warning) if the C++ module has not been built.
@@ -246,15 +260,17 @@ then lower bound). The two calls don't depend on each other, so
 `bounds.compute_bounds` sends the upper-bound solve to a worker process and
 builds and solves the lower bound in the meantime.
 
-- **Only for big graphs.** Starting the worker costs about a second, so it
-  only starts once an upper-bound graph has at least 300 nodes
-  (`MIN_PARALLEL_NODES` in `src/bounds.py`). Small problems, like the
-  default 6-target config, never start it.
+- **Only for big graphs.** The worker only starts once an upper-bound graph
+  has at least 300 nodes (`MIN_PARALLEL_NODES` in `src/bounds.py`), so small
+  problems, like the default 6-target config, never start it. Starting it
+  took about 0.2 s here (it can be slower on Windows or on a cold first
+  run), and it overlaps the lower-bound work.
 - **One worker, a process.** elkai keeps Python locked while LKH runs, and
   LKH keeps global state in C, so a thread would not run in parallel.
 - **Same results.** Every computation is the same as with
   `parallelise: false`; only the elapsed time changes. On
-  `examples/big_75.yml` (temporary test): 44.9 s -> 29.6 s.
+  `examples/big_75.yml` it cut the run from 44.9 s to about 30 s (measured
+  before the upper-bound edges moved to C++).
 - **Timings.** `summary.txt` still shows each stage's own time; the `iter`
   column and `time s` in `convergence.txt` are elapsed time.
 
@@ -278,7 +294,10 @@ on 750. Before the upper bound's Dubins edges moved to C++ they took 8.2 s
 (about 13 µs per edge in Python); the whole run took 29.9 s. Most of the
 remaining graph-building time is Python bookkeeping per edge, not the C++
 calls.
-The default 6-target config runs in about 0.1 s (5 iterations).
+
+The default 6-target config needs about 1 s of computing (9 iterations to
+its 2 % target). Its per-iteration plots are not in these numbers and add a
+little more.
 
 ### Output (`src/utils/report.py`, `src/utils/plotting.py`)
 
@@ -295,11 +314,11 @@ src/
   __main__.py              entry point (python -m src): runs the loop, writes results/
   config.py                reads and checks config.yml
   refine.py                the iteration loop and the refinement step
-  bounds.py                the 5-step pipeline, for either bound
+  bounds.py                the 5-step pipeline, for either bound; the LKH worker
   dubins/
-    path.py                Dubins shortest path between two fixed headings
+    path.py                Dubins shortest path between two fixed headings (Python reference)
     free_heading.py        Dubins paths when one or both end headings are free
-    interval.py            interval problem: Python reference (+ brute-force check)
+    interval.py            interval problem: Python reference, brute-force check, C++ calls
     _interval.cpp          C++ version used by the pipeline: interval problem + Dubins length
   tsp/
     gtsp.py                builds the clustered graphs, caches interval costs
@@ -337,24 +356,32 @@ The pipeline runs the C++ port (`src/dubins/_interval.cpp`, about 2–3 µs per
 solve against about 0.5 ms in Python). The same module also computes the
 upper bound's point-to-point Dubins lengths (`interval.dubins_length`). Build it with
 `python tools/build_interval.py`; without it, the Python solver is used and a
-warning is printed. The tests check that the two give the same lengths.
+warning is printed. The tests check that C++ and Python give the same lengths.
 
 ## Tests
 
-* every Dubins word really ends at the goal configuration;
-* the interval solver is never above brute force, and its path really exists;
+`python -m pytest` (about 5 s) checks that:
+
+* every Dubins word really ends at the goal configuration, with no phantom
+  full circles;
+* the interval solver is never above brute force, its path really exists,
+  and intervals that wrap past 360° work;
+* the C++ interval solver and the C++ Dubins length match the Python
+  reference;
 * Noon–Bean + each solver (LKH, and the exact MILP as reference) reproduces the
-  brute-force one-in-a-set optimum;
+  brute-force one-in-a-set optimum, and decoding rejects broken tours
+  (a cluster left twice, a forbidden edge used);
 * with one 360° interval the lower bound equals the Euclidean TSP;
 * the upper-bound tour has no kinks;
+* the LB estimate stays below the upper bound on the small test instance;
 * a refinement step adds headings inside the chosen interval and keeps the
   interval partition covering the circle exactly once;
-* the LB estimate stays below the upper bound on the small test instance;
+* the loop stops at the first iteration within `gap_target`, and a config
+  that still sets the removed `mu` is rejected;
 * best UB / max LB estimate / gap are reported as defined above, with a
   warning when an LB estimate exceeds the best UB;
-* LKH is deterministic;
-* interval costs are cached between iterations;
-* the C++ interval solver gives the Python reference's lengths.
+* LKH is deterministic, interval costs are cached between iterations, and
+  `parallelise: true` gives exactly the same results as `false`.
 
 ## Changes from the Julia version
 
@@ -366,7 +393,8 @@ warning is printed. The tests check that the two give the same lengths.
 * The turning radius was hard-coded to 1 in several places.
 * A lower bound computed with LKH was reported as a bound; it is now
   labelled as an estimate.
-* Big M is strictly larger than any tour cost (`n · max + 1`).
+* Big M is strictly larger than any tour cost (sum of each cluster's
+  largest outgoing cost, + 1), and small enough for LKH's integer limits.
 * Decoding checks the tour really visits each cluster as one block.
 * Dubins formulas are guarded against rounding noise (a zero-length turn
   coming out as a full circle, a zero-length straight being rejected).
