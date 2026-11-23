@@ -8,9 +8,11 @@ The Dubins TSP needs planar points, a turning radius and a cost scale; TSPLIB
 gives only the first, and not always:
 
 * EUC_2D: the coordinates are used as they are.
+* ATT: the coordinates are used as they are. TSPLIB's ATT (pseudo-Euclidean)
+  distance, about Euclidean / sqrt(10), does not apply.
 * GEO: the coordinates (latitude, longitude in TSPLIB's DDD.MM form) are used
   as plain x, y. The instance's GEO distances do not apply.
-* EXPLICIT (FULL_MATRIX): there are no coordinates. Classical multidimensional
+* EXPLICIT (FULL_MATRIX or LOWER_DIAG_ROW): there are no coordinates. Classical multidimensional
   scaling (MDS) places the cities in the plane so that straight-line distances
   match the matrix as closely as 2-D allows. The result is an approximation of
   the instance, and the config header says how close it is.
@@ -106,17 +108,29 @@ def classical_mds(dist: np.ndarray) -> tuple[np.ndarray, str]:
 def points_from(header: dict, data: list[str]) -> tuple[np.ndarray, list[str]]:
     kind = header.get("EDGE_WEIGHT_TYPE")
     n = int(header["DIMENSION"])
-    if kind in ("EUC_2D", "GEO"):
+    if kind in ("EUC_2D", "ATT", "GEO"):
         coords = np.array([[float(v) for v in line.split()[1:3]] for line in data[:n]])
         if kind == "EUC_2D":
             return coords, ["EUC_2D: TSPLIB coordinates, used as they are."]
+        if kind == "ATT":
+            return coords, [
+                "ATT: TSPLIB coordinates, used as they are; TSPLIB's ATT distance",
+                "(pseudo-Euclidean, about Euclidean / sqrt(10)) does not apply here.",
+            ]
         return coords, [
             "GEO: TSPLIB's latitude / longitude (DDD.MM) used as plain x, y;",
             "the instance's GEO distances do not apply here.",
         ]
-    if kind == "EXPLICIT" and header.get("EDGE_WEIGHT_FORMAT") == "FULL_MATRIX":
+    fmt = header.get("EDGE_WEIGHT_FORMAT")
+    if kind == "EXPLICIT" and fmt in ("FULL_MATRIX", "LOWER_DIAG_ROW"):
         values = np.array([float(v) for line in data for v in line.split()])
-        coords, note = classical_mds(values.reshape(n, n))
+        if fmt == "FULL_MATRIX":
+            dist = values.reshape(n, n)
+        else:  # row i holds d(i, 0..i), diagonal included
+            dist = np.zeros((n, n))
+            dist[np.tril_indices(n)] = values
+            dist = dist + dist.T
+        coords, note = classical_mds(dist)
         return coords, [
             "EXPLICIT: TSPLIB gives only a distance matrix, no coordinates. These",
             "points come from classical MDS, so this is an APPROXIMATION of the instance.",

@@ -45,27 +45,41 @@ The two shipped configs:
 
 ### TSPLIB examples
 
-`examples/` also has four instances from
+`examples/` also has seven instances from
 [TSPLIB](https://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/tspindex.html),
 made by `tools/tsplib_to_config.py` from the original files in
 `examples/tsplib/` (`python tools/tsplib_to_config.py examples/tsplib/<name>.tsp`
 for another one). TSPLIB has no turning radius, so the converter uses
-r = 0.4 × the mean nearest-neighbour distance; all four use 6 headings,
+r = 0.4 × the mean nearest-neighbour distance; all of them use 6 headings,
 6 intervals, `lambda = 1` and a 3 % gap target.
 
-| Instance | Targets | Points | r | Iterations | Gap | Best UB | LB estimate | TSPLIB optimum (straight lines) | Time |
-|---|---|---|---|---|---|---|---|---|---|
-| burma14 | 14 | latitude / longitude used as x, y | 0.54 | 6 | 2.98 % | 32.93 | 31.97 | (GEO distances, not comparable) | 1.2 s |
-| swiss42 | 42 | **approximate**: from the distance matrix by MDS | 8.7 | 9 | 2.49 % | 1421.83 | 1387.31 | 1273 | 20 s |
-| berlin52 | 52 | TSPLIB coordinates | 41 | 10 | 1.52 % | 8201.12 | 8078.50 | 7542 | 34 s |
-| bier127 | 127 | TSPLIB coordinates | 240 | 6 | 2.50 % | 131785.89 | 128572.00 | 118282 | 106 s |
+Not every TSPLIB instance is plain x, y with straight-line distances:
+
+| Instance | TSPLIB gives | Used here as |
+|---|---|---|
+| berlin52, eil101, st70 | x, y (`EUC_2D`) | the coordinates, unchanged |
+| att48 | x, y with its own `ATT` distance (about straight-line ÷ √10) | the coordinates as plain x, y |
+| burma14 | latitude / longitude (`GEO`) | latitude / longitude as plain x, y |
+| swiss42, hk48 | only a distance matrix, no coordinates | **approximate** points from classical MDS |
+
+| Instance | Targets | r | Iterations | Gap | Best UB | LB estimate | TSPLIB optimum | Time |
+|---|---|---|---|---|---|---|---|---|
+| burma14 | 14 | 0.54 | 6 | 2.98 % | 32.93 | 31.97 | 3323 (GEO units, not comparable) | 1.2 s |
+| swiss42 | 42 | 8.7 | 9 | 2.49 % | 1421.83 | 1387.31 | 1273 (matrix; points approximate) | 20 s |
+| att48 | 48 | 200 | 6 | 2.91 % | 35993.31 | 34976.00 | 10628 (ATT units, not comparable) | 14 s |
+| hk48 | 48 | 73 | 10 | 2.78 % | 12312.17 | 11979.60 | 11461 (matrix; points approximate) | 32 s |
+| berlin52 | 52 | 41 | 10 | 1.52 % | 8201.12 | 8078.50 | 7542 | 34 s |
+| st70 | 70 | 2.5 | 5 | 2.82 % | 714.34 | 694.76 | 675 | 20 s |
+| eil101 | 101 | 2.1 | 7 | 2.92 % | 693.48 | 673.78 | 629 | 83 s |
 
 The Dubins lengths are above TSPLIB's straight-line optima, as they must
-be: the vehicle has to turn. swiss42 has no coordinates in TSPLIB; MDS
-places its cities so that 90 % of the distances are within 1 % of the
-matrix (worst pair 12 %), so it is a close approximation, not the original
-instance. Large coordinates need a smaller `cost_scale` (berlin52 10,
-bier127 1) to stay within LKH's integer limit.
+be: the vehicle has to turn. (TSPLIB rounds each distance to an integer,
+so its optima are only roughly the straight-line optima of these points.)
+For swiss42 and hk48, MDS places the cities so that 90 % of the distances
+are within 1 % of the matrix (worst pairs 12 % and 24 %), so they are
+close approximations, not the original instances. Large coordinates need
+a smaller `cost_scale` (att48 1, berlin52 and hk48 10) to stay within LKH's
+integer limit.
 
 ## Output
 
@@ -336,7 +350,7 @@ gap across iterations and `summary.txt` shows the time per stage.
 config.yml                 points and settings
 examples/
   big_75.yml               75 random targets
-  berlin52.yml, burma14.yml, swiss42.yml, bier127.yml   TSPLIB instances
+  att48, berlin52, burma14, eil101, hk48, st70, swiss42 (.yml)   TSPLIB instances
   tsplib/                  the original TSPLIB files
 src/
   __main__.py              entry point (python -m src): runs the loop, writes results/
