@@ -8,3 +8,6 @@ venv/
 results/
 results_big/
 .ruff_cache/
+presentation/
+report/*
+!report/dubins_interval_problem.pdf
