@@ -1,5 +1,9 @@
 # Dubins TSP bounds (Python)
 
+> **[This README is AI Generated]**
+>
+> This codebase was developed with AI coding assistance (Claude Code) under the author's supervision: the method, design decisions and experiments were directed by the author, and the generated code was reviewed and tested by the author.
+
 Computes an **upper bound** and a **lower bound** on the shortest closed tour of
 a Dubins vehicle (forward-only, minimum turning radius `r`) through a set of points.
 Both bounds turn the problem into a one-in-a-set (generalised) TSP and solve it

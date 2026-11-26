@@ -11,3 +11,19 @@ results_big/
 presentation/
 report/*
 !report/dubins_interval_problem.pdf
+
+# OS / editor junk
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+.ipynb_checkpoints/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+.env
